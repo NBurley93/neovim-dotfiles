@@ -1,8 +1,13 @@
-source ~/.nvim/options.vim
-source ~/.nvim/mapping.vim
-source ~/.nvim/plugins.vim
-source ~/.nvim/plugin_options.vim
-source ~/.nvim/functions.vim
-source ~/.nvim/theming.vim
-source ~/.nvim/onstart_actions.vim
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+	silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
+runtime options.vim
+runtime mapping.vim
+runtime plugins.vim
+runtime plugin_options.vim
+runtime functions.vim
+runtime theming.vim
+runtime onstart_actions.vim
