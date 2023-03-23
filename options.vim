@@ -1,5 +1,6 @@
 syntax on
 filetype plugin indent on
+set fileformat=unix
 set updatetime=300
 set encoding=utf-8
 set title
@@ -11,3 +12,7 @@ set shiftwidth=4
 set backspace=2
 set clipboard=unnamedplus
 set signcolumn=yes
+
+if has('win32') || has('win32unix')
+	let g:python3_host_prog = '~\.pyenv\pyenv-win\versions\3.11.2\python.exe'
+endif
