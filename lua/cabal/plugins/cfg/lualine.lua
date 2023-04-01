@@ -2,7 +2,7 @@ require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'auto',
-    component_separators = { left = '', right = ''},
+    component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     globalstatus = true,
     refresh = {
@@ -20,7 +20,7 @@ require('lualine').setup {
         mode = 2,
         use_mode_colors = true,
         symbols = {
-            modified = '*',
+            modified = '!',
             alternate_file = '',
             directory = ''
         }
@@ -37,14 +37,7 @@ require('lualine').setup {
     lualine_y = {},
     lualine_z = {}
   },
-  tabline = {
-      lualine_a = {},
-      lualine_b = {'filename'},
-      lualine_c = {},
-      lualine_x = {},
-      lualine_y = {'filesize'},
-      lualine_z = {'tabs'}
-  },
+  tabline = {},
   winbar = {},
   inactive_winbar = {},
   extensions = {'fugitive', 'nvim-dap-ui'}

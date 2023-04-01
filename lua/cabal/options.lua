@@ -14,7 +14,8 @@ local options = {
     relativenumber = false,
     signcolumn = 'yes:1',
     clipboard = 'unnamedplus',
-    termguicolors = true
+    termguicolors = true,
+    cursorline = true,
 }
 
 for k, v in pairs(options) do

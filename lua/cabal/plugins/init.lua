@@ -6,3 +6,4 @@ vim.cmd([[
 	]])
 
 require('cabal.plugins.pluglist')
+

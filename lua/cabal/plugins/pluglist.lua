@@ -18,7 +18,6 @@ require('packer').startup({function(use)
 	
 	-- Completion
 	use ({
-		{'neovim/nvim-lspconfig'},
 		{'hrsh7th/nvim-cmp' },
 		{ 'hrsh7th/cmp-nvim-lua' },
 		{ 'hrsh7th/cmp-nvim-lsp' },
@@ -28,6 +27,9 @@ require('packer').startup({function(use)
 		{'jiangmiao/auto-pairs' },
 		{ 'dcampos/nvim-snippy' },
 		{ 'dcampos/cmp-snippy' },
+		{ 'williamboman/mason.nvim', run = ':MasonUpdate' },
+		{ 'williamboman/mason-lspconfig.nvim' },
+		{'neovim/nvim-lspconfig'},
 	})
 	
 	-- Filetree
@@ -47,7 +49,7 @@ require('packer').startup({function(use)
 	use ({
 			{ 'tpope/vim-fugitive' },
 			{ 'tpope/vim-rhubarb' },
-			{ 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+			{ 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }, config = function() require('cabal.plugins.cfg.gitsigns') end }
 		})
 	    
 	-- Search
@@ -64,6 +66,12 @@ require('packer').startup({function(use)
 	
 	-- Theming
 	use { 'akai54/2077.nvim' }
+	use {
+		'glepnir/dashboard-nvim',
+		event = 'VimEnter',
+		config = function() require('cabal.plugins.cfg.dashboard') end,
+		dependencies = {{ 'nvim-tree/nvim-web-icons' }},
+	}
 	
 	-- Syntax highlighting
 	use ({
