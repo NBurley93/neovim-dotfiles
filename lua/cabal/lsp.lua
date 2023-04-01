@@ -11,6 +11,9 @@ local function lsp_keybinds()
     vim.keymap.set('n', '<leader>dk', vim.diagnostic.goto_prev, keymap_opts)
     vim.keymap.set('n', '<leader>dl', '<cmd>Telescope diagnostics<cr>', keymap_opts)
     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, keymap_opts)
+    vim.keymap.set('n', '<leader>fc', function()
+        vim.lsp.buf.format { async = true }
+    end, keymap_opts)
 end
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }

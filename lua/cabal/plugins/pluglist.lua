@@ -32,6 +32,7 @@ require('packer').startup({
 				'L3MON4D3/LuaSnip',
 				tag = 'v1.2.*',
 			},
+			{ 'saadparwaiz1/cmp_luasnip' },
 			{ 'williamboman/mason.nvim',          run = ':MasonUpdate' },
 			{ 'williamboman/mason-lspconfig.nvim' },
 			{ 'neovim/nvim-lspconfig' },
@@ -52,6 +53,7 @@ require('packer').startup({
 
 		-- Git
 		use({
+			{ "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" },
 			{ 'tpope/vim-fugitive' },
 			{ 'tpope/vim-rhubarb' },
 			{
