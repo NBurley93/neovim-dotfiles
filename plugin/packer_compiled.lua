@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\2077.nvim",
     url = "https://github.com/akai54/2077.nvim"
   },
+  LuaSnip = {
+    loaded = true,
+    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
   ["auto-pairs"] = {
     loaded = true,
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\auto-pairs",
@@ -103,11 +108,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
-  },
-  ["cmp-snippy"] = {
-    loaded = true,
-    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-snippy",
-    url = "https://github.com/dcampos/cmp-snippy"
   },
   ["dashboard-nvim"] = {
     config = { "\27LJ\2\n;\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0 cabal.plugins.cfg.dashboard\frequire\0" },
@@ -173,11 +173,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
-  },
-  ["nvim-snippy"] = {
-    loaded = true,
-    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-snippy",
-    url = "https://github.com/dcampos/nvim-snippy"
   },
   ["nvim-treesitter"] = {
     loaded = true,

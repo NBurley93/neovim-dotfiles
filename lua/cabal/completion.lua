@@ -1,72 +1,52 @@
-require('mason').setup()
-require('mason-lspconfig').setup()
+local cmp = require "cmp"
 
 local lspkind = require "lspkind"
 lspkind.init()
 
-local cmp = require "cmp"
-
-cmp.setup {
+cmp.setup({
     snippet = {
         expand = function(args)
-            require('snippy').expand_snippet(args.body)
+            require('luasnip').lsp_expand(args.body)
         end,
     },
-
     mapping = {
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-e>"] = cmp.mapping.close(),
-        ["<C-y>"] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = true,
-        },
-
-        ["<c-space>"] = cmp.mapping.complete(),
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ["<C-e>"] = cmp.mapping({
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+        }),
+        ["<C-y>"] = cmp.config.disable,
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
     },
-
     sources = {
         { name = "nvim_lua" },
         { name = "nvim_lsp" },
-        { name = "buffer", keyword_length = 5 },
+        { name = "buffer" },
+        { name = 'luasnip' },
     },
-
     formatting = {
         format = lspkind.cmp_format {
             with_text = true,
             menu = {
-                buffer = "[buf]",
+                buffer = "[Buffer]",
                 nvim_lsp = "[LSP]",
-                nvim_lua = "[api]",
-                path = "[path]",
+                nvim_lua = "[LuaAPI]",
+                path = "[PATH]",
+                snippy = "[SNIP]",
             }
         }
     },
-
     experimental = {
         native_menu = false,
     }
-}
+})
 
--- Setup LSP servers
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-require'lspconfig'.clangd.setup {
-    capabilities = capabilities,
-}
-require'lspconfig'.cmake.setup{
-    capabilities = capabilities
-}
-require'lspconfig'.lua_ls.setup{
-    capabilities = capabilities
-}
-require'lspconfig'.jsonls.setup{
-    capabilities = capabilities
-}
-require'lspconfig'.pyright.setup{
-    capabilities = capabilities
-}
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "rounded",
+cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+        { name = 'cmp_git' },
+    }, {
+        { name = 'buffer' },
     })
-
+})
