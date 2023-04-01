@@ -43,6 +43,7 @@ cmp.setup({
         { name = "nvim_lsp" },
         { name = "buffer" },
         { name = 'luasnip' },
+        { name = 'git' },
     },
     formatting = {
         format = lspkind.cmp_format {
@@ -61,9 +62,4 @@ cmp.setup({
     }
 })
 
-require('cmp').setup({
-    sources = {
-        { name = 'git' },
-    }
-})
 require('cmp_git').setup()
