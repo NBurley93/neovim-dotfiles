@@ -79,15 +79,15 @@ _G.packer_plugins = {
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\2077.nvim",
     url = "https://github.com/akai54/2077.nvim"
   },
+  ["Comment.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\Comment.nvim",
+    url = "https://github.com/numToStr/Comment.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
-  },
-  ["auto-pairs"] = {
-    loaded = true,
-    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\auto-pairs",
-    url = "https://github.com/jiangmiao/auto-pairs"
   },
   ["cmp-buffer"] = {
     loaded = true,
@@ -119,19 +119,28 @@ _G.packer_plugins = {
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  ["dashboard-nvim"] = {
-    config = { "\27LJ\2\n;\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0 cabal.plugins.cfg.dashboard\frequire\0" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\dashboard-nvim",
-    url = "https://github.com/glepnir/dashboard-nvim"
+  ["diffview.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\diffview.nvim",
+    url = "https://github.com/sindrets/diffview.nvim"
+  },
+  ["fidget.nvim"] = {
+    config = { "\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vfidget\frequire\0" },
+    loaded = true,
+    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\fidget.nvim",
+    url = "https://github.com/j-hui/fidget.nvim"
   },
   ["gitsigns.nvim"] = {
     config = { "\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31cabal.plugins.cfg.gitsigns\frequire\0" },
     loaded = true,
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  ["indent-blankline.nvim"] = {
+    config = { "\27LJ\2\nA\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0&cabal.plugins.cfg.indentblankline\frequire\0" },
+    loaded = true,
+    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["lsp-colors.nvim"] = {
     loaded = true,
@@ -154,10 +163,20 @@ _G.packer_plugins = {
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\mason-lspconfig.nvim",
     url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
+  ["mason-nvim-dap.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\mason-nvim-dap.nvim",
+    url = "https://github.com/jay-babu/mason-nvim-dap.nvim"
+  },
   ["mason.nvim"] = {
     loaded = true,
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["neodev.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\neodev.nvim",
+    url = "https://github.com/folke/neodev.nvim"
   },
   nerdtree = {
     loaded = true,
@@ -185,6 +204,7 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-treesitter"] = {
+    config = { "\27LJ\2\nf\0\0\5\0\5\0\t6\0\0\0006\2\1\0'\4\2\0B\2\2\0029\2\3\0025\4\4\0B\2\2\0A\0\0\1K\0\1\0\1\0\1\14with_sync\2\vupdate\28nvim-treesitter.install\frequire\npcall\0" },
     loaded = true,
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -239,6 +259,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-rhubarb",
     url = "https://github.com/tpope/vim-rhubarb"
   },
+  ["vim-sleuth"] = {
+    loaded = true,
+    path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-sleuth",
+    url = "https://github.com/tpope/vim-sleuth"
+  },
   ["vim-vinegar"] = {
     loaded = true,
     path = "C:\\Users\\nickb\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-vinegar",
@@ -252,21 +277,26 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31cabal.plugins.cfg.gitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\2\nf\0\0\5\0\5\0\t6\0\0\0006\2\1\0'\4\2\0B\2\2\0029\2\3\0025\4\4\0B\2\2\0A\0\0\1K\0\1\0\1\0\1\14with_sync\2\vupdate\28nvim-treesitter.install\frequire\npcall\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\nA\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0&cabal.plugins.cfg.indentblankline\frequire\0", "config", "indent-blankline.nvim")
+time([[Config for indent-blankline.nvim]], false)
 -- Config for: lualine.nvim
 time([[Config for lualine.nvim]], true)
 try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30cabal.plugins.cfg.lualine\frequire\0", "config", "lualine.nvim")
 time([[Config for lualine.nvim]], false)
-vim.cmd [[augroup packer_load_aucmds]]
-vim.cmd [[au!]]
-  -- Event lazy-loads
-time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au VimEnter * ++once lua require("packer.load")({'dashboard-nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
-time([[Defining lazy-load event autocommands]], false)
-vim.cmd("augroup END")
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31cabal.plugins.cfg.gitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
+-- Config for: fidget.nvim
+time([[Config for fidget.nvim]], true)
+try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
+time([[Config for fidget.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

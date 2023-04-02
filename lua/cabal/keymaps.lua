@@ -1,27 +1,81 @@
-local builtin = require('telescope.builtin')
-local map = vim.keymap.set
-local globals = vim.g
-local map_defaults = { noremap = true, silent = true }
+return {
+    config = function()
+        local cmp = require('cmp')
+        local dap = require('dap')
+        local luasnip = require('luasnip')
+        local builtin = require('telescope.builtin')
+        local map = vim.keymap.set
+        local globals = vim.g
 
-globals.mapleader = ' '
+        -- Set <leader> to <Space>
+        globals.mapleader = ' '
+        map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
-map('n', '<leader>w', '<cmd>w<cr>', map_defaults)
-map('n', '<leader><home>', '<cmd>source $MYVIMRC<cr>', { noremap = true, silent = false })
-map('n', '<leader>n', '<cmd>set invrelativenumber<cr>', map_defaults)
+        -- Misc helpers
+        map('n', '<leader>l', '<cmd>set invrelativenumber<cr>', { desc = "Toggle between linenumber and rellinenumber" })
 
-map('n', '<leader>xx', '<cmd>TroubleToggle<cr>', map_defaults)
-map('n', '<leader>q', '<cmd>q<cr>', map_defaults)
-map('n', '<leader>Q', '<cmd>Q<cr>', map_defaults)
+        -- Trouble
+        map('n', '<leader>xx', '<cmd>TroubleToggle<cr>', { desc = "Toggle Trouble window" })
 
-map('n', '<leader>bn', '<cmd>enew<cr>', map_defaults)
-map('n', '<leader>b=', '<cmd>bnext<cr>', map_defaults)
-map('n', '<leader>b-', '<cmd>bprev<cr>', map_defaults)
-map('n', '<leader>bc', '<cmd>bd<cr>', map_defaults)
+        -- Diagnostic navigation
+        map('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+        map('n', ']d', vim.diagnostic.goto_prev, { desc = "Go to next diagnostic message" })
+        map('n', '<leader>e', vim.diagnostic.goto_prev, { desc = "Open floating diagnostic message" })
+        map('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
+        -- Buffer mgmnt
+        map('n', '<leader>bn', '<cmd>enew<cr>', { desc = "Create a new empty buffer" })
+        map('n', '<leader>b=', '<cmd>bnext<cr>', { desc = "Go to previous buffer" })
+        map('n', '<leader>b-', '<cmd>bprev<cr>', { desc = "Go to next buffer" })
+        map('n', '<leader>bc', '<cmd>bd<cr>', { desc = "Close the currently selected buffer" })
 
-map('n', '<leader>ff', builtin.find_files)
-map('', '<leader>fg', builtin.live_grep)
-map('n', '<leader>fb', builtin.buffers)
-map('n', '<leader>fh', builtin.help_tags)
-map('n', '<leader>/', builtin.current_buffer_fuzzy_find)
+        -- nvim-cmp Mappings
+        cmp.setup {
+            mapping = cmp.mapping.preset.insert {
+                ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+                ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+                ["<C-e>"] = cmp.mapping({
+                    i = cmp.mapping.abort(),
+                    c = cmp.mapping.close(),
+                }),
+                ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+                ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif luasnip.expand_or_jumpable() then
+                        luasnip.expand_or_jump()
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
+                ['<S-Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    elseif luasnip.jumpable(-1) then
+                        luasnip.jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
+            }
+        }
 
+        -- Telescope
+        map('n', '<leader>ff', builtin.find_files)
+        map('', '<leader>fg', builtin.live_grep)
+        map('n', '<leader>fb', builtin.buffers)
+        map('n', '<leader>fh', builtin.help_tags)
+        map('n', '<leader>/', builtin.current_buffer_fuzzy_find)
+
+        -- DAP Mappings
+        map('n', '<F5>', dap.continue)
+        map('n', '<F1>', dap.step_into)
+        map('n', '<F2>', dap.step_over)
+        map('n', '<F3>', dap.step_out)
+        map('n', '<leader>bp', dap.toggle_breakpoint)
+        map('n', '<leader>BP', function()
+            dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+        end)
+    end,
+}

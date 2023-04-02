@@ -17,6 +17,16 @@ require('packer').startup({
 		-- Vim helpers
 		use { 'folke/which-key.nvim' }
 
+		-- LSP
+		use({
+			{ 'onsails/lspkind.nvim' },
+			{ 'williamboman/mason.nvim',          run = ':MasonUpdate' },
+			{ 'williamboman/mason-lspconfig.nvim' },
+			{ 'neovim/nvim-lspconfig' },
+			{ 'folke/neodev.nvim' },
+			{ 'j-hui/fidget.nvim',                config = function() require('fidget').setup() end },
+		})
+
 		-- Completion
 		use({
 			{ 'hrsh7th/nvim-cmp' },
@@ -24,18 +34,12 @@ require('packer').startup({
 			{ 'hrsh7th/cmp-nvim-lsp' },
 			{ 'hrsh7th/cmp-buffer' },
 			{ 'hrsh7th/cmp-path' },
-			{ 'onsails/lspkind.nvim' },
-			{ 'jiangmiao/auto-pairs' },
-			--		{ 'dcampos/nvim-snippy' },
-			--		{ 'dcampos/cmp-snippy' },
+			{ 'tpope/vim-sleuth' },
 			{
 				'L3MON4D3/LuaSnip',
 				tag = 'v1.2.*',
 			},
 			{ 'saadparwaiz1/cmp_luasnip' },
-			{ 'williamboman/mason.nvim',          run = ':MasonUpdate' },
-			{ 'williamboman/mason-lspconfig.nvim' },
-			{ 'neovim/nvim-lspconfig' },
 		})
 
 		-- Filetree
@@ -59,10 +63,11 @@ require('packer').startup({
 			{
 				'lewis6991/gitsigns.nvim',
 				requires = { 'nvim-lua/plenary.nvim' },
-				config = function()
-					require(
-						'cabal.plugins.cfg.gitsigns')
-				end
+				config = function() require('cabal.plugins.cfg.gitsigns') end
+			},
+			{
+				'sindrets/diffview.nvim',
+				requires = 'nvim-lua/plenary.nvim',
 			}
 		})
 
@@ -74,23 +79,40 @@ require('packer').startup({
 			{ 'folke/trouble.nvim' },
 			{ 'folke/lsp-colors.nvim' },
 			{ 'nvie/vim-flake8' },
+		})
+
+		-- Debugging
+		use({
 			{ 'mfussenegger/nvim-dap' },
-			{ 'rcarriga/nvim-dap-ui' }
+			{ 'rcarriga/nvim-dap-ui' },
+			{ 'jay-babu/mason-nvim-dap.nvim' },
 		})
 
 		-- Theming
 		use { 'akai54/2077.nvim' }
-		use {
-			'glepnir/dashboard-nvim',
-			event = 'VimEnter',
-			config = function() require('cabal.plugins.cfg.dashboard') end,
-			dependencies = { { 'nvim-tree/nvim-web-icons' } },
-		}
+
 
 		-- Syntax highlighting
 		use({
 			{ 'sheerun/vim-polyglot' },
-			{ 'nvim-treesitter/nvim-treesitter' },
+			{
+				'nvim-treesitter/nvim-treesitter',
+				dependencies = {
+					'nvim-treesitter/nvim-treesitter-textobjects'
+				},
+				config = function()
+					pcall(require('nvim-treesitter.install').update { with_sync = true })
+				end,
+			},
+		})
+
+		-- Editing
+		use({
+			{
+				'lukas-reineke/indent-blankline.nvim',
+				config = function() require('cabal.plugins.cfg.indentblankline') end,
+			},
+			{ 'numToStr/Comment.nvim' }
 		})
 
 		-- Automatically set up your configuration after cloning packer.nvim

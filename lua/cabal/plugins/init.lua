@@ -1,9 +1,8 @@
-vim.cmd([[
-	augroup packer_user_config
-		autocmd!
-		autocmd BufWritePost pluglist.lua source <afile> | PackerSync
-	augroup end
-	]])
+return {
+	config = function()
+		require('cabal.plugins.pluglist')
 
-require('cabal.plugins.pluglist')
-
+		-- Make required `setup` calls here
+		require('Comment').setup()
+	end,
+}
