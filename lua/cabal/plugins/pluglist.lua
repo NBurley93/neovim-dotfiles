@@ -17,10 +17,30 @@ require('packer').startup({
 		-- Vim helpers
 		use { 'folke/which-key.nvim' }
 
+		-- Misc
+		use {
+			'andweeb/presence.nvim',
+			config = function()
+				require('presence').setup({
+					auto_update = true,
+					neovim_image_text = "The One True Texteditor",
+					main_image = "neovim",
+					show_time = false,
+					buttons = false,
+				})
+			end,
+		}
+
+
+		use	{ 'williamboman/mason.nvim',          run = ':MasonUpdate' }
+
+		-- Linting and Formatting
+		use { 'jose-elias-alvarez/null-ls.nvim', config = function() require('null-ls').setup() end }
+		use { 'jay-babu/mason-null-ls.nvim' }
+
 		-- LSP
 		use({
 			{ 'onsails/lspkind.nvim' },
-			{ 'williamboman/mason.nvim',          run = ':MasonUpdate' },
 			{ 'williamboman/mason-lspconfig.nvim' },
 			{ 'neovim/nvim-lspconfig' },
 			{ 'folke/neodev.nvim' },

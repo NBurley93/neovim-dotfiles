@@ -28,7 +28,10 @@ return {
         -- Cpp
         require 'lspconfig'.clangd.setup {
             capabilities = capabilities,
-            on_attach = lsp_keybinds(),
+            on_attach = function()
+                lsp_keybinds()
+                map('n', '<leader>h', '<cmd>ClangdSwitchSourceHeader<cr>', { buffer = 0 })
+            end,
         }
 
         -- CMake
