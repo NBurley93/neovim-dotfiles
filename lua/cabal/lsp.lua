@@ -71,6 +71,18 @@ return {
             on_attach = lsp_keybinds(),
         }
 
+        -- Terraform
+        require 'lspconfig'.terraformls.setup {
+            capabilities = capabilities,
+            on_attach = lsp_keybinds(),
+        }
+
+        -- YAML
+        require 'lspconfig'.yamlls.setup {
+            capabilities = capabilities,
+            on_attach = lsp_keybinds(),
+        }
+
         vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
             border = "rounded",
         })
