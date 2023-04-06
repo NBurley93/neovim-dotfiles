@@ -2,20 +2,41 @@ return {
 	config = function()
 		local null_ls = require("null-ls")
 
+		local diagnostics = null_ls.builtins.diagnostics
+		local formatting = null_ls.builtins.formatting
+
 		null_ls.setup({
 			sources = {
-				null_ls.builtins.diagnostics.cpplint,
-				null_ls.builtins.diagnostics.flake8,
-				null_ls.builtins.diagnostics.pylint,
-				null_ls.builtins.diagnostics.terraform_validate,
-				null_ls.builtins.diagnostics.markdownlint,
-				null_ls.builtins.diagnostics.cmake_lint,
-				null_ls.builtins.formatting.autopep8,
-				null_ls.builtins.formatting.clang_format,
-				null_ls.builtins.formatting.terraform_fmt,
-				null_ls.builtins.formatting.stylua,
-				null_ls.builtins.formatting.isort,
-				null_ls.builtins.formatting.cmake_format,
+				-- Cpp
+				diagnostics.cpplint,
+				formatting.clang_format,
+
+				-- Python
+				diagnostics.pylint,
+				diagnostics.flake8,
+				formatting.autopep8,
+				formatting.isort,
+
+				-- Terraform
+				diagnostics.terraform_validate,
+				formatting.terraform_fmt,
+
+				-- Lua
+				formatting.stylua,
+
+				-- CMake
+				diagnostics.cmake_lint,
+				formatting.cmake_format,
+
+				-- Yaml
+				formatting.prettier,
+				diagnostics.yamllint,
+
+				-- Markdown
+				diagnostics.markdownlint,
+
+				-- Docker
+				diagnostics.hadolint,
 			},
 		})
 	end,
