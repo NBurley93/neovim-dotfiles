@@ -12,7 +12,6 @@ return {
 				formatting.clang_format,
 
 				-- Python
-				-- diagnostics.pylint,
 				diagnostics.flake8,
 				formatting.autopep8,
 				formatting.isort,
@@ -23,6 +22,7 @@ return {
 
 				-- Lua
 				formatting.stylua,
+				diagnostics.selene,
 
 				-- CMake
 				diagnostics.cmake_lint,
