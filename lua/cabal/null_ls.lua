@@ -12,7 +12,7 @@ return {
 				formatting.clang_format,
 
 				-- Python
-				diagnostics.pylint,
+				-- diagnostics.pylint,
 				diagnostics.flake8,
 				formatting.autopep8,
 				formatting.isort,
