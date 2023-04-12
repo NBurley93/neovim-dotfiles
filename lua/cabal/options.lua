@@ -28,7 +28,8 @@ return {
 
 		-- Configure python runtime for windows
 		if vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1 then
-			vim.g.python3_host_prog = "~\\.pyenv\\pyenv-win\\versions\\3.11.2\\python.exe"
+			local pythonRoot = os.getenv("PYTHON_HOME") or ""
+			vim.g.python3_host_prog = pythonRoot .. "\\python.exe"
 		end
 	end,
 }
