@@ -15,7 +15,7 @@ require("packer").startup({
 	function(use)
 		use("wbthomason/packer.nvim")
 		-- Vim helpers
-		use({ "folke/which-key.nvim" })
+		use({ "folke/which-key.nvim", tag = "v1.2.1" })
 
 		-- Misc
 		use({
@@ -40,14 +40,14 @@ require("packer").startup({
 				require("null-ls").setup()
 			end,
 		})
-		use({ "jay-babu/mason-null-ls.nvim" })
+		use({ "jay-babu/mason-null-ls.nvim", tag = "v2.0.*" })
 
 		-- LSP
 		use({
 			{ "onsails/lspkind.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
 			{ "neovim/nvim-lspconfig" },
-			{ "folke/neodev.nvim" },
+			{ "folke/neodev.nvim", tag = "v2.5.*" },
 			{
 				"j-hui/fidget.nvim",
 				config = function()
@@ -72,10 +72,7 @@ require("packer").startup({
 		})
 
 		-- Filetree
-		use({
-			{ "preservim/nerdtree" },
-			{ "tpope/vim-vinegar" },
-		})
+		use({ "preservim/nerdtree" })
 
 		-- Statusline
 		use({
