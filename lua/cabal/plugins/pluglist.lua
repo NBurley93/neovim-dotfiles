@@ -102,7 +102,10 @@ require("packer").startup({
 		})
 
 		-- Search
-		use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" } })
+		use({
+			"nvim-telescope/telescope.nvim",
+			requires = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" },
+		})
 
 		-- Diagnostics
 		use({
