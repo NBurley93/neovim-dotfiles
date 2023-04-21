@@ -6,6 +6,9 @@ return {
 		require("mason").setup()
 		require("mason-lspconfig").setup()
 
+		-- Enable logging
+		vim.lsp.set_log_level("debug")
+
 		local function lsp_keybinds()
 			local keymap_opts = { buffer = 0 }
 			map("n", "K", vim.lsp.buf.hover, keymap_opts)
