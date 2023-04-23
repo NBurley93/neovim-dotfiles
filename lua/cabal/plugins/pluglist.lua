@@ -47,11 +47,17 @@ require("packer").startup({
 			{ "onsails/lspkind.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
 			{ "neovim/nvim-lspconfig" },
-			{ "folke/neodev.nvim", tag = "v2.5.*" },
+			{ "folke/neodev.nvim",                tag = "v2.5.*" },
 			{
 				"j-hui/fidget.nvim",
 				config = function()
 					require("fidget").setup()
+				end,
+			},
+			{
+				"ray-x/lsp_signature.nvim",
+				config = function()
+					require("cabal.plugins.cfg.lspsignature")
 				end,
 			},
 		})
