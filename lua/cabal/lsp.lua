@@ -20,6 +20,8 @@ return {
 			map("n", "gd", vim.lsp.buf.definition, keymap_opts)
 			map("n", "gt", vim.lsp.buf.type_definition, keymap_opts)
 			map("n", "gi", vim.lsp.buf.implementation, keymap_opts)
+			map("n", "<leader>ca", vim.lsp.buf.code_action, keymap_opts)
+			map("n", "<leader>lsf", vim.lsp.buf.references, keymap_opts)
 			map("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", keymap_opts)
 			map("n", "<leader>r", vim.lsp.buf.rename, keymap_opts)
 			map("n", "<leader>fc", function()
@@ -33,8 +35,10 @@ return {
 		local lspsig = require("lsp_signature")
 
 		-- Cpp
+		local clangd_capabilities = capabilities
+		clangd_capabilities.offsetEncoding = "utf-8"
 		require("lspconfig").clangd.setup({
-			capabilities = capabilities,
+			capabilities = clangd_capabilities,
 			on_attach = function()
 				lsp_onattach()
 				map("n", "<leader>h", "<cmd>ClangdSwitchSourceHeader<cr>", { buffer = 0 })

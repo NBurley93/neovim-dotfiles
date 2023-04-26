@@ -36,9 +36,9 @@ return {
 
 		-- Buffer mgmnt
 		map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "Create a new empty buffer" })
-		map("n", "<leader>b=", "<cmd>bnext<cr>", { desc = "Go to previous buffer" })
-		map("n", "<leader>b-", "<cmd>bprev<cr>", { desc = "Go to next buffer" })
-		map("n", "<leader>bc", "<cmd>bd<cr>", { desc = "Close the currently selected buffer" })
+		map("n", "<leader>b=", "<cmd>bnext<cr>", { desc = "Go to next buffer" })
+		map("n", "<leader>b-", "<cmd>bprev<cr>", { desc = "Go to previous buffer" })
+		map("n", "<leader>bc", "<cmd>bdelete<cr>", { desc = "Close the currently selected buffer" })
 
 		-- nvim-cmp Mappings
 		cmp.setup({
@@ -72,11 +72,21 @@ return {
 			}),
 		})
 
+		-- Folding
+		map("n", "<leader>fc", "zc", { desc = "Close fold" })
+		map("n", "<leader>fo", "zo", { desc = "Open fold" })
+
+		-- Window Mappings
+		map("n", "<leader>ws", "<cmd>winc p<cr>", { desc = "Goto previous window" })
+		map("n", "<leader>wv", "<cmd>vs<cr>", { desc = "Make vertical split" })
+		map("n", "<leader>wh", "<cmd>sp<cr>", { desc = "Make horizontal split" })
+		map("n", "<leader>wc", "<cmd>hid<cr>", { desc = "Close current window" })
+
 		-- Telescope
-		map("n", "<leader>ff", builtin.find_files)
-		map("", "<leader>fg", builtin.live_grep)
-		map("n", "<leader>fb", builtin.buffers)
-		map("n", "<leader>fh", builtin.help_tags)
+		map("n", "<leader>tf", builtin.find_files)
+		map("", "<leader>tg", builtin.live_grep)
+		map("n", "<leader>tb", builtin.buffers)
+		map("n", "<leader>th", builtin.help_tags)
 		map("n", "<leader>/", builtin.current_buffer_fuzzy_find)
 
 		-- DAP Mappings
