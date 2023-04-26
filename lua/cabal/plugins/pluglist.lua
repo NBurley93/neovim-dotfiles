@@ -47,7 +47,7 @@ require("packer").startup({
 			{ "onsails/lspkind.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
 			{ "neovim/nvim-lspconfig" },
-			{ "folke/neodev.nvim",                tag = "v2.5.*" },
+			{ "folke/neodev.nvim", tag = "v2.5.*" },
 			{
 				"j-hui/fidget.nvim",
 				config = function()
@@ -154,6 +154,9 @@ require("packer").startup({
 			},
 			{ "numToStr/Comment.nvim" },
 		})
+
+		-- Utilities
+		use({ "norcalli/nvim-colorizer.lua" })
 
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
