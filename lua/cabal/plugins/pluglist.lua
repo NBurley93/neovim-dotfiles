@@ -91,6 +91,13 @@ require("packer").startup({
 				"ryanoasis/vim-devicons",
 				requires = { "preservim/nerdtree" },
 			},
+			{
+				"tiagofumo/vim-nerdtree-syntax-highlight",
+				requires = { "preservim/nerdtree", "ryanoasis/vim-devicons" },
+				config = function()
+					require("cabal.plugins.cfg.nerdtreesyntaxhighlight")
+				end,
+			},
 		})
 
 		-- Statusline
