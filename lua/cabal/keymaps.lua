@@ -25,6 +25,10 @@ return {
 			{ silent = false, desc = "Reload configuration" }
 		)
 
+		-- Nerdtree
+		map("n", "<leader>n", "<cmd>NERDTreeFocus<cr>", { desc = "Focus on NERDTreeWindow" })
+		map("n", "<C-b>", "<cmd>NERDTree<cr>", { desc = "Show NERDTree Window" })
+
 		-- Trouble
 		map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { desc = "Toggle Trouble window" })
 

@@ -78,7 +78,20 @@ require("packer").startup({
 		})
 
 		-- Filetree
-		use({ "preservim/nerdtree" })
+		use({
+			{ "preservim/nerdtree" },
+			{
+				"Xuyuanp/nerdtree-git-plugin",
+				requires = "preservim/nerdtree",
+				config = function()
+					require("cabal.plugins.cfg.nerdtreegit")
+				end,
+			},
+			{
+				"ryanoasis/vim-devicons",
+				requires = { "preservim/nerdtree" },
+			},
+		})
 
 		-- Statusline
 		use({
