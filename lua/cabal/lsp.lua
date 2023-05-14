@@ -6,16 +6,13 @@ return {
 		require("mason").setup()
 		require("mason-lspconfig").setup()
 
-		local lspsig = require("lsp_signature")
-		lspsig.on_attach()
-
 		-- Enable logging
 		-- vim.lsp.set_log_level("debug")
 
 		local function lsp_onattach()
 			local keymap_opts = { buffer = 0 }
 			map("n", "K", function()
-				lspsig.toggle_float_win()
+				require('lsp_signature').toggle_float_win()
 			end, keymap_opts)
 			map("n", "gd", vim.lsp.buf.definition, keymap_opts)
 			map("n", "gt", vim.lsp.buf.type_definition, keymap_opts)
@@ -32,7 +29,6 @@ return {
 		-- Setup LSP servers
 		-- Default capabilities fetched from cmp_nvim_lsp
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
-		local lspsig = require("lsp_signature")
 
 		-- Cpp
 		local clangd_capabilities = capabilities
@@ -57,8 +53,18 @@ return {
 			on_attach = lsp_onattach(),
 			settings = {
 				Lua = {
+					runtime = {
+						version = "LuaJIT",
+					},
+					diagnostics = {
+						globals = { "vim" },
+					},
 					workspace = {
 						checkThirdParty = false,
+						library = vim.api.nvim_get_runtime_file("", true),
+					},
+					telemetry = {
+						enable = false,
 					},
 					completion = {
 						callSnippet = "Replace",

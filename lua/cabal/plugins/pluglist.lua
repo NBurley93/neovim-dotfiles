@@ -1,3 +1,11 @@
+local VERSION_LOCK = {
+	mason_null_ls = "v2.0.*",
+	mason_nvim_dap = "v2.*",
+	which_key = "v1.4.*",
+	neodev = "v2.5.*",
+	luasnip = "v1.2.*",
+}
+
 local ensure_packer = function()
 	local fn = vim.fn
 	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -15,7 +23,7 @@ require("packer").startup({
 	function(use)
 		use("wbthomason/packer.nvim")
 		-- Vim helpers
-		use({ "folke/which-key.nvim", tag = "v1.2.1" })
+		use({ "folke/which-key.nvim", tag = VERSION_LOCK.which_key })
 
 		-- Misc
 		use({
@@ -30,6 +38,40 @@ require("packer").startup({
 				})
 			end,
 		})
+		use({
+			"rcarriga/nvim-notify",
+			config = function()
+				vim.notify = require("notify")
+			end,
+		})
+		use({
+			"folke/noice.nvim",
+			config = function()
+				require("noice").setup({
+					lsp = {
+						signature = {
+							enabled = false,
+						},
+						override = {
+							["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+							["vim.lsp.util.stylize_markdown"] = false,
+							["cmp.entry.get_documentation"] = false,
+						},
+					},
+					presets = {
+						bottom_search = true,
+						command_palette = true,
+						long_message_to_split = true,
+						inc_rename = false,
+						lsp_doc_border = false,
+					},
+				})
+			end,
+			requires = {
+				"MunifTanjim/nui.nvim",
+				"rcarriga/nvim-notify",
+			},
+		})
 
 		use({ "williamboman/mason.nvim", run = ":MasonUpdate" })
 
@@ -40,14 +82,14 @@ require("packer").startup({
 				require("null-ls").setup()
 			end,
 		})
-		use({ "jay-babu/mason-null-ls.nvim", tag = "v2.0.*" })
+		use({ "jay-babu/mason-null-ls.nvim", tag = VERSION_LOCK.mason_null_ls })
 
 		-- LSP
 		use({
 			{ "onsails/lspkind.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
 			{ "neovim/nvim-lspconfig" },
-			{ "folke/neodev.nvim", tag = "v2.5.*" },
+			{ "folke/neodev.nvim", tag = VERSION_LOCK.neodev },
 			{
 				"j-hui/fidget.nvim",
 				config = function()
@@ -72,14 +114,19 @@ require("packer").startup({
 			{ "tpope/vim-sleuth" },
 			{
 				"L3MON4D3/LuaSnip",
-				tag = "v1.2.*",
+				tag = VERSION_LOCK.luasnip,
 			},
 			{ "saadparwaiz1/cmp_luasnip" },
 		})
 
 		-- Filetree
 		use({
-			{ "preservim/nerdtree" },
+			{
+				"preservim/nerdtree",
+				config = function()
+					require("cabal.plugins.cfg.nerdtree")
+				end,
+			},
 			{
 				"Xuyuanp/nerdtree-git-plugin",
 				requires = "preservim/nerdtree",
@@ -144,7 +191,7 @@ require("packer").startup({
 		use({
 			{ "mfussenegger/nvim-dap" },
 			{ "rcarriga/nvim-dap-ui" },
-			{ "jay-babu/mason-nvim-dap.nvim", tag = "v2.*" },
+			{ "jay-babu/mason-nvim-dap.nvim", tag = VERSION_LOCK.mason_nvim_dap },
 		})
 
 		-- Theming
