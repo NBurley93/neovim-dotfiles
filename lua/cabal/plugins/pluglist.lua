@@ -41,6 +41,9 @@ require("packer").startup({
 		use({
 			"rcarriga/nvim-notify",
 			config = function()
+				require("notify").setup({
+						background_colour = "#000000",
+				})
 				vim.notify = require("notify")
 			end,
 		})
@@ -178,7 +181,10 @@ require("packer").startup({
 		-- Search
 		use({
 			"nvim-telescope/telescope.nvim",
-			requires = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" },
+			requires = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim", },
+			config = function()
+				require("telescope").setup({})
+			end,
 		})
 		use {'nvim-telescope/telescope-ui-select.nvim' }
 
