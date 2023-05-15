@@ -4,6 +4,7 @@ local VERSION_LOCK = {
 	which_key = "v1.4.*",
 	neodev = "v2.5.*",
 	luasnip = "v1.2.*",
+	gitconflict = "v1.1.*",
 }
 
 local ensure_packer = function()
@@ -176,6 +177,7 @@ require("packer").startup({
 				"sindrets/diffview.nvim",
 				requires = "nvim-lua/plenary.nvim",
 			},
+			{ "akinsho/git-conflict.nvim", tag = VERSION_LOCK.gitconflict, config = function() require('git-conflict').setup() end, }
 		})
 
 		-- Search
