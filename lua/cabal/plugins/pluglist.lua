@@ -73,6 +73,7 @@ require("packer").startup({
 			},
 		})
 
+		use({ "stevearc/dressing.nvim" })
 		use({ "williamboman/mason.nvim", run = ":MasonUpdate" })
 
 		-- Linting and Formatting
@@ -179,6 +180,7 @@ require("packer").startup({
 			"nvim-telescope/telescope.nvim",
 			requires = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" },
 		})
+		use {'nvim-telescope/telescope-ui-select.nvim' }
 
 		-- Diagnostics
 		use({
