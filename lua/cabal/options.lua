@@ -20,6 +20,9 @@ return {
 			termguicolors = true,
 			cursorline = true,
 			cot = "menu,menuone,noselect",
+			foldmethod="expr",
+			foldexpr="nvim_treesitter#foldexpr()",
+			foldenable=false,
 		}
 
 		for k, v in pairs(options) do

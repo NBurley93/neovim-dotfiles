@@ -13,8 +13,8 @@ return {
 					autocmd ColorScheme * hi ErrorMsg guibg=NONE ctermbg=NONE
 				augroup END
 				]])
-		vim.cmd("colorscheme cyberpunk_scarlet")
-		-- vim.cmd('colorscheme 2077')
+		-- vim.cmd("colorscheme cyberpunk_scarlet")
+		vim.cmd('colorscheme 2077')
 		-- vim.cmd('colorscheme hackerman')
 	end,
 }
