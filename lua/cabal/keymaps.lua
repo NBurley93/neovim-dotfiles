@@ -42,7 +42,7 @@ return {
 		map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "Create a new empty buffer" })
 		map("n", "<leader>b=", "<cmd>bnext<cr>", { desc = "Go to next buffer" })
 		map("n", "<leader>b-", "<cmd>bprev<cr>", { desc = "Go to previous buffer" })
-		map("n", "<leader>bc", "<cmd>bdelete<cr>", { desc = "Close the currently selected buffer" })
+		map("n", "<leader>bc", "<cmd>bprev <bar> bdelete #<cr>", { desc = "Close the currently selected buffer" })
 
 		-- nvim-cmp Mappings
 		cmp.setup({
