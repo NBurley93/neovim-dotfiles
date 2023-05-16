@@ -5,7 +5,10 @@ local VERSION_LOCK = {
 	neodev = "v2.5.*",
 	luasnip = "v1.2.*",
 	gitconflict = "v1.1.*",
+	bufferline = "v4.1.*",
 }
+
+local USE_NERDTREE = false
 
 local ensure_packer = function()
 	local fn = vim.fn
@@ -25,6 +28,21 @@ require("packer").startup({
 		use("wbthomason/packer.nvim")
 		-- Vim helpers
 		use({ "folke/which-key.nvim", tag = VERSION_LOCK.which_key })
+
+		use({ "akinsho/bufferline.nvim", tag = VERSION_LOCK.bufferline, config = function() require('cabal.plugins.cfg.bufferline') end })
+
+		use({
+				"glepnir/dashboard-nvim",
+				event = 'VimEnter',
+				config = function()
+					require('cabal.plugins.cfg.dashboard')
+				end,
+				requires = {'nvim-tree/nvim-web-devicons'}
+		})
+		use({
+			"MaximilianLloyd/ascii.nvim",
+			requires = { "MunifTanjim/nui.nvim" },
+		})
 
 		-- Misc
 		use({
@@ -125,6 +143,7 @@ require("packer").startup({
 		})
 
 		-- Filetree
+		if USE_NERDTREE then
 		use({
 			{
 				"preservim/nerdtree",
@@ -151,6 +170,18 @@ require("packer").startup({
 				end,
 			},
 		})
+		else
+			use({
+						"nvim-tree/nvim-tree.lua",
+						requires = {
+							"nvim-tree/nvim-web-devicons",
+						},
+						config = function()
+							require("nvim-tree").setup {}
+						end,
+					})
+			use({ "nvim-tree/nvim-web-devicons" })
+		end
 
 		-- Statusline
 		use({
@@ -177,7 +208,7 @@ require("packer").startup({
 				"sindrets/diffview.nvim",
 				requires = "nvim-lua/plenary.nvim",
 			},
-			{ "akinsho/git-conflict.nvim", tag = VERSION_LOCK.gitconflict, config = function() require('git-conflict').setup() end, }
+			{ "akinsho/git-conflict.nvim", tag = VERSION_LOCK.gitconflict, config = function() require('git-conflict').setup() end, },
 		})
 
 		-- Search
@@ -230,6 +261,13 @@ require("packer").startup({
 				end,
 			},
 			{ "numToStr/Comment.nvim" },
+		})
+
+		use ({
+			'simrat39/symbols-outline.nvim',
+			config = function()
+				require('symbols-outline').setup()
+			end,
 		})
 
 		-- Utilities

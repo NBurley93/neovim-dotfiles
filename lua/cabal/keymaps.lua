@@ -26,8 +26,7 @@ return {
 		)
 
 		-- Nerdtree
-		map("n", "<leader>n", "<cmd>NERDTreeFocus<cr>", { desc = "Focus on NERDTreeWindow" })
-		map("n", "<C-b>", "<cmd>NERDTreeToggle<cr>", { desc = "Toggle NERDTree Window" })
+		map("n", "<C-b>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NERDTree Window" })
 
 		-- Trouble
 		map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { desc = "Toggle Trouble window" })

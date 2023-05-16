@@ -11,6 +11,7 @@ return {
 					autocmd ColorScheme * hi NormalNC guibg=NONE
 					autocmd ColorScheme * hi VertSplit guibg=NONE
 					autocmd ColorScheme * hi ErrorMsg guibg=NONE ctermbg=NONE
+					autocmd ColorScheme * hi NvimTreeNormal guibg=NONE ctermbg=NONE
 				augroup END
 				]])
 		-- vim.cmd("colorscheme cyberpunk_scarlet")

@@ -1,7 +1,7 @@
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
-		theme = "auto",
+		theme = "2077",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		globalstatus = true,
@@ -14,24 +14,8 @@ require("lualine").setup({
 	},
 	sections = {
 		lualine_a = { "mode" },
-		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = {
-			{
-				"buffers",
-				show_modified_status = true,
-				mode = 2,
-				symbols = {
-					modified = "!",
-					alternate_file = "",
-					directory = "",
-				},
-				use_mode_colors = false,
-				buffers_color = {
-					active = "TabLineSel",
-					inactive = "TabLine",
-				},
-			},
-		},
+		lualine_b = { "branch" },
+		lualine_c = {},
 		lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
@@ -47,5 +31,5 @@ require("lualine").setup({
 	tabline = {},
 	winbar = {},
 	inactive_winbar = {},
-	extensions = { "fugitive", "nvim-dap-ui", "nerdtree", "trouble" },
+	extensions = { "fugitive", "nvim-dap-ui", "nvim-tree", "trouble" },
 })

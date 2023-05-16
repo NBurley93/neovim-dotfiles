@@ -23,11 +23,15 @@ return {
 			foldmethod="expr",
 			foldexpr="nvim_treesitter#foldexpr()",
 			foldenable=false,
+			list=true,
 		}
 
 		for k, v in pairs(options) do
 			vim.opt[k] = v
 		end
+
+		vim.opt.listchars:append "space:⋅"
+		vim.opt.listchars:append "eol:↴"
 
 		-- Configure python runtime for windows
 		if vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1 then
