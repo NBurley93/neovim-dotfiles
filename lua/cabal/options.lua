@@ -30,9 +30,6 @@ return {
 			vim.opt[k] = v
 		end
 
-		vim.opt.listchars:append "space:⋅"
-		vim.opt.listchars:append "eol:↴"
-
 		-- Configure python runtime for windows
 		if vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1 then
 			local pythonRoot = os.getenv("PYTHON_HOME") or ""
