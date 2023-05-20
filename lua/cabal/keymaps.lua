@@ -85,6 +85,10 @@ return {
 		map("n", "<leader>wh", "<cmd>sp<cr>", { desc = "Make horizontal split" })
 		map("n", "<leader>wc", "<cmd>hid<cr>", { desc = "Close current window" })
 
+		-- Git 
+		map("n", "<leader>cc", "<cmd>Git commit<cr>", { desc = "Make a git commit" })
+		map("n", "<leader>cd", "<cmd>DiffviewOpen<cr>", { desc = "Open diffview" })
+
 		-- Telescope
 		map("n", "<leader>tf", builtin.find_files)
 		map("", "<leader>tg", builtin.live_grep)

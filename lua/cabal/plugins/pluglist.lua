@@ -207,6 +207,9 @@ require("packer").startup({
 			{
 				"sindrets/diffview.nvim",
 				requires = "nvim-lua/plenary.nvim",
+				config = function()
+					require("cabal.plugins.cfg.diffview")
+				end,
 			},
 			{ "akinsho/git-conflict.nvim", tag = VERSION_LOCK.gitconflict, config = function() require('git-conflict').setup() end, },
 		})
