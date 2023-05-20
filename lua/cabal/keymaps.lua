@@ -86,8 +86,8 @@ return {
 		map("n", "<leader>wc", "<cmd>hid<cr>", { desc = "Close current window" })
 
 		-- Git 
-		map("n", "<leader>cc", "<cmd>Git commit<cr>", { desc = "Make a git commit" })
-		map("n", "<leader>cd", "<cmd>DiffviewOpen<cr>", { desc = "Open diffview" })
+		map("n", "<leader>dvo", "<cmd>DiffviewOpen<cr>", { desc = "Open diffview" })
+		map("n", "<leader>dvc", "<cmd>DiffviewClose<cr>", { desc = "Close diffview" })
 
 		-- Telescope
 		map("n", "<leader>tf", builtin.find_files)
