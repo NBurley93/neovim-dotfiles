@@ -177,7 +177,12 @@ require("packer").startup({
 							"nvim-tree/nvim-web-devicons",
 						},
 						config = function()
-							require("nvim-tree").setup {}
+							require("nvim-tree").setup {
+								renderer = {
+									highlight_opened_files = "name",
+									group_empty = true,
+								}
+							}
 						end,
 					})
 			use({ "nvim-tree/nvim-web-devicons" })
