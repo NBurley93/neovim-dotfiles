@@ -1,83 +1,87 @@
-local VERSION_LOCK = {
-	mason_null_ls = "v2.0.*",
-	mason_nvim_dap = "v2.*",
-	which_key = "v1.4.*",
-	neodev = "v2.5.*",
-	luasnip = "v1.2.*",
-	gitconflict = "v1.1.*",
-	bufferline = "v4.1.*",
-}
-
-local USE_NERDTREE = false
-
 local ensure_packer = function()
 	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+	local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+		fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
 		vim.cmd([[packadd packer.nvim]])
 		return true
 	end
 	return false
 end
 
-local packer_bootstrap = ensure_packer()
+local ensure_lazy = function()
+	local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+	if not vim.loop.fs_stat(lazypath) then
+		vim.fn.system({
+			'git',
+			'clone',
+			'--filter=blob:none',
+			'https://github.com/folke/lazy.nvim.git',
+			'--branch=stable',
+			lazypath,
+		})
+	end
+	vim.opt.rtp:prepend(lazypath)
+end
 
-require("packer").startup({
-	function(use)
-		use("wbthomason/packer.nvim")
+local lazy_bootstrap = ensure_lazy()
+
+-- Set <leader> to <Space>
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+require('lazy').setup({
 		-- Vim helpers
-		use({ "folke/which-key.nvim", tag = VERSION_LOCK.which_key })
+		{ 'folke/which-key.nvim' },
 
-		use({ "akinsho/bufferline.nvim", tag = VERSION_LOCK.bufferline, config = function() require('cabal.plugins.cfg.bufferline') end })
+		{ 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons' },
 
-		use({
-				"glepnir/dashboard-nvim",
+		{
+				'glepnir/dashboard-nvim',
 				event = 'VimEnter',
 				config = function()
 					require('cabal.plugins.cfg.dashboard')
 				end,
-				requires = {'nvim-tree/nvim-web-devicons'}
-		})
-		use({
-			"MaximilianLloyd/ascii.nvim",
-			requires = { "MunifTanjim/nui.nvim" },
-		})
+				dependencies = {'nvim-tree/nvim-web-devicons'}
+		},
+		{
+			'MaximilianLloyd/ascii.nvim',
+			dependencies = { 'MunifTanjim/nui.nvim' },
+		},
 
 		-- Misc
-		use({
-			"andweeb/presence.nvim",
+		{
+			'andweeb/presence.nvim',
 			config = function()
-				require("presence").setup({
+				require('presence').setup({
 					auto_update = true,
-					neovim_image_text = "The One True Texteditor",
-					main_image = "neovim",
+					neovim_image_text = 'The One True Texteditor',
+					main_image = 'neovim',
 					show_time = false,
 					buttons = false,
 				})
 			end,
-		})
-		use({
-			"rcarriga/nvim-notify",
+		},
+		{
+			'rcarriga/nvim-notify',
 			config = function()
-				require("notify").setup({
-						background_colour = "#000000",
+				require('notify').setup({
+						background_colour = '#000000',
 				})
-				vim.notify = require("notify")
+				vim.notify = require('notify')
 			end,
-		})
-		use({
-			"folke/noice.nvim",
+		},
+		{
+			'folke/noice.nvim',
 			config = function()
-				require("noice").setup({
+				require('noice').setup({
 					lsp = {
 						signature = {
 							enabled = false,
 						},
 						override = {
-							["vim.lsp.util.convert_input_to_markdown_lines"] = false,
-							["vim.lsp.util.stylize_markdown"] = false,
-							["cmp.entry.get_documentation"] = false,
+							['vim.lsp.util.convert_input_to_markdown_lines'] = false,
+							['vim.lsp.util.stylize_markdown'] = false,
+							['cmp.entry.get_documentation'] = false,
 						},
 					},
 					presets = {
@@ -89,203 +93,165 @@ require("packer").startup({
 					},
 				})
 			end,
-			requires = {
-				"MunifTanjim/nui.nvim",
-				"rcarriga/nvim-notify",
+			dependencies = {
+				'MunifTanjim/nui.nvim',
+				'rcarriga/nvim-notify',
 			},
-		})
+		},
 
-		use({ "stevearc/dressing.nvim" })
-		use({ "williamboman/mason.nvim", run = ":MasonUpdate" })
+		{ 'stevearc/dressing.nvim' },
+		{ 'williamboman/mason.nvim', build = ':MasonUpdate' },
 
 		-- Linting and Formatting
-		use({
-			"jose-elias-alvarez/null-ls.nvim",
+		{
+			'jose-elias-alvarez/null-ls.nvim',
 			config = function()
-				require("null-ls").setup()
+				require('null-ls').setup()
 			end,
-		})
-		use({ "jay-babu/mason-null-ls.nvim", tag = VERSION_LOCK.mason_null_ls })
+		},
+		{ 'jay-babu/mason-null-ls.nvim' },
 
 		-- LSP
-		use({
-			{ "onsails/lspkind.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
-			{ "neovim/nvim-lspconfig" },
-			{ "folke/neodev.nvim", tag = VERSION_LOCK.neodev },
+		{
+			{ 'onsails/lspkind.nvim' },
+			{ 'williamboman/mason-lspconfig.nvim' },
+			{ 'neovim/nvim-lspconfig' },
+			{ 'folke/neodev.nvim' },
 			{
-				"j-hui/fidget.nvim",
+				'j-hui/fidget.nvim',
 				config = function()
-					require("fidget").setup()
+					require('fidget').setup()
 				end,
 			},
 			{
-				"ray-x/lsp_signature.nvim",
+				'ray-x/lsp_signature.nvim',
 				config = function()
-					require("cabal.plugins.cfg.lspsignature")
+					require('cabal.plugins.cfg.lspsignature')
 				end,
 			},
-		})
+		},
 
 		-- Completion
-		use({
-			{ "hrsh7th/nvim-cmp" },
-			{ "hrsh7th/cmp-nvim-lua" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-path" },
-			{ "tpope/vim-sleuth" },
+		{
+			{ 'hrsh7th/nvim-cmp' },
+			{ 'hrsh7th/cmp-nvim-lua' },
+			{ 'hrsh7th/cmp-nvim-lsp' },
+			{ 'hrsh7th/cmp-buffer' },
+			{ 'hrsh7th/cmp-path' },
+			{ 'tpope/vim-sleuth' },
 			{
-				"L3MON4D3/LuaSnip",
-				tag = VERSION_LOCK.luasnip,
+				'L3MON4D3/LuaSnip',
 			},
-			{ "saadparwaiz1/cmp_luasnip" },
-		})
+			{ 'saadparwaiz1/cmp_luasnip' },
+		},
 
 		-- Filetree
-		if USE_NERDTREE then
-		use({
 			{
-				"preservim/nerdtree",
-				config = function()
-					require("cabal.plugins.cfg.nerdtree")
-				end,
-			},
-			{
-				"Xuyuanp/nerdtree-git-plugin",
-				requires = "preservim/nerdtree",
-				config = function()
-					require("cabal.plugins.cfg.nerdtreegit")
-				end,
-			},
-			{
-				"ryanoasis/vim-devicons",
-				requires = { "preservim/nerdtree" },
-			},
-			{
-				"tiagofumo/vim-nerdtree-syntax-highlight",
-				requires = { "preservim/nerdtree", "ryanoasis/vim-devicons" },
-				config = function()
-					require("cabal.plugins.cfg.nerdtreesyntaxhighlight")
-				end,
-			},
-		})
-		else
-			use({
-						"nvim-tree/nvim-tree.lua",
-						requires = {
-							"nvim-tree/nvim-web-devicons",
+						'nvim-tree/nvim-tree.lua',
+						dependencies = {
+							'nvim-tree/nvim-web-devicons',
 						},
 						config = function()
-							require("nvim-tree").setup {
+							require('nvim-tree').setup {
 								renderer = {
-									highlight_opened_files = "name",
+									highlight_opened_files = 'name',
 									group_empty = true,
 								}
 							}
 						end,
-					})
-			use({ "nvim-tree/nvim-web-devicons" })
-		end
+			},
+		{ 'nvim-tree/nvim-web-devicons' },
 
 		-- Statusline
-		use({
-			"nvim-lualine/lualine.nvim",
-			requires = "nvim-tree/nvim-web-devicons",
+		{
+			'nvim-lualine/lualine.nvim',
+			dependencies = 'nvim-tree/nvim-web-devicons',
 			config = function()
-				require("cabal.plugins.cfg.lualine")
+				require('cabal.plugins.cfg.lualine')
 			end,
-		})
+		},
 
 		-- Git
-		use({
-			{ "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" },
-			{ "tpope/vim-fugitive" },
-			{ "tpope/vim-rhubarb" },
+		{
+			{ 'petertriho/cmp-git', dependencies = 'nvim-lua/plenary.nvim' },
+			{ 'tpope/vim-fugitive' },
+			{ 'tpope/vim-rhubarb' },
 			{
-				"lewis6991/gitsigns.nvim",
-				requires = { "nvim-lua/plenary.nvim" },
+				'lewis6991/gitsigns.nvim',
+				dependencies = { 'nvim-lua/plenary.nvim' },
 				config = function()
-					require("cabal.plugins.cfg.gitsigns")
+					require('cabal.plugins.cfg.gitsigns')
 				end,
 			},
 			{
-				"sindrets/diffview.nvim",
-				requires = "nvim-lua/plenary.nvim",
+				'sindrets/diffview.nvim',
+				dependencies = 'nvim-lua/plenary.nvim',
 				config = function()
-					require("cabal.plugins.cfg.diffview")
+					require('cabal.plugins.cfg.diffview')
 				end,
 			},
-			{ "akinsho/git-conflict.nvim", tag = VERSION_LOCK.gitconflict, config = function() require('git-conflict').setup() end, },
-		})
+			{ 'akinsho/git-conflict.nvim' },
+		},
 
 		-- Search
-		use({
-			"nvim-telescope/telescope.nvim",
-			requires = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim", },
+		{
+			'nvim-telescope/telescope.nvim',
+			dependencies = { 'nvim-lua/plenary.nvim', 'nvim-lua/popup.nvim', },
 			config = function()
-				require("telescope").setup({})
+				require('telescope').setup({})
 			end,
-		})
-		use {'nvim-telescope/telescope-ui-select.nvim' }
+		},
+		{'nvim-telescope/telescope-ui-select.nvim' },
 
 		-- Diagnostics
-		use({
-			{ "folke/trouble.nvim" },
-			{ "folke/lsp-colors.nvim" },
-			{ "nvie/vim-flake8" },
-		})
+		{
+			{ 'folke/trouble.nvim' },
+			{ 'folke/lsp-colors.nvim' },
+			{ 'nvie/vim-flake8' },
+		},
 
 		-- Debugging
-		use({
-			{ "mfussenegger/nvim-dap" },
-			{ "rcarriga/nvim-dap-ui" },
-			{ "jay-babu/mason-nvim-dap.nvim", tag = VERSION_LOCK.mason_nvim_dap },
-		})
+		{
+			{ 'mfussenegger/nvim-dap' },
+			{ 'rcarriga/nvim-dap-ui' },
+			{ 'jay-babu/mason-nvim-dap.nvim' },
+		},
 
 		-- Theming
-		use({ "akai54/2077.nvim" })
+		{ 'akai54/2077.nvim' },
 
 		-- Syntax highlighting
-		use({
-			{ "sheerun/vim-polyglot" },
+		{
 			{
-				"nvim-treesitter/nvim-treesitter",
+				'nvim-treesitter/nvim-treesitter',
 				dependencies = {
-					"nvim-treesitter/nvim-treesitter-textobjects",
+					'nvim-treesitter/nvim-treesitter-textobjects',
 				},
 				config = function()
-					pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+					pcall(require('nvim-treesitter.install').update({ with_sync = true }))
+					require('cabal.plugins.cfg.treesitter')
 				end,
 			},
-		})
+		},
 
 		-- Editing
-		use({
+		{
 			{
-				"lukas-reineke/indent-blankline.nvim",
+				'lukas-reineke/indent-blankline.nvim',
 				config = function()
-					require("cabal.plugins.cfg.indentblankline")
+					require('cabal.plugins.cfg.indentblankline')
 				end,
 			},
-			{ "numToStr/Comment.nvim" },
-		})
+			{ 'numToStr/Comment.nvim' },
+		},
 
-		use ({
+		{
 			'simrat39/symbols-outline.nvim',
 			config = function()
 				require('symbols-outline').setup()
 			end,
-		})
+		},
 
 		-- Utilities
-		use({ "norcalli/nvim-colorizer.lua" })
-
-		-- Automatically set up your configuration after cloning packer.nvim
-		-- Put this at the end after all plugins
-		if packer_bootstrap then
-			require("packer").sync()
-		end
-	end,
-	config = require("cabal.plugins.cfg.packer"),
-})
+		{ 'norcalli/nvim-colorizer.lua' },
+	})

@@ -15,7 +15,7 @@ return {
 					autocmd ColorScheme * hi CursorLine guibg=#050a08
 				augroup END
 				]])
-		-- vim.cmd("colorscheme cyberpunk_scarlet")
+		-- vim.cmd('colorscheme cyberpunk_scarlet')
 		vim.cmd('colorscheme 2077')
 		-- vim.cmd('colorscheme hackerman')
 	end,
