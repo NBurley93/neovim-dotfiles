@@ -22,7 +22,7 @@ return {
 
 				-- Lua
 				formatting.stylua,
-				diagnostics.checklua,
+				diagnostics.luacheck,
 
 				-- CMake
 				diagnostics.cmake_lint,
