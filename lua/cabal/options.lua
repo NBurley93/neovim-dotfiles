@@ -34,6 +34,8 @@ return {
 		if vim.fn.has('win32') == 1 or vim.fn.has('win32unix') == 1 then
 			local pythonRoot = os.getenv('PYTHON_HOME') or ''
 			vim.g.python3_host_prog = pythonRoot .. '\\python.exe'
+		else
+			vim.g.python3_host_prog = '~/.nvimenv/.venv/bin/python3'
 		end
 	end,
 }

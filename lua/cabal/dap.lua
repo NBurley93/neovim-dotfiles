@@ -69,5 +69,22 @@ return {
 		dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 		dap.listeners.before.event_terminated['dapui_config'] = dapui.close
 		dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+		dap.configurations.python = {
+			{
+			type = 'python',
+			request = 'launch',
+			name = 'Test with pytest',
+			program = 'python',
+			args = { '-m', 'pytest', 'tests/' },
+			pythonPath = '.',
+			},
+		}
+
+		dap.adapters.python = {
+			type = 'executable',
+			command = vim.fn.stdpath('data')..'/mason/packages/debugpy/venv/bin/python3',
+			args = { '-m', 'debugpy.adapter' },
+		}
 	end,
 }
