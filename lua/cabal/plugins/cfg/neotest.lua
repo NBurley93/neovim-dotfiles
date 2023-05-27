@@ -7,11 +7,15 @@ require('neotest').setup({
 		unknown = "",
 	},
 	output = {
-		open_on_run = false,
+		open_on_run = true,
 	},
 	adapters = {
-		require 'neotest-python' {
+		require('neotest-python')({
 			runner = 'pytest',
-		},
+		}),
+		--[[ require('neotest-gtest'), ]]
+	},
+	output_panel = {
+		enabled = false,
 	},
 })

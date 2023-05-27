@@ -2,10 +2,6 @@ local map = vim.keymap.set
 
 return {
 	config = function()
-		require('neodev').setup()
-		require('mason').setup()
-		require('mason-lspconfig').setup()
-
 		-- Enable logging
 		-- vim.lsp.set_log_level('debug')
 
