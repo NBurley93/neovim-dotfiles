@@ -28,6 +28,7 @@ require("lazy").setup({
 			config = function()
 				require("cabal.plugins.cfg.treesitter")
 			end,
+			build = ':TSUpdate',
 		},
 	},
 
@@ -109,6 +110,7 @@ require("lazy").setup({
 				require("cabal.plugins.cfg.lspsignature")
 			end,
 		},
+		{ 'p00f/clangd_extensions.nvim' },
 	},
 
 	-- Completion

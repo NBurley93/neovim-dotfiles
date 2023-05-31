@@ -37,6 +37,11 @@ return {
 				lsp_onattach()
 				map('n', '<leader>h', '<cmd>ClangdSwitchSourceHeader<cr>', { buffer = 0 })
 			end,
+			cmd = {
+				'clangd',
+				'--clang-tidy',
+				'--completion-style=bundled',
+			},
 		})
 
 		-- CMake
