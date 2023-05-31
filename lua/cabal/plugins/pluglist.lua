@@ -210,6 +210,10 @@ require("lazy").setup({
 
 	-- Theming
 	{ "akai54/2077.nvim" },
+	{ "navarasu/onedark.nvim" },
+	{ "EdenEast/nightfox.nvim" },
+	{ "rebelot/kanagawa.nvim" },
+	{ "ray-x/aurora" },
 
 	-- Editing
 	{
