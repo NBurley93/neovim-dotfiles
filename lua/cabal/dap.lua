@@ -32,8 +32,8 @@ return {
 		}
 		dap.configurations.c = dap.configurations.cpp
 
-		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiffText", linehl = "", numhl = "" })
-		vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DiffText", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticError", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DiagnosticWarn", linehl = "", numhl = "" })
 
 		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
 		dap.listeners.before.event_terminated["dapui_config"] = dapui.close

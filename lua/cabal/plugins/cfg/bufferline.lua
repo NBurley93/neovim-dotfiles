@@ -6,12 +6,18 @@ require('bufferline').setup({
 				text = 'Nvim Tree',
 				separator = true,
 				text_align = 'center',
-			}
+			},
+			{
+				filetype = 'dapui_breakpoints',
+				text = 'Breakpoints',
+				separator = true,
+				text_align = 'center',
+			},
 		},
 		diagnostics = 'nvim_lsp',
 		separator_style = { '', '' },
 		modified_icon = '●',
-		show_close_icon = true,
-		show_buffer_close_icons = true,
+		show_close_icon = false,
+		show_buffer_close_icons = false,
 	}
 })
