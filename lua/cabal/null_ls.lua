@@ -8,7 +8,8 @@ return {
 		null_ls.setup({
 			sources = {
 				-- Cpp
-				diagnostics.cppcheck,
+				diagnostics.clang_check,
+				diagnostics.cpplint,
 				formatting.clang_format,
 
 				-- Python
