@@ -5,7 +5,6 @@ return {
 		local luasnip = require("luasnip")
 		local builtin = require("telescope.builtin")
 		local map = vim.keymap.set
-		local globals = vim.g
 
 		-- Disable command mode binding
 		map("n", "q:", "<Nop>", { silent = true, desc = "Disable commandline window binding" })
