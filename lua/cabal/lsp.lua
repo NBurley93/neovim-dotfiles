@@ -112,6 +112,13 @@ return {
 			on_attach = lsp_onattach(),
 		})
 
+		-- Powershell
+		require('lspconfig').powershell_es.setup({
+			bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/",
+			capabilities = capabilities,
+			on_attach = lsp_onattach(),
+		})
+
 		vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
 			border = 'rounded',
 		})
