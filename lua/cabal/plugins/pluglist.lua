@@ -17,6 +17,7 @@ vim.g.maplocalleader = " "
 require("lazy").setup({
 	-- Vim helpers
 	{ "folke/which-key.nvim" },
+	{ "mg979/docgen.vim" },
 
 	-- Syntax highlighting
 	{
