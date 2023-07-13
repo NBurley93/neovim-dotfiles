@@ -29,7 +29,7 @@ require("lazy").setup({
 			config = function()
 				require("cabal.plugins.cfg.treesitter")
 			end,
-			build = ':TSUpdate',
+			build = ":TSUpdate",
 		},
 	},
 
@@ -111,7 +111,7 @@ require("lazy").setup({
 				require("cabal.plugins.cfg.lspsignature")
 			end,
 		},
-		{ 'p00f/clangd_extensions.nvim' },
+		{ "p00f/clangd_extensions.nvim" },
 	},
 
 	-- Completion
@@ -194,6 +194,7 @@ require("lazy").setup({
 			},
 		},
 		{ "mfussenegger/nvim-dap" },
+		"mfussenegger/nvim-dap-python",
 		{
 			"theHamsta/nvim-dap-virtual-text",
 			dependencies = {

@@ -1,6 +1,6 @@
 -- Dap UI setup
 -- For more information, see |:help nvim-dap-ui|
-require('dapui').setup({
+require("dapui").setup({
 	-- Set icons to characters that are more likely to work in every terminal.
 	--    Feel free to remove or use ones that you like more! :)
 	--    Don't feel like these are good choices.
@@ -49,9 +49,17 @@ require('dapui').setup({
 	floating = {
 		max_height = 0.9,
 		max_width = 0.5,
-		border = 'rounded',
+		border = "rounded",
 		mappings = {
 			close = { "q", "<Esc>" },
 		},
 	},
 })
+
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.before.event_terminated["dapui_config"] = function()
+	dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+	dapui.close()
+end
