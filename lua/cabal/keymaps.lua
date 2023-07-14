@@ -2,6 +2,7 @@ return {
 	config = function()
 		local cmp = require("cmp")
 		local dap = require("dap")
+		local dapui = require("dapui")
 		local luasnip = require("luasnip")
 		local builtin = require("telescope.builtin")
 		local map = vim.keymap.set
@@ -104,6 +105,7 @@ return {
 		map("n", "<leader>BP", function()
 			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 		end)
+		map("n", "<leader>dc", dapui.close)
 
 		-- Neotest
 		map('n', '<leader>t', function() require('neotest').run.run() end)

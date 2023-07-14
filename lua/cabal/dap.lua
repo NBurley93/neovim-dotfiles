@@ -1,15 +1,29 @@
 return {
 	config = function()
 		local dap, dapui, dappython = require('dap'), require('dapui'), require('dap-python')
-		dappython.setup('~/.nvimenv/.venv/bin/python')
-		table.insert(dap.configurations.python, {
+		dappython.setup(vim.g.python3_host_prog)
+		local commonPytestConfig = {
 			type = 'python',
 			request = 'launch',
-			name = 'Pytest all',
+			name = 'Pytest all (coverage installed)',
 			module = 'pytest',
 			args = { 'tests', '--no-cov' },
 			cwd = '${workspaceFolder}',
-		})
+			console = "integratedTerminal",
+			logToFile = false,
+		}
+		local nocovPytestConfig = {
+			type = commonPytestConfig.type,
+			request = commonPytestConfig.request,
+			name = 'Pytest all (coverage not installed)',
+			module = commonPytestConfig.module,
+			args = { 'tests' },
+			cwd = commonPytestConfig.cwd,
+			console = commonPytestConfig.console,
+			logToFile = commonPytestConfig.logToFile
+		}
+		table.insert(dap.configurations.python, commonPytestConfig)
+		table.insert(dap.configurations.python, nocovPytestConfig)
 
 		dap.adapters.cppdbg = {
 			id = "cppdbg",
@@ -40,31 +54,11 @@ return {
 		}
 		dap.configurations.c = dap.configurations.cpp
 
-		-- dap.adapters.python = {
-		-- 	type = 'executable',
-		-- 	-- command = vim.fn.stdpath('data')..'/mason/packages/debugpy/venv/bin/python',
-		-- 	command = vim.g.python3_host_prog,
-		-- 	args = { '-m', 'debugpy.adapter' },
-		-- }
-		-- dap.configurations.python = {
-		-- 	{
-		-- 		type = "python",
-		-- 		request = "launch",
-		-- 		name = "Debug with pytest",
-		-- 		module = "pytest",
-		-- 		args = { "tests" },
-		-- 		cwd = "${workspaceFolder}",
-		-- 	},
-		-- }
-
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticError", linehl = "", numhl = "" })
 		vim.fn.sign_define(
 			"DapBreakpointCondition",
 			{ text = "", texthl = "DiagnosticWarn", linehl = "", numhl = "" }
 		)
-
 		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-		dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-		dap.listeners.before.event_exited["dapui_config"] = dapui.close
 	end,
 }
