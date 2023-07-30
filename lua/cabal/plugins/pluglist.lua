@@ -36,6 +36,15 @@ require("lazy").setup({
 	-- Ui
 	{
 		{
+			"stevearc/aerial.nvim",
+			opts = {},
+			-- Optional dependencies
+			dependencies = {
+				"nvim-treesitter/nvim-treesitter",
+				"nvim-tree/nvim-web-devicons",
+			},
+		},
+		{
 			"akinsho/bufferline.nvim",
 			version = "*",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -122,8 +131,13 @@ require("lazy").setup({
 		{ "hrsh7th/cmp-buffer" },
 		{ "hrsh7th/cmp-path" },
 		{ "tpope/vim-sleuth" },
-		{ "L3MON4D3/LuaSnip" },
 		{ "saadparwaiz1/cmp_luasnip" },
+	},
+
+	-- Snippets
+	{
+		"L3MON4D3/LuaSnip",
+		dependencies = { "rafamadriz/friendly-snippets" },
 	},
 
 	-- Filetree
@@ -246,13 +260,23 @@ require("lazy").setup({
 			end,
 			dependencies = { "mfussenegger/nvim-dap", "williamboman/mason.nvim" },
 		},
+		{
+			"akinsho/toggleterm.nvim",
+			opts = {
+				open_mapping = "<leader>ot",
+				direction = "float",
+				float_opts = {
+					border = "curved",
+				},
+			},
+		},
 	},
 
 	-- Misc
-	{
-		"andweeb/presence.nvim",
-		config = function()
-			require("cabal.plugins.cfg.presence")
-		end,
-	},
+	-- {
+	-- 	"andweeb/presence.nvim",
+	-- 	config = function()
+	-- 		require("cabal.plugins.cfg.presence")
+	-- 	end,
+	-- },
 })

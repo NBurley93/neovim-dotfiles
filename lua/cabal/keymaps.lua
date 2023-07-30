@@ -26,6 +26,9 @@ return {
 			{ silent = false, desc = "Reload configuration" }
 		)
 
+		-- Aerial
+		map("n", "<leader>a", "<cmd>AerialToggle! right<cr>", { desc = "Toggle Aerial" })
+
 		-- Nerdtree
 		map("n", "<C-b>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NERDTree Window" })
 
