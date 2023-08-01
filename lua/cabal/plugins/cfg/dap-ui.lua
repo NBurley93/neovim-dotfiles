@@ -4,6 +4,7 @@ require("dapui").setup({
 	-- Set icons to characters that are more likely to work in every terminal.
 	--    Feel free to remove or use ones that you like more! :)
 	--    Don't feel like these are good choices.
+
 	icons = { expanded = "▾", collapsed = "▸", current_frame = "" },
 	expand_lines = true,
 	mappings = {
@@ -30,9 +31,7 @@ require("dapui").setup({
 		{
 			elements = {
 				{ id = "scopes", size = 0.33 },
-				{ id = "breakpoints", size = 0.17 },
 				{ id = "stacks", size = 0.25 },
-				{ id = "watches", size = 0.25 },
 			},
 			size = 0.33,
 			position = "right",
@@ -44,6 +43,14 @@ require("dapui").setup({
 			},
 			size = 0.27,
 			position = "bottom",
+		},
+		{
+			elements = {
+				{ id = "watches", size = 0.5 },
+				{ id = "breakpoints", size = 0.5 },
+			},
+			size = 0.33,
+			position = "left",
 		},
 	},
 	floating = {

@@ -14,6 +14,9 @@ vim.opt.rtp:prepend(lazypath)
 -- Set <leader> to <Space>
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+local icons = require("common.icons")
+
 require("lazy").setup({
 	-- Vim helpers
 	{ "folke/which-key.nvim" },
@@ -132,6 +135,7 @@ require("lazy").setup({
 		{ "hrsh7th/cmp-path" },
 		{ "tpope/vim-sleuth" },
 		{ "saadparwaiz1/cmp_luasnip" },
+		{ "rcarriga/cmp-dap" },
 	},
 
 	-- Snippets
@@ -182,7 +186,21 @@ require("lazy").setup({
 
 	-- Diagnostics
 	{
-		{ "folke/trouble.nvim" },
+		{
+			"folke/trouble.nvim",
+			dependencies = { "nvim-tree/nvim-web-devicons" },
+			opts = {
+				fold_open = "", -- icon used for open folds
+				fold_closed = "", -- icon used for closed folds
+				signs = {
+					error = icons.diagnostics.Error,
+					warning = icons.diagnostics.Warning,
+					hint = icons.diagnostics.Hint,
+					information = icons.diagnostics.Information,
+					other = icons.diagnostics.Information,
+				},
+			},
+		},
 		{ "folke/lsp-colors.nvim" },
 		{ "nvie/vim-flake8" },
 	},

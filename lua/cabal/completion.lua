@@ -2,6 +2,8 @@ return {
 	config = function()
 		local cmp = require("cmp")
 
+		local icons = require("common.icons")
+
 		local lspkind = require("lspkind")
 		lspkind.init()
 
@@ -22,11 +24,11 @@ return {
 				format = lspkind.cmp_format({
 					with_text = true,
 					menu = {
-						buffer = "[Buffer]",
-						nvim_lsp = "[LSP]",
-						nvim_lua = "[LuaAPI]",
-						path = "[PATH]",
-						snippy = "[SNIP]",
+						buffer = icons.kind.Text .. "[Buffer]",
+						nvim_lsp = icons.ui.Code .. "[LSP]",
+						nvim_lua = icons.language.Lua .. "[LuaAPI]",
+						path = icons.kind.Folder .. "[PATH]",
+						snippy = icons.kind.Snippet .. "[SNIP]",
 					},
 				}),
 			},
@@ -54,6 +56,14 @@ return {
 				{ name = "path" },
 			}, {
 				{ name = "cmdline" },
+			}),
+		})
+
+		cmp.setup.filetype({ "dap-repl", "dap_watches", "dapui_hover" }, {
+			sources = cmp.config.sources({
+				{
+					{ name = "dap" },
+				},
 			}),
 		})
 	end,

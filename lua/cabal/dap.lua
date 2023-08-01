@@ -42,7 +42,7 @@ return {
 					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 				end,
 				cwd = "${workspaceFolder}",
-				stopAtEntry = true,
+				stopAtEntry = false,
 				setupCommands = {
 					{
 						text = "-enable-pretty-printing",
@@ -54,10 +54,20 @@ return {
 		}
 		dap.configurations.c = dap.configurations.cpp
 
-		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticError", linehl = "", numhl = "" })
+		local icons = require("common.icons")
+
+		vim.fn.sign_define(
+			"DapBreakpoint",
+			{ text = icons.ui.Circle, texthl = "DiagnosticError", linehl = "", numhl = "" }
+		)
+		vim.api.nvim_set_hl(0, "DapStoppedLinehl", { bg = "#555530" })
+		vim.fn.sign_define(
+			"DapStopped",
+			{ text = icons.ui.ChevronRight, texthl = "Error", linehl = "DapStoppedLinehl", numhl = "" }
+		)
 		vim.fn.sign_define(
 			"DapBreakpointCondition",
-			{ text = "", texthl = "DiagnosticWarn", linehl = "", numhl = "" }
+			{ text = icons.ui.CircleWithGap, texthl = "DiagnosticWarn", linehl = "", numhl = "" }
 		)
 		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
 	end,
