@@ -1,26 +1,26 @@
 return {
 	config = function()
-		local dap, dapui, dappython = require('dap'), require('dapui'), require('dap-python')
+		local dap, dapui, dappython = require("dap"), require("dapui"), require("dap-python")
 		dappython.setup(vim.g.python3_host_prog)
 		local commonPytestConfig = {
-			type = 'python',
-			request = 'launch',
-			name = 'Pytest all (coverage installed)',
-			module = 'pytest',
-			args = { 'tests', '--no-cov' },
-			cwd = '${workspaceFolder}',
+			type = "python",
+			request = "launch",
+			name = "Pytest all (coverage installed)",
+			module = "pytest",
+			args = { "tests", "--no-cov" },
+			cwd = "${workspaceFolder}",
 			console = "integratedTerminal",
 			logToFile = false,
 		}
 		local nocovPytestConfig = {
 			type = commonPytestConfig.type,
 			request = commonPytestConfig.request,
-			name = 'Pytest all (coverage not installed)',
+			name = "Pytest all (coverage not installed)",
 			module = commonPytestConfig.module,
-			args = { 'tests' },
+			args = { "tests" },
 			cwd = commonPytestConfig.cwd,
 			console = commonPytestConfig.console,
-			logToFile = commonPytestConfig.logToFile
+			logToFile = commonPytestConfig.logToFile,
 		}
 		table.insert(dap.configurations.python, commonPytestConfig)
 		table.insert(dap.configurations.python, nocovPytestConfig)

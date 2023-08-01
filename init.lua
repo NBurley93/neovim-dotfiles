@@ -1,1 +1,1 @@
-require('cabal').config()
+require("cabal").config()

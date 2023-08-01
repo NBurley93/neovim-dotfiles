@@ -1,23 +1,23 @@
-require('bufferline').setup({
+require("bufferline").setup({
 	options = {
 		offsets = {
 			{
-				filetype = 'NvimTree',
-				text = 'Nvim Tree',
+				filetype = "NvimTree",
+				text = "Nvim Tree",
 				separator = true,
-				text_align = 'center',
+				text_align = "center",
 			},
 			{
-				filetype = 'dapui_breakpoints',
-				text = 'Breakpoints',
+				filetype = "dapui_breakpoints",
+				text = "Breakpoints",
 				separator = true,
-				text_align = 'center',
+				text_align = "center",
 			},
 		},
-		diagnostics = 'nvim_lsp',
-		separator_style = { '', '' },
-		modified_icon = '●',
+		diagnostics = "nvim_lsp",
+		separator_style = { "", "" },
+		modified_icon = "●",
 		show_close_icon = false,
 		show_buffer_close_icons = false,
-	}
+	},
 })

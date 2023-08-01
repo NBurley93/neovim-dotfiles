@@ -1,4 +1,4 @@
-require('neotest').setup({
+require("neotest").setup({
 	icons = {
 		failed = "",
 		passed = "",
@@ -10,11 +10,11 @@ require('neotest').setup({
 		open_on_run = true,
 	},
 	adapters = {
-		require('neotest-python')({
-			runner = 'pytest',
+		require("neotest-python")({
+			runner = "pytest",
 			dap = { justMyCode = false },
 		}),
-		[[ require('neotest-gtest'), ]]
+		[[ require('neotest-gtest'), ]],
 	},
 	output_panel = {
 		enabled = false,

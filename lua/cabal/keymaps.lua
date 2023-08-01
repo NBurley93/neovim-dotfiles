@@ -111,7 +111,11 @@ return {
 		map("n", "<leader>dc", dapui.close)
 
 		-- Neotest
-		map('n', '<leader>t', function() require('neotest').run.run() end)
-		map('n', '<leader>T', function() require('neotest').run.run(vim.fn.expand('%')) end)
+		map("n", "<leader>t", function()
+			require("neotest").run.run()
+		end)
+		map("n", "<leader>T", function()
+			require("neotest").run.run(vim.fn.expand("%"))
+		end)
 	end,
 }

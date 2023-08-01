@@ -21,6 +21,6 @@ mason.setup({
 
 	ensure_installed = {
 		"debugpy",
-		"cpptools"
+		"cpptools",
 	},
 })
