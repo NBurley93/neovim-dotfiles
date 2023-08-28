@@ -289,6 +289,7 @@ require("lazy").setup({
 			},
 		},
 	},
+	{ "mechatroner/rainbow_csv" },
 
 	-- Misc
 	-- {
