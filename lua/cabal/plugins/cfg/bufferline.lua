@@ -3,9 +3,12 @@ require("bufferline").setup({
 		offsets = {
 			{
 				filetype = "NvimTree",
-				text = "Nvim Tree",
+				text = function()
+					return vim.fn.getcwd()
+				end,
+				highlight = "Directory",
 				separator = true,
-				text_align = "center",
+				text_align = "left",
 			},
 			{
 				filetype = "dapui_breakpoints",
@@ -15,9 +18,14 @@ require("bufferline").setup({
 			},
 		},
 		diagnostics = "nvim_lsp",
-		separator_style = { "", "" },
+		diagnostics_indicator = function(count, level)
+			local icon = level:match("error") and " " or ""
+			return " " .. icon .. count
+		end,
+		separator_style = "padded_slant",
 		modified_icon = "●",
 		show_close_icon = false,
 		show_buffer_close_icons = false,
+		highlights = {},
 	},
 })
