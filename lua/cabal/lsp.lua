@@ -4,24 +4,26 @@ return {
 	config = function()
 		-- Enable logging
 		-- vim.lsp.set_log_level('debug')
+		--
+		local function create_lsp_keybind_opts(helptext)
+			return { noremap = true, silent = true, desc = helptext }
+		end
 
 		local function lsp_onattach()
-			local keymap_opts = { noremap = true, silent = true }
 			map("n", "K", function()
 				require("lsp_signature").toggle_float_win()
-			end, keymap_opts)
-			map("n", "gD", vim.lsp.buf.declaration, keymap_opts)
-			map("n", "gd", vim.lsp.buf.definition, keymap_opts)
-			map("n", "gt", vim.lsp.buf.type_definition, keymap_opts)
-			map("n", "gi", vim.lsp.buf.implementation, keymap_opts)
-			map("n", "<leader>D", vim.lsp.buf.type_definition, keymap_opts)
-			map("n", "<leader>qf", vim.lsp.buf.code_action, keymap_opts)
-			map("n", "<leader>gr", vim.lsp.buf.references, keymap_opts)
-			map("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", keymap_opts)
-			map("n", "<leader>rn", vim.lsp.buf.rename, keymap_opts)
-			map("n", "<leader>f", function()
+			end, create_lsp_keybind_opts("Show code signature"))
+			map("n", "gD", vim.lsp.buf.declaration, create_lsp_keybind_opts("Goto code declaration"))
+			map("n", "gd", vim.lsp.buf.definition, create_lsp_keybind_opts("Goto code definition"))
+			map("n", "gt", vim.lsp.buf.type_definition, create_lsp_keybind_opts("Goto code type definition"))
+			map("n", "gi", vim.lsp.buf.implementation, create_lsp_keybind_opts("Goto code implementations"))
+			map("n", "<leader>qf", vim.lsp.buf.code_action, create_lsp_keybind_opts("View code actions"))
+			map("n", "<leader>gr", vim.lsp.buf.references, create_lsp_keybind_opts("View references"))
+			map("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", create_lsp_keybind_opts("View diagnostics"))
+			map("n", "<leader>rn", vim.lsp.buf.rename, create_lsp_keybind_opts("Rename symbol"))
+			map("n", "<leader>fb", function()
 				vim.lsp.buf.format({ async = true })
-			end, keymap_opts)
+			end, create_lsp_keybind_opts("Format buffer"))
 		end
 
 		-- Setup LSP servers

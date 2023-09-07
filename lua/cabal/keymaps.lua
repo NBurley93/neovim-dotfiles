@@ -19,12 +19,6 @@ return {
 			"<cmd>set invrelativenumber<cr>",
 			{ desc = "Toggle between linenumber and rellinenumber" }
 		)
-		map(
-			"n",
-			"<leader><home>",
-			"<cmd>luafile ~/nvim/init.lua<cr>",
-			{ silent = false, desc = "Reload configuration" }
-		)
 
 		-- Aerial
 		map("n", "<leader>a", "<cmd>AerialToggle! right<cr>", { desc = "Toggle Aerial" })
@@ -38,8 +32,6 @@ return {
 		-- Diagnostic navigation
 		map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 		map("n", "]d", vim.diagnostic.goto_prev, { desc = "Go to next diagnostic message" })
-		map("n", "<leader>e", vim.diagnostic.goto_prev, { desc = "Open floating diagnostic message" })
-		map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 		-- Buffer mgmnt
 		map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "Create a new empty buffer" })
@@ -94,7 +86,7 @@ return {
 
 		-- Telescope
 		map("n", "<leader>sf", builtin.find_files)
-		map("", "<leader>sg", builtin.live_grep)
+		map("n", "<leader>sg", builtin.live_grep)
 		map("n", "<leader>sb", builtin.buffers)
 		map("n", "<leader>sh", builtin.help_tags)
 		map("n", "<leader>/", builtin.current_buffer_fuzzy_find)

@@ -15,12 +15,29 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local icons = require("common.icons")
+local WEB_DEVICONS_PROVIDER = "kyazdani42/nvim-web-devicons"
 
 require("lazy").setup({
 	-- Vim helpers
-	{ "folke/which-key.nvim" },
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {},
+	},
 	{ "mg979/docgen.vim" },
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		opts = function()
+			return require("cabal.plugins.cfg.flash").options
+		end,
+		-- stylua: ignore
+		keys = function() return require('cabal.plugins.cfg.flash').keys end,
+	},
 
 	-- Syntax highlighting
 	{
@@ -44,16 +61,20 @@ require("lazy").setup({
 			-- Optional dependencies
 			dependencies = {
 				"nvim-treesitter/nvim-treesitter",
-				"nvim-tree/nvim-web-devicons",
+				WEB_DEVICONS_PROVIDER,
 			},
 		},
 		{
-			"akinsho/bufferline.nvim",
-			version = "*",
-			dependencies = { "nvim-tree/nvim-web-devicons" },
-			config = function()
-				require("cabal.plugins.cfg.bufferline")
+			"willothy/nvim-cokeline",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				WEB_DEVICONS_PROVIDER,
+			},
+			config = true,
+			opts = function()
+				return require("cabal.plugins.cfg.cokeline")
 			end,
+			tag = "v0.4.0",
 		},
 		{
 			"glepnir/dashboard-nvim",
@@ -61,7 +82,7 @@ require("lazy").setup({
 			config = function()
 				require("cabal.plugins.cfg.dashboard")
 			end,
-			dependencies = { "nvim-tree/nvim-web-devicons" },
+			dependencies = { WEB_DEVICONS_PROVIDER },
 		},
 		{
 			"MaximilianLloyd/ascii.nvim",
@@ -69,7 +90,7 @@ require("lazy").setup({
 		},
 		{
 			"nvim-lualine/lualine.nvim",
-			dependencies = "nvim-tree/nvim-web-devicons",
+			dependencies = WEB_DEVICONS_PROVIDER,
 			config = function()
 				require("cabal.plugins.cfg.lualine")
 			end,
@@ -148,7 +169,7 @@ require("lazy").setup({
 	{
 		"nvim-tree/nvim-tree.lua",
 		dependencies = {
-			"nvim-tree/nvim-web-devicons",
+			WEB_DEVICONS_PROVIDER,
 		},
 		config = function()
 			require("cabal.plugins.cfg.nvim-tree")
@@ -188,18 +209,10 @@ require("lazy").setup({
 	{
 		{
 			"folke/trouble.nvim",
-			dependencies = { "nvim-tree/nvim-web-devicons" },
-			opts = {
-				fold_open = "", -- icon used for open folds
-				fold_closed = "", -- icon used for closed folds
-				signs = {
-					error = icons.diagnostics.Error,
-					warning = icons.diagnostics.Warning,
-					hint = icons.diagnostics.Hint,
-					information = icons.diagnostics.Information,
-					other = icons.diagnostics.Information,
-				},
-			},
+			dependencies = { WEB_DEVICONS_PROVIDER },
+			opts = function()
+				return require("cabal.plugins.cfg.trouble")
+			end,
 		},
 		{ "folke/lsp-colors.nvim" },
 		{ "nvie/vim-flake8" },
@@ -245,8 +258,19 @@ require("lazy").setup({
 	-- Theming
 	{ "akai54/2077.nvim" },
 	{ "navarasu/onedark.nvim" },
-	{ "EdenEast/nightfox.nvim" },
-	{ "rebelot/kanagawa.nvim" },
+	{
+		"EdenEast/nightfox.nvim",
+		opts = {
+			transparent = true,
+		},
+	},
+	{
+		"rebelot/kanagawa.nvim",
+		opts = {
+			commentStyle = { italic = true },
+			transparent = true,
+		},
+	},
 	{ "ray-x/aurora" },
 
 	-- Editing
@@ -257,7 +281,11 @@ require("lazy").setup({
 				require("cabal.plugins.cfg.indentblankline")
 			end,
 		},
-		{ "numToStr/Comment.nvim" },
+		{
+			"windwp/nvim-autopairs",
+			event = "InsertEnter",
+			opts = {},
+		},
 	},
 
 	-- Utilities
@@ -280,13 +308,9 @@ require("lazy").setup({
 		},
 		{
 			"akinsho/toggleterm.nvim",
-			opts = {
-				open_mapping = "<leader>`",
-				direction = "float",
-				float_opts = {
-					border = "curved",
-				},
-			},
+			opts = function()
+				return require("cabal.plugins.cfg.toggleterm")
+			end,
 		},
 	},
 	{ "mechatroner/rainbow_csv" },

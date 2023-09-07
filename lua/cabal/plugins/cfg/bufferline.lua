@@ -3,12 +3,10 @@ require("bufferline").setup({
 		offsets = {
 			{
 				filetype = "NvimTree",
-				text = function()
-					return vim.fn.getcwd()
-				end,
-				highlight = "Directory",
+				text = "File Browser",
+				highlight = "Todo",
 				separator = true,
-				text_align = "left",
+				text_align = "center",
 			},
 			{
 				filetype = "dapui_breakpoints",
@@ -22,7 +20,7 @@ require("bufferline").setup({
 			local icon = level:match("error") and " " or ""
 			return " " .. icon .. count
 		end,
-		separator_style = "padded_slant",
+		separator_style = "thin",
 		modified_icon = "●",
 		show_close_icon = false,
 		show_buffer_close_icons = false,
