@@ -1,8 +1,9 @@
 return {
 	config = function()
-		require("cabal.plugins.pluglist")
+		require("plugins.pluglist")
 
 		-- Make required `setup` calls here
+		require("oil").setup()
 
 		local ts = require("telescope")
 		ts.load_extension("ui-select")

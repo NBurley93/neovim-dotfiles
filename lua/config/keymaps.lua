@@ -17,11 +17,11 @@ return {
 			"n",
 			"<leader>l",
 			"<cmd>set invrelativenumber<cr>",
-			{ desc = "Toggle between linenumber and rellinenumber" }
+			{ desc = "Toggle between absolute and relative line numberings" }
 		)
 
 		-- Aerial
-		map("n", "<leader>a", "<cmd>AerialToggle! right<cr>", { desc = "Toggle Aerial" })
+		map("n", "<leader>aa", "<cmd>AerialToggle! right<cr>", { desc = "Toggle Aerial" })
 
 		-- Nerdtree
 		map("n", "<C-b>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NERDTree Window" })
@@ -30,15 +30,13 @@ return {
 		map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { desc = "Toggle Trouble window" })
 
 		-- Diagnostic navigation
-		map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-		map("n", "]d", vim.diagnostic.goto_prev, { desc = "Go to next diagnostic message" })
+		map("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+		map("n", "<leader>dn", vim.diagnostic.goto_prev, { desc = "Go to next diagnostic message" })
 
 		-- Buffer mgmnt
-		map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "Create a new empty buffer" })
-		map("n", "<leader>b=", "<cmd>bnext<cr>", { desc = "Go to next buffer" })
-		map("n", "<leader>b-", "<cmd>bprev<cr>", { desc = "Go to previous buffer" })
 		map("n", "<leader>bc", "<cmd>bprev <bar> bdelete #<cr>", { desc = "Close the currently selected buffer" })
 
+		map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 		-- nvim-cmp Mappings
 		cmp.setup({
 			mapping = cmp.mapping.preset.insert({
@@ -71,18 +69,9 @@ return {
 			}),
 		})
 
-		-- Folding
-		map("n", "<leader>fc", "zc", { desc = "Close fold" })
-		map("n", "<leader>fo", "zo", { desc = "Open fold" })
-
-		-- Window Mappings
-		map("n", "<leader>ws", "<cmd>winc p<cr>", { desc = "Goto previous window" })
-		map("n", "<leader>wv", "<cmd>vs<cr>", { desc = "Make vertical split" })
-		map("n", "<leader>wh", "<cmd>sp<cr>", { desc = "Make horizontal split" })
-		map("n", "<leader>wc", "<cmd>hid<cr>", { desc = "Close current window" })
-
 		-- Git
-		map("n", "<leader>dv", "<cmd>DiffviewOpen<cr>", { desc = "Open diffview" })
+		map("n", "<leader>dvo", "<cmd>DiffviewOpen<cr>", { desc = "Review diffs in diffview" })
+		map("n", "<leader>dvc", "<cmd>DiffviewClose<cr>", { desc = "Close diffview if open" })
 
 		-- Telescope
 		map("n", "<leader>sf", builtin.find_files)
@@ -90,6 +79,8 @@ return {
 		map("n", "<leader>sb", builtin.buffers)
 		map("n", "<leader>sh", builtin.help_tags)
 		map("n", "<leader>/", builtin.current_buffer_fuzzy_find)
+
+		map("n", "<C-Q>", "<cmd>qa<cr>", { desc = "Close neovim" })
 
 		-- DAP Mappings
 		map("n", "<F5>", dap.continue)
@@ -100,13 +91,17 @@ return {
 		map("n", "<leader>BP", function()
 			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 		end)
-		map("n", "<leader>dc", dapui.close)
+		map("n", "<leader>dbg", dapui.open)
+		map("n", "<leader>dbc", dapui.close)
+
+		-- Whichkey
+		map("n", "<leader>wk", "<cmd>WhichKey<cr>", { desc = "Open whichkey window" })
 
 		-- Neotest
-		map("n", "<leader>t", function()
+		map("n", "<leader>ut", function()
 			require("neotest").run.run()
 		end)
-		map("n", "<leader>T", function()
+		map("n", "<leader>uT", function()
 			require("neotest").run.run(vim.fn.expand("%"))
 		end)
 	end,

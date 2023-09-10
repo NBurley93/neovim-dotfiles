@@ -30,13 +30,18 @@ require("lazy").setup({
 	},
 	{ "mg979/docgen.vim" },
 	{
+		"stevearc/oil.nvim",
+		opts = {},
+		dependencies = { WEB_DEVICONS_PROVIDER },
+	},
+	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		opts = function()
-			return require("cabal.plugins.cfg.flash").options
+			return require("plugins.cfg.flash").options
 		end,
 		-- stylua: ignore
-		keys = function() return require('cabal.plugins.cfg.flash').keys end,
+		keys = function() return require('plugins.cfg.flash').keys end,
 	},
 
 	-- Syntax highlighting
@@ -47,7 +52,7 @@ require("lazy").setup({
 				"nvim-treesitter/nvim-treesitter-textobjects",
 			},
 			config = function()
-				require("cabal.plugins.cfg.treesitter")
+				require("plugins.cfg.treesitter")
 			end,
 			build = ":TSUpdate",
 		},
@@ -72,7 +77,7 @@ require("lazy").setup({
 			},
 			config = true,
 			opts = function()
-				return require("cabal.plugins.cfg.cokeline")
+				return require("plugins.cfg.cokeline")
 			end,
 			tag = "v0.4.0",
 		},
@@ -80,7 +85,7 @@ require("lazy").setup({
 			"glepnir/dashboard-nvim",
 			event = "VimEnter",
 			config = function()
-				require("cabal.plugins.cfg.dashboard")
+				require("plugins.cfg.dashboard")
 			end,
 			dependencies = { WEB_DEVICONS_PROVIDER },
 		},
@@ -92,19 +97,19 @@ require("lazy").setup({
 			"nvim-lualine/lualine.nvim",
 			dependencies = WEB_DEVICONS_PROVIDER,
 			config = function()
-				require("cabal.plugins.cfg.lualine")
+				require("plugins.cfg.lualine")
 			end,
 		},
 		{
 			"rcarriga/nvim-notify",
 			config = function()
-				require("cabal.plugins.cfg.notify")
+				require("plugins.cfg.notify")
 			end,
 		},
 		{
 			"folke/noice.nvim",
 			config = function()
-				require("cabal.plugins.cfg.noice")
+				require("plugins.cfg.noice")
 			end,
 			dependencies = {
 				"MunifTanjim/nui.nvim",
@@ -125,7 +130,7 @@ require("lazy").setup({
 		{
 			"folke/neodev.nvim",
 			config = function()
-				require("cabal.plugins.cfg.neodev")
+				require("plugins.cfg.neodev")
 			end,
 		},
 		{ "onsails/lspkind.nvim" },
@@ -141,7 +146,7 @@ require("lazy").setup({
 		{
 			"ray-x/lsp_signature.nvim",
 			config = function()
-				require("cabal.plugins.cfg.lspsignature")
+				require("plugins.cfg.lspsignature")
 			end,
 		},
 		{ "p00f/clangd_extensions.nvim" },
@@ -172,7 +177,7 @@ require("lazy").setup({
 			WEB_DEVICONS_PROVIDER,
 		},
 		config = function()
-			require("cabal.plugins.cfg.nvim-tree")
+			require("plugins.cfg.nvim-tree")
 		end,
 	},
 
@@ -185,14 +190,14 @@ require("lazy").setup({
 			"lewis6991/gitsigns.nvim",
 			dependencies = { "nvim-lua/plenary.nvim" },
 			config = function()
-				require("cabal.plugins.cfg.gitsigns")
+				require("plugins.cfg.gitsigns")
 			end,
 		},
 		{
 			"sindrets/diffview.nvim",
 			dependencies = "nvim-lua/plenary.nvim",
 			config = function()
-				require("cabal.plugins.cfg.diffview")
+				require("plugins.cfg.diffview")
 			end,
 		},
 		{ "akinsho/git-conflict.nvim" },
@@ -211,7 +216,7 @@ require("lazy").setup({
 			"folke/trouble.nvim",
 			dependencies = { WEB_DEVICONS_PROVIDER },
 			opts = function()
-				return require("cabal.plugins.cfg.trouble")
+				return require("plugins.cfg.trouble")
 			end,
 		},
 		{ "folke/lsp-colors.nvim" },
@@ -230,7 +235,7 @@ require("lazy").setup({
 		{
 			"nvim-neotest/neotest",
 			config = function()
-				require("cabal.plugins.cfg.neotest")
+				require("plugins.cfg.neotest")
 			end,
 			dependencies = {
 				"nvim-lua/plenary.nvim",
@@ -250,7 +255,7 @@ require("lazy").setup({
 		{
 			"rcarriga/nvim-dap-ui",
 			config = function()
-				require("cabal.plugins.cfg.dap-ui")
+				require("plugins.cfg.dap-ui")
 			end,
 		},
 	},
@@ -278,7 +283,7 @@ require("lazy").setup({
 		{
 			"lukas-reineke/indent-blankline.nvim",
 			config = function()
-				require("cabal.plugins.cfg.indentblankline")
+				require("plugins.cfg.indentblankline")
 			end,
 		},
 		{
@@ -302,14 +307,14 @@ require("lazy").setup({
 		{
 			"jay-babu/mason-nvim-dap.nvim",
 			config = function()
-				require("cabal.plugins.cfg.mason-nvim-dap")
+				require("plugins.cfg.mason-nvim-dap")
 			end,
 			dependencies = { "mfussenegger/nvim-dap", "williamboman/mason.nvim" },
 		},
 		{
 			"akinsho/toggleterm.nvim",
 			opts = function()
-				return require("cabal.plugins.cfg.toggleterm")
+				return require("plugins.cfg.toggleterm")
 			end,
 		},
 	},
@@ -319,7 +324,7 @@ require("lazy").setup({
 	-- {
 	-- 	"andweeb/presence.nvim",
 	-- 	config = function()
-	-- 		require("cabal.plugins.cfg.presence")
+	-- 		require("plugins.cfg.presence")
 	-- 	end,
 	-- },
 })
