@@ -1,4 +1,8 @@
-local get_hex = require("cokeline/utils").get_hex
+local get_hex = require("cokeline.hlgroups").get_hl_attr
+if get_hex == nil then
+	-- Fallback
+	get_hex = require("cokeline.utils").get_hex
+end
 local mappings = require("cokeline/mappings")
 
 local comments_fg = get_hex("Comment", "fg")
@@ -7,6 +11,7 @@ local warnings_fg = get_hex("DiagnosticWarn", "fg")
 
 local red = vim.g.terminal_color_1
 local yellow = vim.g.terminal_color_3
+local green = vim.g.terminal_color_5
 
 local components = {
 	space = {

@@ -16,6 +16,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local WEB_DEVICONS_PROVIDER = "kyazdani42/nvim-web-devicons"
+local COKELINE_WORKING_TAG = "v0.4.0"
+local COKELINE_TAG = false
 
 require("lazy").setup({
 	-- Vim helpers
@@ -79,7 +81,7 @@ require("lazy").setup({
 			opts = function()
 				return require("plugins.cfg.cokeline")
 			end,
-			tag = "v0.4.0",
+			tag = COKELINE_TAG,
 		},
 		{
 			"glepnir/dashboard-nvim",
