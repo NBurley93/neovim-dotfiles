@@ -227,13 +227,6 @@ require("lazy").setup({
 
 	-- Debugging/Testing
 	{
-		{ "nvim-neotest/neotest-python" },
-		-- {
-		-- 	"alfaix/neotest-gtest",
-		-- 	config = function()
-		-- 		require("neotest-gtest").setup({})
-		-- 	end,
-		-- },
 		{
 			"nvim-neotest/neotest",
 			config = function()
@@ -243,10 +236,11 @@ require("lazy").setup({
 				"nvim-lua/plenary.nvim",
 				"nvim-treesitter/nvim-treesitter",
 				"antoinemadec/FixCursorHold.nvim",
+				"nvim-neotest/neotest-python",
 			},
 		},
 		{ "mfussenegger/nvim-dap" },
-		"mfussenegger/nvim-dap-python",
+		{ "mfussenegger/nvim-dap-python" },
 		{
 			"theHamsta/nvim-dap-virtual-text",
 			dependencies = {

@@ -16,7 +16,6 @@ require("neotest").setup({
 			runner = "pytest",
 			dap = { justMyCode = false },
 		}),
-		[[ require('neotest-gtest'), ]],
 	},
 	output_panel = {
 		enabled = false,

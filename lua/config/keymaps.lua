@@ -104,5 +104,8 @@ return {
 		map("n", "<leader>uT", function()
 			require("neotest").run.run(vim.fn.expand("%"))
 		end)
+		map("n", "<leader>ud", function()
+			require("neotest").run.run({ strategy = "dap" })
+		end)
 	end,
 }
