@@ -119,6 +119,7 @@ require("lazy").setup({
 			},
 		},
 		{ "stevearc/dressing.nvim" },
+		{ "tjdevries/colorbuddy.nvim" },
 	},
 
 	-- Linting and Formatting

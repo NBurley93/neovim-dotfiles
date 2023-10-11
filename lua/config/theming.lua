@@ -1,7 +1,8 @@
-return {
-	config = function()
-		vim.cmd([[
-				augroup my_color_scheme
+-- local Color, colors, Group, groups, styles = require("colorbuddy").setup()
+
+local function setup_colorscheme_augroup()
+	vim.cmd([[
+				augroup color_scheme_tweaks
 					autocmd!
 					autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
 					" autocmd ColorScheme * highlight NonText guibg=NONE ctermbg=NONE guifg=#2e2225
@@ -17,13 +18,17 @@ return {
 					" autocmd ColorScheme * hi TelescopeBorder guibg=NONE ctermbg=NONE
 					" autocmd ColorScheme * hi NoiceCmdlinePopupBorderSearch guibg=NONE ctermbg=NONE
 					" autocmd ColorScheme * hi CursorLine guibg=#050a08
-					autocmd ColorScheme * highlight NoiceCmdlinePopupBorder ctermbg=None guibg=None
-					autocmd ColorScheme * highlight NoiceCmdlinePopupTitle ctermbg=None guibg=None
-				augroup END
+					" autocmd ColorScheme * highlight NoiceCmdlinePopupBorder ctermbg=None guibg=None
+					" autocmd ColorScheme * highlight NoiceCmdlinePopupTitle ctermbg=None guibg=None
+				" augroup END
 				]])
-		require("kanagawa").load("wave")
+end
 
-		vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { bg = nil })
+return {
+	config = function()
+		-- require("kanagawa").load("wave")
+		require("themes.neonwave").use()
+
 		-- vim.cmd('colorscheme cyberpunk_scarlet')
 		-- vim.cmd('colorscheme 2077')
 		-- vim.cmd('colorscheme hackerman')
