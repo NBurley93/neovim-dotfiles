@@ -21,17 +21,13 @@ return {
 		)
 
 		-- Aerial
-		map("n", "<leader>aa", "<cmd>AerialToggle! right<cr>", { desc = "Toggle Aerial" })
+		map("n", "<leader>av", "<cmd>AerialToggle! right<cr>", { desc = "Toggle Aerial view" })
 
 		-- Nerdtree
 		map("n", "<C-b>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NERDTree Window" })
 
 		-- Trouble
 		map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { desc = "Toggle Trouble window" })
-
-		-- Diagnostic navigation
-		map("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-		map("n", "<leader>dn", vim.diagnostic.goto_prev, { desc = "Go to next diagnostic message" })
 
 		-- Buffer mgmnt
 		map("n", "<leader>bc", "<cmd>bprev <bar> bdelete #<cr>", { desc = "Close the currently selected buffer" })
@@ -47,7 +43,7 @@ return {
 					c = cmp.mapping.close(),
 				}),
 				["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-				["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+				["<C-y>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()

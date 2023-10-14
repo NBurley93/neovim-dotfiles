@@ -162,6 +162,7 @@ require("lazy").setup({
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-buffer" },
 		{ "hrsh7th/cmp-path" },
+		{ "hrsh7th/cmp-nvim-lsp-document-symbol" },
 		{ "tpope/vim-sleuth" },
 		{ "saadparwaiz1/cmp_luasnip" },
 		{ "rcarriga/cmp-dap" },
@@ -170,7 +171,7 @@ require("lazy").setup({
 	-- Snippets
 	{
 		"L3MON4D3/LuaSnip",
-		dependencies = { "rafamadriz/friendly-snippets" },
+		dependencies = { "rafamadriz/friendly-snippets", "molleweide/LuaSnip-snippets.nvim" },
 	},
 
 	-- Filetree

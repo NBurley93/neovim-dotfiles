@@ -6,11 +6,11 @@
 return {
 	kind = {
 		Text = "󰦨 ",
-		Method = " ",
-		Function = " ",
+		Method = "󰊕 ",
+		Function = "󰊕 ",
 		Constructor = " ",
 		Field = " ",
-		Variable = " ",
+		Variable = "󰫧 ",
 		Class = " ",
 		Interface = " ",
 		Module = " ",
@@ -19,7 +19,7 @@ return {
 		Value = "󰾡 ",
 		Enum = " ",
 		Keyword = " ",
-		Snippet = " ",
+		Snippet = " ",
 		Color = " ",
 		File = " ",
 		Reference = " ",
