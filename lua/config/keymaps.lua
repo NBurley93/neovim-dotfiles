@@ -69,6 +69,10 @@ return {
 		map("n", "<leader>dvo", "<cmd>DiffviewOpen<cr>", { desc = "Review diffs in diffview" })
 		map("n", "<leader>dvc", "<cmd>DiffviewClose<cr>", { desc = "Close diffview if open" })
 
+		-- Folds
+		map("n", "zR", require("ufo").openAllFolds, { desc = "Open all Folds (UFO)" })
+		map("n", "zM", require("ufo").closeAllFolds, { desc = "Close all Folds (UFO)" })
+
 		-- Telescope
 		map("n", "<leader>sf", builtin.find_files)
 		map("n", "<leader>sg", builtin.live_grep)

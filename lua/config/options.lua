@@ -1,5 +1,10 @@
 return {
 	config = function()
+		local options_backup = {
+			foldmethod = "expr",
+			foldexpr = "nvim_treesitter#foldexpr()",
+		}
+
 		local options = {
 			fileformat = "unix",
 			autoindent = true,
@@ -15,16 +20,18 @@ return {
 			smartindent = true,
 			number = true,
 			relativenumber = false,
-			signcolumn = "yes:1",
+			signcolumn = "yes:4",
 			clipboard = "unnamedplus",
 			termguicolors = true,
-			cursorline = true,
+			cursorline = false,
 			cot = "menu,menuone,noselect",
-			foldmethod = "expr",
-			foldexpr = "nvim_treesitter#foldexpr()",
-			foldenable = false,
+			foldcolumn = "5",
+			foldlevel = 99,
+			foldlevelstart = 99,
+			foldenable = true,
 			list = true,
 			background = "",
+			fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
 		}
 
 		for k, v in pairs(options) do

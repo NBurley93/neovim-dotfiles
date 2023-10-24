@@ -25,7 +25,7 @@ return {
 		Group.new("CursorLine", colors.NONE, colors.CursorLineBG, styles.NONE)
 
 		Color.new("cursorcolumnBG", "#262626")
-		Group.new("cursorcolumn", colors.NONE, colors.cursorcolumnBG, styles.NONE)
+		Group.new("cursorcolumn", colors.NONE, colors.NONE, styles.NONE)
 
 		Color.new("CursorLineNrFG", "#00d7ff")
 		Color.new("CursorLineNrBG", "#262626")
@@ -59,7 +59,7 @@ return {
 
 		Color.new("FoldColumnFG", "#0087ff")
 		Color.new("FoldColumnBG", "#121212")
-		Group.new("FoldColumn", colors.FoldColumnFG, colors.FoldColumnBG, styles.NONE)
+		Group.new("FoldColumn", colors.FoldColumnFG, colors.NONE, styles.NONE)
 
 		Color.new("FoldedFG", "#0087ff")
 		Group.new("Folded", colors.FoldedFG, colors.NONE, styles.NONE)
@@ -88,7 +88,7 @@ return {
 
 		Color.new("LineNrFG", "#00af87")
 		Color.new("LineNrBG", "#121212")
-		Group.new("LineNr", colors.LineNrFG, colors.LineNrBG, styles.NONE)
+		Group.new("LineNr", colors.LineNrFG, colors.NONE, styles.NONE)
 
 		Color.new("MacroFG", "#5f87ff")
 		Group.new("Macro", colors.MacroFG, colors.NONE, styles.NONE)
@@ -230,7 +230,7 @@ return {
 
 		Color.new("StatusLineNCFG", "#8787ff")
 		Color.new("StatusLineNCBG", "#303030")
-		Group.new("StatusLineNC", colors.StatusLineNCFG, colors.StatusLineNCBG, styles.NONE)
+		Group.new("StatusLineNC", colors.StatusLineNCFG, colors.NONE, styles.NONE)
 
 		Color.new("StatementFG", "#ff00ff")
 		Group.new("Statement", colors.StatementFG, colors.NONE, styles.NONE)
@@ -283,5 +283,9 @@ return {
 		Color.new("WarningMsgFG", "#e4e4e4")
 		Color.new("WarningMsgBG", "#800000")
 		Group.new("WarningMsg", colors.WarningMsgFG, colors.WarningMsgBG, styles.NONE)
+
+		Group.new("GitSignsAdd", colors.WarningMsgFG, colors.NONE, styles.NONE)
+		Group.new("GitSignsChange", colors.FoldColumnFG, colors.NONE, styles.NONE)
+		Group.new("GitSignsDelete", colors.ErrorFG, colors.NONE, styles.NONE)
 	end,
 }

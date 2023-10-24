@@ -58,6 +58,15 @@ require("lazy").setup({
 			end,
 			build = ":TSUpdate",
 		},
+		{
+			"kevinhwang91/nvim-ufo",
+			config = function()
+				require("plugins.cfg.ufo")
+			end,
+			dependencies = {
+				"kevinhwang91/promise-async",
+			},
+		},
 	},
 
 	-- Ui
