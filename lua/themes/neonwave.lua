@@ -206,7 +206,7 @@ return {
 
 		Color.new("SignColumnFG", "#00ff00")
 		Color.new("SignColumnBG", "#1c1c1c")
-		Group.new("SignColumn", colors.SignColumnFG, colors.SignColumnBG, styles.NONE)
+		Group.new("SignColumn", colors.SignColumnFG, colors.NONE, styles.NONE)
 
 		Color.new("SpecialFG", "#ff00ff")
 		Group.new("Special", colors.SpecialFG, colors.NONE, styles.NONE)
@@ -274,7 +274,7 @@ return {
 
 		Color.new("VertSplitFG", "#8787ff")
 		Color.new("VertSplitBG", "#303030")
-		Group.new("VertSplit", colors.VertSplitFG, colors.VertSplitBG, styles.NONE)
+		Group.new("VertSplit", colors.VertSplitFG, colors.NONE, styles.NONE)
 
 		Color.new("VisualFG", "#87afff")
 		Color.new("VisualBG", "#3a3a3a")

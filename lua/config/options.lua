@@ -25,12 +25,13 @@ return {
 			termguicolors = true,
 			cursorline = false,
 			cot = "menu,menuone,noselect",
-			foldcolumn = "5",
+			foldcolumn = "1",
 			foldlevel = 99,
 			foldlevelstart = 99,
 			foldenable = true,
 			list = true,
 			background = "",
+			pb = 15,
 			fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
 		}
 
