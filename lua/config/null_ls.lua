@@ -28,11 +28,11 @@ return {
 
 				-- Lua
 				formatting.stylua,
-				diagnostics.luacheck,
+				diagnostics.selene,
 
 				-- CMake
 				diagnostics.cmake_lint,
-				formatting.cmake_format,
+				formatting.gersemi,
 
 				-- Yaml
 				formatting.prettier,
