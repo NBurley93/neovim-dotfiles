@@ -41,7 +41,7 @@ return {
 		-- Cpp
 		local clangd_capabilities = lsp_defaults.capabilities
 		clangd_capabilities.offsetEncoding = "utf-8"
-		require("lspconfig").clangd.setup({
+		lspconfig.clangd.setup({
 			capabilities = clangd_capabilities,
 			cmd = {
 				"clangd",
@@ -51,12 +51,12 @@ return {
 		})
 
 		-- CMake
-		require("lspconfig").cmake.setup({
+		lspconfig.cmake.setup({
 			on_attach = lsp_onattach(),
 		})
 
 		-- Lua
-		require("lspconfig").lua_ls.setup({
+		lspconfig.lua_ls.setup({
 			on_attach = lsp_onattach(),
 			settings = {
 				Lua = {
@@ -81,37 +81,51 @@ return {
 		})
 
 		-- Json
-		require("lspconfig").jsonls.setup({
+		lspconfig.jsonls.setup({
 			on_attach = lsp_onattach(),
 		})
 
 		-- Python
-		require("lspconfig").pyright.setup({
+		lspconfig.pyright.setup({
 			on_attach = lsp_onattach(),
 		})
 
 		-- Docker
-		require("lspconfig").dockerls.setup({
+		lspconfig.dockerls.setup({
 			on_attach = lsp_onattach(),
 		})
 
 		-- Terraform
-		require("lspconfig").terraformls.setup({
+		lspconfig.terraformls.setup({
 			on_attach = lsp_onattach(),
 		})
 
 		-- YAML
-		require("lspconfig").yamlls.setup({
+		lspconfig.yamlls.setup({
 			on_attach = lsp_onattach(),
 		})
 
 		-- Markdown
-		require("lspconfig").marksman.setup({
+		lspconfig.marksman.setup({
+			on_attach = lsp_onattach(),
+		})
+
+		lspconfig.ast_grep.setup({
+			on_attach = lsp_onattach(),
+			filetypes = {
+				"javascript",
+				"typescript",
+				"html",
+				"css",
+			},
+		})
+
+		lspconfig.eslint.setup({
 			on_attach = lsp_onattach(),
 		})
 
 		-- Powershell
-		require("lspconfig").powershell_es.setup({
+		lspconfig.powershell_es.setup({
 			bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/",
 			on_attach = lsp_onattach(),
 		})
