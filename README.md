@@ -3,12 +3,8 @@
 ## Setup
 
 Ensure you are connected to the internet,
-startup nvim and run `:PackerSync` to install required plugins
+startup nvim and Lazy should automatically bootstrap and install. After that, you can run `:Lazy sync` to update plugins if needed.
 
-If the autosetup for the LSP and NullLS doesn't work,
-refer to `lua/cabal/lsp.lua` and `lua/cabal/nullls.lua`
-to determine what needs to be installed using `:Mason`
+This configuration is following a cutting-edge approach and follows the head of master as much as possible for plugins, so frequent breaking changes will be expected.
 
-## TODO
-
-- Figure out how to get lualine to properly highlight the active buffer with our color scheme, or at least make it clearer which one is active
+Make sure to use checkhealth to determine what needs to be either installed natively, or installed using Mason. LSP & Linting/Formatting require a few, so check the config to figure out which or just run checkhealth
