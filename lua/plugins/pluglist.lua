@@ -222,6 +222,9 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" },
 	},
 	{ "nvim-telescope/telescope-ui-select.nvim" },
+	{ "xiyaowong/telescope-emoji.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+	{ "ANGkeith/telescope-terraform-doc.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+	{ "barrett-ruth/telescope-http.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 
 	-- Diagnostics
 	{

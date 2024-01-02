@@ -5,6 +5,7 @@ return {
 		local dapui = require("dapui")
 		local luasnip = require("luasnip")
 		local builtin = require("telescope.builtin")
+		local ts = require("telescope")
 		local map = vim.keymap.set
 
 		-- Disable command mode binding
@@ -74,11 +75,21 @@ return {
 		map("n", "zM", require("ufo").closeAllFolds, { desc = "Close all Folds (UFO)" })
 
 		-- Telescope
-		map("n", "<leader>sf", builtin.find_files)
-		map("n", "<leader>sg", builtin.live_grep)
-		map("n", "<leader>sb", builtin.buffers)
-		map("n", "<leader>sh", builtin.help_tags)
-		map("n", "<leader>/", builtin.current_buffer_fuzzy_find)
+		map("n", "<leader>sf", builtin.find_files, { desc = "Telescope - Find Files" })
+		map("n", "<leader>sg", builtin.live_grep, { desc = "Telescope - Live Grep" })
+		map("n", "<leader>sb", builtin.buffers, { desc = "Telescope - Buffers" })
+		map("n", "<leader>sh", builtin.help_tags, { desc = "Telescope - Help Tags" })
+		map("n", "<leader>se", "<cmd>Telescope emoji<cr>", { desc = "Telescope - Emojis" })
+		map("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Telescope - Fuzzy Find" })
+		map("n", "<leader>std", "<cmd>Telescope terraform_doc<cr>", { desc = "Telescope - TFDOCS/DOCS" })
+		map("n", "<leader>stm", "<cmd>Telescope terraform_doc modules<cr>", { desc = "Telescope - TFDOCS/MODULES" })
+		map(
+			"n",
+			"<leader>sta",
+			"<cmd>Telescope terraform_doc full_name=hashicorp/aws<cr>",
+			{ desc = "Telescope - TFDOCS/AWS" }
+		)
+		map("n", "<leader>sm", "<cmd>Telescope http list<cr>", { desc = "Telescope - Http Status Codes" })
 
 		map("n", "<C-Q>", "<cmd>qa<cr>", { desc = "Close neovim" })
 
