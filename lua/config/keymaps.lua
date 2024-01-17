@@ -93,6 +93,8 @@ return {
 
 		map("n", "<C-Q>", "<cmd>qa<cr>", { desc = "Close neovim" })
 
+		map("n", "<leader>tc", "<cmd>TSContextToggle<cr>", { desc = "Toggle TreesitterContext" })
+
 		-- DAP Mappings
 		map("n", "<F5>", dap.continue)
 		map("n", "<F1>", dap.step_into)

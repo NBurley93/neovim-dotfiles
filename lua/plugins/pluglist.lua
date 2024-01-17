@@ -59,6 +59,15 @@ require("lazy").setup({
 			build = ":TSUpdate",
 		},
 		{
+			"nvim-treesitter/nvim-treesitter-context",
+			dependencies = {
+				"nvim-treesitter/nvim-treesitter",
+			},
+			config = function()
+				require("plugins.cfg.treesittercontext")
+			end,
+		},
+		{
 			"kevinhwang91/nvim-ufo",
 			config = function()
 				require("plugins.cfg.ufo")
