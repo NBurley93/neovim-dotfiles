@@ -107,6 +107,9 @@ return {
 		map("n", "<leader>dbg", dapui.open, { desc = "DapUI - Open" })
 		map("n", "<leader>dbc", dapui.close, { desc = "DapUI - Close" })
 		map("n", "<leader>dbe", dapui.eval, { desc = "DapUI - Eval" })
+		map("n", "<leader>dbw", function()
+			require("dap.ui.widgets").hover()
+		end, { desc = "DapUI - Widgets" })
 
 		-- Whichkey
 		map("n", "<leader>wk", "<cmd>WhichKey<cr>", { desc = "Open whichkey window" })
