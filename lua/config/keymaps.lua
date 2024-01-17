@@ -96,16 +96,17 @@ return {
 		map("n", "<leader>tc", "<cmd>TSContextToggle<cr>", { desc = "Toggle TreesitterContext" })
 
 		-- DAP Mappings
-		map("n", "<F5>", dap.continue)
-		map("n", "<F1>", dap.step_into)
-		map("n", "<F2>", dap.step_over)
-		map("n", "<F3>", dap.step_out)
-		map("n", "<leader>bp", dap.toggle_breakpoint)
+		map("n", "<F5>", dap.continue, { desc = "DapUI - Continue" })
+		map("n", "<F1>", dap.step_into, { desc = "DapUI - Step Into" })
+		map("n", "<F2>", dap.step_over, { desc = "DapUI - Step Over" })
+		map("n", "<F3>", dap.step_out, { desc = "DapUI - Step Out" })
+		map("n", "<leader>bp", dap.toggle_breakpoint, { desc = "DapUI - Set Breakpoint" })
 		map("n", "<leader>BP", function()
 			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-		end)
-		map("n", "<leader>dbg", dapui.open)
-		map("n", "<leader>dbc", dapui.close)
+		end, { desc = "DapUI - Set Conditional Breakpoint" })
+		map("n", "<leader>dbg", dapui.open, { desc = "DapUI - Open" })
+		map("n", "<leader>dbc", dapui.close, { desc = "DapUI - Close" })
+		map("n", "<leader>dbe", dapui.eval, { desc = "DapUI - Eval" })
 
 		-- Whichkey
 		map("n", "<leader>wk", "<cmd>WhichKey<cr>", { desc = "Open whichkey window" })
