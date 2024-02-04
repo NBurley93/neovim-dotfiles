@@ -33,6 +33,15 @@ return {
 				detached = false,
 			},
 		}
+		dap.adapters.cppvsdbg = {
+			id = "cppvsdbg",
+			type = "executable",
+			command = vim.fn.stdpath("data") .. "/mason/packages/cpptools/extension/debugAdapters/vsdbg/bin/vsdbg",
+			options = { detached = false },
+			args = {
+				"--interpreter=vscode",
+			},
+		}
 		dap.configurations.cpp = {
 			{
 				name = "Launch file",

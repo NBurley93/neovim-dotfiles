@@ -19,7 +19,7 @@ return {
 			backspace = "indent,eol,start",
 			smartindent = true,
 			number = true,
-			relativenumber = false,
+			relativenumber = true,
 			signcolumn = "yes:4",
 			clipboard = "unnamedplus",
 			termguicolors = true,

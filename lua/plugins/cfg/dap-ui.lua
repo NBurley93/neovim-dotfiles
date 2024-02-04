@@ -5,7 +5,7 @@ require("dapui").setup({
 	--    Feel free to remove or use ones that you like more! :)
 	--    Don't feel like these are good choices.
 
-	icons = { expanded = "▾", collapsed = "▸", current_frame = "" },
+	icons = { expanded = "", collapsed = "", current_frame = "" },
 	expand_lines = true,
 	mappings = {
 		expand = { "<CR>", "<2-LeftMouse>" },
@@ -16,40 +16,35 @@ require("dapui").setup({
 		toggle = "t",
 	},
 	controls = {
+		element = "repl",
 		icons = {
-			pause = "",
-			play = "",
-			step_into = "󰆹",
-			step_over = "󰆷",
-			step_out = "󰆸",
+			pause = "󱤳",
+			play = "󱤵",
+			run_last = "󱑞",
 			step_back = "",
-			run_last = "",
-			terminate = "",
+			step_into = "󰆹",
+			step_out = "󰆸",
+			step_over = "󰆷",
+			terminate = "󱤷",
 		},
 	},
 	layouts = {
 		{
 			elements = {
-				{ id = "scopes", size = 0.33 },
-				{ id = "stacks", size = 0.25 },
+				{ id = "repl", size = 0.5 },
+				{ id = "console", size = 0.5 },
 			},
-			size = 0.33,
-			position = "right",
-		},
-		{
-			elements = {
-				{ id = "repl", size = 0.45 },
-				{ id = "console", size = 0.55 },
-			},
-			size = 0.27,
+			size = 0.25,
 			position = "bottom",
 		},
 		{
 			elements = {
-				{ id = "watches", size = 0.5 },
-				{ id = "breakpoints", size = 0.5 },
+				{ id = "scopes", size = 0.25 },
+				{ id = "watches", size = 0.25 },
+				{ id = "stacks", size = 0.25 },
+				{ id = "breakpoints", size = 0.25 },
 			},
-			size = 0.33,
+			size = 0.25,
 			position = "left",
 		},
 	},
