@@ -4,7 +4,7 @@ require("lualine").setup({
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		globalstatus = true,
-		disabled_filetypes = { "lazy", "NVimTree", "noice" },
+		disabled_filetypes = { "lazy", "noice" },
 		refresh = {
 			statusline = 1000,
 			tabline = 1000,
@@ -35,5 +35,5 @@ require("lualine").setup({
 	tabline = {},
 	winbar = {},
 	inactive_winbar = {},
-	extensions = { "fugitive", "nvim-dap-ui", "nvim-tree", "trouble", "lazy" },
+	extensions = { "fugitive", "nvim-dap-ui", "trouble", "lazy" },
 })

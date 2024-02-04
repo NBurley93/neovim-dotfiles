@@ -46,6 +46,11 @@ require("lazy").setup({
 		keys = function() return require('plugins.cfg.flash').keys end,
 	},
 
+	{
+		"stevearc/overseer.nvim",
+		opts = {},
+	},
+
 	-- Syntax highlighting
 	{
 		{
@@ -190,17 +195,6 @@ require("lazy").setup({
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = { "rafamadriz/friendly-snippets", "molleweide/LuaSnip-snippets.nvim" },
-	},
-
-	-- Filetree
-	{
-		"nvim-tree/nvim-tree.lua",
-		dependencies = {
-			WEB_DEVICONS_PROVIDER,
-		},
-		config = function()
-			require("plugins.cfg.nvim-tree")
-		end,
 	},
 
 	-- Git

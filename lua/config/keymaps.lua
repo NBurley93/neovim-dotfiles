@@ -24,11 +24,12 @@ return {
 		-- Aerial
 		map("n", "<leader>av", "<cmd>AerialToggle! right<cr>", { desc = "Toggle Aerial view" })
 
-		-- Nerdtree
-		map("n", "<C-b>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NERDTree Window" })
-
 		-- Trouble
 		map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { desc = "Toggle Trouble window" })
+
+		-- Overseer
+		map("n", "<leader>or", "<cmd>OverseerRun<cr>", { desc = "Run from Overseer Tasks" })
+		map("n", "<leader>ot", "<cmd>OverseerToggle<cr>", { desc = "Toggle Overseer List" })
 
 		-- Buffer mgmnt
 		map("n", "<leader>bc", "<cmd>bprev <bar> bdelete #<cr>", { desc = "Close the currently selected buffer" })
