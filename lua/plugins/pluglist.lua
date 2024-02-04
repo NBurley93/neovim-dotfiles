@@ -16,39 +16,38 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local WEB_DEVICONS_PROVIDER = "kyazdani42/nvim-web-devicons"
-local COKELINE_WORKING_TAG = "v0.4.0"
-local COKELINE_TAG = false
 
 require("lazy").setup({
 	-- Vim helpers
 	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-		end,
-		opts = {},
-	},
-	{ "mg979/docgen.vim" },
-	{
-		"stevearc/oil.nvim",
-		opts = {},
-		dependencies = { WEB_DEVICONS_PROVIDER },
-	},
-	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		opts = function()
-			return require("plugins.cfg.flash").options
-		end,
-		-- stylua: ignore
-		keys = function() return require('plugins.cfg.flash').keys end,
-	},
-
-	{
-		"stevearc/overseer.nvim",
-		opts = {},
+		{
+			"folke/which-key.nvim",
+			event = "VeryLazy",
+			init = function()
+				vim.o.timeout = true
+				vim.o.timeoutlen = 300
+			end,
+			opts = {},
+		},
+		{ "mg979/docgen.vim" },
+		{
+			"stevearc/oil.nvim",
+			opts = {},
+			dependencies = { WEB_DEVICONS_PROVIDER },
+		},
+		{
+			"folke/flash.nvim",
+			event = "VeryLazy",
+			opts = function()
+				return require("plugins.cfg.flash").options
+			end,
+			-- stylua: ignore
+			keys = function() return require('plugins.cfg.flash').keys end,
+		},
+		{
+			"stevearc/overseer.nvim",
+			opts = {},
+		},
 	},
 
 	-- Syntax highlighting
@@ -104,7 +103,6 @@ require("lazy").setup({
 			opts = function()
 				return require("plugins.cfg.cokeline")
 			end,
-			tag = COKELINE_TAG,
 		},
 		{
 			"glepnir/dashboard-nvim",
@@ -113,10 +111,6 @@ require("lazy").setup({
 				require("plugins.cfg.dashboard")
 			end,
 			dependencies = { WEB_DEVICONS_PROVIDER },
-		},
-		{
-			"MaximilianLloyd/ascii.nvim",
-			dependencies = { "MunifTanjim/nui.nvim" },
 		},
 		{
 			"nvim-lualine/lualine.nvim",
@@ -221,13 +215,15 @@ require("lazy").setup({
 
 	-- Search
 	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" },
+		{
+			"nvim-telescope/telescope.nvim",
+			dependencies = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" },
+		},
+		{ "nvim-telescope/telescope-ui-select.nvim" },
+		{ "xiyaowong/telescope-emoji.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+		{ "ANGkeith/telescope-terraform-doc.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+		{ "barrett-ruth/telescope-http.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 	},
-	{ "nvim-telescope/telescope-ui-select.nvim" },
-	{ "xiyaowong/telescope-emoji.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
-	{ "ANGkeith/telescope-terraform-doc.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
-	{ "barrett-ruth/telescope-http.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 
 	-- Diagnostics
 	{
@@ -273,24 +269,6 @@ require("lazy").setup({
 		},
 	},
 
-	-- Theming
-	{ "akai54/2077.nvim" },
-	{ "navarasu/onedark.nvim" },
-	{
-		"EdenEast/nightfox.nvim",
-		opts = {
-			transparent = true,
-		},
-	},
-	{
-		"rebelot/kanagawa.nvim",
-		opts = {
-			commentStyle = { italic = true },
-			transparent = true,
-		},
-	},
-	{ "ray-x/aurora" },
-
 	-- Editing
 	{
 		{
@@ -299,11 +277,6 @@ require("lazy").setup({
 			config = function()
 				require("plugins.cfg.indentblankline")
 			end,
-		},
-		{
-			"windwp/nvim-autopairs",
-			event = "InsertEnter",
-			opts = {},
 		},
 	},
 
@@ -333,12 +306,4 @@ require("lazy").setup({
 		},
 	},
 	{ "mechatroner/rainbow_csv" },
-
-	-- Misc
-	-- {
-	-- 	"andweeb/presence.nvim",
-	-- 	config = function()
-	-- 		require("plugins.cfg.presence")
-	-- 	end,
-	-- },
 })
