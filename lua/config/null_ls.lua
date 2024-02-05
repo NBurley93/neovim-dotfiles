@@ -33,6 +33,13 @@ return {
 				diagnostics.cmake_lint,
 				formatting.gersemi,
 
+				-- Go
+				diagnostics.golangci_lint,
+				formatting.gofmt,
+
+				-- Rust
+				formatting.rustfmt,
+
 				-- Yaml
 				formatting.prettier,
 				diagnostics.yamllint,

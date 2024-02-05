@@ -2,6 +2,8 @@ local map = vim.keymap.set
 
 return {
 	config = function()
+		vim.lsp.set_log_level("debug")
+
 		local function create_lsp_keybind_opts(helptext)
 			return { noremap = true, silent = true, desc = helptext }
 		end
@@ -99,6 +101,19 @@ return {
 
 		-- Docker
 		lspconfig.dockerls.setup({
+			on_attach = lsp_onattach(),
+		})
+
+		-- Rust
+		local rust_capabilities = lsp_defaults.capabilities
+		rust_capabilities.offsetEncoding = "utf-8"
+		lspconfig.rust_analyzer.setup({
+			capabilities = rust_capabilities,
+			on_attach = lsp_onattach(),
+		})
+
+		-- Go
+		lspconfig.gopls.setup({
 			on_attach = lsp_onattach(),
 		})
 
