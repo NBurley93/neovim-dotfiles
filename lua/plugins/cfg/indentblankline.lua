@@ -2,7 +2,7 @@ require("ibl").setup({
 	indent = {
 		char = "│",
 		tab_char = "│",
-		highlight = { "Define" },
+		--highlight = { "Define" },
 	},
 	scope = {
 		char = "│",

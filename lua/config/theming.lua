@@ -27,7 +27,15 @@ end
 return {
 	config = function()
 		-- require("kanagawa").load("wave")
-		require("themes.neonwave").use()
+		-- require("themes.neonwave").use()
+		local fm = require("fluoromachine")
+
+		fm.setup({
+			transparent = "full",
+			theme = "delta",
+			glow = false,
+		})
+		vim.cmd.colorscheme("fluoromachine")
 
 		-- vim.cmd('colorscheme cyberpunk_scarlet')
 		-- vim.cmd('colorscheme 2077')

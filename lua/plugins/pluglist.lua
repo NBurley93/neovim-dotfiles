@@ -5,6 +5,7 @@ vim.g.maplocalleader = " "
 local WEB_DEVICONS_PROVIDER = "kyazdani42/nvim-web-devicons"
 
 require("lazy").setup({
+	{ "maxmx03/FluoroMachine.nvim" },
 	-- Vim helpers
 	{
 		{
