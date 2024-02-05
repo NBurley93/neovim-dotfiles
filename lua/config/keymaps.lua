@@ -5,36 +5,39 @@ return {
 		local dapui = require("dapui")
 		local luasnip = require("luasnip")
 		local builtin = require("telescope.builtin")
-		local ts = require("telescope")
 		local map = vim.keymap.set
 
-		-- Disable command mode binding
-		map("n", "q:", "<Nop>", { silent = true, desc = "Disable commandline window binding" })
+		map("n", "Q", "<nop>")
+
+		map("n", "<C-d>", "<C-d>zz")
+		map("n", "<C-u>", "<C-u>zz")
+		map("n", "n", "nzzzv")
+		map("n", "N", "Nzzzv")
+
+		map("n", "<leader><leader>", function()
+			vim.cmd("so")
+		end, { desc = "Re-source this file" })
 
 		map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
-		-- Misc helpers
-		map(
-			"n",
-			"<leader>l",
-			"<cmd>set invrelativenumber<cr>",
-			{ desc = "Toggle between absolute and relative line numberings" }
-		)
-
 		-- Aerial
-		map("n", "<leader>av", "<cmd>AerialToggle! right<cr>", { desc = "Toggle Aerial view" })
+		map("n", "<leader>av", function()
+			vim.cmd.AerialToggle("right")
+		end, { desc = "Toggle Aerial view" })
 
 		-- Trouble
-		map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { desc = "Toggle Trouble window" })
+		map("n", "<leader>xx", vim.cmd.TroubleToggle, { desc = "Toggle Trouble window" })
 
 		-- Overseer
-		map("n", "<leader>or", "<cmd>OverseerRun<cr>", { desc = "Run from Overseer Tasks" })
-		map("n", "<leader>ot", "<cmd>OverseerToggle<cr>", { desc = "Toggle Overseer List" })
+		map("n", "<leader>or", vim.cmd.OverseerRun, { desc = "Run from Overseer Tasks" })
+		map("n", "<leader>ot", vim.cmd.OverseerToggle, { desc = "Toggle Overseer List" })
 
-		-- Buffer mgmnt
-		map("n", "<leader>bc", "<cmd>bprev <bar> bdelete #<cr>", { desc = "Close the currently selected buffer" })
+		-- Shortcut to exit insert mode
+		map("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" })
 
-		map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+		map("n", "<leader>pv", function()
+			vim.cmd.Oil("--float")
+		end, { desc = "View project directory" })
 		-- nvim-cmp Mappings
 		cmp.setup({
 			mapping = cmp.mapping.preset.insert({
@@ -45,7 +48,7 @@ return {
 					c = cmp.mapping.close(),
 				}),
 				["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-				["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+				["<C-y>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
@@ -68,33 +71,31 @@ return {
 		})
 
 		-- Git
-		map("n", "<leader>dvo", "<cmd>DiffviewOpen<cr>", { desc = "Review diffs in diffview" })
-		map("n", "<leader>dvc", "<cmd>DiffviewClose<cr>", { desc = "Close diffview if open" })
+		map("n", "<leader>dvo", vim.cmd.DiffviewOpen, { desc = "Review diffs in diffview" })
+		map("n", "<leader>dvc", vim.cmd.DiffviewClose, { desc = "Close diffview if open" })
 
 		-- Folds
 		map("n", "zR", require("ufo").openAllFolds, { desc = "Open all Folds (UFO)" })
 		map("n", "zM", require("ufo").closeAllFolds, { desc = "Close all Folds (UFO)" })
 
 		-- Telescope
-		map("n", "<leader>sf", builtin.find_files, { desc = "Telescope - Find Files" })
-		map("n", "<leader>sg", builtin.live_grep, { desc = "Telescope - Live Grep" })
-		map("n", "<leader>sb", builtin.buffers, { desc = "Telescope - Buffers" })
-		map("n", "<leader>sh", builtin.help_tags, { desc = "Telescope - Help Tags" })
-		map("n", "<leader>se", "<cmd>Telescope emoji<cr>", { desc = "Telescope - Emojis" })
-		map("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Telescope - Fuzzy Find" })
-		map("n", "<leader>std", "<cmd>Telescope terraform_doc<cr>", { desc = "Telescope - TFDOCS/DOCS" })
-		map("n", "<leader>stm", "<cmd>Telescope terraform_doc modules<cr>", { desc = "Telescope - TFDOCS/MODULES" })
-		map(
-			"n",
-			"<leader>sta",
-			"<cmd>Telescope terraform_doc full_name=hashicorp/aws<cr>",
-			{ desc = "Telescope - TFDOCS/AWS" }
-		)
-		map("n", "<leader>sm", "<cmd>Telescope http list<cr>", { desc = "Telescope - Http Status Codes" })
+		map("n", "<leader>pf", builtin.find_files, { desc = "Find files in project" })
+		map("n", "<C-p>", builtin.git_files, { desc = "Only search for files that are unignored by git" })
+		map("n", "<leader>ps", function()
+			builtin.grep_string({ search = vim.fn.input("Grep > ") })
+		end, { desc = "Perform a grep string search thru project" })
+		map("n", "<leader>vh", builtin.help_tags, { desc = "Search help tags" })
+		map("n", "<leader>se", function()
+			vim.cmd.Telescope("emoji")
+		end, { desc = "Find emojis" })
+		map("n", "<leader>vat", function()
+			vim.cmd.Telescope("terraform_doc", "full_name=hashicorp/aws")
+		end, { desc = "Search AWS Terraform Docs" })
+		map("n", "<leader>sm", function()
+			vim.cmd.Telescope("http", "list")
+		end, { desc = "Telescope - Http Status Codes" })
 
-		map("n", "<C-Q>", "<cmd>qa<cr>", { desc = "Close neovim" })
-
-		map("n", "<leader>tc", "<cmd>TSContextToggle<cr>", { desc = "Toggle TreesitterContext" })
+		map("n", "<leader>tc", vim.cmd.TSContextToggle, { desc = "Toggle TreesitterContext" })
 
 		-- DAP Mappings
 		map("n", "<F5>", dap.continue, { desc = "DapUI - Continue" })
@@ -125,5 +126,8 @@ return {
 		map("n", "<leader>ud", function()
 			require("neotest").run.run({ strategy = "dap" })
 		end)
+
+		-- The BEST remap ever!!!
+		map("x", "<leader>p", [["_dP]], { desc = "Put without replacing paste buffer" })
 	end,
 }

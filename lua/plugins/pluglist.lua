@@ -1,16 +1,3 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
-end
-vim.opt.rtp:prepend(lazypath)
-
 -- Set <leader> to <Space>
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -32,7 +19,9 @@ require("lazy").setup({
 		{ "mg979/docgen.vim" },
 		{
 			"stevearc/oil.nvim",
-			opts = {},
+			config = function()
+				require("plugins.cfg.oil")
+			end,
 			dependencies = { WEB_DEVICONS_PROVIDER },
 		},
 		{
@@ -47,6 +36,17 @@ require("lazy").setup({
 		{
 			"stevearc/overseer.nvim",
 			opts = {},
+		},
+	},
+
+	-- Editing
+	{
+		{
+			"lukas-reineke/indent-blankline.nvim",
+			main = "ibl",
+			config = function()
+				require("plugins.cfg.indentblankline")
+			end,
 		},
 	},
 
@@ -92,17 +92,6 @@ require("lazy").setup({
 				"nvim-treesitter/nvim-treesitter",
 				WEB_DEVICONS_PROVIDER,
 			},
-		},
-		{
-			"willothy/nvim-cokeline",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-				WEB_DEVICONS_PROVIDER,
-			},
-			config = true,
-			opts = function()
-				return require("plugins.cfg.cokeline")
-			end,
 		},
 		{
 			"glepnir/dashboard-nvim",
@@ -163,12 +152,6 @@ require("lazy").setup({
 		},
 		{ "neovim/nvim-lspconfig" },
 		{ "j-hui/fidget.nvim" },
-		{
-			"ray-x/lsp_signature.nvim",
-			config = function()
-				require("plugins.cfg.lspsignature")
-			end,
-		},
 		{ "p00f/clangd_extensions.nvim" },
 	},
 
@@ -265,17 +248,6 @@ require("lazy").setup({
 			"rcarriga/nvim-dap-ui",
 			config = function()
 				require("plugins.cfg.dap-ui")
-			end,
-		},
-	},
-
-	-- Editing
-	{
-		{
-			"lukas-reineke/indent-blankline.nvim",
-			main = "ibl",
-			config = function()
-				require("plugins.cfg.indentblankline")
 			end,
 		},
 	},

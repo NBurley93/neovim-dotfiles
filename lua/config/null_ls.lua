@@ -28,7 +28,6 @@ return {
 
 				-- Lua
 				formatting.stylua,
-				diagnostics.selene,
 
 				-- CMake
 				diagnostics.cmake_lint,

@@ -6,10 +6,11 @@ return {
 		}
 
 		local options = {
+			guicursor = "",
 			fileformat = "unix",
 			autoindent = true,
 			encoding = "UTF-8",
-			updatetime = 250,
+			updatetime = 50,
 			timeout = true,
 			timeoutlen = 300,
 			expandtab = true,
@@ -25,10 +26,16 @@ return {
 			termguicolors = true,
 			cursorline = false,
 			cot = "menu,menuone,noselect",
+			wrap = false,
+			swapfile = false,
+			backup = false,
+			hlsearch = false,
+			incsearch = true,
 			foldcolumn = "1",
 			foldlevel = 99,
 			foldlevelstart = 99,
 			foldenable = true,
+			scrolloff = 8,
 			list = true,
 			background = "",
 			pb = 15,
@@ -38,10 +45,11 @@ return {
 		for k, v in pairs(options) do
 			vim.opt[k] = v
 		end
+		vim.opt.isfname:append("@-@")
 
 		vim.lsp.set_log_level("off")
 
-		if vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1 then
+		if vim.fn.has("win32") == 1 then
 			local powershell_options = {
 				shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell",
 				shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
@@ -64,8 +72,8 @@ return {
 			end
 		end
 
-		-- Configure python runtime for windows
-		if vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1 then
+		-- Configure python runtime for windowps
+		if vim.fn.has("win32") == 1 then
 			local pythonRoot = os.getenv("PYTHON_HOME") or ""
 			vim.g.python3_host_prog = pythonRoot .. "\\python.exe"
 		else

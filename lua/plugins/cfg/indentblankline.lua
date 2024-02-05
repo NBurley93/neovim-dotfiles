@@ -1,10 +1,11 @@
 require("ibl").setup({
 	indent = {
-		char = "▎",
-		tab_char = nil,
+		char = "│",
+		tab_char = "│",
+		highlight = { "Define" },
 	},
 	scope = {
-		char = "▎",
+		char = "│",
 	},
 	exclude = {
 		buftypes = {
