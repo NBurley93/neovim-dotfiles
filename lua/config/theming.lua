@@ -31,7 +31,7 @@ return {
 		local fm = require("fluoromachine")
 
 		fm.setup({
-			transparent = "full",
+			transparent = true,
 			theme = "delta",
 			glow = false,
 		})

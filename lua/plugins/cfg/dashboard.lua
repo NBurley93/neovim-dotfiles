@@ -10,39 +10,21 @@ require("dashboard").setup({
 		center = {
 			{
 				icon = " ",
-				icon_hl = "DevIconNPMrc",
+				icon_hl = "DevIconZsh",
 				desc = "View plugins with Lazy",
 				action = "Lazy",
 			},
 			{
 				icon = " ",
-				icon_hl = "DevIconDoc",
+				icon_hl = "DevIconarduino",
 				desc = "Manage 3rd Party integrations with Mason",
 				action = "Mason",
 			},
 			{
 				icon = " ",
-				icon_hl = "DevIconCoffee",
+				icon_hl = "DevIconNPMrc",
 				desc = "Check NVIM's health",
 				action = "checkhealth",
-			},
-			{
-				icon = " ",
-				icon_hl = "DevIconMint",
-				desc = "Browse this folder",
-				action = "Oil",
-			},
-			{
-				icon = " ",
-				icon_hl = "DevIconAi",
-				desc = "Find File in this folder with Telescope",
-				action = "Telescope find_files",
-			},
-			{
-				icon = " ",
-				icon_hl = "DevIconCpp",
-				desc = "Search files for pattern with Telescope's live grep search",
-				action = "Telescope live_grep",
 			},
 		},
 	},
