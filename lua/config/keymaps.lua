@@ -36,37 +36,16 @@ return {
 		map("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" })
 
 		map("n", "<leader>pv", function()
-			vim.cmd.Oil("--float")
+			vim.cmd.Oil()
 		end, { desc = "View project directory" })
 		-- nvim-cmp Mappings
+		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 		cmp.setup({
 			mapping = cmp.mapping.preset.insert({
-				["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-				["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-				["<C-e>"] = cmp.mapping({
-					i = cmp.mapping.abort(),
-					c = cmp.mapping.close(),
-				}),
-				["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-				["<C-y>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-				["<Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					elseif luasnip.expand_or_jumpable() then
-						luasnip.expand_or_jump()
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
-				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					elseif luasnip.jumpable(-1) then
-						luasnip.jump(-1)
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
+				["<C-Space>"] = cmp.mapping.complete(),
+				["<C-y>"] = cmp.mapping.confirm({ select = true }),
+				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
 			}),
 		})
 
@@ -94,8 +73,6 @@ return {
 		map("n", "<leader>sm", function()
 			vim.cmd.Telescope("http", "list")
 		end, { desc = "Telescope - Http Status Codes" })
-
-		map("n", "<leader>tc", vim.cmd.TSContextToggle, { desc = "Toggle TreesitterContext" })
 
 		-- DAP Mappings
 		map("n", "<F5>", dap.continue, { desc = "DapUI - Continue" })
