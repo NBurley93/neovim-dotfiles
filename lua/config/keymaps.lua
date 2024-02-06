@@ -26,7 +26,10 @@ return {
 		end, { desc = "Toggle Aerial view" })
 
 		-- Git
-		map("n", "<leader>gs", vim.cmd.Git, { desc = "Make git commit" })
+		map("n", "<leader>gs", vim.cmd.Git, { desc = "Open up fugitive for git" })
+		map("n", "<leader>gp", function()
+			vim.cmd.Git("push")
+		end, { desc = "Push to git-remote" })
 
 		-- Trouble
 		map("n", "<leader>xx", vim.cmd.TroubleToggle, { desc = "Toggle Trouble window" })
