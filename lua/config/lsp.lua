@@ -11,7 +11,7 @@ return {
 		local function lsp_onattach()
 			map("n", "K", function()
 				vim.lsp.buf.hover()
-			end, create_lsp_keybind_opts("Show code signature"))
+			end, create_lsp_keybind_opts("Show code signature for hover'd item"))
 			map("n", "gD", vim.lsp.buf.declaration, create_lsp_keybind_opts("Goto code declaration"))
 			map("n", "gd", vim.lsp.buf.definition, create_lsp_keybind_opts("Goto code definition"))
 			map("n", "gt", vim.lsp.buf.type_definition, create_lsp_keybind_opts("Goto code type definition"))
@@ -26,6 +26,7 @@ return {
 			map("n", "gl", vim.diagnostic.open_float, create_lsp_keybind_opts("Floating diagnostic"))
 			map("n", "[d", vim.diagnostic.goto_prev, create_lsp_keybind_opts("Goto previous diagnostic"))
 			map("n", "]d", vim.diagnostic.goto_next, create_lsp_keybind_opts("Goto next diagnostic"))
+			map("n", "<c-k>", vim.lsp.buf.signature_help, create_lsp_keybind_opts("Show signature help in context"))
 
 			map("n", "<leader>f", function()
 				vim.lsp.buf.format({ async = true })
@@ -110,11 +111,45 @@ return {
 		lspconfig.rust_analyzer.setup({
 			capabilities = rust_capabilities,
 			on_attach = lsp_onattach(),
+			cmd = {
+				"rustup",
+				"run",
+				"stable",
+				"rust-analyzer",
+			},
+			settings = {
+				["rust-analyzer"] = {
+					imports = {
+						granularity = {
+							group = "module",
+						},
+						prefix = "self",
+					},
+					cargo = {
+						buildScripts = {
+							enable = true,
+						},
+					},
+					procMacro = {
+						enable = true,
+					},
+				},
+			},
 		})
 
 		-- Go
+		local go_capabilities = lsp_defaults.capabilities
 		lspconfig.gopls.setup({
+			capabilities = go_capabilities,
 			on_attach = lsp_onattach(),
+			settings = {
+				gopls = {
+					gofumpt = true,
+				},
+			},
+			flags = {
+				debounce_text_changes = 150,
+			},
 		})
 
 		-- Terraform
