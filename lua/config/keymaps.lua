@@ -30,6 +30,9 @@ return {
 		map("n", "<leader>gp", function()
 			vim.cmd.Git("push")
 		end, { desc = "Push to git-remote" })
+		map("n", "<leader>gP", function()
+			vim.cmd.Git("pull")
+		end, { desc = "Pull from git-remote" })
 
 		-- Trouble
 		map("n", "<leader>xx", vim.cmd.TroubleToggle, { desc = "Toggle Trouble window" })
