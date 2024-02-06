@@ -6,7 +6,6 @@ return {
 		}
 
 		local options = {
-			guicursor = "",
 			fileformat = "unix",
 			autoindent = true,
 			encoding = "UTF-8",

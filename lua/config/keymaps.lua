@@ -25,6 +25,9 @@ return {
 			vim.cmd.AerialToggle("right")
 		end, { desc = "Toggle Aerial view" })
 
+		-- Git
+		map("n", "<leader>gs", vim.cmd.Git, { desc = "Make git commit" })
+
 		-- Trouble
 		map("n", "<leader>xx", vim.cmd.TroubleToggle, { desc = "Toggle Trouble window" })
 
