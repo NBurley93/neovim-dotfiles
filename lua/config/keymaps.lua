@@ -72,6 +72,10 @@ return {
 			}),
 		})
 
+		-- Allow us to move a line of code up or down using visual mode (SUPER USEFUL!!)
+		map("v", "K", ":m '>-2<CR>gv=gv", { desc = "Move current line up" })
+		map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move current line down" })
+
 		-- Git
 		map("n", "<leader>dvo", vim.cmd.DiffviewOpen, { desc = "Review diffs in diffview" })
 		map("n", "<leader>dvc", vim.cmd.DiffviewClose, { desc = "Close diffview if open" })
