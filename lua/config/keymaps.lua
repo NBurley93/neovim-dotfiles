@@ -35,7 +35,7 @@ return {
 		end, { desc = "Makes a git commit" })
 		map("n", "<leader>gs", vim.cmd.Git, { desc = "Open up fugitive for git" })
 		map("n", "<leader>gp", function()
-			vim.cmd.Git("-c", "push.default=current", "push")
+			vim.cmd.Git("-c push.default=current push")
 		end, { desc = "Push to git-remote" })
 		map("n", "<leader>gP", function()
 			vim.cmd.Git("pull")
