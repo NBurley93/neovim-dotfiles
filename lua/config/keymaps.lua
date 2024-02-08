@@ -24,6 +24,16 @@ return {
 			vim.cmd.AerialToggle("right")
 		end, { desc = "Toggle Aerial view" })
 
+		-- Save file as
+		map("n", "<leader>es", function()
+			vim.cmd.saveas(vim.fn.input({ prompt = "Filename > ", text = vim.fn.expand("%:p") }))
+		end, { desc = "Saveas file" })
+
+		-- Create new file buffer
+		map("n", "<leader>en", function()
+			vim.cmd.e(vim.fn.input({ prompt = "Filename > ", text = "newfile" }))
+		end, { desc = "Create new file" })
+
 		-- Git
 		map("n", "<leader>ga", function()
 			local toStage = vim.fn.expand("%:p")
@@ -40,7 +50,10 @@ return {
 		map("n", "<leader>gP", function()
 			vim.cmd.Git("pull")
 		end, { desc = "Pull from git-remote" })
-		map("n", "<leader>gd", vim.cmd.Gdiff, { desc = "Open up Gdiff in vim-fugitive" })
+		map("n", "<leader>gd", vim.cmd.Gdiffsplit, { desc = "Open up Gdiff in vim-fugitive for the current file" })
+		map("n", "<leader>gr", function()
+			vim.cmd.Git("diff --staged")
+		end, { desc = "Show a review diff for all our staged changes" })
 		map("n", "<leader>gb", function()
 			vim.cmd.Git("branch ")
 		end, { desc = "Git branch" })
