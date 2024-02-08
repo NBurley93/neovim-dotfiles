@@ -34,8 +34,16 @@ return {
 			transparent = true,
 			theme = "delta",
 			glow = false,
+			overrides = function(c)
+				return {
+					FoldColumn = { fg = c.fg, bg = "NONE" },
+				}
+			end,
 		})
 		vim.cmd.colorscheme("fluoromachine")
+
+		-- Fix incorrectly set transparency for FoldColumn
+		-- vim.api.nvim_set_hl(0, FoldColumn, {
 
 		-- vim.cmd('colorscheme cyberpunk_scarlet')
 		-- vim.cmd('colorscheme 2077')

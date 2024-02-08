@@ -51,6 +51,15 @@ require("lazy").setup({
 		},
 	},
 
+	{
+		{
+			"luukvbaal/statuscol.nvim",
+			config = function()
+				require("plugins.cfg.statuscol")
+			end,
+		},
+	},
+
 	-- Syntax highlighting
 	{
 		{
