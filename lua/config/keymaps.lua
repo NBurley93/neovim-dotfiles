@@ -3,7 +3,6 @@ return {
 		local cmp = require("cmp")
 		local dap = require("dap")
 		local dapui = require("dapui")
-		local luasnip = require("luasnip")
 		local builtin = require("telescope.builtin")
 		local map = vim.keymap.set
 
@@ -26,13 +25,28 @@ return {
 		end, { desc = "Toggle Aerial view" })
 
 		-- Git
+		map("n", "<leader>ga", function()
+			local toStage = vim.fn.expand("%:p")
+			vim.cmd.Git("add " .. toStage)
+			print("Staged " .. toStage)
+		end, { desc = "Add currently open file to git staged" })
+		map("n", "<leader>gc", function()
+			vim.cmd.Git("commit")
+		end, { desc = "Makes a git commit" })
 		map("n", "<leader>gs", vim.cmd.Git, { desc = "Open up fugitive for git" })
 		map("n", "<leader>gp", function()
-			vim.cmd.Git("push")
+			vim.cmd.Git("-c", "push.default=current", "push")
 		end, { desc = "Push to git-remote" })
 		map("n", "<leader>gP", function()
 			vim.cmd.Git("pull")
 		end, { desc = "Pull from git-remote" })
+		map("n", "<leader>gd", vim.cmd.Gdiff, { desc = "Open up Gdiff in vim-fugitive" })
+		map("n", "<leader>gb", function()
+			vim.cmd.Git("branch ")
+		end, { desc = "Git branch" })
+		map("n", "<leader>go", function()
+			vim.cmd.Git("checkout ")
+		end, { desc = "Git checkout" })
 
 		-- Trouble
 		map("n", "<leader>xx", vim.cmd.TroubleToggle, { desc = "Toggle Trouble window" })
@@ -68,7 +82,9 @@ return {
 
 		-- Telescope
 		map("n", "<leader>pf", builtin.find_files, { desc = "Find files in project" })
-		map("n", "<C-p>", builtin.git_files, { desc = "Only search for files that are unignored by git" })
+		map("n", "<C-p>", function()
+			builtin.git_files({ show_untracked = true })
+		end, { desc = "Only search for files that are unignored by git" })
 		map("n", "<leader>ps", function()
 			builtin.grep_string({ search = vim.fn.input("Grep > ") })
 		end, { desc = "Perform a grep string search thru project" })
@@ -82,6 +98,15 @@ return {
 		map("n", "<leader>sm", function()
 			vim.cmd.Telescope("http", "list")
 		end, { desc = "Telescope - Http Status Codes" })
+		map("n", "<leader>sgb", function()
+			builtin.git_branches({ show_remote_tracking_branches = false })
+		end, { desc = "Search git branches" })
+		map("n", "<leader>sgB", function()
+			builtin.git_branches({ show_remote_tracking_branches = true })
+		end, { desc = "Search git branches - Including upstream" })
+		map("n", "<leader>sb", function()
+			builtin.buffers({ sort_lastused = true, ignore_current_buffer = true })
+		end, { desc = "Show open buffers" })
 
 		-- DAP Mappings
 		map("n", "<F5>", dap.continue, { desc = "DapUI - Continue" })
@@ -92,12 +117,9 @@ return {
 		map("n", "<leader>BP", function()
 			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 		end, { desc = "DapUI - Set Conditional Breakpoint" })
-		map("n", "<leader>dbg", dapui.open, { desc = "DapUI - Open" })
+		map("n", "<leader>db", dapui.open, { desc = "DapUI - Open" })
 		map("n", "<leader>dbc", dapui.close, { desc = "DapUI - Close" })
 		map("n", "<leader>dbe", dapui.eval, { desc = "DapUI - Eval" })
-		map("n", "<leader>dbw", function()
-			require("dap.ui.widgets").hover()
-		end, { desc = "DapUI - Widgets" })
 
 		-- Whichkey
 		map("n", "<leader>wk", "<cmd>WhichKey<cr>", { desc = "Open whichkey window" })
