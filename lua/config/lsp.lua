@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 
-local ENABLE_LOGGING = true
+local ENABLE_LOGGING = false
 
 local function create_lsp_keybind_opts(helptext)
 	return { noremap = true, silent = true, desc = helptext }
@@ -37,7 +37,7 @@ end
 
 return {
 	config = function()
-		if ENABLE_LOGGING == true then
+		if ENABLE_LOGGING then
 			vim.lsp.set_log_level("debug")
 		end
 
