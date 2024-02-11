@@ -17,7 +17,8 @@ require("lazy").setup({
 			end,
 			opts = {},
 		},
-		{ "mg979/docgen.vim" },
+		{ "danymat/neogen", dependencies = "nvim-treesitter/nvim-treesitter", config = true },
+		{ "m4xshen/autoclose.nvim", setup = true },
 		{
 			"stevearc/oil.nvim",
 			config = function()
@@ -161,7 +162,12 @@ require("lazy").setup({
 			},
 		},
 		{ "neovim/nvim-lspconfig" },
-		{ "j-hui/fidget.nvim" },
+		{
+			"j-hui/fidget.nvim",
+			config = function()
+				require("plugins.cfg.fidget")
+			end,
+		},
 		{ "p00f/clangd_extensions.nvim" },
 	},
 
@@ -262,9 +268,17 @@ require("lazy").setup({
 		},
 	},
 
+	-- Python helpers
+	{
+		{
+			"linux-cultist/venv-selector.nvim",
+			dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
+			opts = { dap_enabled = true },
+		},
+	},
+
 	-- Utilities
 	{
-		{ "simrat39/symbols-outline.nvim" },
 		{ "norcalli/nvim-colorizer.lua" },
 		{
 			"williamboman/mason.nvim",

@@ -1,4 +1,6 @@
 require("notify").setup({
-	background_colour = "#000000",
+	render = "minimal",
+	stages = "slide",
+	fps = 40,
 })
 vim.notify = require("notify")

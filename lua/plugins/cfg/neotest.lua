@@ -9,15 +9,24 @@ require("neotest").setup({
 		unknown = commonicons.diagnostics.Question,
 	},
 	output = {
-		open_on_run = true,
+		enabled = true,
+		open_on_run = "short",
+	},
+	status = {
+		virtual_text = true,
 	},
 	adapters = {
 		require("neotest-python")({
 			runner = "pytest",
 			dap = { justMyCode = false },
+			pytest_discover_instances = true,
+			args = { "--log-level", "DEBUG" },
 		}),
 	},
 	output_panel = {
 		enabled = false,
+	},
+	summary = {
+		mappings = {},
 	},
 })

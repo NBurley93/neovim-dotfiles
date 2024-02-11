@@ -1,4 +1,5 @@
 local mason = require("mason-nvim-dap")
+local masonregistry = require("mason-registry")
 mason.setup({
 	automatic_setup = true,
 
@@ -9,7 +10,7 @@ mason.setup({
 		python = function(config)
 			config.adapters = {
 				type = "executable",
-				command = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python3",
+				command = masonregistry.get_package("debugpy"):get_install_path() .. "/venv/bin/python3",
 				args = {
 					"-m",
 					"-debugpy.adapter",

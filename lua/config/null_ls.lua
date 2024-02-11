@@ -13,14 +13,8 @@ return {
 				formatting.clang_format,
 
 				-- Python
-				diagnostics.pylint.with({
-					diagnostics_postprocess = function(diagnostic)
-						diagnostic.code = diagnostic.message_id
-					end,
-				}),
 				diagnostics.flake8,
 				formatting.autopep8,
-				formatting.isort,
 
 				-- Terraform
 				diagnostics.terraform_validate,

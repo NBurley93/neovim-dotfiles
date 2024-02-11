@@ -19,7 +19,7 @@ return {
 
 		map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
-		-- Aerial
+		-- Code overview binds
 		map("n", "<leader>av", function()
 			vim.cmd.AerialToggle("right")
 		end, { desc = "Toggle Aerial view" })
@@ -61,6 +61,11 @@ return {
 			vim.cmd.Git("checkout ")
 		end, { desc = "Git checkout" })
 
+		-- Code annotation
+		map("n", "<leader>ca", function()
+			require("neogen").generate()
+		end, { desc = "Generate code annotation" })
+
 		-- Trouble
 		map("n", "<leader>xx", vim.cmd.TroubleToggle, { desc = "Toggle Trouble window" })
 
@@ -98,6 +103,7 @@ return {
 		map("n", "zM", require("ufo").closeAllFolds, { desc = "Close all Folds (UFO)" })
 
 		-- Telescope
+		local telescope = require("telescope")
 		map("n", "<leader>pf", builtin.find_files, { desc = "Find files in project" })
 		map("n", "<C-p>", function()
 			builtin.git_files({ show_untracked = true })
@@ -124,6 +130,9 @@ return {
 		map("n", "<leader>sb", function()
 			builtin.buffers({ sort_lastused = true, ignore_current_buffer = true })
 		end, { desc = "Show open buffers" })
+		map("n", "<leader>vn", function()
+			telescope.extensions.notify.notify()
+		end, { desc = "Show notify message history" })
 
 		-- DAP Mappings
 		map("n", "<F5>", dap.continue, { desc = "DapUI - Continue" })
@@ -142,15 +151,23 @@ return {
 		map("n", "<leader>wk", "<cmd>WhichKey<cr>", { desc = "Open whichkey window" })
 
 		-- Neotest
+		map("n", "<leader>us", function()
+			require("neotest").summary.open()
+		end, { desc = "Open unit-test summary window" })
+
 		map("n", "<leader>ut", function()
 			require("neotest").run.run()
-		end)
+		end, { desc = "Run the nearest unit-test" })
 		map("n", "<leader>uT", function()
 			require("neotest").run.run(vim.fn.expand("%"))
-		end)
+		end, { desc = "Run all unit-tests in the active buffer's file" })
+
 		map("n", "<leader>ud", function()
 			require("neotest").run.run({ strategy = "dap" })
-		end)
+		end, { desc = "Run test with dap-ui debugging" })
+		map("n", "<leader>uD", function()
+			require("neotest").run.run({ strategy = "dap" })
+		end, { desc = "Run all tests in file with dap-ui debugging" })
 
 		-- The BEST remap ever!!!
 		map("x", "<leader>p", [["_dP]], { desc = "Put without replacing paste buffer" })

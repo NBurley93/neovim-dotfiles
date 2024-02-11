@@ -14,7 +14,7 @@ local function lsp_onattach(client, bufnr)
 	map("n", "gd", vim.lsp.buf.definition, create_lsp_keybind_opts("Goto code definition"))
 	map("n", "gt", vim.lsp.buf.type_definition, create_lsp_keybind_opts("Goto code type definition"))
 	map("n", "gi", vim.lsp.buf.implementation, create_lsp_keybind_opts("Goto code implementations"))
-	map("n", "<leader>vca", vim.lsp.buf.code_action, create_lsp_keybind_opts("View code actions"))
+	map("n", "<leader>c", vim.lsp.buf.code_action, create_lsp_keybind_opts("Code actions"))
 	map("n", "gr", vim.lsp.buf.references, create_lsp_keybind_opts("View references"))
 	map("n", "<leader>dl", function()
 		vim.cmd.Telescope("diagnostics")
@@ -105,8 +105,17 @@ return {
 		})
 
 		-- Python
-		lspconfig.pyright.setup({
+		lspconfig.pylsp.setup({
 			on_attach = lsp_onattach,
+			settings = {
+				pylsp = {
+					plugins = {
+						pycodestyle = {
+							maxLineLength = 80,
+						},
+					},
+				},
+			},
 		})
 
 		-- Docker

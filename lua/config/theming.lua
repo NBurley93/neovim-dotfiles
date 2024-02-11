@@ -37,6 +37,11 @@ return {
 			overrides = function(c)
 				return {
 					FoldColumn = { fg = c.fg, bg = "NONE" },
+					NotifyERRORBody = { fg = c.fg, bg = "NONE" },
+					NotifyWARNBody = { fg = c.fg, bg = "NONE" },
+					NotifyINFOBody = { fg = c.fg, bg = "NONE" },
+					NotifyDEBUGBody = { fg = c.fg, bg = "NONE" },
+					NotifyTRACEBody = { fg = c.fg, bg = "NONE" },
 				}
 			end,
 		})
