@@ -1,9 +1,15 @@
 local map = vim.keymap.set
 
-local ENABLE_LOGGING = false
-
 local function create_lsp_keybind_opts(helptext)
 	return { noremap = true, silent = true, desc = helptext }
+end
+
+local function get_capabilities(cmp_lsp)
+	if cmp_lsp then
+		return cmp_lsp.default_capabilities()
+	end
+
+	return vim.lsp.protocol.make_client_capabilities()
 end
 
 local function lsp_onattach(client, bufnr)
@@ -35,190 +41,199 @@ local function lsp_onattach(client, bufnr)
 	end
 end
 
+local function setup_icons(icons)
+	local signs = {
+		Error = icons.diagnostics.Error,
+		Warn = icons.diagnostics.Warning,
+		Hint = icons.diagnostics.Hint,
+		Info = icons.diagnostics.Information,
+	}
+	for type, icon in pairs(signs) do
+		local hl = "DiagnosticSign" .. type
+		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+	end
+end
+
+local function setup_lsp_defaults(lspconfig)
+	local lsp_defaults = lspconfig.util.default_config
+	lsp_defaults.capabilities =
+		vim.tbl_deep_extend("force", lsp_defaults.capabilities, get_capabilities(require("cmp_nvim_lsp")))
+	return lsp_defaults
+end
+
+local function configure_logging(enable)
+	if enable then
+		vim.lsp.set_log_level("debug")
+	end
+end
+
+local function configure_cpp_lsp(lspconfig, lsp_defaults)
+	local clangd_capabilities = lsp_defaults.capabilities
+	clangd_capabilities.offsetEncoding = "utf-8"
+	lspconfig.clangd.setup({
+		on_attach = lsp_onattach,
+		capabilities = clangd_capabilities,
+		cmd = {
+			"clangd",
+			"--clang-tidy",
+			"--completion-style=bundled",
+		},
+	})
+end
+
+local function configure_lua_lsp(lspconfig)
+	lspconfig.lua_ls.setup({
+		on_attach = lsp_onattach,
+		on_init = function(client)
+			local path = client.workspace_folders[1].name
+			if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+				client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
+					Lua = {
+						runtime = {
+							-- Tell the language server which version of Lua you're using
+							-- (most likely LuaJIT in the case of Neovim)
+							version = "LuaJIT",
+						},
+						-- Make the server aware of Neovim runtime files
+						workspace = {
+							checkThirdParty = false,
+							library = {
+								vim.env.VIMRUNTIME,
+								-- "${3rd}/luv/library"
+								-- "${3rd}/busted/library",
+							},
+							-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+							-- library = vim.api.nvim_get_runtime_file("", true)
+						},
+					},
+				})
+
+				client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+			end
+			return true
+		end,
+	})
+end
+
+local function configure_python_lsp(lspconfig)
+	lspconfig.pylsp.setup({
+		on_attach = lsp_onattach,
+		settings = {
+			pylsp = {
+				plugins = {
+					pycodestyle = {
+						maxLineLength = 80,
+					},
+				},
+			},
+		},
+	})
+end
+
+local function configure_misc_lsp(lspconfig)
+	-- CMake
+	lspconfig.cmake.setup({
+		on_attach = lsp_onattach,
+	})
+
+	-- Json
+	lspconfig.jsonls.setup({
+		on_attach = lsp_onattach,
+	})
+
+	-- Docker
+	lspconfig.dockerls.setup({
+		on_attach = lsp_onattach,
+	})
+
+	-- Terraform
+	lspconfig.terraformls.setup({
+		on_attach = lsp_onattach,
+	})
+
+	-- YAML
+	lspconfig.yamlls.setup({
+		on_attach = lsp_onattach,
+	})
+
+	-- Markdown
+	lspconfig.marksman.setup({
+		on_attach = lsp_onattach,
+	})
+
+	-- Javascript
+	lspconfig.eslint.setup({
+		on_attach = lsp_onattach,
+	})
+
+	-- Powershell
+	lspconfig.powershell_es.setup({
+		bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/",
+		on_attach = lsp_onattach,
+	})
+end
+
+local function configure_rust_lsp(lspconfig, lsp_defaults)
+	-- Rust
+	local rust_capabilities = lsp_defaults.capabilities
+	rust_capabilities.offsetEncoding = { "utf-8", "utf-16" }
+	lspconfig.rust_analyzer.setup({
+		capabilities = rust_capabilities,
+		on_attach = lsp_onattach,
+		settings = {
+			["rust-analyzer"] = {},
+		},
+	})
+end
+
+local function configure_go_lsp(lspconfig, lsp_defaults)
+	-- Go
+	local go_capabilities = lsp_defaults.capabilities
+	lspconfig.gopls.setup({
+		capabilities = go_capabilities,
+		on_attach = lsp_onattach,
+		settings = {
+			gopls = {
+				gofumpt = true,
+			},
+		},
+		flags = {
+			debounce_text_changes = 150,
+		},
+	})
+end
+
+local function configure_astgrep_lsp(lspconfig)
+	lspconfig.ast_grep.setup({
+		on_attach = lsp_onattach,
+		filetypes = {
+			"javascript",
+			"typescript",
+			"html",
+			"css",
+		},
+	})
+end
+
 return {
 	config = function()
-		if ENABLE_LOGGING then
-			vim.lsp.set_log_level("debug")
-		end
+		configure_logging(true)
 
-		-- Setup LSP servers
-		-- Default capabilities fetched from cmp_nvim_lsp
 		local lspconfig = require("lspconfig")
-		local lsp_defaults = lspconfig.util.default_config
-		lsp_defaults.capabilities =
-			vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+		local lsp_defaults = setup_lsp_defaults(lspconfig)
 
-		-- Cpp
-		local clangd_capabilities = lsp_defaults.capabilities
-		clangd_capabilities.offsetEncoding = "utf-8"
-		lspconfig.clangd.setup({
-			on_attach = lsp_onattach,
-			capabilities = clangd_capabilities,
-			cmd = {
-				"clangd",
-				"--clang-tidy",
-				"--completion-style=bundled",
-			},
-		})
-
-		-- Lua
-		lspconfig.lua_ls.setup({
-			on_attach = lsp_onattach,
-			on_init = function(client)
-				local path = client.workspace_folders[1].name
-				if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-					client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
-						Lua = {
-							runtime = {
-								-- Tell the language server which version of Lua you're using
-								-- (most likely LuaJIT in the case of Neovim)
-								version = "LuaJIT",
-							},
-							-- Make the server aware of Neovim runtime files
-							workspace = {
-								checkThirdParty = false,
-								library = {
-									vim.env.VIMRUNTIME,
-									-- "${3rd}/luv/library"
-									-- "${3rd}/busted/library",
-								},
-								-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-								-- library = vim.api.nvim_get_runtime_file("", true)
-							},
-						},
-					})
-
-					client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-				end
-				return true
-			end,
-		})
-
-		-- CMake
-		lspconfig.cmake.setup({
-			on_attach = lsp_onattach,
-		})
-
-		-- Json
-		lspconfig.jsonls.setup({
-			on_attach = lsp_onattach,
-		})
-
-		-- Python
-		lspconfig.pylsp.setup({
-			on_attach = lsp_onattach,
-			settings = {
-				pylsp = {
-					plugins = {
-						pycodestyle = {
-							maxLineLength = 80,
-						},
-					},
-				},
-			},
-		})
-
-		-- Docker
-		lspconfig.dockerls.setup({
-			on_attach = lsp_onattach,
-		})
-
-		-- Rust
-		local rust_capabilities = lsp_defaults.capabilities
-		rust_capabilities.offsetEncoding = "utf-8"
-		lspconfig.rust_analyzer.setup({
-			capabilities = rust_capabilities,
-			on_attach = lsp_onattach,
-			cmd = {
-				"rustup",
-				"run",
-				"stable",
-				"rust-analyzer",
-			},
-			settings = {
-				["rust-analyzer"] = {
-					imports = {
-						granularity = {
-							group = "module",
-						},
-						prefix = "self",
-					},
-					cargo = {
-						buildScripts = {
-							enable = true,
-						},
-					},
-					procMacro = {
-						enable = true,
-					},
-				},
-			},
-		})
-
-		-- Go
-		local go_capabilities = lsp_defaults.capabilities
-		lspconfig.gopls.setup({
-			capabilities = go_capabilities,
-			on_attach = lsp_onattach,
-			settings = {
-				gopls = {
-					gofumpt = true,
-				},
-			},
-			flags = {
-				debounce_text_changes = 150,
-			},
-		})
-
-		-- Terraform
-		lspconfig.terraformls.setup({
-			on_attach = lsp_onattach,
-		})
-
-		-- YAML
-		lspconfig.yamlls.setup({
-			on_attach = lsp_onattach,
-		})
-
-		-- Markdown
-		lspconfig.marksman.setup({
-			on_attach = lsp_onattach,
-		})
-
-		lspconfig.ast_grep.setup({
-			on_attach = lsp_onattach,
-			filetypes = {
-				"javascript",
-				"typescript",
-				"html",
-				"css",
-			},
-		})
-
-		lspconfig.eslint.setup({
-			on_attach = lsp_onattach,
-		})
-
-		-- Powershell
-		lspconfig.powershell_es.setup({
-			bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/",
-			on_attach = lsp_onattach,
-		})
+		configure_cpp_lsp(lspconfig, lsp_defaults)
+		configure_lua_lsp(lspconfig)
+		configure_python_lsp(lspconfig)
+		configure_astgrep_lsp(lspconfig)
+		configure_go_lsp(lspconfig, lsp_defaults)
+		configure_rust_lsp(lspconfig, lsp_defaults)
+		configure_misc_lsp(lspconfig)
 
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = "rounded",
+			border = "single",
 		})
 
-		local icons = require("common.icons")
-		local signs = {
-			Error = icons.diagnostics.Error,
-			Warn = icons.diagnostics.Warning,
-			Hint = icons.diagnostics.Hint,
-			Info = icons.diagnostics.Information,
-		}
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
+		setup_icons(require("common.icons"))
 	end,
 }
