@@ -43,6 +43,9 @@ return {
 
 				-- Docker
 				diagnostics.hadolint,
+
+				-- Shell
+				formatting.shfmt,
 			},
 		})
 	end,
