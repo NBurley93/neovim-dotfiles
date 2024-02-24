@@ -130,6 +130,12 @@ local function configure_python_lsp(lspconfig)
 	})
 end
 
+local function configure_python_ruff_lsp(lspconfig)
+	lspconfig.ruff_lsp.setup({
+		on_attach = lsp_onattach,
+	})
+end
+
 local function configure_misc_lsp(lspconfig)
 	-- CMake
 	lspconfig.cmake.setup({
@@ -224,7 +230,8 @@ return {
 
 		configure_cpp_lsp(lspconfig, lsp_defaults)
 		configure_lua_lsp(lspconfig)
-		configure_python_lsp(lspconfig)
+		--configure_python_lsp(lspconfig)
+		configure_python_ruff_lsp(lspconfig)
 		configure_astgrep_lsp(lspconfig)
 		configure_go_lsp(lspconfig, lsp_defaults)
 		configure_rust_lsp(lspconfig, lsp_defaults)

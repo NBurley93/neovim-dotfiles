@@ -7,14 +7,9 @@ return {
 
 		null_ls.setup({
 			sources = {
-				-- Cpp
-				diagnostics.clang_check,
-				diagnostics.cpplint,
-				formatting.clang_format,
-
 				-- Python
-				diagnostics.flake8,
-				formatting.autopep8,
+				-- diagnostics.flake8,
+				-- formatting.autopep8,
 
 				-- Terraform
 				diagnostics.terraform_validate,
@@ -32,7 +27,7 @@ return {
 				formatting.gofmt,
 
 				-- Rust
-				formatting.rustfmt,
+				-- formatting.rustfmt,
 
 				-- Yaml
 				formatting.prettier,
