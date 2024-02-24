@@ -40,6 +40,7 @@ require("lazy").setup({
 			opts = {},
 		},
 	},
+	{ "norcalli/nvim-colorizer.lua" },
 
 	-- Editing
 	{
