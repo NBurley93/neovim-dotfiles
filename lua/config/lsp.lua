@@ -8,7 +8,6 @@ local function get_capabilities(cmp_lsp)
 	if cmp_lsp then
 		return cmp_lsp.default_capabilities()
 	end
-
 	return vim.lsp.protocol.make_client_capabilities()
 end
 
@@ -35,10 +34,6 @@ local function lsp_onattach(client, bufnr)
 	map("n", "<leader>f", function()
 		vim.lsp.buf.format({ async = true })
 	end, create_lsp_keybind_opts("Format buffer"))
-
-	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.inlay_hint.enable(bufnr, true)
-	end
 end
 
 local function setup_icons(icons)
@@ -67,11 +62,21 @@ local function configure_logging(enable)
 	end
 end
 
+-- C/Cpp
 local function configure_cpp_lsp(lspconfig, lsp_defaults)
 	local clangd_capabilities = lsp_defaults.capabilities
 	clangd_capabilities.offsetEncoding = "utf-8"
+
 	lspconfig.clangd.setup({
-		on_attach = lsp_onattach,
+		on_attach = function(client, bufnr)
+			lsp_onattach(client, bufnr)
+			map(
+				"n",
+				"<leader>sh",
+				vim.cmd.ClangdSwitchSourceHeader,
+				create_lsp_keybind_opts("Swap to header/implementation file")
+			)
+		end,
 		capabilities = clangd_capabilities,
 		cmd = {
 			"clangd",
@@ -81,6 +86,7 @@ local function configure_cpp_lsp(lspconfig, lsp_defaults)
 	})
 end
 
+-- Lua
 local function configure_lua_lsp(lspconfig)
 	lspconfig.lua_ls.setup({
 		on_attach = lsp_onattach,
@@ -115,6 +121,7 @@ local function configure_lua_lsp(lspconfig)
 	})
 end
 
+-- Python pylsp
 local function configure_python_lsp(lspconfig)
 	lspconfig.pylsp.setup({
 		on_attach = lsp_onattach,
@@ -130,6 +137,7 @@ local function configure_python_lsp(lspconfig)
 	})
 end
 
+-- Python ruff
 local function configure_python_ruff_lsp(lspconfig)
 	lspconfig.ruff_lsp.setup({
 		on_attach = lsp_onattach,
@@ -179,8 +187,8 @@ local function configure_misc_lsp(lspconfig)
 	})
 end
 
+-- Rust
 local function configure_rust_lsp(lspconfig, lsp_defaults)
-	-- Rust
 	local rust_capabilities = lsp_defaults.capabilities
 	rust_capabilities.offsetEncoding = { "utf-8", "utf-16" }
 	lspconfig.rust_analyzer.setup({
@@ -192,8 +200,8 @@ local function configure_rust_lsp(lspconfig, lsp_defaults)
 	})
 end
 
+-- Go
 local function configure_go_lsp(lspconfig, lsp_defaults)
-	-- Go
 	local go_capabilities = lsp_defaults.capabilities
 	lspconfig.gopls.setup({
 		capabilities = go_capabilities,
@@ -209,6 +217,7 @@ local function configure_go_lsp(lspconfig, lsp_defaults)
 	})
 end
 
+-- Astgrep
 local function configure_astgrep_lsp(lspconfig)
 	lspconfig.ast_grep.setup({
 		on_attach = lsp_onattach,

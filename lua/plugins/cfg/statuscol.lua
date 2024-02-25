@@ -1,6 +1,8 @@
 local builtin = require("statuscol.builtin")
 require("statuscol").setup({
 	segments = {
+		-- Breakpoints
+		{ sign = { name = { "Dap*" }, maxwidth = 1 } },
 		-- Diagnostics
 		{ sign = { name = { "Diagnostic.*" }, maxwidth = 1 } },
 		-- Folds
