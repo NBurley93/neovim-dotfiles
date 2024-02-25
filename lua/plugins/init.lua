@@ -7,5 +7,7 @@ return {
 		ts.load_extension("terraform_doc")
 		ts.load_extension("http")
 		ts.load_extension("emoji")
+
+		require("colorizer").setup()
 	end,
 }

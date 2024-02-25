@@ -42,6 +42,7 @@ return {
 					NotifyINFOBody = { fg = c.fg, bg = "NONE" },
 					NotifyDEBUGBody = { fg = c.fg, bg = "NONE" },
 					NotifyTRACEBody = { fg = c.fg, bg = "NONE" },
+					DapStoppedLinehl = { fg = "#ffffff", bg = "#ce4573" },
 				}
 			end,
 		})
