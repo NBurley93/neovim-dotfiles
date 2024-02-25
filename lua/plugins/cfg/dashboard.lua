@@ -1,7 +1,22 @@
+local utils = require("dashboard.utils")
+local package_manager_stats = utils.get_package_manager_stats()
+
+local function return_version()
+	local version = vim.version()
+	return " v" .. version.major .. "." .. version.minor .. "." .. version.patch
+end
+
+local function capitalize(str)
+	return (str:gsub("^%l", string.upper))
+end
+
 local logo = {}
 for _, item in ipairs(require("plugins.cfg.dashboard-art")) do
 	table.insert(logo, item)
 end
+table.insert(logo, [[]])
+table.insert(logo, "  Neovim" .. return_version())
+table.insert(logo, [[]])
 
 require("dashboard").setup({
 	theme = "doom",
@@ -11,21 +26,42 @@ require("dashboard").setup({
 			{
 				icon = " ",
 				icon_hl = "DevIconZsh",
-				desc = "View plugins with Lazy",
+				desc = "Plugin Manager",
 				action = "Lazy",
 			},
 			{
 				icon = " ",
 				icon_hl = "DevIconarduino",
-				desc = "Manage 3rd Party integrations with Mason",
+				desc = "Mason Package Manager",
 				action = "Mason",
+			},
+			{
+				icon = "󱥃 ",
+				icon_hl = "DevIconZig",
+				desc = "What's new?",
+				action = "help news",
 			},
 			{
 				icon = " ",
 				icon_hl = "DevIconNPMrc",
-				desc = "Check NVIM's health",
+				desc = "Check Health",
 				action = "checkhealth",
 			},
+			{
+				icon = "󰩈 ",
+				icon_hl = "DevIconNim",
+				desc = "Quit",
+				action = "qa!",
+			},
+		},
+		footer = {
+			"",
+			" Startup-Time: " .. package_manager_stats.time .. " ms",
+			"󰒲 Lazy: "
+				.. package_manager_stats.loaded
+				.. " loaded / "
+				.. package_manager_stats.count
+				.. " installed",
 		},
 	},
 })
