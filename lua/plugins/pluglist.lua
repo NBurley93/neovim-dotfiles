@@ -18,7 +18,7 @@ require("lazy").setup({
 			opts = {},
 		},
 		{ "danymat/neogen", dependencies = "nvim-treesitter/nvim-treesitter", config = true },
-		{ "m4xshen/autoclose.nvim", setup = true },
+		{ "m4xshen/autoclose.nvim" },
 		{
 			"stevearc/oil.nvim",
 			config = function()

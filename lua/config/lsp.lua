@@ -232,7 +232,7 @@ end
 
 return {
 	config = function()
-		configure_logging(true)
+		configure_logging(false)
 
 		local lspconfig = require("lspconfig")
 		local lsp_defaults = setup_lsp_defaults(lspconfig)

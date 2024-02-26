@@ -8,6 +8,7 @@ return {
 		ts.load_extension("http")
 		ts.load_extension("emoji")
 
+		require("autoclose").setup()
 		require("colorizer").setup()
 	end,
 }
