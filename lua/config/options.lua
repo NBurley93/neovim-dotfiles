@@ -1,3 +1,7 @@
+-- Set <leader> to <Space>
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 return {
 	config = function()
 		local options_backup = {

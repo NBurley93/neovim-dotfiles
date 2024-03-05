@@ -12,11 +12,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 local cfg = require("config")
-local plugins = require("plugins")
 
 -- Load configurations
 cfg.options.config()
-plugins.config()
+require("lazy").setup("plugins")
 cfg.completion.config()
 cfg.lsp.config()
 cfg.autocommands.config()
