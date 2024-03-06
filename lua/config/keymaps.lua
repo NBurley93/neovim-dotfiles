@@ -63,7 +63,7 @@ local function telescope_mappings()
 	local builtin = require("telescope.builtin")
 	local utils = require("telescope.utils")
 
-	nvim_map("n", "<leader>pf", builtin.find_files, { desc = "Find files in project" })
+	nvim_map("n", "<leader>pf", builtin.find_files, { desc = "Files search" })
 
 	nvim_map("n", "<C-p>", function()
 		local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
@@ -73,44 +73,48 @@ local function telescope_mappings()
 			nvim_notify_info("Not a git repository, defaulting to find_files instead!")
 			builtin.find_files()
 		end
-	end, { desc = "Only search for files that are unignored by git" })
+	end, { desc = "Search git files" })
 
 	nvim_map("n", "<leader>ps", function()
 		builtin.grep_string({ search = nvim_input("Grep > ") })
-	end, { desc = "Perform a grep string search thru project" })
+	end, { desc = "Grep search in files" })
 
-	nvim_map("n", "<leader>sh", builtin.help_tags, { desc = "Search help tags" })
-	nvim_map("n", "<leader>ss", function()
+	nvim_map("n", "<leader>sh", builtin.help_tags, { desc = "Help tags" })
+	nvim_map("n", "<leader>ses", function()
 		nvim_cmd.Telescope("symbols")
-	end, { desc = "Find symbols" })
+	end, { desc = "Symbols" })
 
-	nvim_map("n", "<leader>st", function()
+	nvim_map("n", "<leader>set", function()
 		nvim_cmd.Telescope("terraform_doc", "full_name=hashicorp/aws")
-	end, { desc = "Search AWS Terraform Docs" })
+	end, { desc = "AWS Terraform Docs" })
 
-	nvim_map("n", "<leader>sm", function()
+	nvim_map("n", "<leader>seh", function()
 		nvim_cmd.Telescope("http", "list")
-	end, { desc = "Search Http status codes" })
+	end, { desc = "Http status codes" })
 
 	nvim_map("n", "<leader>sgb", function()
 		builtin.git_branches({ show_remote_tracking_branches = false })
-	end, { desc = "Search git branches" })
+	end, { desc = "Branches" })
 
 	nvim_map("n", "<leader>sgB", function()
 		builtin.git_branches({ show_remote_tracking_branches = true })
-	end, { desc = "Search git branches - Including upstream" })
+	end, { desc = "Branches + upstream" })
 
 	nvim_map("n", "<leader>sb", function()
 		builtin.buffers({ sort_lastused = true, ignore_current_buffer = true })
-	end, { desc = "Show open buffers" })
+	end, { desc = "Buffers" })
 
-	nvim_map("n", "<leader>sc", function()
+	nvim_map("n", "<leader>sec", function()
 		nvim_cmd.Telescope("cheat", "fd")
-	end, { desc = "Search cheat.sh entries" })
+	end, { desc = "cheat.sh" })
+
+	nvim_map("n", "<leader>st", builtin.treesitter, { desc = "Treesitter" })
+
+	nvim_map("n", "<leader>sB", builtin.builtin, { desc = "Builtin Telescope" })
 
 	nvim_map("n", "<leader>sn", function()
 		telescope.extensions.notify.notify()
-	end, { desc = "Show notify message history" })
+	end, { desc = "Notification history" })
 end
 
 -- DAP
@@ -162,12 +166,55 @@ local function attempt_write(write_func)
 	end
 end
 
-local function base_mappings()
+-- Config Shortcuts
+local function config_shortcut_mappings()
 	-- Allow re-sourcing a file from keybind
-	nvim_map("n", "<leader><leader>", function()
+	nvim_map("n", "<leader><leader>s", function()
 		nvim_cmd("so")
 	end, { desc = "Re-source this file" })
 
+	nvim_map("n", "<leader><leader>k", function()
+		nvim_cmd.e(vim.fn.stdpath("config") .. "/lua/config/keymaps.lua")
+	end, { desc = "Open keybind config file" })
+
+	nvim_map("n", "<leader><leader>l", function()
+		nvim_cmd.e(vim.fn.stdpath("config") .. "/lua/config/lsp.lua")
+	end, { desc = "Open lsp config file" })
+
+	nvim_map("n", "<leader><leader>d", function()
+		nvim_cmd.e(vim.fn.stdpath("config") .. "/lua/config/dap.lua")
+	end, { desc = "Open dap config file" })
+
+	nvim_map("n", "<leader><leader>c", function()
+		nvim_cmd.e(vim.fn.stdpath("config") .. "/lua/config/completion.lua")
+	end, { desc = "Open completion config file" })
+
+	nvim_map("n", "<leader><leader>a", function()
+		nvim_cmd.e(vim.fn.stdpath("config") .. "/lua/config/autocommands.lua")
+	end, { desc = "Open autocommands config file" })
+
+	nvim_map("n", "<leader><leader>n", function()
+		nvim_cmd.e(vim.fn.stdpath("config") .. "/lua/config/null_ls.lua")
+	end, { desc = "Open null-ls config file" })
+
+	nvim_map("n", "<leader><leader>o", function()
+		nvim_cmd.e(vim.fn.stdpath("config") .. "/lua/config/options.lua")
+	end, { desc = "Open options config file" })
+
+	nvim_map("n", "<leader><leader>t", function()
+		nvim_cmd.e(vim.fn.stdpath("config") .. "/lua/config/theming.lua")
+	end, { desc = "Open theming config file" })
+
+	nvim_map("n", "<leader><leader>i", function()
+		nvim_cmd.e(vim.fn.stdpath("config") .. "/init.lua")
+	end, { desc = "Open config init.lua" })
+
+	nvim_map("n", "<leader><leader>p", function()
+		require("oil").open(vim.fn.stdpath("config"))
+	end, { desc = "Open configuration folder in Oil" })
+end
+
+local function base_mappings()
 	-- Nop both Q and our leader key
 	nvim_map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 	nvim_map("n", "Q", "<nop>")
@@ -273,6 +320,7 @@ end
 return {
 	config = function()
 		base_mappings()
+		config_shortcut_mappings()
 		git_mappings()
 		telescope_mappings()
 		dap_mappings()
@@ -280,6 +328,7 @@ return {
 		minor_plugin_mappings()
 
 		require("which-key").register({
+			["<leader><leader>"] = { name = "[Config Shortcuts]", _ = "which_key_ignore" },
 			["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
 			["<leader>o"] = { name = "[O]verseer", _ = "which_key_ignore" },
 			["<leader>e"] = { name = "[E]dit Files", _ = "which_key_ignore" },
@@ -289,6 +338,7 @@ return {
 			["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
 			["<leader>q"] = { name = "[Q]uit", _ = "which_key_ignore" },
 			["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
+			["<leader>se"] = { name = "[E]xtensions", _ = "which_key_ignore" },
 			["<leader>d"] = { name = "[D]iagnostics & Debugging", _ = "which_key_ignore" },
 			["<leader>db"] = { name = "De[B]ug", _ = "which_key_ignore" },
 			["<leader>dv"] = { name = "Diff[V]iew", _ = "which_key_ignore" },
