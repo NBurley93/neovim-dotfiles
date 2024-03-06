@@ -84,5 +84,10 @@ return {
 		else
 			vim.g.python3_host_prog = "~/.nvimenv/.venv/bin/python3"
 		end
+
+		-- Set path for sqlite3 for windows
+		if vim.fn.has("win32") == 1 then
+			vim.g.sqlite_clib_path = vim.fn.stdpath("data") .. "/sqlite3.dll"
+		end
 	end,
 }

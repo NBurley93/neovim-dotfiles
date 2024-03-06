@@ -12,5 +12,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- hack to deal with bug in telescope-cheat.nvim
+-- https://github.com/nvim-telescope/telescope-cheat.nvim/issues/7
+local cheat_dbdir = vim.fn.stdpath("data") .. "/databases"
+if not vim.loop.fs_stat(cheat_dbdir) then
+	vim.loop.fs_mkdir(cheat_dbdir, 493)
+end
+
 -- Load configurations
 require("config").config_all()

@@ -104,6 +104,10 @@ local function telescope_mappings()
 		builtin.buffers({ sort_lastused = true, ignore_current_buffer = true })
 	end, { desc = "Show open buffers" })
 
+	nvim_map("n", "<leader>sc", function()
+		nvim_cmd.Telescope("cheat", "fd")
+	end, { desc = "Search cheat.sh entries" })
+
 	nvim_map("n", "<leader>vn", function()
 		telescope.extensions.notify.notify()
 	end, { desc = "Show notify message history" })
