@@ -11,15 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
-local cfg = require("config")
 
 -- Load configurations
-cfg.options.config()
-require("lazy").setup("plugins")
-cfg.completion.config()
-cfg.lsp.config()
-cfg.autocommands.config()
-cfg.dap.config()
-cfg.null_ls.config()
-cfg.keymappings.config()
-cfg.theming.config()
+require("config").config_all()
