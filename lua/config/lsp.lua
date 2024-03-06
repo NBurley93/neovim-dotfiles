@@ -24,14 +24,14 @@ local function lsp_onattach(client, bufnr)
 	map("n", "<leader>dl", function()
 		vim.cmd.Telescope("diagnostics")
 	end, create_lsp_keybind_opts("View diagnostics"))
-	map("n", "<leader>rn", vim.lsp.buf.rename, create_lsp_keybind_opts("Rename symbol"))
+	map("n", "<leader>cr", vim.lsp.buf.rename, create_lsp_keybind_opts("Rename symbol"))
 
 	map("n", "gl", vim.diagnostic.open_float, create_lsp_keybind_opts("Floating diagnostic"))
 	map("n", "[d", vim.diagnostic.goto_prev, create_lsp_keybind_opts("Goto previous diagnostic"))
 	map("n", "]d", vim.diagnostic.goto_next, create_lsp_keybind_opts("Goto next diagnostic"))
 	map("n", "<c-h>", vim.lsp.buf.signature_help, create_lsp_keybind_opts("Show signature help in context"))
 
-	map("n", "<leader>f", function()
+	map("n", "<leader>cf", function()
 		vim.lsp.buf.format({ async = true })
 	end, create_lsp_keybind_opts("Format buffer"))
 end

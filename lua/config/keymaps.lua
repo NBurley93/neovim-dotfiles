@@ -79,18 +79,18 @@ local function telescope_mappings()
 		builtin.grep_string({ search = nvim_input("Grep > ") })
 	end, { desc = "Perform a grep string search thru project" })
 
-	nvim_map("n", "<leader>vh", builtin.help_tags, { desc = "Search help tags" })
+	nvim_map("n", "<leader>sh", builtin.help_tags, { desc = "Search help tags" })
 	nvim_map("n", "<leader>ss", function()
 		nvim_cmd.Telescope("symbols")
 	end, { desc = "Find symbols" })
 
-	nvim_map("n", "<leader>vat", function()
+	nvim_map("n", "<leader>st", function()
 		nvim_cmd.Telescope("terraform_doc", "full_name=hashicorp/aws")
 	end, { desc = "Search AWS Terraform Docs" })
 
 	nvim_map("n", "<leader>sm", function()
 		nvim_cmd.Telescope("http", "list")
-	end, { desc = "Telescope - Http Status Codes" })
+	end, { desc = "Search Http status codes" })
 
 	nvim_map("n", "<leader>sgb", function()
 		builtin.git_branches({ show_remote_tracking_branches = false })
@@ -108,7 +108,7 @@ local function telescope_mappings()
 		nvim_cmd.Telescope("cheat", "fd")
 	end, { desc = "Search cheat.sh entries" })
 
-	nvim_map("n", "<leader>vn", function()
+	nvim_map("n", "<leader>sn", function()
 		telescope.extensions.notify.notify()
 	end, { desc = "Show notify message history" })
 end
@@ -117,17 +117,17 @@ end
 local function dap_mappings()
 	local dap = require("dap")
 	local dapui = require("dapui")
-	nvim_map("n", "<F5>", dap.continue, { desc = "DapUI - Continue" })
-	nvim_map("n", "<F1>", dap.step_into, { desc = "DapUI - Step Into" })
-	nvim_map("n", "<F2>", dap.step_over, { desc = "DapUI - Step Over" })
-	nvim_map("n", "<F3>", dap.step_out, { desc = "DapUI - Step Out" })
-	nvim_map("n", "<leader>bp", dap.toggle_breakpoint, { desc = "DapUI - Set Breakpoint" })
-	nvim_map("n", "<leader>BP", function()
+	nvim_map("n", "<F5>", dap.continue, { desc = "Continue" })
+	nvim_map("n", "<F1>", dap.step_into, { desc = "Step into" })
+	nvim_map("n", "<F2>", dap.step_over, { desc = "Step over" })
+	nvim_map("n", "<F3>", dap.step_out, { desc = "Step out" })
+	nvim_map("n", "<leader>dbb", dap.toggle_breakpoint, { desc = "Set breakpoint" })
+	nvim_map("n", "<leader>dbB", function()
 		dap.set_breakpoint(nvim_input("Breakpoint condition: "))
-	end, { desc = "DapUI - Set Conditional Breakpoint" })
-	nvim_map("n", "<leader>db", dapui.open, { desc = "DapUI - Open" })
-	nvim_map("n", "<leader>dbc", dapui.close, { desc = "DapUI - Close" })
-	nvim_map("n", "<leader>dbe", dapui.eval, { desc = "DapUI - Eval" })
+	end, { desc = "Set conditional breakpoint" })
+	nvim_map("n", "<leader>dbo", dapui.open, { desc = "Open" })
+	nvim_map("n", "<leader>dbc", dapui.close, { desc = "Close" })
+	nvim_map("n", "<leader>dbe", dapui.eval, { desc = "Evaluate" })
 end
 
 -- neotest
@@ -184,15 +184,25 @@ local function base_mappings()
 		attempt_write(nvim_cmd.wq)
 	end, { desc = "Write current buffer and quit" })
 
+	nvim_map("n", "<Esc>", nvim_cmd.nohlsearch, { desc = "Clear search highlight" })
+
 	-- Quit ops
 	nvim_map("n", "<leader>qq", nvim_cmd.qall, { desc = "Quit neovim, unless there are buffer changes" })
 	nvim_map("n", "<leader>qf", function()
 		nvim_cmd("qall!")
 	end, { desc = "Force-quit neovim even with buffer changes. VERY DANGEROUS" })
 
+	nvim_map("n", "<leader>qw", nvim_cmd.q, { desc = "Quit current window" })
+
 	-- Reconfigure search next & prev to center the find result on the screen
 	nvim_map("n", "n", "nzzzv")
 	nvim_map("n", "N", "Nzzzv")
+
+	-- Window navigation
+	nvim_map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to left window" })
+	nvim_map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to right window" })
+	nvim_map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to lower window" })
+	nvim_map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to upper window" })
 
 	-- Allow us to move a line of code up or down using visual mode (SUPER USEFUL!!)
 	nvim_map("v", "K", ":m '>-2<CR>gv=gv", { desc = "Move current line up" })
@@ -227,7 +237,7 @@ local function minor_plugin_mappings()
 	end, { desc = "Generate code annotation" })
 
 	-- Trouble
-	nvim_map("n", "<leader>xx", nvim_cmd.TroubleToggle, { desc = "Toggle Trouble window" })
+	nvim_map("n", "<leader>dt", nvim_cmd.TroubleToggle, { desc = "Toggle Trouble window" })
 
 	-- Overseer
 	nvim_map("n", "<leader>or", nvim_cmd.OverseerRun, { desc = "Run from Overseer Tasks" })
@@ -268,5 +278,22 @@ return {
 		dap_mappings()
 		neotest_mappings()
 		minor_plugin_mappings()
+
+		require("which-key").register({
+			["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
+			["<leader>o"] = { name = "[O]verseer", _ = "which_key_ignore" },
+			["<leader>e"] = { name = "[E]dit Files", _ = "which_key_ignore" },
+			["<leader>w"] = { name = "[W]rite Files", _ = "which_key_ignore" },
+			["<leader>p"] = { name = "[P]roject Management", _ = "which_key_ignore" },
+			["<leader>a"] = { name = "[A]erial", _ = "which_key_ignore" },
+			["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
+			["<leader>q"] = { name = "[Q]uit", _ = "which_key_ignore" },
+			["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
+			["<leader>d"] = { name = "[D]iagnostics & Debugging", _ = "which_key_ignore" },
+			["<leader>db"] = { name = "De[B]ug", _ = "which_key_ignore" },
+			["<leader>dv"] = { name = "Diff[V]iew", _ = "which_key_ignore" },
+			["<leader>u"] = { name = "[U]nit Testing", _ = "which_key_ignore" },
+			["<leader>sg"] = { name = "[G]it", _ = "which_key_ignore" },
+		})
 	end,
 }
