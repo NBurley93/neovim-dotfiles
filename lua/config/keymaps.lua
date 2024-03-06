@@ -8,9 +8,9 @@ local nvim_notify_warn = function(msg)
 	vim.notify(msg, vim.log.levels.WARN)
 end
 
-local nvim_notify_error = function(msg)
+--[[ local nvim_notify_error = function(msg)
 	vim.notify(msg, vim.log.levels.ERROR)
-end
+end ]]
 
 local nvim_notify_info = function(msg)
 	vim.notify(msg, vim.log.levels.INFO)
@@ -247,9 +247,9 @@ local function base_mappings()
 
 	-- Window navigation
 	nvim_map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to left window" })
-	nvim_map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to right window" })
 	nvim_map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to lower window" })
 	nvim_map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to upper window" })
+	nvim_map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to right window" })
 
 	-- Allow us to move a line of code up or down using visual mode (SUPER USEFUL!!)
 	nvim_map("v", "K", ":m '>-2<CR>gv=gv", { desc = "Move current line up" })

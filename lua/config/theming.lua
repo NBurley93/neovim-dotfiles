@@ -32,7 +32,7 @@ return {
 
 		fm.setup({
 			transparent = true,
-			theme = "delta",
+			theme = "retrowave",
 			glow = false,
 			overrides = function(c)
 				return {
@@ -42,7 +42,7 @@ return {
 					NotifyINFOBody = { fg = c.fg, bg = "NONE" },
 					NotifyDEBUGBody = { fg = c.fg, bg = "NONE" },
 					NotifyTRACEBody = { fg = c.fg, bg = "NONE" },
-					DapStoppedLinehl = { fg = "#ffffff", bg = "#ce4573" },
+					DapStoppedLinehl = { fg = c.white, bg = c.red },
 				}
 			end,
 		})

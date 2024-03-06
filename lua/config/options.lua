@@ -15,7 +15,7 @@ return {
 			encoding = "UTF-8",
 			updatetime = 50,
 			timeout = true,
-			timeoutlen = 300,
+			timeoutlen = 1000,
 			expandtab = true,
 			title = true,
 			shiftwidth = 4,
