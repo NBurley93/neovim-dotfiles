@@ -67,6 +67,12 @@ return {
 							action = "checkhealth",
 						},
 						{
+							icon = " ",
+							icon_hl = "DevIconZsh",
+							desc = "Vim Be Good",
+							action = "VimBeGood",
+						},
+						{
 							icon = "󰩈 ",
 							icon_hl = "DevIconNim",
 							desc = "Quit",

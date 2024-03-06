@@ -80,9 +80,9 @@ local function telescope_mappings()
 	end, { desc = "Perform a grep string search thru project" })
 
 	nvim_map("n", "<leader>vh", builtin.help_tags, { desc = "Search help tags" })
-	nvim_map("n", "<leader>se", function()
-		nvim_cmd.Telescope("emoji")
-	end, { desc = "Find emojis" })
+	nvim_map("n", "<leader>ss", function()
+		nvim_cmd.Telescope("symbols")
+	end, { desc = "Find symbols" })
 
 	nvim_map("n", "<leader>vat", function()
 		nvim_cmd.Telescope("terraform_doc", "full_name=hashicorp/aws")
