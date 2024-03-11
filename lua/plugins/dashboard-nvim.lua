@@ -3,6 +3,8 @@ local function return_version()
 	return " v" .. version.major .. "." .. version.minor .. "." .. version.patch
 end
 
+local SHOW_DASHBOARD_ARTWORK = false
+
 local dashboard_artwork = {
 	[[]],
 	[[ ⣿⣿⣷⡁⢆⠈⠕⢕⢂⢕⢂⢕⢂⢔⢂⢕⢄⠂⣂⠂⠆⢂⢕⢂⢕⢂⢕⢂⢕⢂ ]],
@@ -30,8 +32,10 @@ return {
 			local utils = require("dashboard.utils")
 			local package_manager_stats = utils.get_package_manager_stats()
 			local logo = {}
-			for _, item in ipairs(dashboard_artwork) do
-				table.insert(logo, item)
+			if SHOW_DASHBOARD_ARTWORK then
+				for _, item in ipairs(dashboard_artwork) do
+					table.insert(logo, item)
+				end
 			end
 			table.insert(logo, [[]])
 			table.insert(logo, "  Neovim" .. return_version())
