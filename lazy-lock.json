@@ -69,7 +69,7 @@
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
   "telescope-terraform-doc.nvim": { "branch": "main", "commit": "e09181f76acefaf66d2b55149bebe939828234b4" },
   "telescope-ui-select.nvim": { "branch": "master", "commit": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2" },
-  "telescope.nvim": { "branch": "master", "commit": "b323abeb4baf9e4851c3af1961e770ce76c657c7" },
+  "telescope.nvim": { "branch": "master", "commit": "67c598fdd4fca113224281c85721c4d8a6df055e" },
   "toggleterm.nvim": { "branch": "main", "commit": "193786e0371e3286d3bc9aa0079da1cd41beaa62" },
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "venv-selector.nvim": { "branch": "main", "commit": "2ad34f36d498ff5193ea10f79c87688bd5284172" },
