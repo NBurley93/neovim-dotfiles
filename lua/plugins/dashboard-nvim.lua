@@ -65,6 +65,12 @@ return {
 							action = "help news",
 						},
 						{
+							icon = " ",
+							icon_hl = "DevIconZig",
+							desc = "Check for new Neovim release",
+							action = "Browse https://github.com/neovim/neovim/releases",
+						},
+						{
 							icon = " ",
 							icon_hl = "DevIconNPMrc",
 							desc = "Check Health",

@@ -1,4 +1,4 @@
-return {
+local plugin = {
 	{
 		"jiriks74/presence.nvim",
 		event = "UIEnter",
@@ -25,3 +25,4 @@ return {
 		},
 	},
 }
+return {}
