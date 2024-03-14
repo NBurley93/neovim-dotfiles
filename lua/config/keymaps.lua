@@ -224,22 +224,22 @@ local function base_mappings()
 	nvim_map("n", "<C-u>", "<C-u>zz")
 
 	-- File write operations
-	nvim_map("n", "<leader>wb", function()
+	nvim_map("n", "wb", function()
 		attempt_write(nvim_cmd.w)
 	end, { desc = "Write current buffer" })
-	nvim_map("n", "<leader>wq", function()
+	nvim_map("n", "wq", function()
 		attempt_write(nvim_cmd.wq)
 	end, { desc = "Write current buffer and quit" })
 
 	nvim_map("n", "<Esc>", nvim_cmd.nohlsearch, { desc = "Clear search highlight" })
 
 	-- Quit ops
-	nvim_map("n", "<leader>qq", nvim_cmd.qall, { desc = "Quit neovim, unless there are buffer changes" })
-	nvim_map("n", "<leader>qf", function()
+	nvim_map("n", "qq", nvim_cmd.qall, { desc = "Quit neovim, unless there are buffer changes" })
+	nvim_map("n", "qf", function()
 		nvim_cmd("qall!")
 	end, { desc = "Force-quit neovim even with buffer changes. VERY DANGEROUS" })
 
-	nvim_map("n", "<leader>qw", nvim_cmd.q, { desc = "Quit current window" })
+	nvim_map("n", "qw", nvim_cmd.q, { desc = "Quit current window" })
 
 	-- Reconfigure search next & prev to center the find result on the screen
 	nvim_map("n", "n", "nzzzv")
@@ -332,11 +332,9 @@ return {
 			["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
 			["<leader>o"] = { name = "[O]verseer", _ = "which_key_ignore" },
 			["<leader>e"] = { name = "[E]dit Files", _ = "which_key_ignore" },
-			["<leader>w"] = { name = "[W]rite Files", _ = "which_key_ignore" },
 			["<leader>p"] = { name = "[P]roject Management", _ = "which_key_ignore" },
 			["<leader>a"] = { name = "[A]erial", _ = "which_key_ignore" },
 			["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-			["<leader>q"] = { name = "[Q]uit", _ = "which_key_ignore" },
 			["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
 			["<leader>se"] = { name = "[E]xtensions", _ = "which_key_ignore" },
 			["<leader>d"] = { name = "[D]iagnostics & Debugging", _ = "which_key_ignore" },

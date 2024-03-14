@@ -101,6 +101,6 @@ return {
 				},
 			})
 		end,
-		dependencies = { require("common.defines").WEB_DEVICONS_PROVIDER },
+		dependencies = { require("common.defines").WEB_DEVICONS_PROVIDER, "chrishrb/gx.nvim" },
 	},
 }
