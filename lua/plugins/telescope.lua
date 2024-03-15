@@ -14,12 +14,14 @@ return {
 			ts.load_extension("http")
 			ts.load_extension("cheat")
 			ts.load_extension("dap")
+			ts.load_extension("undo")
 		end,
 	},
 	{ "nvim-telescope/telescope-ui-select.nvim" },
 	{ "ANGkeith/telescope-terraform-doc.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 	{ "barrett-ruth/telescope-http.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 	{ "nvim-telescope/telescope-symbols.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+	{ "debugloop/telescope-undo.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 	{
 		"nvim-telescope/telescope-cheat.nvim",
 		dependencies = {

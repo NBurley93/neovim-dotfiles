@@ -1,7 +1,5 @@
-local map = vim.keymap.set
-
-local function create_lsp_keybind_opts(helptext)
-	return { noremap = true, silent = true, desc = helptext }
+local map = function(keys, func, bufnr, desc)
+	vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
 end
 
 local function get_capabilities(cmp_lsp)
@@ -12,28 +10,27 @@ local function get_capabilities(cmp_lsp)
 end
 
 local function lsp_onattach(client, bufnr)
-	map("n", "K", function()
+	local builtin = require("telescope.builtin")
+
+	map("gd", builtin.lsp_definitions, bufnr, "[G]oto [D]efinition")
+	map("gD", vim.lsp.buf.declaration, bufnr, "[G]oto [D]eclaration")
+	map("gr", builtin.lsp_references, bufnr, "[G]oto [R]eferences")
+	map("gI", builtin.lsp_implementations, bufnr, "[G]oto [I]mplementations")
+	map("<leader>D", builtin.lsp_type_definitions, bufnr, "Type [D]efinition")
+	map("<leader>cs", builtin.lsp_document_symbols, bufnr, "[C]ode [S]ymbols")
+
+	map("K", function()
 		vim.lsp.buf.hover()
-	end, create_lsp_keybind_opts("Show code signature for hover'd item"))
-	map("n", "gD", vim.lsp.buf.declaration, create_lsp_keybind_opts("Goto code declaration"))
-	map("n", "gd", vim.lsp.buf.definition, create_lsp_keybind_opts("Goto code definition"))
-	map("n", "gt", vim.lsp.buf.type_definition, create_lsp_keybind_opts("Goto code type definition"))
-	map("n", "gi", vim.lsp.buf.implementation, create_lsp_keybind_opts("Goto code implementations"))
-	map("n", "<leader>c", vim.lsp.buf.code_action, create_lsp_keybind_opts("Code actions"))
-	map("n", "gr", vim.lsp.buf.references, create_lsp_keybind_opts("View references"))
-	map("n", "<leader>dl", function()
-		vim.cmd.Telescope("diagnostics")
-	end, create_lsp_keybind_opts("View diagnostics"))
-	map("n", "<leader>cr", vim.lsp.buf.rename, create_lsp_keybind_opts("Rename symbol"))
+	end, bufnr, "Hover Documentation")
+	map("<leader>ca", vim.lsp.buf.code_action, bufnr, "[C]ode [A]ction")
 
-	map("n", "gl", vim.diagnostic.open_float, create_lsp_keybind_opts("Floating diagnostic"))
-	map("n", "[d", vim.diagnostic.goto_prev, create_lsp_keybind_opts("Goto previous diagnostic"))
-	map("n", "]d", vim.diagnostic.goto_next, create_lsp_keybind_opts("Goto next diagnostic"))
-	map("n", "<c-h>", vim.lsp.buf.signature_help, create_lsp_keybind_opts("Show signature help in context"))
+	map("<leader>rn", vim.lsp.buf.rename, bufnr, "[R]e[n]ame")
 
-	map("n", "<leader>cf", function()
+	map("<c-h>", vim.lsp.buf.signature_help, bufnr, "Show signature help in context")
+
+	map("<leader>fb", function()
 		vim.lsp.buf.format({ async = true })
-	end, create_lsp_keybind_opts("Format buffer"))
+	end, bufnr, "[F]ormat [B]uffer")
 end
 
 local function setup_icons(icons)
@@ -70,12 +67,7 @@ local function configure_cpp_lsp(lspconfig, lsp_defaults)
 	lspconfig.clangd.setup({
 		on_attach = function(client, bufnr)
 			lsp_onattach(client, bufnr)
-			map(
-				"n",
-				"<leader>sh",
-				vim.cmd.ClangdSwitchSourceHeader,
-				create_lsp_keybind_opts("Swap to header/implementation file")
-			)
+			map("<leader>sh", vim.cmd.ClangdSwitchSourceHeader, bufnr, "Swap to header/implementation file")
 		end,
 		capabilities = clangd_capabilities,
 		cmd = {
@@ -122,7 +114,7 @@ local function configure_lua_lsp(lspconfig)
 end
 
 -- Python pylsp
-local function configure_python_lsp(lspconfig)
+--[[ local function configure_python_lsp(lspconfig)
 	lspconfig.pylsp.setup({
 		on_attach = lsp_onattach,
 		settings = {
@@ -135,7 +127,7 @@ local function configure_python_lsp(lspconfig)
 			},
 		},
 	})
-end
+end ]]
 
 -- Python ruff
 local function configure_python_ruff_lsp(lspconfig)
