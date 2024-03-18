@@ -36,14 +36,13 @@ return {
 			})
 		end,
 		dependencies = {
+			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-neotest/neotest-python",
 		},
 	},
-	{ "mfussenegger/nvim-dap" },
-	{ "mfussenegger/nvim-dap-python" },
 	{
 		"theHamsta/nvim-dap-virtual-text",
 		dependencies = {
@@ -53,6 +52,7 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
 		config = function()
 			require("dapui").setup({
 				-- Set icons to characters that are more likely to work in every terminal.
