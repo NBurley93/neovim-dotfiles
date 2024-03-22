@@ -8,6 +8,16 @@ return {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown({}),
 				},
+				defaults = {
+					layout_config = { prompt_position = "top" },
+					layout_strategy = "horizontal",
+					sorting_strategy = "ascending",
+					winblend = 0,
+					prompt_prefix = "   ",
+					selection_caret = "  ",
+					results_title = "",
+					dynamic_preview_title = true,
+				},
 			})
 			ts.load_extension("ui-select")
 			ts.load_extension("terraform_doc")

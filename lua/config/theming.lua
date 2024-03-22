@@ -36,13 +36,17 @@ return {
 			glow = false,
 			overrides = function(c)
 				return {
-					FoldColumn = { fg = c.fg, bg = "NONE" },
-					NotifyERRORBody = { fg = c.fg, bg = "NONE" },
-					NotifyWARNBody = { fg = c.fg, bg = "NONE" },
-					NotifyINFOBody = { fg = c.fg, bg = "NONE" },
-					NotifyDEBUGBody = { fg = c.fg, bg = "NONE" },
-					NotifyTRACEBody = { fg = c.fg, bg = "NONE" },
+					FoldColumn = { fg = "#c1e2ff", bg = "NONE" },
+					NotifyERRORBody = { bg = "NONE" },
+					NotifyWARNBody = { bg = "NONE" },
+					NotifyINFOBody = { bg = "NONE" },
+					NotifyDEBUGBody = { bg = "NONE" },
+					NotifyTRACEBody = { bg = "NONE" },
 					DapStoppedLinehl = { fg = c.white, bg = c.red },
+					WinSeparator = { bg = "NONE" },
+					NormalFloat = { bg = "NONE" },
+					DashboardDesc = { fg = "#ab0000" },
+					FloatBorder = { bg = "NONE" },
 				}
 			end,
 		})

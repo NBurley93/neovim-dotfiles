@@ -1,7 +1,7 @@
 local commonfuncs = require("common.functions")
 
 local function setup_whichkey_root()
-	require("which-key").register({
+	local root_defs = {
 		["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
 		["<leader>o"] = { name = "[O]verseer", _ = "which_key_ignore" },
 		["<leader>w"] = { name = "[W]rite Buffers", _ = "which_key_ignore" },
@@ -11,13 +11,14 @@ local function setup_whichkey_root()
 		["<leader>a"] = { name = "[A]erial", _ = "which_key_ignore" },
 		["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
 		["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-		["<leader>se"] = { name = "[E]xtensions", _ = "which_key_ignore" },
 		["<leader>d"] = { name = "[D]iagnostics & Debugging", _ = "which_key_ignore" },
 		["<leader>db"] = { name = "De[B]ug", _ = "which_key_ignore" },
 		["<leader>dv"] = { name = "Diff[V]iew", _ = "which_key_ignore" },
 		["<leader>u"] = { name = "[U]nit Testing", _ = "which_key_ignore" },
-		["<leader>sg"] = { name = "[G]it", _ = "which_key_ignore" },
-	})
+	}
+	root_defs = vim.tbl_deep_extend("force", root_defs, require("config.keymaps.telescope").root_whichkey())
+
+	require("which-key").register(root_defs)
 end
 
 local function base_mappings()

@@ -4,7 +4,6 @@ return {
 		config = function()
 			local commonicons = require("common.icons")
 			require("neotest").setup({
-
 				icons = {
 					failed = commonicons.diagnostics.Error,
 					passed = commonicons.ui.Check,

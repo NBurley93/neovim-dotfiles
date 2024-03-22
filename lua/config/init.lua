@@ -12,7 +12,11 @@ local config_entries = {
 return {
 	config_all = function()
 		config_entries.options.config()
-		require("lazy").setup("plugins")
+		require("lazy").setup("plugins", {
+			ui = {
+				border = "rounded",
+			},
+		})
 		config_entries.completion.config()
 		config_entries.lsp.config()
 		config_entries.autocommands.config()
