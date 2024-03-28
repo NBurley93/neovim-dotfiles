@@ -1,13 +1,10 @@
 local telescope = require("telescope")
 local utils = require("telescope.utils")
 local themes = require("telescope.themes")
-
-local map = function(keys, action, desc)
-	vim.keymap.set("n", keys, action, { desc = desc })
-end
+local cf = require("common.functions")
 
 local search_map = function(keys, action, desc)
-	map("<leader>s" .. keys, action, desc)
+	cf.mapn("<leader>s" .. keys, action, desc)
 end
 
 local M = {}
@@ -16,7 +13,7 @@ local function map_builtins()
 	local builtin = require("telescope.builtin")
 
 	-- Ctrl+p for searching project files
-	map("<C-p>", function()
+	cf.mapn("<C-p>", function()
 		local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
 		if ret == 0 then
 			builtin.git_files({ show_untracked = true })
@@ -35,7 +32,7 @@ local function map_builtins()
 	search_map("a", builtin.autocommands, "[A]utocommands")
 
 	-- fzysearch
-	map("<leader>/", function()
+	cf.mapn("<leader>/", function()
 		builtin.current_buffer_fuzzy_find(themes.get_dropdown({
 			winblend = 10,
 			previewer = false,
@@ -48,7 +45,7 @@ local function map_builtins()
 	end, "Neovim [C]onfiguration file search")
 
 	-- Allow searching our project with grep
-	map("<leader>ps", function()
+	cf.mapn("<leader>ps", function()
 		builtin.grep_string({ search = vim.fn.input("Grep > ") })
 	end, "Grep search in files")
 
@@ -66,7 +63,7 @@ local function map_builtins()
 	end, "Branches + upstream")
 
 	-- Currently open buffers
-	map("<leader><leader>", function()
+	cf.mapn("<leader><leader>", function()
 		builtin.buffers(themes.get_dropdown({ previewer = false }), { sort_lastused = true })
 	end, "Buffers")
 

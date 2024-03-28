@@ -40,7 +40,7 @@ return {
 		-- Overseer
 		map("<leader>or", vim.cmd.OverseerRun, "Run from Overseer Tasks")
 		map("<leader>ot", vim.cmd.OverseerToggle, "Toggle Overseer List")
-		map("<C-B>", vim.cmd.OverseerRun, "Overseer Task Shortcut")
+		map("<C-O>", vim.cmd.OverseerRun, "Overseer Task Shortcut")
 
 		-- Shortcut to exit insert mode
 		mapi("<C-c>", "<Esc>", "Exit insert mode")

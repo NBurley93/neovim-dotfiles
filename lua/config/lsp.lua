@@ -1,6 +1,4 @@
-local map = function(keys, func, bufnr, desc)
-	vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
-end
+local lsp_keymaps = require("config.keymaps.lsp")
 
 local function get_capabilities(cmp_lsp)
 	if cmp_lsp then
@@ -10,27 +8,7 @@ local function get_capabilities(cmp_lsp)
 end
 
 local function lsp_onattach(client, bufnr)
-	local builtin = require("telescope.builtin")
-
-	map("gd", builtin.lsp_definitions, bufnr, "[G]oto [D]efinition")
-	map("gD", vim.lsp.buf.declaration, bufnr, "[G]oto [D]eclaration")
-	map("gr", builtin.lsp_references, bufnr, "[G]oto [R]eferences")
-	map("gI", builtin.lsp_implementations, bufnr, "[G]oto [I]mplementations")
-	map("<leader>D", builtin.lsp_type_definitions, bufnr, "Type [D]efinition")
-	map("<leader>cs", builtin.lsp_document_symbols, bufnr, "[C]ode [S]ymbols")
-
-	map("K", function()
-		vim.lsp.buf.hover()
-	end, bufnr, "Hover Documentation")
-	map("<leader>ca", vim.lsp.buf.code_action, bufnr, "[C]ode [A]ction")
-
-	map("<leader>rn", vim.lsp.buf.rename, bufnr, "[R]e[n]ame")
-
-	map("<c-h>", vim.lsp.buf.signature_help, bufnr, "Show signature help in context")
-
-	map("<leader>fb", function()
-		vim.lsp.buf.format({ async = true })
-	end, bufnr, "[F]ormat [B]uffer")
+	lsp_keymaps.config(client, bufnr)
 end
 
 local function setup_icons(icons)
@@ -65,10 +43,7 @@ local function configure_cpp_lsp(lspconfig, lsp_defaults)
 	clangd_capabilities.offsetEncoding = "utf-8"
 
 	lspconfig.clangd.setup({
-		on_attach = function(client, bufnr)
-			lsp_onattach(client, bufnr)
-			map("<leader>sh", vim.cmd.ClangdSwitchSourceHeader, bufnr, "Swap to header/implementation file")
-		end,
+		on_attach = lsp_onattach,
 		capabilities = clangd_capabilities,
 		cmd = {
 			"clangd",
