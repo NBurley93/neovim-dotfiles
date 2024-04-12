@@ -111,43 +111,57 @@ local function configure_python_ruff_lsp(lspconfig)
 	})
 end
 
-local function configure_misc_lsp(lspconfig)
-	-- CMake
+-- CMake
+local function configure_cmake_lsp(lspconfig)
 	lspconfig.cmake.setup({
 		on_attach = lsp_onattach,
 	})
+end
 
-	-- Json
+-- Json
+local function configure_json_lsp(lspconfig)
 	lspconfig.jsonls.setup({
 		on_attach = lsp_onattach,
 	})
+end
 
-	-- Docker
+-- Docker
+local function configure_docker_lsp(lspconfig)
 	lspconfig.dockerls.setup({
 		on_attach = lsp_onattach,
 	})
+end
 
-	-- Terraform
+-- Terraform
+local function configure_terraform_lsp(lspconfig)
 	lspconfig.terraformls.setup({
 		on_attach = lsp_onattach,
 	})
+end
 
-	-- YAML
+-- YAML
+local function configure_yaml_lsp(lspconfig)
 	lspconfig.yamlls.setup({
 		on_attach = lsp_onattach,
 	})
+end
 
-	-- Markdown
+-- Markdown
+local function configure_markdown_lsp(lspconfig)
 	lspconfig.marksman.setup({
 		on_attach = lsp_onattach,
 	})
+end
 
-	-- Javascript
+-- Javascript
+local function configure_javascript_lsp(lspconfig)
 	lspconfig.eslint.setup({
 		on_attach = lsp_onattach,
 	})
+end
 
-	-- Powershell
+-- Powershell
+local function configure_powershell_lsp(lspconfig)
 	lspconfig.powershell_es.setup({
 		bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/",
 		on_attach = lsp_onattach,
@@ -211,7 +225,14 @@ return {
 		configure_astgrep_lsp(lspconfig)
 		configure_go_lsp(lspconfig, lsp_defaults)
 		configure_rust_lsp(lspconfig, lsp_defaults)
-		configure_misc_lsp(lspconfig)
+		configure_cmake_lsp(lspconfig)
+		configure_json_lsp(lspconfig)
+		configure_docker_lsp(lspconfig)
+		configure_terraform_lsp(lspconfig)
+		configure_yaml_lsp(lspconfig)
+		configure_markdown_lsp(lspconfig)
+		configure_javascript_lsp(lspconfig)
+		configure_powershell_lsp(lspconfig)
 
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 			border = "single",

@@ -10,7 +10,6 @@ return {
 		}
 
 		local options = {
-			fileformat = "unix",
 			autoindent = true,
 			encoding = "UTF-8",
 			updatetime = 50,

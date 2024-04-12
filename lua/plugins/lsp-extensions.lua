@@ -28,6 +28,28 @@ return {
 			"williamboman/mason.nvim",
 			"folke/neodev.nvim",
 		},
+		config = function()
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"gopls",
+					"cmake",
+					"marksman",
+					"clangd",
+					"lua_ls",
+					"ruff_lsp",
+					"eslint",
+					"rust_analyzer",
+					"yamlls",
+					"powershell_es",
+					"jsonls",
+					"terraformls",
+					"dockerls",
+					"ast_grep",
+					"glslls",
+					"html",
+				},
+			})
+		end,
 	},
 	{ "neovim/nvim-lspconfig" },
 	{
