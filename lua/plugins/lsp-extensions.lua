@@ -45,7 +45,7 @@ return {
 					"terraformls",
 					"dockerls",
 					"ast_grep",
-					"glslls",
+					--					"glslls",
 					"html",
 				},
 			})
