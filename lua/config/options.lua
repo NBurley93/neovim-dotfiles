@@ -65,7 +65,7 @@ return {
 
 		vim.lsp.set_log_level("off")
 
-		if vim.fn.has("win32") == 1 then
+		if vim.fn.has("win32") == 1 and vim.fn.has("wsl") == 0 then
 			local powershell_options = {
 				shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell",
 				shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
@@ -100,5 +100,9 @@ return {
 		if vim.fn.has("win32") == 1 then
 			vim.g.sqlite_clib_path = vim.fn.stdpath("data") .. "/sqlite3.dll"
 		end
+
+		-- Misc provider vars
+		vim.g.loaded_perl_provider = 0
+		vim.g.loaded_ruby_provider = 0
 	end,
 }
