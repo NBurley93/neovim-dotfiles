@@ -44,7 +44,7 @@ return {
 					"jsonls",
 					"terraformls",
 					"dockerls",
-					"ast_grep",
+					--					"ast_grep",
 					--					"glslls",
 					"html",
 				},
