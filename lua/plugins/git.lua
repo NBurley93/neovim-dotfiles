@@ -34,6 +34,10 @@ return {
 				default_args = {
 					DiffviewOpen = { "--imply-local" },
 				},
+				merge_tool = {
+					layout = "diff4_mixed",
+					winbar_info = true,
+				},
 				keymaps = {
 					file_panel = {
 						{

@@ -41,5 +41,7 @@ return {
 		map("<leader>dvo", vim.cmd.DiffviewOpen, "Review diffs in diffview")
 
 		map("<leader>dvc", vim.cmd.DiffviewClose, "Close diffview if open")
+
+		map("<leader>dvh", vim.cmd.DIffviewFileHistory, "Opens the git file history view")
 	end,
 }
