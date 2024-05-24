@@ -56,6 +56,12 @@ return {
 
 				-- Shell
 				formatting.shfmt,
+
+				-- XML
+				formatting.tidy,
+
+				-- CSharp
+				formatting.csharpier,
 			},
 		})
 	end,

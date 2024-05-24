@@ -19,5 +19,13 @@ if not vim.loop.fs_stat(cheat_dbdir) then
 	vim.loop.fs_mkdir(cheat_dbdir, 493)
 end
 
+-- Bootstrap in external depencencies (tidy)
+if vim.fn.executable("tidy") == 0 then
+	-- Install tidy if on linux, otherwise, warn the user
+	if vim.fn.has("win32") == 0 then
+		os.execute("sudo apt-get install tidy -y")
+	end
+end
+
 -- Load configurations
 require("config").config_all()

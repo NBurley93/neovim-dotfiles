@@ -53,6 +53,13 @@ local function configure_cpp_lsp(lspconfig, lsp_defaults)
 	})
 end
 
+-- C#
+local function configure_csharp_lsp(lspconfig)
+	lspconfig.csharp_ls.setup({
+		on_attach = lsp_onattach,
+	})
+end
+
 -- Lua
 local function configure_lua_lsp(lspconfig)
 	lspconfig.lua_ls.setup({
@@ -211,6 +218,20 @@ local function configure_astgrep_lsp(lspconfig)
 	})
 end
 
+-- XML
+local function configure_xml_lsp(lspconfig)
+	lspconfig.lemminx.setup({
+		on_attach = lsp_onattach,
+		filetypes = {
+			"xml",
+			"xsd",
+			"xsl",
+			"xslt",
+			"svg",
+		},
+	})
+end
+
 return {
 	config = function()
 		configure_logging(false)
@@ -220,6 +241,7 @@ return {
 
 		configure_cpp_lsp(lspconfig, lsp_defaults)
 		configure_lua_lsp(lspconfig)
+		configure_csharp_lsp(lspconfig)
 		--configure_python_lsp(lspconfig)
 		configure_python_ruff_lsp(lspconfig)
 		configure_astgrep_lsp(lspconfig)
@@ -233,6 +255,7 @@ return {
 		configure_markdown_lsp(lspconfig)
 		configure_javascript_lsp(lspconfig)
 		configure_powershell_lsp(lspconfig)
+		configure_xml_lsp(lspconfig)
 
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 			border = "single",
