@@ -32,11 +32,8 @@ local function map_builtins()
 	search_map("a", builtin.autocommands, "[A]utocommands")
 
 	-- fzysearch
-	cf.mapn("<leader>/", function()
-		builtin.current_buffer_fuzzy_find(themes.get_dropdown({
-			winblend = 10,
-			previewer = false,
-		}))
+	cf.mapn("/", function()
+		builtin.current_buffer_fuzzy_find()
 	end, "[/] Fuzzily search in buffer")
 
 	-- Search nvim config
@@ -107,6 +104,10 @@ local function map_extensions()
 	search_map("n", function()
 		extensions.notify.notify(themes.get_dropdown())
 	end, "[N]otifications")
+
+	search_map("s", function()
+		extensions.aerial.aerial()
+	end, "[S]ymbols")
 end
 
 function M.config()

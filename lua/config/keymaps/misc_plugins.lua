@@ -8,16 +8,16 @@ return {
 			vim.keymap.set("i", keys, action, { desc = desc })
 		end
 
+		-- Aerial
+		map("<leader>av", function()
+			vim.cmd.AerialToggle()
+		end, "Toggle aerial view")
+
 		-- Whichkey
 		map("<leader>wk", "<cmd>WhichKey<cr>", "Open whichkey window")
 
 		-- nvim-spectre
 		map("<leader>ts", require("spectre").toggle, "[T]oggle [S]pectre")
-
-		-- Code overview binds
-		map("<leader>av", function()
-			vim.cmd.AerialToggle("right")
-		end, "Toggle Aerial view")
 
 		-- Save file as
 		map("<leader>es", function()

@@ -1,6 +1,20 @@
 local function setup_line_segments()
 	return {
-		lualine_a = { "mode" },
+		lualine_a = {
+			{
+				"mode",
+				icons_enabled = true,
+				fmt = function(str)
+					if str == "V-BLOCK" then
+						return "VB"
+					elseif str == "V-LINE" then
+						return "VL"
+					else
+						return str:sub(1, 1)
+					end
+				end,
+			},
+		},
 		lualine_b = {
 			{
 				"b:gitsigns_head",
@@ -42,9 +56,11 @@ local function setup_line_segments()
 				maxcount = 999,
 				timeout = 500,
 			},
-			function()
-				return vim.fn["nvim_treesitter#statusline"](180)
-			end,
+			"aerial",
+
+			--function()
+			--return vim.fn["nvim_treesitter#statusline"](180)
+			--end,
 		},
 		lualine_x = {
 			{ "datetime", style = "%I:%M:%S %p" },
