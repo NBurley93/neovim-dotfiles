@@ -1,32 +1,36 @@
 return {
 	{ "nvimtools/none-ls.nvim" },
 	{ "jay-babu/mason-null-ls.nvim" },
+	-- neodev.nvim has reached EOL, deprecated for now, will be removed from this file soon
+	--	{
+	--		"folke/neodev.nvim",
+	--		config = function()
+	--			require("neodev").setup({
+	--				library = {
+	--					enabled = true,
+	--					runtime = true,
+	--					types = true,
+	--					plugins = {
+	--						"nvim-dap-ui",
+	--						"telescope.nvim",
+	--						"plenary.nvim",
+	--					},
+	--					setup_jsonls = true,
+	--					lspconfig = true,
+	--					pathStrict = true,
+	--				},
+	--			})
+	--		end,
+	--	},
 	{
-		"folke/neodev.nvim",
-		config = function()
-			require("neodev").setup({
-				library = {
-					enabled = true,
-					runtime = true,
-					types = true,
-					plugins = {
-						"nvim-dap-ui",
-						"telescope.nvim",
-						"plenary.nvim",
-					},
-					setup_jsonls = true,
-					lspconfig = true,
-					pathStrict = true,
-				},
-			})
-		end,
+		"folke/lazydev.nvim",
+		ft = "lua",
 	},
 	{ "onsails/lspkind.nvim" },
 	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = {
 			"williamboman/mason.nvim",
-			"folke/neodev.nvim",
 		},
 		config = function()
 			require("mason-lspconfig").setup({
