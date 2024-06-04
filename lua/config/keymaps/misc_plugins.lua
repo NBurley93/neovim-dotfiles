@@ -55,6 +55,11 @@ return {
 			vim.cmd.Oil()
 		end, "View project directory")
 
+		-- venv-selector
+		map("<leader>vs", function()
+			vim.cmd.VenvSelect()
+		end, "[S]elect Python VEnv")
+
 		-- nvim-cmp Mappings
 		local cmp = require("cmp")
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }

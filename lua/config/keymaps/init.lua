@@ -15,6 +15,7 @@ local function setup_whichkey_root()
 		["<leader>db"] = { name = "De[B]ug", _ = "which_key_ignore" },
 		["<leader>dv"] = { name = "Diff[V]iew", _ = "which_key_ignore" },
 		["<leader>u"] = { name = "[U]nit Testing", _ = "which_key_ignore" },
+		["<leader>v"] = { name = "[V]irtual environment", _ = "which_key_ignore" },
 	}
 	root_defs = vim.tbl_deep_extend("force", root_defs, require("config.keymaps.telescope").root_whichkey())
 
