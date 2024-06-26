@@ -41,10 +41,10 @@ return {
 		end,
 	},
 	{ "nvim-telescope/telescope-ui-select.nvim" },
-	{ "ANGkeith/telescope-terraform-doc.nvim",  dependencies = { "nvim-telescope/telescope.nvim" } },
-	{ "barrett-ruth/telescope-http.nvim",       dependencies = { "nvim-telescope/telescope.nvim" } },
-	{ "nvim-telescope/telescope-symbols.nvim",  dependencies = { "nvim-telescope/telescope.nvim" } },
-	{ "debugloop/telescope-undo.nvim",          dependencies = { "nvim-telescope/telescope.nvim" } },
+	{ "ANGkeith/telescope-terraform-doc.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+	{ "barrett-ruth/http-codes.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+	{ "nvim-telescope/telescope-symbols.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+	{ "debugloop/telescope-undo.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 	{
 		"nvim-telescope/telescope-cheat.nvim",
 		dependencies = {

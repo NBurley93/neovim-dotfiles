@@ -29,28 +29,50 @@ return {
 		-- require("kanagawa").load("wave")
 		-- require("themes.neonwave").use()
 		local fm = require("fluoromachine")
+		local rp = require("rose-pine")
 
 		fm.setup({
 			transparent = true,
 			theme = "retrowave",
 			glow = false,
-			overrides = function(c)
+			overrides = function(c, color)
+				local blend = color.blend
+				local darken = color.darken
+				local alpha = 0.2
+
+				local debug = c.pink
+				local trace = c.purple
+
 				return {
 					FoldColumn = { fg = "#c1e2ff", bg = "NONE" },
-					NotifyERRORBody = { bg = "NONE" },
-					NotifyWARNBody = { bg = "NONE" },
-					NotifyINFOBody = { bg = "NONE" },
-					NotifyDEBUGBody = { bg = "NONE" },
-					NotifyTRACEBody = { bg = "NONE" },
+					NotifyERRORBorder = { fg = blend(c.diag.error, c.bgdark, alpha) },
+					NotifyWARNBorder = { fg = blend(c.diag.warning, c.bgdark, alpha) },
+					NotifyINFOBorder = { fg = blend(c.diag.info, c.bgdark, alpha) },
+					NotifyDEBUGBorder = { fg = blend(debug, c.bgdark, alpha) },
+					NotifyTRACEBorder = { fg = blend(trace, c.bgdark, alpha) },
 					DapStoppedLinehl = { fg = c.white, bg = c.red },
 					WinSeparator = { bg = "NONE" },
-					NormalFloat = { bg = "NONE" },
-					DashboardDesc = { fg = "#ab0000" },
-					FloatBorder = { bg = "NONE" },
+
+					TelescopeBorder = { fg = c.bgdark, bg = c.bgdark },
+					TelescopePreviewBorder = { fg = c.red, bg = c.bgdark },
+					TelescopePromptBorder = { fg = c.red, bg = c.bgdark },
+					TelescopeNormal = { fg = c.red, bg = c.bgdark },
+
+					WhichKey = { fg = c.red },
+
+					-- NormalFloat = { bg = "NONE" },
 				}
 			end,
 		})
 		vim.cmd.colorscheme("fluoromachine")
+
+		rp.setup({
+			variant = "moon",
+			styles = {
+				transparency = true,
+			},
+		})
+		-- vim.cmd.colorscheme("rose-pine")
 
 		-- Fix incorrectly set transparency for FoldColumn
 		-- vim.api.nvim_set_hl(0, FoldColumn, {
