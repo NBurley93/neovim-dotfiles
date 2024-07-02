@@ -23,7 +23,7 @@ return {
 						runner = "pytest",
 						dap = { justMyCode = false },
 						pytest_discover_instances = true,
-						args = { "--log-level", "DEBUG" },
+						args = { "--log-level", "DEBUG", "-vv", "--no-cov" },
 					}),
 				},
 				output_panel = {
