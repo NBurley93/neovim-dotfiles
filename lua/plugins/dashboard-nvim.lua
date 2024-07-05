@@ -3,7 +3,7 @@ local function return_version()
 	return " v" .. version.major .. "." .. version.minor .. "." .. version.patch
 end
 
-local SHOW_DASHBOARD_ARTWORK = false
+local SHOW_DASHBOARD_ARTWORK = true
 
 local dashboard_artwork = {
 	[[]],
