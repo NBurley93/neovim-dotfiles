@@ -45,7 +45,7 @@ return {
 				-- formatting.rustfmt,
 
 				-- Yaml
-				formatting.prettier,
+				formatting.yamlfmt,
 				diagnostics.yamllint,
 
 				-- Markdown

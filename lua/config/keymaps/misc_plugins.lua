@@ -35,7 +35,13 @@ return {
 		end, "Generate code annotation")
 
 		-- Trouble
-		map("<leader>dt", vim.cmd.TroubleToggle, "Toggle Trouble window")
+		map("<leader>dtd", function()
+			vim.cmd.Trouble("diagnostics", "toggle")
+		end, "Toggle Trouble diagnostics window")
+
+		map("<leader>dtq", function()
+			vim.cmd.Trouble("qflist", "toggle")
+		end, "Toggle Trouble quickfix list window")
 
 		-- Overseer
 		map("<leader>or", vim.cmd.OverseerRun, "Run from Overseer Tasks")
