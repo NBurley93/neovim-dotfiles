@@ -22,6 +22,7 @@ local function setup_whichkey_root()
 		{ "<leader>v", group = "[V]irtual environment" },
 		{ "<leader>w", group = "[W]rite Buffers" },
 		{ "<leader>t", group = "[T]oggles" },
+		{ "<leader>n", group = "[N]ode operations" },
 		{ "<leader>ew", group = "[W]ord editing" },
 	}
 	local km_telescope = require("config.keymaps.telescope")
@@ -42,6 +43,10 @@ local function base_mappings()
 	-- Reconfigure search next & prev to center the find result on the screen
 	cf.mapn("n", "nzzzv")
 	cf.mapn("N", "Nzzzv")
+
+	-- Preserve visual selection when indenting
+	cf.mapv(">", ">gv")
+	cf.mapv("<", "<gv")
 
 	-- Bindings to allow us to append/prepend to a word
 	cf.mapn("<leader>ewa", "ea", "Append to word")

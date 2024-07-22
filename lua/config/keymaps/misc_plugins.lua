@@ -16,6 +16,15 @@ return {
 		-- Whichkey
 		map("<leader>wk", "<cmd>WhichKey<cr>", "Open whichkey window")
 
+		-- treesj
+		map("<leader>ns", function()
+			require("treesj").split()
+		end, "Split treesitter node into multilined statement")
+
+		map("<leader>nj", function()
+			require("treesj").join()
+		end, "Joins a multiline treesitter node into a single-line statement")
+
 		-- nvim-spectre
 		map("<leader>ts", require("spectre").toggle, "[T]oggle [S]pectre")
 
