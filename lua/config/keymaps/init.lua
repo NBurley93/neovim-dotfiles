@@ -2,21 +2,44 @@ local cf = require("common.functions")
 
 local function setup_whichkey_root()
 	local root_defs = {
-		["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
-		["<leader>o"] = { name = "[O]verseer", _ = "which_key_ignore" },
-		["<leader>w"] = { name = "[W]rite Buffers", _ = "which_key_ignore" },
-		["<leader>q"] = { name = "[Q]uit Neovim", _ = "which_key_ignore" },
-		["<leader>e"] = { name = "[E]dit Files", _ = "which_key_ignore" },
-		["<leader>p"] = { name = "[P]roject Management", _ = "which_key_ignore" },
-		["<leader>a"] = { name = "[A]erial", _ = "which_key_ignore" },
-		["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-		["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-		["<leader>d"] = { name = "[D]iagnostics & Debugging", _ = "which_key_ignore" },
-		["<leader>dt"] = { name = "[T]rouble", _ = "which_key_ignore" },
-		["<leader>db"] = { name = "De[B]ug", _ = "which_key_ignore" },
-		["<leader>dv"] = { name = "Diff[V]iew", _ = "which_key_ignore" },
-		["<leader>u"] = { name = "[U]nit Testing", _ = "which_key_ignore" },
-		["<leader>v"] = { name = "[V]irtual environment", _ = "which_key_ignore" },
+		{ "<leader>a", group = "[A]erial" },
+		{ "<leader>a_", hidden = true },
+		{ "<leader>c", group = "[C]ode" },
+		{ "<leader>c_", hidden = true },
+		{ "<leader>d", group = "[D]iagnostics & Debugging" },
+		{ "<leader>d_", hidden = true },
+		{ "<leader>db", group = "De[B]ug" },
+		{ "<leader>db_", hidden = true },
+		{ "<leader>dt", group = "[T]rouble" },
+		{ "<leader>dt_", hidden = true },
+		{ "<leader>dv", group = "Diff[V]iew" },
+		{ "<leader>dv_", hidden = true },
+		{ "<leader>e", group = "[E]dit Files" },
+		{ "<leader>e_", hidden = true },
+		{ "<leader>g", group = "[G]it" },
+		{ "<leader>g_", hidden = true },
+		{ "<leader>o", group = "[O]verseer" },
+		{ "<leader>o_", hidden = true },
+		{ "<leader>p", group = "[P]roject Management" },
+		{ "<leader>p_", hidden = true },
+		{ "<leader>q", group = "[Q]uit Neovim" },
+		{ "<leader>q_", hidden = true },
+		{ "<leader>s", group = "[S]earch" },
+		{ "<leader>s_", hidden = true },
+		{ "<leader>se", group = "[E]xtensions" },
+		{ "<leader>se_", hidden = true },
+		{ "<leader>sed", group = "[D]ap" },
+		{ "<leader>sed_", hidden = true },
+		{ "<leader>sf", group = "[F]iles" },
+		{ "<leader>sf_", hidden = true },
+		{ "<leader>sg", group = "[G]it" },
+		{ "<leader>sg_", hidden = true },
+		{ "<leader>u", group = "[U]nit Testing" },
+		{ "<leader>u_", hidden = true },
+		{ "<leader>v", group = "[V]irtual environment" },
+		{ "<leader>v_", hidden = true },
+		{ "<leader>w", group = "[W]rite Buffers" },
+		{ "<leader>w_", hidden = true },
 	}
 	root_defs = vim.tbl_deep_extend("force", root_defs, require("config.keymaps.telescope").root_whichkey())
 
@@ -35,6 +58,10 @@ local function base_mappings()
 	-- Reconfigure search next & prev to center the find result on the screen
 	cf.mapn("n", "nzzzv")
 	cf.mapn("N", "Nzzzv")
+
+	-- Bindings to allow us to append/prepend to a word
+	cf.mapn("<leader>aw", "ea", "Append to word")
+	cf.mapn("<leader>pw", "wbi", "Prepend to word")
 
 	-- File write operations
 	cf.mapn("<leader>wb", function()

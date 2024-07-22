@@ -117,10 +117,14 @@ end
 
 function M.root_whichkey()
 	return {
-		["<leader>se"] = { name = "[E]xtensions", _ = "which_key_ignore" },
-		["<leader>sg"] = { name = "[G]it", _ = "which_key_ignore" },
-		["<leader>sed"] = { name = "[D]ap", _ = "which_key_ignore" },
-		["<leader>sf"] = { name = "[F]iles", _ = "which_key_ignore" },
+		{ "<leader>se", group = "[E]xtensions" },
+		{ "<leader>se_", hidden = true },
+		{ "<leader>sed", group = "[D]ap" },
+		{ "<leader>sed_", hidden = true },
+		{ "<leader>sf", group = "[F]iles" },
+		{ "<leader>sf_", hidden = true },
+		{ "<leader>sg", group = "[G]it" },
+		{ "<leader>sg_", hidden = true },
 	}
 end
 
