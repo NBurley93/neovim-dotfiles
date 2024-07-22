@@ -3,47 +3,31 @@ local cf = require("common.functions")
 local function setup_whichkey_root()
 	local root_defs = {
 		{ "<leader>a", group = "[A]erial" },
-		{ "<leader>a_", hidden = true },
 		{ "<leader>c", group = "[C]ode" },
-		{ "<leader>c_", hidden = true },
 		{ "<leader>d", group = "[D]iagnostics & Debugging" },
-		{ "<leader>d_", hidden = true },
 		{ "<leader>db", group = "De[B]ug" },
-		{ "<leader>db_", hidden = true },
 		{ "<leader>dt", group = "[T]rouble" },
-		{ "<leader>dt_", hidden = true },
 		{ "<leader>dv", group = "Diff[V]iew" },
-		{ "<leader>dv_", hidden = true },
 		{ "<leader>e", group = "[E]dit Files" },
-		{ "<leader>e_", hidden = true },
 		{ "<leader>g", group = "[G]it" },
-		{ "<leader>g_", hidden = true },
 		{ "<leader>o", group = "[O]verseer" },
-		{ "<leader>o_", hidden = true },
 		{ "<leader>p", group = "[P]roject Management" },
-		{ "<leader>p_", hidden = true },
 		{ "<leader>q", group = "[Q]uit Neovim" },
-		{ "<leader>q_", hidden = true },
 		{ "<leader>s", group = "[S]earch" },
-		{ "<leader>s_", hidden = true },
 		{ "<leader>se", group = "[E]xtensions" },
-		{ "<leader>se_", hidden = true },
 		{ "<leader>sed", group = "[D]ap" },
-		{ "<leader>sed_", hidden = true },
 		{ "<leader>sf", group = "[F]iles" },
-		{ "<leader>sf_", hidden = true },
 		{ "<leader>sg", group = "[G]it" },
-		{ "<leader>sg_", hidden = true },
 		{ "<leader>u", group = "[U]nit Testing" },
-		{ "<leader>u_", hidden = true },
 		{ "<leader>v", group = "[V]irtual environment" },
-		{ "<leader>v_", hidden = true },
 		{ "<leader>w", group = "[W]rite Buffers" },
-		{ "<leader>w_", hidden = true },
+		{ "<leader>t", group = "[T]oggles" },
+		{ "<leader>ew", group = "[W]ord editing" },
 	}
-	root_defs = vim.tbl_deep_extend("force", root_defs, require("config.keymaps.telescope").root_whichkey())
-
-	require("which-key").register(root_defs)
+	local km_telescope = require("config.keymaps.telescope")
+	local wk = require("which-key")
+	wk.add(root_defs)
+	wk.add(km_telescope.root_whichkey())
 end
 
 local function base_mappings()
@@ -60,8 +44,8 @@ local function base_mappings()
 	cf.mapn("N", "Nzzzv")
 
 	-- Bindings to allow us to append/prepend to a word
-	cf.mapn("<leader>aw", "ea", "Append to word")
-	cf.mapn("<leader>pw", "wbi", "Prepend to word")
+	cf.mapn("<leader>ewa", "ea", "Append to word")
+	cf.mapn("<leader>ewp", "wbi", "Prepend to word")
 
 	-- File write operations
 	cf.mapn("<leader>wb", function()
@@ -70,6 +54,11 @@ local function base_mappings()
 	cf.mapn("<leader>wq", function()
 		cf.attempt_write(vim.cmd.wq)
 	end, "Write current buffer and quit")
+	cf.mapn("<leader>wr", function()
+		cf.attempt_write(function()
+			vim.cmd("noa w")
+		end)
+	end, "Write buffer without running autocmds (raw)")
 
 	cf.mapn("<Esc>", vim.cmd.nohlsearch, "Clear search highlight")
 
@@ -97,11 +86,16 @@ end
 return {
 	config = function()
 		base_mappings()
-		require("config.keymaps.git").config()
-		require("config.keymaps.telescope").config()
-		require("config.keymaps.dap").config()
-		require("config.keymaps.neotest").config()
-		require("config.keymaps.misc_plugins").config()
+		local km_telescope = require("config.keymaps.telescope")
+		local km_git = require("config.keymaps.git")
+		local km_dap = require("config.keymaps.dap")
+		local km_neotest = require("config.keymaps.neotest")
+		local km_misc = require("config.keymaps.misc_plugins")
+		km_telescope.config()
+		km_git.config()
+		km_dap.config()
+		km_neotest.config()
+		km_misc.config()
 		setup_whichkey_root()
 	end,
 }

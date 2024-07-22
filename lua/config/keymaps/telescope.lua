@@ -1,4 +1,3 @@
-local telescope = require("telescope")
 local utils = require("telescope.utils")
 local themes = require("telescope.themes")
 local cf = require("common.functions")
@@ -118,13 +117,9 @@ end
 function M.root_whichkey()
 	return {
 		{ "<leader>se", group = "[E]xtensions" },
-		{ "<leader>se_", hidden = true },
 		{ "<leader>sed", group = "[D]ap" },
-		{ "<leader>sed_", hidden = true },
 		{ "<leader>sf", group = "[F]iles" },
-		{ "<leader>sf_", hidden = true },
 		{ "<leader>sg", group = "[G]it" },
-		{ "<leader>sg_", hidden = true },
 	}
 end
 
