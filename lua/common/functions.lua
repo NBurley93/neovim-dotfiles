@@ -33,4 +33,16 @@ M.attempt_write = function(write_func)
 	end
 end
 
+M.addKeyToSet = function(set, key)
+	set[key] = true
+end
+
+M.removeKeyFromSet = function(set, key)
+	set[key] = nil
+end
+
+M.setContainsKey = function(set, key)
+	return set[key] ~= nil
+end
+
 return M

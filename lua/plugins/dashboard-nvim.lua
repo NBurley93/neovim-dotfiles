@@ -1,9 +1,18 @@
+local cf = require("common.functions")
+
 local function return_version()
 	local version = vim.version()
 	return " v" .. version.major .. "." .. version.minor .. "." .. version.patch
 end
 
-local SHOW_DASHBOARD_ARTWORK = true
+local SHOW_DASHBOARD_ARTWORK = function()
+	local envvars = vim.env
+	if cf.setContainsKey(envvars, "CNVIM_HIDE_ARTWORK") then
+		return envvars.CNVIM_HIDE_ARTWORK == "0"
+	else
+		return true
+	end
+end
 
 local dashboard_artwork = {
 	[[]],
@@ -32,7 +41,7 @@ return {
 			local utils = require("dashboard.utils")
 			local package_manager_stats = utils.get_package_manager_stats()
 			local logo = {}
-			if SHOW_DASHBOARD_ARTWORK then
+			if SHOW_DASHBOARD_ARTWORK() then
 				for _, item in ipairs(dashboard_artwork) do
 					table.insert(logo, item)
 				end
