@@ -101,9 +101,12 @@ local function configure_python_lsp(lspconfig)
 		on_attach = lsp_onattach,
 		settings = {
 			pylsp = {
+				configurationSources = {
+					"flake8",
+				},
 				plugins = {
-					pycodestyle = {
-						maxLineLength = 80,
+					flake8 = {
+						enabled = true,
 					},
 				},
 			},
