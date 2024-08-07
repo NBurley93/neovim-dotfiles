@@ -24,6 +24,7 @@ return {
 			sources = {
 				-- Python
 				-- diagnostics.flake8,
+				-- formatting.ruff,
 				-- formatting.autopep8,
 
 				-- Terraform

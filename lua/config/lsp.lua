@@ -108,6 +108,9 @@ local function configure_python_lsp(lspconfig)
 					flake8 = {
 						enabled = true,
 					},
+					pycodestyle = {
+						enabled = false,
+					},
 				},
 			},
 		},
@@ -115,8 +118,8 @@ local function configure_python_lsp(lspconfig)
 end
 
 -- Python ruff
--- local function configure_python_ruff_lsp(lspconfig)
--- 	lspconfig.ruff_lsp.setup({
+-- local function configure_python_ruff(lspconfig)
+-- 	lspconfig.ruff.setup({
 -- 		on_attach = lsp_onattach,
 -- 	})
 -- end
@@ -246,7 +249,7 @@ return {
 		configure_lua_lsp(lspconfig)
 		configure_csharp_lsp(lspconfig)
 		configure_python_lsp(lspconfig)
-		-- configure_python_ruff_lsp(lspconfig)
+		-- configure_python_ruff(lspconfig)
 		configure_astgrep_lsp(lspconfig)
 		configure_go_lsp(lspconfig, lsp_defaults)
 		configure_rust_lsp(lspconfig, lsp_defaults)

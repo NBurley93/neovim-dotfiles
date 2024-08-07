@@ -11,6 +11,7 @@ OUTPUT_FILE_TEMPLATE = """
         end,
     }}
     """
+USAGE_TEXT = "usage: colorbuddy-converter.py <vim-colorschemefile> <output-file>"
 
 
 def read_input(filepath: str):
@@ -43,14 +44,17 @@ def main():
 
                 output_lines.append("")
                 if gui_fg != "NONE":
-                    output_lines.append(LUA_NEW_COLOR.format(group_name + "FG", gui_fg))
+                    output_lines.append(LUA_NEW_COLOR.format(
+                        group_name + "FG", gui_fg))
                     gui_fg = group_name + "FG"
                 if gui_bg != "NONE":
-                    output_lines.append(LUA_NEW_COLOR.format(group_name + "BG", gui_bg))
+                    output_lines.append(LUA_NEW_COLOR.format(
+                        group_name + "BG", gui_bg))
                     gui_bg = group_name + "BG"
 
                 output_lines.append(
-                    LUA_NEW_GROUP.format(group_name, gui_fg, gui_bg, GROUP_STYLE)
+                    LUA_NEW_GROUP.format(
+                        group_name, gui_fg, gui_bg, GROUP_STYLE)
                 )
 
         THEME_LINES = "\n".join(output_lines)
@@ -59,7 +63,7 @@ def main():
             fo.write(OUTPUT_DATA)
 
     else:
-        print("usage: colorbuddy-converter.py <vim-colorschemefile> <output-file>")
+        print(USAGE_TEXT)
 
 
 if __name__ == "__main__":
