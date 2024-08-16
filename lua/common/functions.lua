@@ -45,4 +45,9 @@ M.setContainsKey = function(set, key)
 	return set[key] ~= nil
 end
 
+-- Global convinience debugging func
+P = function(v)
+	vim.print(v)
+end
+
 return M

@@ -43,4 +43,12 @@ rm packages-microsoft-prod.deb
 sudo apt-get update &&
 	sudo apt-get install -y dotnet-sdk-8.0
 
+# luarocks
+wget https://luarocks.org/releases/luarocks-3.11.1.tar.gz
+tar zxpf luarocks-3.11.1.tar.gz
+cd luarocks-3.11.1
+./configure && make && sudo make install
+rm luarocks-3.11.1.tar.gz
+rm -rf luarocks-3.11.1
+
 echo "Environment setup complete! Please restart the shell and run neovim!"

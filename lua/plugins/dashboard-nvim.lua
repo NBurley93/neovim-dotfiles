@@ -101,6 +101,15 @@ return {
 							key_format = " [%s]",
 						},
 						{
+							icon = "󰎚",
+							icon_hl = "DevIconBlender",
+							desc = "Neorg Notes",
+							action = "Neorg workspace notes",
+							key = "O",
+							key_hl = "group",
+							key_format = " [%s]",
+						},
+						{
 							icon = " ",
 							icon_hl = "DevIconZsh",
 							desc = "Vim Be Good",

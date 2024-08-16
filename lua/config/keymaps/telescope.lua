@@ -100,6 +100,15 @@ local function map_extensions()
 		extensions.cheat.fd({})
 	end, "[c]heat.sh")
 
+	-- Neorg
+	search_map("enw", function()
+		extensions.neorg.switch_workspace()
+	end, "[W]orkspaces")
+
+	search_map("enb", function()
+		extensions.neorg.find_backlinks()
+	end, "[B]acklinks")
+
 	search_map("n", function()
 		extensions.notify.notify(themes.get_dropdown())
 	end, "[N]otifications")
@@ -118,6 +127,7 @@ function M.root_whichkey()
 	return {
 		{ "<leader>se", group = "[E]xtensions" },
 		{ "<leader>sed", group = "[D]ap" },
+		{ "<leader>sen", group = "[N]eorg" },
 		{ "<leader>sf", group = "[F]iles" },
 		{ "<leader>sg", group = "[G]it" },
 	}
