@@ -101,7 +101,7 @@ return {
 							key_format = " [%s]",
 						},
 						{
-							icon = "󰎚",
+							icon = "󰎚 ",
 							icon_hl = "DevIconBlender",
 							desc = "Neorg Notes",
 							action = "Neorg workspace notes",
