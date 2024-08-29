@@ -61,6 +61,9 @@ return {
 				-- XML
 				formatting.tidy,
 
+				-- sql
+				formatting.sqlfmt,
+
 				-- CSharp
 				formatting.csharpier,
 			},

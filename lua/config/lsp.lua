@@ -1,3 +1,4 @@
+-- LSP config
 local lsp_keymaps = require("config.keymaps.lsp")
 
 local function get_capabilities(cmp_lsp)
@@ -238,6 +239,13 @@ local function configure_xml_lsp(lspconfig)
 	})
 end
 
+-- Jinja
+local function configure_jinja_lsp(lspconfig)
+	lspconfig.jinja_lsp.setup({
+		on_attach = lsp_onattach,
+	})
+end
+
 return {
 	config = function()
 		configure_logging(false)
@@ -262,6 +270,7 @@ return {
 		configure_javascript_lsp(lspconfig)
 		configure_powershell_lsp(lspconfig)
 		configure_xml_lsp(lspconfig)
+		configure_jinja_lsp(lspconfig)
 
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 			border = "single",
