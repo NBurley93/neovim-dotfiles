@@ -30,11 +30,6 @@ local function map_builtins()
 	search_map("l", builtin.highlights, "[H]ighlights")
 	search_map("a", builtin.autocommands, "[A]utocommands")
 
-	-- fzysearch
-	cf.mapn("/", function()
-		builtin.current_buffer_fuzzy_find()
-	end, "[/] Fuzzily search in buffer")
-
 	-- Search nvim config
 	search_map("c", function()
 		builtin.find_files({ cwd = vim.fn.stdpath("config") })
