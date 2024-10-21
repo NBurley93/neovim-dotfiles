@@ -5,11 +5,11 @@ return {
 			local commonicons = require("common.icons")
 			require("neotest").setup({
 				icons = {
-					failed = commonicons.diagnostics.Error,
-					passed = commonicons.ui.Check,
-					running = commonicons.ui.Gear,
-					skipped = commonicons.diagnostics.Information,
-					unknown = commonicons.diagnostics.Question,
+					failed = commonicons.testing.Fail,
+					passed = commonicons.testing.Pass,
+					running = commonicons.testing.Running,
+					skipped = commonicons.testing.Skipped,
+					unknown = commonicons.testing.Unknown,
 				},
 				output = {
 					enabled = true,
@@ -23,14 +23,16 @@ return {
 						runner = "pytest",
 						dap = { justMyCode = false },
 						pytest_discover_instances = true,
-						args = { "--log-level", "DEBUG", "-vv", "--no-cov" },
+						python = ".venv/bin/python",
+						args = { "tests", "-vv", "--no-cov" },
 					}),
 				},
 				output_panel = {
-					enabled = false,
+					enabled = true,
+					open = "botright split | resize 15",
 				},
 				summary = {
-					mappings = {},
+					animated = false,
 				},
 			})
 		end,

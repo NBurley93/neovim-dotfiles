@@ -106,7 +106,15 @@ return {
 		Next = "",
 		Previous = "",
 	},
+	testing = {
+		Running = "",
+		Pass = "",
+		Fail = "",
+		Skipped = "",
+		Unknown = "",
+	},
 	diagnostics = {
+		Ok = " ",
 		Error = " ",
 		Warning = " ",
 		Information = " ",
