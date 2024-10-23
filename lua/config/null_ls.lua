@@ -62,6 +62,9 @@ return {
 				formatting.tidy,
 
 				-- sql
+				diagnostics.sqlfluff.with({
+					extra_args = { "--dialect", "sqlite" },
+				}),
 				formatting.sqlfmt,
 
 				-- CSharp

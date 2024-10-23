@@ -182,6 +182,13 @@ local function configure_powershell_lsp(lspconfig)
 	})
 end
 
+-- SQL
+local function configure_sql_lsp(lspconfig)
+	lspconfig.sqls.setup({
+		on_attach = lsp_onattach,
+	})
+end
+
 -- Rust
 local function configure_rust_lsp(lspconfig, lsp_defaults)
 	local rust_capabilities = lsp_defaults.capabilities
@@ -271,6 +278,7 @@ return {
 		configure_powershell_lsp(lspconfig)
 		configure_xml_lsp(lspconfig)
 		configure_jinja_lsp(lspconfig)
+		configure_sql_lsp(lspconfig)
 
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 			border = "single",
