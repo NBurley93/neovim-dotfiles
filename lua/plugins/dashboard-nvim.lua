@@ -38,8 +38,6 @@ return {
 		"glepnir/dashboard-nvim",
 		event = "VimEnter",
 		config = function()
-			local utils = require("dashboard.utils")
-			local package_manager_stats = utils.get_package_manager_stats()
 			local logo = {}
 			if SHOW_DASHBOARD_ARTWORK() then
 				for _, item in ipairs(dashboard_artwork) do
@@ -63,48 +61,41 @@ return {
 					{
 						icon = " ",
 						desc = "Plugin Manager",
-						group = "DevIconZsh",
 						action = "Lazy",
 						key = "p",
 					},
 					{
 						icon = " ",
 						desc = "Mason Package Manager",
-						group = "DevIconarduino",
 						action = "Mason",
 						key = "m",
 					},
 					{
 						icon = "󰱼 ",
 						desc = "Files",
-						group = "Label",
 						action = "Telescope find_files",
 						key = "f",
 					},
 					{
 						icon = "󰙅 ",
 						desc = "Filetree",
-						group = "Special",
 						action = "Oil",
 						key = "t",
 					},
 					{
 						icon = "󱩾 ",
 						desc = "Grep Search",
-						group = "DevIconCpp",
 						action = "Telescope grep_string",
 						key = "g"
 					},
 					{
 						icon = " ",
-						group = "DevIconZig",
 						desc = "Check for new Neovim release",
 						action = "W3mSplit https://github.com/neovim/neovim/releases",
 						key = "r",
 					},
 					{
 						icon = " ",
-						group = "DevIconNPMrc",
 						desc = "Check Health",
 						action = "checkhealth",
 						key = "h",
@@ -117,6 +108,6 @@ return {
 				config = hyper_cfg,
 			})
 		end,
-		dependencies = { require("common.defines").WEB_DEVICONS_PROVIDER, "chrishrb/gx.nvim" },
+		dependencies = { require("common.defines").WEB_DEVICONS_PROVIDER, },
 	},
 }

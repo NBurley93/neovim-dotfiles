@@ -86,17 +86,5 @@ return {
 		map("<leader>in", function()
 			vim.cmd.W3mSplit(vim.fn.input({ prompt = "URL > " }))
 		end, "[I]nternet [N]avigate")
-
-		-- nvim-cmp Mappings
-		local cmp = require("cmp")
-		local cmp_select = { behavior = cmp.SelectBehavior.Select }
-		cmp.setup({
-			mapping = cmp.mapping.preset.insert({
-				["<C-Space>"] = cmp.mapping.complete(),
-				["<C-y>"] = cmp.mapping.confirm({ select = true }),
-				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-			}),
-		})
 	end,
 }

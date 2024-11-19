@@ -1,9 +1,9 @@
 -- LSP config
 local lsp_keymaps = require("config.keymaps.lsp")
 
-local function get_capabilities(cmp_lsp)
-	if cmp_lsp then
-		return cmp_lsp.default_capabilities()
+local function inject_cmp_engine(engine, capabilities)
+	if engine then
+		return engine.get_lsp_capabilities(capabilities)
 	end
 	return vim.lsp.protocol.make_client_capabilities()
 end
@@ -28,7 +28,7 @@ end
 local function setup_lsp_defaults(lspconfig)
 	local lsp_defaults = lspconfig.util.default_config
 	lsp_defaults.capabilities =
-		vim.tbl_deep_extend("force", lsp_defaults.capabilities, get_capabilities(require("cmp_nvim_lsp")))
+		vim.tbl_deep_extend("force", lsp_defaults.capabilities, require('blink.cmp').get_lsp_capabilities(lsp_defaults.capabilities))
 	return lsp_defaults
 end
 

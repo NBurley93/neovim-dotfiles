@@ -18,6 +18,7 @@ return {
 			expandtab = true,
 			title = true,
 			shiftwidth = 4,
+			fileformat = "unix",
 			tabstop = 4,
 			history = 50,
 			backspace = "indent,eol,start",
@@ -62,6 +63,20 @@ return {
 			vim.opt[k] = v
 		end
 		vim.opt.isfname:append("@-@")
+
+		-- MUCH better clipboard
+		vim.g.clipboard = {
+			name = "xclip-wsl",
+			copy = {
+				["+"] = { "xclip", "-quiet", "-i", "-selection", "clipboard" },
+				["*"] = { "xclip", "-quiet", "-i", "-selection", "primary" },
+			},
+			paste = {
+				["+"] = { "xclip", "-o", "-selection", "clipboard" },
+				["*"] = { "xclip", "-o", "-selection", "primary" },
+			},
+			cache_enabled = 1,
+		}
 
 		vim.lsp.set_log_level("off")
 
