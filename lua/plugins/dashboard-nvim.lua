@@ -89,6 +89,13 @@ return {
 						key = "t",
 					},
 					{
+						icon = "󱩾 ",
+						desc = "Grep Search",
+						group = "DevIconCpp",
+						action = "Telescope grep_string",
+						key = "g"
+					},
+					{
 						icon = " ",
 						group = "DevIconZig",
 						desc = "Check for new Neovim release",

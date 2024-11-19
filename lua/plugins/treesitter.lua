@@ -44,7 +44,6 @@ return {
 					"terraform",
 					"go",
 					"rust",
-					"norg",
 					"dockerfile",
 				},
 
