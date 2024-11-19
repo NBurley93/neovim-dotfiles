@@ -1,9 +1,22 @@
+local unwrap_groups = function(groups)
+	local sources = {}
+
+	for _, group in ipairs(groups) do
+		for _, module in ipairs(group) do
+			table.insert(sources, module)
+		end
+	end
+
+	return sources
+end
+
 return {
 	config = function()
 		local null_ls = require("null-ls")
 
 		local diagnostics = null_ls.builtins.diagnostics
 		local formatting = null_ls.builtins.formatting
+
 
 		local augroup = vim.api.nvim_create_augroup("LspAutoformatting", {})
 
@@ -21,55 +34,48 @@ return {
 				end
 			end,
 
-			sources = {
-				-- Python
-				-- diagnostics.flake8,
-				-- formatting.ruff,
-				-- formatting.autopep8,
-
-				-- Terraform
-				diagnostics.terraform_validate,
-				formatting.terraform_fmt,
-
-				-- Lua
-				formatting.stylua,
-
-				-- CMake
-				diagnostics.cmake_lint,
-				formatting.gersemi,
-
-				-- Go
-				diagnostics.golangci_lint,
-				formatting.gofmt,
-
-				-- Rust
-				-- formatting.rustfmt,
-
-				-- Yaml
-				formatting.yamlfmt,
-				diagnostics.yamllint,
-
-				-- Markdown
-				diagnostics.markdownlint,
-
-				-- Docker
-				diagnostics.hadolint,
-
-				-- Shell
-				formatting.shfmt,
-
-				-- XML
-				formatting.tidy,
-
-				-- sql
-				diagnostics.sqlfluff.with({
-					extra_args = { "--dialect", "sqlite" },
-				}),
-				formatting.sqlfmt,
-
-				-- CSharp
-				formatting.csharpier,
-			},
+			sources = unwrap_groups({
+				terraform = {
+					diagnostics.terraform_validate,
+					formatting.terraform_fmt,
+				},
+				lua = {
+					formatting.stylua,
+				},
+				cmake = {
+					diagnostics.cmake_lint,
+					formatting.gersemi,
+				},
+				go = {
+					diagnostics.golangci_lint,
+					formatting.gofmt,
+				},
+				yaml = {
+					formatting.yamlfmt,
+					diagnostics.yamllint,
+				},
+				markdown = {
+					diagnostics.markdownlint,
+				},
+				docker = {
+					diagnostics.hadolint,
+				},
+				shell = {
+					formatting.shfmt,
+				},
+				xml = {
+					formatting.tidy,
+				},
+				sql = {
+					diagnostics.sqlfluff.with({
+						extra_args = { "--dialect", "sqlite" },
+					}),
+					formatting.sqlfmt,
+				},
+				csharp = {
+					formatting.csharpier,
+				},
+			}),
 		})
 	end,
 }

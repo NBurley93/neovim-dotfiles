@@ -50,94 +50,64 @@ return {
 			table.insert(logo, "  Neovim" .. return_version())
 			table.insert(logo, [[]])
 
-			require("dashboard").setup({
-				theme = "doom",
-				config = {
-					header = logo,
-					center = {
-						{
-							icon = " ",
-							icon_hl = "DevIconZsh",
-							desc = "Plugin Manager",
-							action = "Lazy",
-							key = "P",
-							key_hl = "group",
-							key_format = " [%s]",
-						},
-						{
-							icon = " ",
-							icon_hl = "DevIconarduino",
-							desc = "Mason Package Manager",
-							action = "Mason",
-							key = "M",
-							key_hl = "group",
-							key_format = " [%s]",
-						},
-						{
-							icon = "󱥃 ",
-							icon_hl = "DevIconZig",
-							desc = "What's new?",
-							action = "help news",
-							key = "N",
-							key_hl = "group",
-							key_format = " [%s]",
-						},
-						{
-							icon = " ",
-							icon_hl = "DevIconZig",
-							desc = "Check for new Neovim release",
-							action = "Browse https://github.com/neovim/neovim/releases",
-							key = "R",
-							key_hl = "group",
-							key_format = " [%s]",
-						},
-						{
-							icon = " ",
-							icon_hl = "DevIconNPMrc",
-							desc = "Check Health",
-							action = "checkhealth",
-							key = "H",
-							key_hl = "group",
-							key_format = " [%s]",
-						},
-						{
-							icon = "󰎚 ",
-							icon_hl = "DevIconBlender",
-							desc = "Neorg Notes",
-							action = "Neorg workspace notes",
-							key = "O",
-							key_hl = "group",
-							key_format = " [%s]",
-						},
-						{
-							icon = " ",
-							icon_hl = "DevIconZsh",
-							desc = "Vim Be Good",
-							action = "VimBeGood",
-							key = "G",
-							key_hl = "group",
-							key_format = " [%s]",
-						},
-						{
-							icon = "󰩈 ",
-							icon_hl = "DevIconNim",
-							desc = "Quit",
-							action = "qa!",
-							key = "Q",
-							key_hl = "group",
-							key_format = " [%s]",
-						},
+			local hyper_cfg = {
+				header = logo,
+				packages = {
+					enable = true,
+				},
+				project = {
+					enable = false,
+				},
+				mru = { enable = false, },
+				shortcut = {
+					{
+						icon = " ",
+						desc = "Plugin Manager",
+						group = "DevIconZsh",
+						action = "Lazy",
+						key = "p",
 					},
-					footer = {
-						"",
-						" Startup-Time: " .. package_manager_stats.time .. " ms",
-						"󰒲 Lazy: "
-							.. package_manager_stats.loaded
-							.. " loaded / "
-							.. package_manager_stats.count
-							.. " installed",
+					{
+						icon = " ",
+						desc = "Mason Package Manager",
+						group = "DevIconarduino",
+						action = "Mason",
+						key = "m",
+					},
+					{
+						icon = "󰱼 ",
+						desc = "Files",
+						group = "Label",
+						action = "Telescope find_files",
+						key = "f",
+					},
+					{
+						icon = "󰙅 ",
+						desc = "Filetree",
+						group = "Special",
+						action = "Oil",
+						key = "t",
+					},
+					{
+						icon = " ",
+						group = "DevIconZig",
+						desc = "Check for new Neovim release",
+						action = "W3mSplit https://github.com/neovim/neovim/releases",
+						key = "r",
+					},
+					{
+						icon = " ",
+						group = "DevIconNPMrc",
+						desc = "Check Health",
+						action = "checkhealth",
+						key = "h",
 					},
 				},
+			}
+
+			require("dashboard").setup({
+				theme = "hyper",
+				config = hyper_cfg,
 			})
 		end,
 		dependencies = { require("common.defines").WEB_DEVICONS_PROVIDER, "chrishrb/gx.nvim" },

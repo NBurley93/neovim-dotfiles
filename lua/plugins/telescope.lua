@@ -38,7 +38,6 @@ return {
 			ts.load_extension("dap")
 			ts.load_extension("undo")
 			ts.load_extension("aerial")
-			ts.load_extension("neorg")
 		end,
 	},
 	{ "nvim-telescope/telescope-ui-select.nvim" },
@@ -56,9 +55,5 @@ return {
 	{
 		"nvim-telescope/telescope-dap.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
-	},
-	{
-		"nvim-neorg/neorg-telescope",
-		dependencies = { "nvim-telescope/telescope.nvim", "nvim-neorg/neorg" },
 	},
 }

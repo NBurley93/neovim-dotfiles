@@ -1,28 +1,51 @@
-local config_entries = {
-	options = require("config.options"),
-	completion = require("config.completion"),
-	lsp = require("config.lsp"),
-	autocommands = require("config.autocommands"),
-	dap = require("config.dap"),
-	null_ls = require("config.null_ls"),
-	keymappings = require("config.keymaps"),
-	theming = require("config.theming"),
-}
+local PROFILE_CONFIG_MODULES = false
 
-return {
-	config_all = function()
-		config_entries.options.config()
+local lzy_module = {
+	config = function()
 		require("lazy").setup("plugins", {
 			ui = {
 				border = "rounded",
 			},
 		})
-		config_entries.completion.config()
-		config_entries.lsp.config()
-		config_entries.autocommands.config()
-		config_entries.dap.config()
-		config_entries.null_ls.config()
-		config_entries.keymappings.config()
-		config_entries.theming.config()
+	end,
+}
+
+local config_module = function(key, module)
+	return {
+		key = key,
+		module = module,
+	}
+end
+
+local config_entries = {
+	config_module('options', require('config.options')),
+	config_module('plugins', lzy_module),
+	config_module('completion', require('config.completion')),
+	config_module('lsp', require('config.lsp')),
+	config_module('autocmd', require('config.autocommands')),
+	config_module('dap', require('config.dap')),
+	config_module('null-ls', require('config.null_ls')),
+	config_module('keymaps', require('config.keymaps')),
+	config_module('theming', require('config.theming')),
+}
+
+return {
+	config_all = function()
+		for _, entry in ipairs(config_entries) do
+			local module = entry.module
+			if module and type(module.config) == "function" then
+				if PROFILE_CONFIG_MODULES == true then
+					local config_start_time = os.clock()
+				end
+				module.config()
+				if PROFILE_CONFIG_MODULES == true then
+					local config_end_time = os.clock()
+					local config_elapsed_time = config_end_time - config_start_time
+					print(string.format("Module %s took %.4f seconds to configure", entry.key, config_elapsed_time))
+				end
+			else
+				print('Skipping config module: ', entry.key, ' - config function missing or invalid')
+			end
+		end
 	end,
 }

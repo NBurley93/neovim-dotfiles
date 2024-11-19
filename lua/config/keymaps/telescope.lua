@@ -95,15 +95,6 @@ local function map_extensions()
 		extensions.cheat.fd({})
 	end, "[c]heat.sh")
 
-	-- Neorg
-	search_map("enw", function()
-		extensions.neorg.switch_workspace()
-	end, "[W]orkspaces")
-
-	search_map("enb", function()
-		extensions.neorg.find_backlinks()
-	end, "[B]acklinks")
-
 	search_map("n", function()
 		extensions.notify.notify(themes.get_dropdown())
 	end, "[N]otifications")

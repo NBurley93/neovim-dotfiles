@@ -75,6 +75,18 @@ return {
 			vim.cmd.VenvSelect()
 		end, "[S]elect Python VEnv")
 
+		-- w3m
+		map("<leader>is", function()
+			vim.cmd.W3mSplit(
+				vim.fn.input({ prompt = "Search Engine Name (ref https://github.com/yuratomo/w3m.vim) >" }),
+				vim.fn.input({ prompt = "Search Query > " })
+			)
+		end, "[I]nternet [S]earch")
+
+		map("<leader>in", function()
+			vim.cmd.W3mSplit(vim.fn.input({ prompt = "URL > " }))
+		end, "[I]nternet [N]avigate")
+
 		-- nvim-cmp Mappings
 		local cmp = require("cmp")
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
