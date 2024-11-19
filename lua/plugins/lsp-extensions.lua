@@ -1,27 +1,6 @@
 return {
 	{ "nvimtools/none-ls.nvim" },
 	{ "jay-babu/mason-null-ls.nvim" },
-	-- neodev.nvim has reached EOL, deprecated for now, will be removed from this file soon
-	--	{
-	--		"folke/neodev.nvim",
-	--		config = function()
-	--			require("neodev").setup({
-	--				library = {
-	--					enabled = true,
-	--					runtime = true,
-	--					types = true,
-	--					plugins = {
-	--						"nvim-dap-ui",
-	--						"telescope.nvim",
-	--						"plenary.nvim",
-	--					},
-	--					setup_jsonls = true,
-	--					lspconfig = true,
-	--					pathStrict = true,
-	--				},
-	--			})
-	--		end,
-	--	},
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",
@@ -48,8 +27,6 @@ return {
 					"jsonls",
 					"terraformls",
 					"dockerls",
-					--					"ast_grep",
-					--					"glslls",
 					"html",
 				},
 			})

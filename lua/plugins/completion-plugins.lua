@@ -1,28 +1,19 @@
 return {
-	-- {
-	-- 	"hrsh7th/nvim-cmp",
-	-- 	opts = function(_, opts)
-	-- 		opts.sources = opts.sources or {}
-	-- 		table.insert(opts.sources, {
-	-- 			name = "lazydev",
-	-- 			group_index = 0,
-	-- 		})
-	-- 	end,
-	-- },
-	-- { "hrsh7th/cmp-nvim-lua" },
-	-- { "hrsh7th/cmp-nvim-lsp" },
-	-- { "hrsh7th/cmp-buffer" },
-	-- { "hrsh7th/cmp-path" },
-	-- { "hrsh7th/cmp-nvim-lsp-document-symbol" },
-	{ "tpope/vim-sleuth" },
-	-- { "saadparwaiz1/cmp_luasnip" },
-	-- { "rcarriga/cmp-dap" },
 	{
 		"Saghen/blink.cmp",
 		lazy = false,
-		version = "v0.*",
-		dependencies = 'rafamadriz/friendly-snippets',
+		version = "v0.5.*",
+		dependencies = {
+            'rafamadriz/friendly-snippets',
+            'saghen/blink.compat',
+            { 'petertriho/cmp-git', lazy = true },
+        },
 		opts = {
+			accept = {
+				auto_brackets = {
+					enabled = true,
+				},
+			},
 			keymap = { preset = 'default' },
 			highlight = {
 				use_nvim_cmp_as_default = false,
@@ -40,22 +31,27 @@ return {
 			},
 			sources = {
 				completion = {
-					enabled_providers = { "lsp", "path", "buffer", "luasnip" },
+					enabled_providers = { "lsp", "path", "buffer", "lazydev", "git" },
 				},
 				providers = {
-					luasnip = {
-						name = "luasnip",
-						module = "blink.compat.source",
+                    lsp = { fallback_for = {"lazydev"}},
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                    },
+                    git = {
+                        name = 'git',
+                        module = 'blink.compat.source',
 
-						score_offset = -3,
+                        score_offset = -3,
 
-						opts = {
-							use_show_condition = false,
-							show_autosnippets = true,
-						}
-					}
-				}
-			}
-		}
+                        opts = {
+                            filetypes = { "gitcommit" },
+                            remotes = { "upstream", "origin" },
+                        },
+                    },
+				},
+			},
+		},
 	},
 }
