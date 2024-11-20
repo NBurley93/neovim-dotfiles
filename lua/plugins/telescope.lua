@@ -33,27 +33,11 @@ return {
 			})
 			ts.load_extension("ui-select")
 			ts.load_extension("terraform_doc")
-			ts.load_extension("http")
-			ts.load_extension("cheat")
-			ts.load_extension("dap")
 			ts.load_extension("undo")
-			ts.load_extension("aerial")
 		end,
 	},
 	{ "nvim-telescope/telescope-ui-select.nvim" },
 	{ "ANGkeith/telescope-terraform-doc.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
-	{ "barrett-ruth/http-codes.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 	{ "nvim-telescope/telescope-symbols.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 	{ "debugloop/telescope-undo.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
-	{
-		"nvim-telescope/telescope-cheat.nvim",
-		dependencies = {
-			"kkharji/sqlite.lua",
-			"nvim-telescope/telescope.nvim",
-		},
-	},
-	{
-		"nvim-telescope/telescope-dap.nvim",
-		dependencies = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
-	},
 }

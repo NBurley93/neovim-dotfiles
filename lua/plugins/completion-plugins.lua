@@ -7,6 +7,7 @@ return {
             'rafamadriz/friendly-snippets',
             'saghen/blink.compat',
             { 'petertriho/cmp-git', lazy = true },
+            { "onsails/lspkind.nvim", lazy = true },
         },
 		opts = {
 			accept = {

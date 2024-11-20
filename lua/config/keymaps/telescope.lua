@@ -70,30 +70,10 @@ local function map_extensions()
 		extensions.undo.undo()
 	end, "[U]ndo history")
 
-	-- Dap
-	search_map("edo", function()
-		extensions.dap.configurations(themes.get_dropdown({
-			previewer = true,
-		}))
-	end, "Dap C[O]nfigurations")
-
-	search_map("edc", function()
-		extensions.dap.commands(themes.get_dropdown({
-			previewer = true,
-		}))
-	end, "Dap [C]ommands")
 
 	search_map("et", function()
 		extensions.terraform_doc.terraform_doc({ full_name = "hashicorp/aws" })
 	end, "AWS [T]erraform Docs")
-
-	search_map("eh", function()
-		extensions.http.list({ theme = "ivy" })
-	end, "[H]ttp status codes")
-
-	search_map("ec", function()
-		extensions.cheat.fd({})
-	end, "[c]heat.sh")
 
 	search_map("n", function()
 		extensions.notify.notify(themes.get_dropdown())
@@ -112,8 +92,6 @@ end
 function M.root_whichkey()
 	return {
 		{ "<leader>se", group = "[E]xtensions" },
-		{ "<leader>sed", group = "[D]ap" },
-		{ "<leader>sen", group = "[N]eorg" },
 		{ "<leader>sf", group = "[F]iles" },
 		{ "<leader>sg", group = "[G]it" },
 	}

@@ -17,6 +17,9 @@ rm nodesource_setup.sh
 sudo npm install -g npm
 sudo npm install -g neovim
 
+# Install w3m
+sudo apt-get install -y w3m
+
 # Install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 

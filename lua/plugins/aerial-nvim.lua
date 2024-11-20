@@ -1,6 +1,7 @@
 return {
 	{
 		"stevearc/aerial.nvim",
+        event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			backends = { "lsp", "treesitter", "markdown", "asciidoc", "man" },
 			layout = {
@@ -38,8 +39,6 @@ return {
 				"TypeParameter",
 				"Variable",
 			},
-			lazy_load = false,
-
 			highlight_on_hover = true,
 
 			show_guides = true,

@@ -4,11 +4,6 @@ vim.g.maplocalleader = " "
 
 return {
 	config = function()
-		local options_backup = {
-			foldmethod = "expr",
-			foldexpr = "nvim_treesitter#foldexpr()",
-		}
-
 		local options = {
 			autoindent = true,
 			encoding = "UTF-8",

@@ -3,6 +3,10 @@ local icons = require("common.icons")
 return {
 	{
 		"folke/trouble.nvim",
+        event = {
+            "BufReadPost",
+            "BufNewFile"
+        },
 		dependencies = { require("common.defines").WEB_DEVICONS_PROVIDER },
 		opts = {
 			fold_open = "", -- icon used for open folds
