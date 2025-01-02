@@ -29,7 +29,6 @@ return {
                     "marksman",
                     "clangd",
                     "lua_ls",
-                    "ruff_lsp",
                     "eslint",
                     "rust_analyzer",
                     "yamlls",
