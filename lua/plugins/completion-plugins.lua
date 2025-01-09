@@ -1,44 +1,42 @@
 return {
-	{
-		"Saghen/blink.cmp",
-		lazy = false,
-		version = "v0.5.*",
-		dependencies = {
+    {
+        "Saghen/blink.cmp",
+        lazy = false,
+        version = "v0.9.*",
+        dependencies = {
             'rafamadriz/friendly-snippets',
             'saghen/blink.compat',
-            { 'petertriho/cmp-git', lazy = true },
+            { 'petertriho/cmp-git',   lazy = true },
             { "onsails/lspkind.nvim", lazy = true },
         },
-		opts = {
-			accept = {
-				auto_brackets = {
-					enabled = true,
-				},
-			},
-			keymap = { preset = 'default' },
-			highlight = {
-				use_nvim_cmp_as_default = false,
-			},
-			nerd_font_variant = 'mono',
-			windows = {
-				autocomplete = {
-					border = "rounded",
-					winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-				},
-				documentation = {
-					border = "rounded",
-					auto_show = true,
-				},
-			},
-			sources = {
-				completion = {
-					enabled_providers = { "lsp", "path", "buffer", "lazydev", "git" },
-				},
-				providers = {
-                    lsp = { fallback_for = {"lazydev"}},
+        opts = {
+            keymap = { preset = 'default' },
+            appearance = {
+                use_nvim_cmp_as_default = false,
+                nerd_font_variant = 'mono',
+            },
+            completion = {
+                accept = {
+                    auto_brackets = {
+                        enabled = true,
+                    },
+                },
+                -- menu = {
+                --     border = "rounded",
+                --     winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+                -- },
+                -- documentation = {
+                --     border = "rounded",
+                --     auto_show = true,
+                -- },
+            },
+            sources = {
+                default = { "lsp", "path", "buffer", "lazydev", "git" },
+                providers = {
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
+                        fallbacks = { "lsp" },
                     },
                     git = {
                         name = 'git',
@@ -51,8 +49,8 @@ return {
                             remotes = { "upstream", "origin" },
                         },
                     },
-				},
-			},
-		},
-	},
+                },
+            },
+        },
+    },
 }
