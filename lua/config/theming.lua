@@ -96,11 +96,18 @@ local setup_cyberdream = function(cd)
 	vim.cmd.colorscheme("cyberdream")
 end
 
+local setup_warp_colorscheme = function(source, filename)
+    source.setup({
+        theme_link = vim.fn.stdpath('config') .. '/colors/' .. filename .. '.yaml',
+    })
+end
+
 return {
 	config = function()
 		-- setup_fluoromachine(require("fluoromachine"))
 		-- setup_rosepine(require("rose-pine"))
-		setup_cyberdream(require("cyberdream"))
+		-- setup_cyberdream(require("cyberdream"))
+        setup_warp_colorscheme(require("warp-theme-nvim"), "hotsprings")
 
 
 		-- Fix incorrectly set transparency for FoldColumn
