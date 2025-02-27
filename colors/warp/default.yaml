@@ -1,9 +1,9 @@
 ---
-background: "#8e4753"
-accent: "#523154"
+background: "#523154"
+accent: "#bcc2b8"
 foreground: "#ffffff"
 background_image:
-  path: "C:\\Users\\nickb\\AppData\\Roaming\\warp\\Warp\\data\\themes\\1701473311243848.jpg"
+  path: ""
   opacity: 30
 details: darker
 terminal_colors:
@@ -25,4 +25,4 @@ terminal_colors:
     magenta: "#ffb1fe"
     cyan: "#e5e6fe"
     white: "#feffff"
-name: "1701473311243848"
+name: default
