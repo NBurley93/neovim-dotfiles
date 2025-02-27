@@ -2,7 +2,8 @@ return {
     {
         "Saghen/blink.cmp",
         lazy = false,
-        version = "v0.9.*",
+        version = "v0.13.*",
+        build = 'cargo build --release',
         dependencies = {
             'rafamadriz/friendly-snippets',
             'saghen/blink.compat',
@@ -11,6 +12,13 @@ return {
         },
         opts = {
             keymap = { preset = 'default' },
+            fuzzy = {
+                implementation = "prefer_rust_with_warning",
+                prebuilt_binaries = {
+                    download = true,
+                    ignore_version_mismatch = true
+                }
+            },
             appearance = {
                 use_nvim_cmp_as_default = false,
                 nerd_font_variant = 'mono',
