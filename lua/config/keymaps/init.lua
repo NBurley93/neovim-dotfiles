@@ -29,9 +29,8 @@ local function setup_whichkey_root()
 end
 
 local function base_mappings()
-	-- Nop both Q and our leader key
+	-- Nop leader key
 	vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-	cf.mapn("Q", "<nop>")
 
 	-- Scroll pages with the cursor on the center of the page
 	cf.mapn("<C-d>", "<C-d>zz")

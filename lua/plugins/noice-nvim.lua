@@ -10,6 +10,12 @@ return {
                     help = { icon = "󰠗" },
                 },
             },
+            routes = {
+                {
+                    view = "notify",
+                    filter = { event = "msg_showmode" },
+                },
+            },
             presets = {
                 long_message_to_split = true,
                 inc_rename = false,

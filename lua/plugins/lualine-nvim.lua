@@ -17,6 +17,10 @@ local function setup_line_segments()
         },
         lualine_b = {
             {
+                require("noice").api.statusline.mode.get,
+                cond = require("noice").api.statusline.mode.has,
+            },
+            {
                 "b:gitsigns_head",
                 icon = "",
             },
