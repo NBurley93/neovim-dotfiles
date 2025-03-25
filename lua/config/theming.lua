@@ -25,7 +25,9 @@ function M.get_available_themes()
     return themes
 end
 
-function M.apply_theme(theme_name)
+function M.apply_theme(theme_name, opts)
+    opts = opts or {}
+
     if not theme_name then
         print('No theme specified')
         return false
@@ -43,7 +45,7 @@ function M.apply_theme(theme_name)
         return false
     end
 
-    theme.setup()
+    theme.setup(opts)
     M.current_theme = theme_name
 
     return true
@@ -75,6 +77,9 @@ function M.config()
     -- M.apply_theme("warp", {
     --     filename = 'spring'
     -- }) -- Default theme
+    -- M.apply_theme("catppuccin", {
+    --     variant = "latte",
+    -- })
     M.apply_theme("rosepine")
 end
 
