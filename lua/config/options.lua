@@ -28,6 +28,7 @@ return {
 			clipboard = "unnamedplus",
 			termguicolors = true,
 			cursorline = true,
+            guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20",
 			cot = "menu,menuone,noselect",
 			wrap = false,
 			swapfile = false,
