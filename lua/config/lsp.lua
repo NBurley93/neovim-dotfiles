@@ -2,40 +2,49 @@
 local lsp_keymaps = require("config.keymaps.lsp")
 
 local function inject_cmp_engine(engine, capabilities)
-	if engine then
-		return engine.get_lsp_capabilities(capabilities)
-	end
-	return vim.lsp.protocol.make_client_capabilities()
+    if engine then
+        return engine.get_lsp_capabilities(capabilities)
+    end
+    return vim.lsp.protocol.make_client_capabilities()
 end
 
 local function lsp_onattach(client, bufnr)
-	lsp_keymaps.config(client, bufnr)
+    lsp_keymaps.config(client, bufnr)
 end
 
 local function setup_icons(icons)
-	local signs = {
-		Error = icons.diagnostics.Error,
-		Warn = icons.diagnostics.Warning,
-		Hint = icons.diagnostics.Hint,
-		Info = icons.diagnostics.Information,
-	}
-	for type, icon in pairs(signs) do
-		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-	end
+    vim.diagnostic.config({
+        signs = {
+            text = {
+                [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+                [vim.diagnostic.severity.WARN] = icons.diagnostics.Warning,
+                [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+                [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+            },
+            linehl = {
+            },
+            numhl = {
+                [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+                [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+                [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+                [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+            },
+        },
+    })
 end
 
 local function setup_lsp_defaults(lspconfig)
-	local lsp_defaults = lspconfig.util.default_config
-	lsp_defaults.capabilities =
-		vim.tbl_deep_extend("force", lsp_defaults.capabilities, require('blink.cmp').get_lsp_capabilities(lsp_defaults.capabilities))
-	return lsp_defaults
+    local lsp_defaults = lspconfig.util.default_config
+    lsp_defaults.capabilities =
+        vim.tbl_deep_extend("force", lsp_defaults.capabilities,
+            require('blink.cmp').get_lsp_capabilities(lsp_defaults.capabilities))
+    return lsp_defaults
 end
 
 local function configure_logging(enable)
-	if enable then
-		vim.lsp.set_log_level("debug")
-	end
+    if enable then
+        vim.lsp.set_log_level("debug")
+    end
 end
 
 -- C/Cpp
@@ -191,32 +200,32 @@ end
 
 -- Rust
 local function configure_rust_lsp(lspconfig, lsp_defaults)
-	local rust_capabilities = lsp_defaults.capabilities
-	rust_capabilities.offsetEncoding = { "utf-8", "utf-16" }
-	lspconfig.rust_analyzer.setup({
-		capabilities = rust_capabilities,
-		on_attach = lsp_onattach,
-		settings = {
-			["rust-analyzer"] = {},
-		},
-	})
+    local rust_capabilities = lsp_defaults.capabilities
+    rust_capabilities.offsetEncoding = { "utf-8", "utf-16" }
+    lspconfig.rust_analyzer.setup({
+        capabilities = rust_capabilities,
+        on_attach = lsp_onattach,
+        settings = {
+            ["rust-analyzer"] = {},
+        },
+    })
 end
 
 -- Go
 local function configure_go_lsp(lspconfig, lsp_defaults)
-	local go_capabilities = lsp_defaults.capabilities
-	lspconfig.gopls.setup({
-		capabilities = go_capabilities,
-		on_attach = lsp_onattach,
-		settings = {
-			gopls = {
-				gofumpt = true,
-			},
-		},
-		flags = {
-			debounce_text_changes = 150,
-		},
-	})
+    local go_capabilities = lsp_defaults.capabilities
+    lspconfig.gopls.setup({
+        capabilities = go_capabilities,
+        on_attach = lsp_onattach,
+        settings = {
+            gopls = {
+                gofumpt = true,
+            },
+        },
+        flags = {
+            debounce_text_changes = 150,
+        },
+    })
 end
 
 -- Astgrep
@@ -254,7 +263,7 @@ local function configure_jinja_lsp(lspconfig)
 end
 
 return {
-	config = function()
+    config = function()
 		configure_logging(false)
 
 		local lspconfig = require("lspconfig")
@@ -285,5 +294,5 @@ return {
 		})
 
 		setup_icons(require("common.icons"))
-	end,
+    end,
 }

@@ -48,7 +48,6 @@ return {
 				nbsp = "␣",
 			},
 			gdefault = true,
-			background = "",
 			pb = 15,
 			splitright = true,
 			splitbelow = true,
