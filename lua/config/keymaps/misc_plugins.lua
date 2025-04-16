@@ -14,9 +14,13 @@ return {
         end, "Toggle aerial view")
 
         -- AI Chat
-        map("<leader>Gt", function()
+        map("<C-g>t", function()
             vim.cmd.GpChatToggle("vsplit")
         end, "Toggle AI Chat window")
+
+        map("<C-g>r", function()
+            vim.cmd.GpRewrite()
+        end, "AI Visual rewrite")
 
         -- treesj
         map("<leader>ns", function()

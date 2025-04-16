@@ -1,69 +1,96 @@
 import sys
+import argparse
+from typing import List, Optional
+from pathlib import Path
 
-LUA_NEW_COLOR = "\t\tColor.new('{0}', '{1}')"
-LUA_NEW_GROUP = "\t\tGroup.new('{0}', colors.{1}, colors.{2}, styles.{3})"
-OUTPUT_FILE_TEMPLATE = """
-    local Color, colors, Group, groups, styles = require("colorbuddy").setup()
+LUA_NEW_COLOR = "\t\tColor.new('{name}', '{value}')"
+LUA_NEW_GROUP = "\t\tGroup.new('{name}', colors.{fg}, colors.{bg}, styles.{style})"
+OUTPUT_FILE_TEMPLATE = """local Color, colors, Group, groups, styles = require("colorbuddy").setup()
 
-    return {{
-        use = function()
-            {0}
-        end,
-    }}
-    """
-USAGE_TEXT = "usage: colorbuddy-converter.py <vim-colorschemefile> <output-file>"
-
-
-def read_input(filepath: str):
-    input_lines = []
-    with open(filepath, "r", encoding="utf-8") as fi:
-        input_lines = fi.read().split("\n")
-    input_lines = [" ".join(x.split()) for x in input_lines]
-    return input_lines
+return {
+    use = function()
+{content}
+    end,
+}"""
 
 
-def main():
-    args = sys.argv[1:]
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description='Convert colorscheme to colorbuddy format')
+    parser.add_argument('input_colorscheme', type=Path, help='Input colorscheme file path')
+    parser.add_argument('output_file', type=Path, help='Output lua file path')
+    return parser.parse_args()
 
-    if len(args) == 2:
-        filepath = args[0]
-        output_path = args[1]
 
-        input_lines = read_input(filepath)
+def read_input(filepath: Path) -> List[str]:
+    """Read and normalize input file lines."""
+    return [" ".join(line.split()) for line in filepath.read_text(encoding="utf-8").splitlines()]
 
-        output_lines = []
-        for line in input_lines:
-            elems = line.split(" ")
-            if elems[0] == "hi":
-                group_name = elems[1]
-                gui_fg = elems[6].split("=")[1]
-                gui_bg = elems[7].split("=")[1]
-                # style = elems[4].split('=')[1]
 
-                GROUP_STYLE = "NONE"
+def parse_highlight_line(line: str) -> Optional[tuple]:
+    """Parse a highlight line and return components."""
+    parts = line.split()
+    if not parts or parts[0] != "hi":
+        return None
 
-                output_lines.append("")
-                if gui_fg != "NONE":
-                    output_lines.append(LUA_NEW_COLOR.format(
-                        group_name + "FG", gui_fg))
-                    gui_fg = group_name + "FG"
-                if gui_bg != "NONE":
-                    output_lines.append(LUA_NEW_COLOR.format(
-                        group_name + "BG", gui_bg))
-                    gui_bg = group_name + "BG"
+    try:
+        group_name = parts[1]
+        gui_fg = parts[6].split("=")[1]
+        gui_bg = parts[7].split("=")[1]
+        return (group_name, gui_fg, gui_bg)
+    except (IndexError, ValueError):
+        return None
 
-                output_lines.append(
-                    LUA_NEW_GROUP.format(
-                        group_name, gui_fg, gui_bg, GROUP_STYLE)
-                )
 
-        THEME_LINES = "\n".join(output_lines)
-        OUTPUT_DATA = OUTPUT_FILE_TEMPLATE.format(THEME_LINES)
-        with open(output_path, "w", encoding="utf-8") as fo:
-            fo.write(OUTPUT_DATA)
+def process_highlight(group_name: str, gui_fg: str, gui_bg: str) -> List[str]:
+    """Process highlight group and generate Lua code."""
+    output = []
 
+    if gui_fg != "NONE":
+        fg_name = f"{group_name}FG"
+        output.append(LUA_NEW_COLOR.format(name=fg_name, value=gui_fg))
     else:
-        print(USAGE_TEXT)
+        fg_name = "NONE"
+
+    if gui_bg != "NONE":
+        bg_name = f"{group_name}BG"
+        output.append(LUA_NEW_COLOR.format(name=bg_name, value=gui_bg))
+    else:
+        bg_name = "NONE"
+
+    output.append(LUA_NEW_GROUP.format(
+        name=group_name,
+        fg=fg_name,
+        bg=bg_name,
+        style="NONE"
+    ))
+
+    return output
+
+
+def main() -> None:
+    args = parse_args()
+
+    try:
+        input_lines = read_input(args.input_colorscheme)
+    except (FileNotFoundError, PermissionError) as e:
+        print(f"Error reading input file: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    output_lines = []
+    for line in input_lines:
+        parsed = parse_highlight_line(line)
+        if parsed:
+            group_name, gui_fg, gui_bg = parsed
+            output_lines.extend([""] + process_highlight(group_name, gui_fg, gui_bg))
+
+    output_content = "\n".join(output_lines)
+    output_data = OUTPUT_FILE_TEMPLATE.format(content=output_content)
+
+    try:
+        args.output_file.write_text(output_data, encoding="utf-8")
+    except (FileNotFoundError, PermissionError) as e:
+        print(f"Error writing output file: {e}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
