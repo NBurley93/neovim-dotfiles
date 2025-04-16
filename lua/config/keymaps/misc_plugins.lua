@@ -13,6 +13,11 @@ return {
             vim.cmd.AerialToggle()
         end, "Toggle aerial view")
 
+        -- AI Chat
+        map("<leader>Gt", function()
+            vim.cmd.GpChatToggle("vsplit")
+        end, "Toggle AI Chat window")
+
         -- treesj
         map("<leader>ns", function()
             require("treesj").split()
