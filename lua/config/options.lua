@@ -114,5 +114,8 @@ return {
 		-- Misc provider vars
 		vim.g.loaded_perl_provider = 0
 		vim.g.loaded_ruby_provider = 0
+
+        -- vim.g.copilot_proxy = 'localhost:9000'
+        vim.g.copilot_proxy_strict_ssl = false
 	end,
 }
