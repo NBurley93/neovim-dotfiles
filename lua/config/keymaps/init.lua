@@ -21,6 +21,7 @@ local function setup_whichkey_root()
 		{ "<leader>q", group = "[Q]uick Fix" },
 		{ "<leader>n", group = "[N]ode operations" },
         { "<leader>i", group = "[I]nternet Browsing"},
+        { "<C-g>", group = "AI [G]pt"},
 	}
 	local km_telescope = require("config.keymaps.telescope")
 	local wk = require("which-key")
@@ -76,9 +77,11 @@ return {
 		local km_telescope = require("config.keymaps.telescope")
 		local km_git = require("config.keymaps.git")
 		local km_misc = require("config.keymaps.misc_plugins")
+        local km_ai = require("config.keymaps.ai_keymaps")
 		km_telescope.config()
 		km_git.config()
 		km_misc.config()
+        km_ai.config()
 		setup_whichkey_root()
 	end,
 }

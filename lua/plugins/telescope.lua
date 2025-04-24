@@ -34,10 +34,12 @@ return {
 			ts.load_extension("ui-select")
 			ts.load_extension("terraform_doc")
 			ts.load_extension("undo")
+            ts.load_extension("gp_picker")
 		end,
 	},
 	{ "nvim-telescope/telescope-ui-select.nvim" },
 	{ "ANGkeith/telescope-terraform-doc.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 	{ "nvim-telescope/telescope-symbols.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 	{ "debugloop/telescope-undo.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+    { "undg/telescope-gp-agent-picker.nvim", dependencies = { "nvim-telescope/telescope.nvim" }},
 }

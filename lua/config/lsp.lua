@@ -59,6 +59,7 @@ local function configure_cpp_lsp(lspconfig, lsp_defaults)
 			"clangd",
 			"--clang-tidy",
 			"--completion-style=bundled",
+            "--fallback-style=file",
 		},
 	})
 end

@@ -7,7 +7,7 @@ return {
                     openai = { disable = true, },
                     openrouter = {
                         endpoint = "https://openrouter.ai/api/v1/chat/completions",
-                        secret = os.getenv("GP_NVIM_KEY") or { "rbw", "get", "GP_NVIM_KEY" },
+                        secret = os.getenv("GP_NVIM_KEY") or { "cat", "~/gp_key.txt" },
                     },
                 },
                 agents = {
