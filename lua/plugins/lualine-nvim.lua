@@ -36,7 +36,7 @@ local function setup_line_segments()
             {
                 "filename",
                 file_status = true,
-                path = 0,
+                path = 1,
                 symbols = {
                     modified = "󱇧",
                     readonly = "󰈡 ",
@@ -55,11 +55,6 @@ local function setup_line_segments()
             },
         },
         lualine_c = {
-            {
-                "searchcount",
-                maxcount = 999,
-                timeout = 500,
-            },
             "aerial",
 
             --function()
@@ -67,11 +62,24 @@ local function setup_line_segments()
             --end,
         },
         lualine_x = {
-            { "datetime", style = "%I:%M:%S %p" },
+            {
+                "fileformat",
+                symbols = {
+                    unix = "",
+                    dos = "",
+                    mac = "",
+                }
+            },
             "encoding",
             { "filetype", colored = true },
         },
-        lualine_y = { "progress" },
+        lualine_y = { "progress",
+            {
+                "searchcount",
+                maxcount = 999,
+                timeout = 500,
+            },
+        },
         lualine_z = { "location" },
     }
 end
