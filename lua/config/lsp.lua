@@ -52,28 +52,22 @@ local function configure_cpp_lsp(lspconfig, lsp_defaults)
 	local clangd_capabilities = lsp_defaults.capabilities
 	clangd_capabilities.offsetEncoding = "utf-8"
 
-	lspconfig.clangd.setup({
-		on_attach = lsp_onattach,
-		capabilities = clangd_capabilities,
-		cmd = {
-			"clangd",
-			"--clang-tidy",
-			"--completion-style=bundled",
+    vim.lsp.config('clangd', {
+        on_attach = lsp_onattach,
+        capabilities = clangd_capabilities,
+        cmd = {
+            "clangd",
+            "--clang-tidy",
+            "--completion-style=bundled",
             "--fallback-style=file",
-		},
-	})
-end
-
--- C#
-local function configure_csharp_lsp(lspconfig)
-	lspconfig.csharp_ls.setup({
-		on_attach = lsp_onattach,
-	})
+        },
+    })
+    vim.lsp.enable('clangd')
 end
 
 -- Lua
 local function configure_lua_lsp(lspconfig)
-	lspconfig.lua_ls.setup({
+    vim.lsp.config('lua_ls', {
 		on_attach = lsp_onattach,
 		on_init = function(client)
 			local path = client.workspace_folders[1].name
@@ -104,164 +98,72 @@ local function configure_lua_lsp(lspconfig)
 			return true
 		end,
 	})
-end
-
--- Python pylsp
-local function configure_python_lsp(lspconfig)
-	lspconfig.pylsp.setup({
-		on_attach = lsp_onattach,
-		settings = {
-			pylsp = {
-				configurationSources = {
-					"flake8",
-				},
-				plugins = {
-					flake8 = {
-						enabled = true,
-					},
-					pycodestyle = {
-						enabled = false,
-					},
-				},
-			},
-		},
-	})
+    vim.lsp.enable('lua_ls')
 end
 
 -- Python ruff
--- local function configure_python_ruff(lspconfig)
--- 	lspconfig.ruff.setup({
--- 		on_attach = lsp_onattach,
--- 	})
--- end
+local function configure_python_ruff(lspconfig)
+    vim.lsp.config('ruff', {
+        on_attach = lsp_onattach,
+    })
+    vim.lsp.enable('ruff')
+end
 
 -- CMake
 local function configure_cmake_lsp(lspconfig)
-	lspconfig.cmake.setup({
-		on_attach = lsp_onattach,
-	})
+    vim.lsp.config('cmake', {
+        on_attach = lsp_onattach,
+    })
+    vim.lsp.enable('cmake')
 end
 
 -- Json
 local function configure_json_lsp(lspconfig)
-	lspconfig.jsonls.setup({
-		on_attach = lsp_onattach,
-	})
+    vim.lsp.config('jsonls', {
+        on_attach = lsp_onattach,
+    })
+    vim.lsp.enable('jsonls')
 end
 
 -- Docker
 local function configure_docker_lsp(lspconfig)
-	lspconfig.dockerls.setup({
+	vim.lsp.config('dockerls', {
 		on_attach = lsp_onattach,
 	})
+    vim.lsp.enable('dockerls')
 end
 
 -- Terraform
 local function configure_terraform_lsp(lspconfig)
-	lspconfig.terraformls.setup({
+	vim.lsp.config('terraformls', {
 		on_attach = lsp_onattach,
 	})
+    vim.lsp.enable('terraformls')
 end
 
 -- YAML
 local function configure_yaml_lsp(lspconfig)
-	lspconfig.yamlls.setup({
+	vim.lsp.config('yamlls', {
 		on_attach = lsp_onattach,
 	})
-end
-
--- Markdown
-local function configure_markdown_lsp(lspconfig)
-	lspconfig.marksman.setup({
-		on_attach = lsp_onattach,
-	})
-end
-
--- Javascript
-local function configure_javascript_lsp(lspconfig)
-	lspconfig.eslint.setup({
-		on_attach = lsp_onattach,
-	})
-end
-
--- Powershell
-local function configure_powershell_lsp(lspconfig)
-	lspconfig.powershell_es.setup({
-		bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/",
-		on_attach = lsp_onattach,
-	})
-end
-
--- SQL
-local function configure_sql_lsp(lspconfig)
-	lspconfig.sqls.setup({
-		on_attach = lsp_onattach,
-	})
+    vim.lsp.enable('yamlls')
 end
 
 -- Rust
 local function configure_rust_lsp(lspconfig, lsp_defaults)
     local rust_capabilities = lsp_defaults.capabilities
     rust_capabilities.offsetEncoding = { "utf-8", "utf-16" }
-    lspconfig.rust_analyzer.setup({
-        capabilities = rust_capabilities,
+
+    vim.lsp.config('rust_analyzer', {
         on_attach = lsp_onattach,
+        capabilities = rust_capabilities,
         settings = {
             ["rust-analyzer"] = {},
         },
     })
+    vim.lsp.enable('rust_analyzer')
 end
 
--- Go
-local function configure_go_lsp(lspconfig, lsp_defaults)
-    local go_capabilities = lsp_defaults.capabilities
-    lspconfig.gopls.setup({
-        capabilities = go_capabilities,
-        on_attach = lsp_onattach,
-        settings = {
-            gopls = {
-                gofumpt = true,
-            },
-        },
-        flags = {
-            debounce_text_changes = 150,
-        },
-    })
-end
-
--- Astgrep
-local function configure_astgrep_lsp(lspconfig)
-	lspconfig.ast_grep.setup({
-		on_attach = lsp_onattach,
-		filetypes = {
-			"javascript",
-			"typescript",
-			"html",
-			"css",
-		},
-	})
-end
-
--- XML
-local function configure_xml_lsp(lspconfig)
-	lspconfig.lemminx.setup({
-		on_attach = lsp_onattach,
-		filetypes = {
-			"xml",
-			"xsd",
-			"xsl",
-			"xslt",
-			"svg",
-		},
-	})
-end
-
--- Jinja
-local function configure_jinja_lsp(lspconfig)
-	lspconfig.jinja_lsp.setup({
-		on_attach = lsp_onattach,
-	})
-end
 
 return {
     config = function()
@@ -272,23 +174,13 @@ return {
 
 		configure_cpp_lsp(lspconfig, lsp_defaults)
 		configure_lua_lsp(lspconfig)
-		configure_csharp_lsp(lspconfig)
-		configure_python_lsp(lspconfig)
-		-- configure_python_ruff(lspconfig)
-		configure_astgrep_lsp(lspconfig)
-		configure_go_lsp(lspconfig, lsp_defaults)
+		configure_python_ruff(lspconfig)
 		configure_rust_lsp(lspconfig, lsp_defaults)
 		configure_cmake_lsp(lspconfig)
 		configure_json_lsp(lspconfig)
 		configure_docker_lsp(lspconfig)
 		configure_terraform_lsp(lspconfig)
 		configure_yaml_lsp(lspconfig)
-		configure_markdown_lsp(lspconfig)
-		configure_javascript_lsp(lspconfig)
-		configure_powershell_lsp(lspconfig)
-		configure_xml_lsp(lspconfig)
-		configure_jinja_lsp(lspconfig)
-		configure_sql_lsp(lspconfig)
 
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 			border = "single",

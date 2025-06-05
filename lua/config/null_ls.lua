@@ -38,26 +38,11 @@ return {
                     formatting.yamlfmt,
                     diagnostics.yamllint,
                 },
-                markdown = {
-                    diagnostics.markdownlint,
-                },
                 docker = {
                     diagnostics.hadolint,
                 },
-                shell = {
-                    formatting.shfmt,
-                },
                 xml = {
                     formatting.tidy,
-                },
-                sql = {
-                    diagnostics.sqlfluff.with({
-                        extra_args = { "--dialect", "sqlite" },
-                    }),
-                    formatting.sqlfmt,
-                },
-                csharp = {
-                    formatting.csharpier,
                 },
             }),
         })

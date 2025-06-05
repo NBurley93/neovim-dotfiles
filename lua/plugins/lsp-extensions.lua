@@ -19,24 +19,20 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPost", "BufNewFile" },
         dependencies = {
-            "williamboman/mason-lspconfig.nvim",
+            "mason-org/mason-lspconfig.nvim",
         },
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    "gopls",
-                    "cmake",
-                    "marksman",
-                    "clangd",
                     "lua_ls",
-                    "eslint",
-                    "rust_analyzer",
                     "yamlls",
-                    "powershell_es",
-                    "jsonls",
+                    "rust_analyzer",
                     "terraformls",
                     "dockerls",
-                    "html",
+                    "jsonls",
+                    "cmake",
+                    "ruff",
+                    "clangd",
                 },
             })
         end,

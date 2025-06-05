@@ -15,15 +15,22 @@ return {
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Convert colorscheme to colorbuddy format')
-    parser.add_argument('input_colorscheme', type=Path, help='Input colorscheme file path')
-    parser.add_argument('output_file', type=Path, help='Output lua file path')
+    parser = argparse.ArgumentParser(
+        description="Convert colorscheme to colorbuddy format"
+    )
+    parser.add_argument(
+        "input_colorscheme", type=Path, help="Input colorscheme file path"
+    )
+    parser.add_argument("output_file", type=Path, help="Output lua file path")
     return parser.parse_args()
 
 
 def read_input(filepath: Path) -> List[str]:
     """Read and normalize input file lines."""
-    return [" ".join(line.split()) for line in filepath.read_text(encoding="utf-8").splitlines()]
+    return [
+        " ".join(line.split())
+        for line in filepath.read_text(encoding="utf-8").splitlines()
+    ]
 
 
 def parse_highlight_line(line: str) -> Optional[tuple]:
@@ -57,12 +64,9 @@ def process_highlight(group_name: str, gui_fg: str, gui_bg: str) -> List[str]:
     else:
         bg_name = "NONE"
 
-    output.append(LUA_NEW_GROUP.format(
-        name=group_name,
-        fg=fg_name,
-        bg=bg_name,
-        style="NONE"
-    ))
+    output.append(
+        LUA_NEW_GROUP.format(name=group_name, fg=fg_name, bg=bg_name, style="NONE")
+    )
 
     return output
 
