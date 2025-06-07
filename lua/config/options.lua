@@ -59,21 +59,24 @@ return {
 		end
 		vim.opt.isfname:append("@-@")
 
-		-- MUCH better clipboard
-		vim.g.clipboard = {
-			name = "xclip-wsl",
-			copy = {
-				["+"] = { "xclip", "-quiet", "-i", "-selection", "clipboard" },
-				["*"] = { "xclip", "-quiet", "-i", "-selection", "primary" },
-			},
-			paste = {
-				["+"] = { "xclip", "-o", "-selection", "clipboard" },
-				["*"] = { "xclip", "-o", "-selection", "primary" },
-			},
-			cache_enabled = 1,
-		}
 
 		vim.lsp.set_log_level("off")
+
+        if vim.fn.has('win32') == 1 and vim.fn.has("wsl") == 1 then
+            -- MUCH better clipboard
+            vim.g.clipboard = {
+                name = "xclip-wsl",
+                copy = {
+                    ["+"] = { "xclip", "-quiet", "-i", "-selection", "clipboard" },
+                    ["*"] = { "xclip", "-quiet", "-i", "-selection", "primary" },
+                },
+                paste = {
+                    ["+"] = { "xclip", "-o", "-selection", "clipboard" },
+                    ["*"] = { "xclip", "-o", "-selection", "primary" },
+                },
+                cache_enabled = 1,
+            }
+        end
 
 		if vim.fn.has("win32") == 1 and vim.fn.has("wsl") == 0 then
 			local powershell_options = {
