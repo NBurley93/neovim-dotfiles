@@ -103,8 +103,7 @@ return {
 
 		-- Configure python runtime for windowps
 		if vim.fn.has("win32") == 1 then
-			local pythonRoot = os.getenv("PYTHON_HOME") or ""
-			vim.g.python3_host_prog = pythonRoot .. "\\python.exe"
+			vim.g.python3_host_prog = "python.exe"
 		else
 			vim.g.python3_host_prog = "~/.nvimenv/.venv/bin/python3"
 		end
