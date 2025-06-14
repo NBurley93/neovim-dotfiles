@@ -41,9 +41,6 @@ return {
                 docker = {
                     diagnostics.hadolint,
                 },
-                xml = {
-                    formatting.tidy,
-                },
             }),
         })
     end,
