@@ -1,5 +1,16 @@
 local M = {}
 
+function M.lsp_onattach_baseline(client, bufnr)
+    require('config.keymaps.lsp').config(client, bufnr)
+end
+
+function M.lsp_extend_baseline_onattach(func)
+    return function(client, bufnr)
+        M.lsp_onattach_baseline(client, bufnr)
+        func(client, bufnr)
+    end
+end
+
 function M.setup(server_list)
     local function configure_lsp_server(server_name, config)
         -- Check if the config was provided
@@ -9,7 +20,7 @@ function M.setup(server_list)
 
         -- Setup defaults
         if not config.on_attach then
-            config.on_attach = require('config.keymaps.lsp').config
+            config.on_attach = M.lsp_onattach_baseline
         end
         if not config.on_init then
             config.on_init = function(client)

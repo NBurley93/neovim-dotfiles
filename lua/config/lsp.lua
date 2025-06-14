@@ -1,4 +1,6 @@
 -- LSP config
+local lsp_config_backend = require('common.lsp_backend')
+
 local function make_lsp_config(server_name, config)
     if config then
         return {
@@ -14,7 +16,7 @@ end
 
 return {
     config = function()
-        require('common.lsp_backend').setup({
+        lsp_config_backend.setup({
             make_lsp_config("clangd", {
                 cmd = {
                     "clangd",
@@ -50,7 +52,12 @@ return {
             make_lsp_config("jsonls"),
             make_lsp_config("dockerls"),
             make_lsp_config("terraformls"),
-            make_lsp_config("yamlls"),
+            make_lsp_config("yamlls", {
+                on_attach = lsp_config_backend.lsp_extend_baseline_onattach(function(client, bufnr)
+                    -- Force YAML to permit formatting
+                    client.server_capabilities.documentFormattingProvider = true
+                end),
+            }),
             make_lsp_config("lemminx"),
             make_lsp_config("rust_analyzer"),
             make_lsp_config("glsl_analyzer"),
