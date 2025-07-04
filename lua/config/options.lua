@@ -6,20 +6,17 @@ return {
 	config = function()
 		local options = {
 			autoindent = true,
-			encoding = "UTF-8",
 			updatetime = 50,
 			timeout = true,
 			timeoutlen = 1000,
 			expandtab = true,
 			title = true,
 			shiftwidth = 4,
-			fileformat = "unix",
 			tabstop = 4,
-			history = 50,
+			history = 10000,
 			backspace = "indent,eol,start",
 			smartindent = true,
 			number = true,
-			showmode = false,
 			cmdheight = 2,
 			breakindent = true,
 			mouse = "a",
@@ -29,15 +26,13 @@ return {
 			termguicolors = true,
 			cursorline = true,
             guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20",
-			cot = "menu,menuone,noselect",
+			completeopt = "menu,menuone,noselect",
 			wrap = false,
 			swapfile = false,
 			backup = false,
 			hlsearch = true,
 			incsearch = true,
 			foldcolumn = "1",
-			foldlevel = 99,
-			foldlevelstart = 99,
 			foldenable = true,
 			inccommand = "split",
 			scrolloff = 8,
@@ -48,7 +43,7 @@ return {
 				nbsp = "␣",
 			},
 			gdefault = true,
-			pb = 15,
+			pumblend = 15,
 			splitright = true,
 			splitbelow = true,
 			fillchars = { eob = " ", foldopen = "", foldsep = " ", foldclose = "" },
@@ -59,10 +54,14 @@ return {
 		end
 		vim.opt.isfname:append("@-@")
 
-
 		vim.lsp.set_log_level("off")
 
-        if vim.fn.has('win32') == 1 and vim.fn.has("wsl") == 1 then
+        local isWindows = vim.fn.has('win32') == 1
+        local isWSL = vim.fn.has('wsl') == 1
+        local isWSLWindows = (isWindows and isWSL)
+        local isWindowsNative = (isWindows and isWSL == false)
+
+        if isWSLWindows then
             -- MUCH better clipboard
             vim.g.clipboard = {
                 name = "xclip-wsl",
@@ -78,7 +77,7 @@ return {
             }
         end
 
-		if vim.fn.has("win32") == 1 and vim.fn.has("wsl") == 0 then
+		if isWindowsNative then
 			local powershell_options = {
 				shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell",
 				shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
@@ -102,22 +101,17 @@ return {
 		end
 
 		-- Configure python runtime for windowps
-		if vim.fn.has("win32") == 1 then
+		if isWindows then
 			vim.g.python3_host_prog = "python.exe"
+			vim.g.sqlite_clib_path = vim.fn.stdpath("data") .. "/sqlite3.dll"
 		else
 			vim.g.python3_host_prog = "~/.nvimenv/.venv/bin/python3"
-		end
-
-		-- Set path for sqlite3 for windows
-		if vim.fn.has("win32") == 1 then
-			vim.g.sqlite_clib_path = vim.fn.stdpath("data") .. "/sqlite3.dll"
 		end
 
 		-- Misc provider vars
 		vim.g.loaded_perl_provider = 0
 		vim.g.loaded_ruby_provider = 0
 
-        -- vim.g.copilot_proxy = 'localhost:9000'
         vim.g.copilot_proxy_strict_ssl = false
 	end,
 }
