@@ -21,5 +21,4 @@ return {
 		},
 	},
 	{ "folke/lsp-colors.nvim" },
-	{ "nvie/vim-flake8" },
 }

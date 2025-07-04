@@ -23,7 +23,6 @@ function M.setup(opts)
                 NotifyINFOBorder = { fg = blend(c.diag.info, c.bgdark, alpha) },
                 NotifyDEBUGBorder = { fg = blend(debug, c.bgdark, alpha) },
                 NotifyTRACEBorder = { fg = blend(trace, c.bgdark, alpha) },
-                DapStoppedLinehl = { fg = c.white, bg = c.red },
                 WinSeparator = { bg = "NONE" },
 
                 TelescopeBorder = { fg = c.bgdark, bg = c.bgdark },

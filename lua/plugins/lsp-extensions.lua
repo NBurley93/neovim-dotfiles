@@ -13,7 +13,7 @@ return {
             "BufReadPost *.lua",
             "BufNewFile *.lua",
         },
-        ft = "lua",
+        ft = { "nvimconf", },
     },
     {
         "neovim/nvim-lspconfig",

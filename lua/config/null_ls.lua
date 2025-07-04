@@ -26,6 +26,9 @@ return {
                 lua = {
                     formatting.stylua,
                 },
+                nvimconf = {
+                    formatting.stylua,
+                },
                 cmake = {
                     diagnostics.cmake_lint,
                     formatting.gersemi,
