@@ -34,6 +34,8 @@ return {
 			incsearch = true,
 			foldcolumn = "1",
 			foldenable = true,
+            foldlevel = 99,
+            foldlevelstart = -1,
 			inccommand = "split",
 			scrolloff = 8,
 			list = true,

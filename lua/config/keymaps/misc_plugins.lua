@@ -1,28 +1,20 @@
 return {
     config = function()
-        local map = function(keys, action, desc)
-            vim.keymap.set("n", keys, action, { desc = desc })
-        end
-
-        local mapi = function(keys, action, desc)
-            vim.keymap.set("i", keys, action, { desc = desc })
-        end
-
         -- Trouble
-        map("<leader>t", function()
+        vim.keymap.set("n", "<leader>t", function()
             vim.cmd.Trouble("diagnostics", "toggle")
-        end, "Show Trouble menu")
+        end, { desc = "Show Trouble menu" })
 
         -- Shortcut to exit insert mode
-        mapi("<C-c>", "<Esc>", "Exit insert mode")
+        vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" })
 
         -- Folds
-        map("zR", function() require('ufo').openAllFolds() end, "Open all Folds (UFO)")
-        map("zM", function() require('ufo').closeAllFolds() end, "Close all Folds (UFO)")
+        vim.keymap.set("n", "zR", function() require('ufo').openAllFolds() end, { desc = "Open all Folds (UFO)" })
+        vim.keymap.set("n", "zM", function() require('ufo').closeAllFolds() end, { desc = "Close all Folds (UFO)" })
 
         -- Oil
-        map("<leader>pv", function()
+        vim.keymap.set("n", "<leader>pv", function()
             vim.cmd.Oil()
-        end, "Open Oil to cwd")
+        end, { desc = "Open Oil to cwd" })
     end,
 }

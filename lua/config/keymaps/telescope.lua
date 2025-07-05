@@ -1,9 +1,8 @@
 local utils = require("telescope.utils")
 local themes = require("telescope.themes")
-local cf = require("common.functions")
 
 local search_map = function(keys, action, desc)
-    cf.mapn("<leader>s" .. keys, action, desc)
+    vim.keymap.set("n", "<leader>s" .. keys, action, { desc = desc })
 end
 
 local M = {}
@@ -12,7 +11,7 @@ local function map_builtins()
     local builtin = require("telescope.builtin")
 
     -- Ctrl+p for searching project files
-    cf.mapn("<C-p>", function()
+    vim.keymap.set("n", "<C-p>", function()
         local _, ret, _ = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })
         if ret == 0 then
             builtin.git_files({ show_untracked = true })
@@ -20,18 +19,18 @@ local function map_builtins()
             require("common.functions").nvim_notify_info("Not a git repository, defaulting to find_files instead!")
             builtin.find_files()
         end
-    end, "Search git files")
+    end, { desc = "Search git files"})
 
     -- Files
-    cf.mapn("<leader>ff", builtin.find_files, "Find files")
+    vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
 
     -- Search nvim config
-    cf.mapn("cf", function()
+    vim.keymap.set("n", "cf", function()
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
-    end, "Neovim Config find files")
+    end, { desc = "Neovim Config find files"})
 
     -- Search for a string in files
-    cf.mapn("<leader>ss", builtin.live_grep, "String search")
+    vim.keymap.set("n", "<leader>ss", builtin.live_grep, { desc = "String search" })
 
     -- Help
     search_map("h", function()
@@ -47,9 +46,9 @@ local function map_builtins()
     end, "Search Git Branches + upstream")
 
     -- Currently open buffers
-    cf.mapn("<leader><leader>", function()
+    vim.keymap.set("n", "<leader><leader>", function()
         builtin.buffers(themes.get_dropdown({ previewer = false }), { sort_lastused = true })
-    end, "Search Buffers")
+    end, { desc = "Search Buffers"})
 end
 
 local function map_extensions()
