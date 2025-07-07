@@ -55,11 +55,20 @@ local function setup_line_segments()
             },
         },
         lualine_c = {
-            "aerial",
-
-            --function()
-            --return vim.fn["nvim_treesitter#statusline"](180)
-            --end,
+            {
+                'lsp_status',
+                icon = '', -- f013
+                symbols = {
+                    -- Standard unicode symbols to cycle through for LSP progress:
+                    spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
+                    -- Standard unicode symbol for when LSP is done:
+                    done = '✓',
+                    -- Delimiter inserted between LSP names:
+                    separator = ' ',
+                },
+                -- List of LSP names to ignore (e.g., `null-ls`):
+                ignore_lsp = {},
+            }
         },
         lualine_x = {
             {
@@ -110,7 +119,7 @@ return {
             tabline = {},
             winbar = {},
             inactive_winbar = {},
-            extensions = { "fugitive", "trouble", "lazy", "mason", "oil", "aerial" },
+            extensions = { "fugitive", "trouble", "lazy", "mason", "oil" },
         },
     },
 }
