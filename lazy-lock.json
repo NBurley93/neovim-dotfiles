@@ -10,7 +10,7 @@
   "citruszest.nvim": { "branch": "main", "commit": "ce6749e4c3a842679cc302ce1c2db76c2d07f700" },
   "clangd_extensions.nvim": { "branch": "main", "commit": "db28f29be928d18cbfb86fbfb9f83f584f658feb" },
   "cmp-git": { "branch": "main", "commit": "b24309c386c9666c549a1abaedd4956541676d06" },
-  "copilot.lua": { "branch": "master", "commit": "46f4b7d026cba9497159dcd3e6aa61a185cb1c48" },
+  "copilot.lua": { "branch": "master", "commit": "3680bebcc95dfd6c7509466367e66f6dc64a5140" },
   "cyberdream.nvim": { "branch": "main", "commit": "f660ebfd8840e226d2a5368e08108a7aa84fef36" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "evergarden": { "branch": "mega", "commit": "9f1b369a7b076c4d313e95da743b454dd6c71680" },
