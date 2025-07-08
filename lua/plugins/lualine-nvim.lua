@@ -6,11 +6,17 @@ local function setup_line_segments()
                 icons_enabled = true,
                 fmt = function(str)
                     if str == "V-BLOCK" then
-                        return "VB"
+                        return "V-B"
                     elseif str == "V-LINE" then
-                        return "VL"
+                        return "V-L"
+                    elseif str == "NORMAL" then
+                        return "NRM"
+                    elseif str == "INSERT" then
+                        return "INS"
+                    elseif str == "VISUAL" then
+                        return "VIS"
                     else
-                        return str:sub(1, 1)
+                        return str:sub(1, 3).upper()
                     end
                 end,
             },
@@ -112,7 +118,11 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         event = { "BufReadPre", "BufNewFile" },
-        dependencies = require("common.defines").WEB_DEVICONS_PROVIDER,
+        dependencies = {
+            require("common.defines").WEB_DEVICONS_PROVIDER,
+            "ficcdaf/ashen.nvim",
+            "devoc09/lflops.nvim",
+        },
         opts = {
             options = setup_options(),
             sections = setup_line_segments(),
@@ -120,6 +130,7 @@ return {
             winbar = {},
             inactive_winbar = {},
             extensions = { "fugitive", "trouble", "lazy", "mason", "oil" },
+            theme = 'lflops',
         },
     },
 }

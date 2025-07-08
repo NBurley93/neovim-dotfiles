@@ -113,7 +113,9 @@ function M.config()
     -- })
     -- M.apply_theme("rosepine")
     -- M.apply_theme("kanagawa", { variant = "wave" })
-    M.apply_theme("flow")
+    -- M.apply_theme("flow")
+    -- M.apply_theme("ashen")
+    M.apply_theme("lflops")
 end
 
 return M

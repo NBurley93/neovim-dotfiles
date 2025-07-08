@@ -17,6 +17,7 @@ return {
 			backspace = "indent,eol,start",
 			smartindent = true,
 			number = true,
+            showmode = false,
 			cmdheight = 2,
 			breakindent = true,
 			mouse = "a",

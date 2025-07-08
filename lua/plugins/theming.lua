@@ -1,8 +1,29 @@
 return {
     { "maxmx03/FluoroMachine.nvim" },
     { "rose-pine/neovim" },
+    {
+        "ficcdaf/ashen.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            style_presets = {
+                bold_functions = true,
+                italic_comments = true,
+            },
+            colors = {
+                background = "none" -- Transparent background
+            },
+        },
+    },
     { "scottmckendry/cyberdream.nvim", lazy = false,        priority = 1000, },
     { "liliwilson/warp-theme-nvim" },
+    {
+        "devoc09/lflops.nvim",
+        priority = 1000,
+        opts = {
+            transparent_mode = true,
+        },
+    },
     { "catppuccin/nvim",               name = "catppuccin", priority = 1000 },
     {
         "rebelot/kanagawa.nvim",
