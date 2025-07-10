@@ -40,6 +40,7 @@ return {
                     "bashls",
                     "powershell_es",
                     "taplo",
+                    "docker_compose_language_service",
                 },
             })
         end,

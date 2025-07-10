@@ -68,6 +68,13 @@ return {
             make_lsp_config("bashls"),
             make_lsp_config("powershell_es"),
             make_lsp_config("taplo"),
+            make_lsp_config("docker_compose_language_service", {
+                config = {
+                    cmd = { 'docker-compose-langserver', '--stdio' },
+                    filetype = { "yaml.docker-compose" },
+                    single_file_support = true,
+                },
+            }),
         })
     end,
 }
