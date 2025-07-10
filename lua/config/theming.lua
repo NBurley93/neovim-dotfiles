@@ -115,7 +115,12 @@ function M.config()
     -- M.apply_theme("kanagawa", { variant = "wave" })
     -- M.apply_theme("flow")
     -- M.apply_theme("ashen")
-    M.apply_theme("lflops")
+    -- M.apply_theme("lflops")
+    -- M.apply_theme("neocybervim")
+    M.apply_theme("catppuccin", {
+        variant = "macchiato",
+        transparent = true,
+    })
 end
 
 return M

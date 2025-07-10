@@ -1,5 +1,6 @@
 return {
     { "maxmx03/FluoroMachine.nvim" },
+    { "DonJulve/NeoCyberVim"},
     { "rose-pine/neovim" },
     {
         "ficcdaf/ashen.nvim",
