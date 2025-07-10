@@ -58,10 +58,6 @@ local function map_extensions()
     search_map("u", function()
         extensions.undo.undo()
     end, "Search undo history")
-
-    search_map("t", function()
-        extensions.terraform_doc.terraform_doc({ full_name = "hashicorp/aws" })
-    end, "Search AWS Terraform Docs")
 end
 
 function M.config()

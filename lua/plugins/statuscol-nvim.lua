@@ -4,9 +4,10 @@ return {
 		config = function()
 			local builtin = require("statuscol.builtin")
 			require("statuscol").setup({
+                relculright = true,
 				segments = {
 					-- Diagnostics
-					{ sign = { name = { "Diagnostic.*" }, maxwidth = 1 } },
+					-- { sign = { name = { "Diagnostic.*" }, maxwidth = 1 } },
 					-- Folds
 					{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
 					-- Line num
