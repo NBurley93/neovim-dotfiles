@@ -44,6 +44,9 @@ return {
                 docker = {
                     diagnostics.hadolint,
                 },
+                gitcommit = {
+                    diagnostics.commitlint,
+                },
             }),
         })
     end,

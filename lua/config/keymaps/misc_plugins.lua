@@ -16,5 +16,22 @@ return {
         vim.keymap.set("n", "<leader>pv", function()
             vim.cmd.Oil()
         end, { desc = "Open Oil to cwd" })
+
+        -- Copilot
+        vim.keymap.set("n", "<leader>cpc", function()
+            vim.cmd.CopilotChatToggle()
+        end, { desc = "Open Copilot chat" })
+
+        vim.keymap.set("n", "<leader>cpm", function()
+            vim.cmd.CopilotChatModels()
+        end, { desc = "Show Copilot Models" })
+
+        vim.keymap.set("n", "<leader>cpa", function()
+            vim.cmd.CopilotChatAgents()
+        end, { desc = "Show Copilot Agents" })
+
+        vim.keymap.set("n", "<leader>cpp", function()
+            vim.cmd.CopilotChatPrompts()
+        end, { desc = "Prepare a Copilot prompt" })
     end,
 }
