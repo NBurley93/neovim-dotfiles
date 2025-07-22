@@ -120,8 +120,6 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             require("common.defines").WEB_DEVICONS_PROVIDER,
-            "ficcdaf/ashen.nvim",
-            "devoc09/lflops.nvim",
         },
         opts = {
             options = setup_options(),
