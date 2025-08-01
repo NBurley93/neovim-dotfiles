@@ -41,6 +41,7 @@ return {
                     "powershell_es",
                     "taplo",
                     "docker_compose_language_service",
+                    "texlab",
                 },
             })
         end,

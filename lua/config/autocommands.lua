@@ -35,7 +35,21 @@ local function AutofixFiletypeCommands()
         desc = "Automatically set docker-compose to use the yaml.docker-compose ft",
         callback = function()
             vim.opt.filetype = 'yaml.docker-compose'
-        end
+        end,
+    })
+end
+
+local function AutoformatFTCommands()
+    local afmt_group = augroup("autofmt_ft_group", { clear = true })
+
+    autocmd({ "BufWritePost" }, {
+        pattern = { "*.tex" },
+        group = afmt_group,
+        desc = "Automatically format LaTex files on save using tex-fmt",
+        callback = function()
+            local fname = vim.api.nvim_buf_get_name(0)
+            vim.cmd(":silent !tex-fmt " .. fname)
+        end,
     })
 end
 
@@ -52,5 +66,6 @@ return {
 
         CopilotAutocommands()
         AutofixFiletypeCommands()
+        AutoformatFTCommands()
     end,
 }

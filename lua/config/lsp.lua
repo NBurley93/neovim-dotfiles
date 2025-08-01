@@ -69,6 +69,27 @@ return {
             make_lsp_config("bashls"),
             make_lsp_config("powershell_es"),
             make_lsp_config("taplo"),
+            make_lsp_config("texlab", {
+                root_markers = { ".git", ".latexmkrc", "latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" },
+                filetypes = { "tex", "plaintex", "bib" },
+                settings = {
+                    texlab = {
+                        build = {
+                            executable = "tectonic",
+                            args = {
+                                "-X",
+                                "compile",
+                                "%f",
+                                "--synctex",
+                                "--keep-logs",
+                                "--keep-intermediates",
+                            },
+                        },
+                        latexFormatter = "tex-fmt",
+                        bibtexFormatter = "tex-fmt",
+                    },
+                }
+            }),
             make_lsp_config("docker_compose_language_service", {
                 config = {
                     cmd = { 'docker-compose-langserver', '--stdio' },

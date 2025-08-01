@@ -47,6 +47,9 @@ return {
                 gitcommit = {
                     diagnostics.commitlint,
                 },
+                latex = {
+                    diagnostics.vale,
+                },
             }),
         })
     end,
