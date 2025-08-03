@@ -31,7 +31,6 @@ return {
                 },
                 cmake = {
                     diagnostics.cmake_lint,
-                    formatting.gersemi,
                 },
                 go = {
                     diagnostics.golangci_lint,

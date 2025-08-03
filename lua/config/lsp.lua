@@ -97,6 +97,6 @@ return {
                 },
                 filetypes = { "yaml.docker-compose" },
             }),
-        })
+        }, "warn")
     end,
 }

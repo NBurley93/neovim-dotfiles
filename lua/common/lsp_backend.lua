@@ -11,7 +11,12 @@ function M.lsp_extend_baseline_onattach(func)
     end
 end
 
-function M.setup(server_list)
+-- Sets the logging level for the LSP client.
+function M.set_logging_level(log_level)
+    vim.lsp.set_log_level(log_level) -- options: "trace", "debug", "info", "warn", "error"
+end
+
+function M.setup(server_list, log_level)
     local function configure_lsp_server(server_name, config)
         -- Check if the config was provided
         if not config then
@@ -50,6 +55,8 @@ function M.setup(server_list)
     vim.diagnostic.config({
         signs = require('common.defines').DIAGNOSTIC_SIGNS
     })
+
+    M.set_logging_level(log_level or "warn")
 end
 
 return M

@@ -28,6 +28,7 @@ return {
                     "lua_ls",
                     "ruff",
                     "cmake",
+                    "cmakelint",
                     "jsonls",
                     "dockerls",
                     "terraformls",

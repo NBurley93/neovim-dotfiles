@@ -2,7 +2,7 @@ local cf = require("common.functions")
 
 local function base_mappings()
     -- Nop leader key
-    vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+    -- vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
     -- Scroll pages with the cursor on the center of the page
     vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -27,6 +27,9 @@ local function base_mappings()
     end, { desc = "Write buffer without running autocmds (raw)"})
 
     vim.keymap.set("n", "<Esc>", vim.cmd.nohlsearch, { desc = "Clear search highlight" })
+
+    -- Ergonomic underscore
+    vim.keymap.set("i", "<S-Space>", "_", { desc = "Underscore", noremap = true, })
 
     -- Window navigation
     vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to left window" })

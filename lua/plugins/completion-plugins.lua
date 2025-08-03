@@ -12,7 +12,10 @@ return {
             { "giuxtaposition/blink-cmp-copilot" },
         },
         opts = {
-            keymap = { preset = 'default' },
+            keymap = {
+                preset = 'default',
+                ['<C-space>'] = {},
+            },
             fuzzy = {
                 implementation = "prefer_rust_with_warning",
                 prebuilt_binaries = {
