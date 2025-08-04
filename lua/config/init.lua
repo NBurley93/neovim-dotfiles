@@ -20,6 +20,7 @@ end
 local config_entries = {
 	config_module('options', require('config.options')),
 	config_module('plugins', lzy_module),
+    config_module('postplugins', require('config.postplugins')),
 	config_module('completion', require('config.completion')),
 	config_module('lsp', require('config.lsp')),
 	config_module('autocmd', require('config.autocommands')),

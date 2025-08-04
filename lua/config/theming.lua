@@ -73,6 +73,8 @@ function M.setup_commands()
 end
 
 function M.config()
+    vim.api.nvim_set_hl(0, "BufferFlash", { bg = "#FFD700" })
+
     M.setup_commands()
     M.apply_theme("catppuccin", {
         flavour = "macchiato",

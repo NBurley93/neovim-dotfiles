@@ -33,4 +33,20 @@ M.setContainsKey = function(set, key)
 	return set[key] ~= nil
 end
 
+M.flashBuffer = function(bufnr, duration)
+    bufnr = bufnr or vim.api.nvim_get_current_buf()
+    local ns = vim.api.nvim_create_namespace("BufferFlash")
+    local line_count = vim.api.nvim_buf_line_count(bufnr)
+
+    -- Highlight all lines
+    for i = 0, line_count - 1 do
+        vim.api.nvim_buf_add_highlight(bufnr, ns, "BufferFlash", i, 0, -1)
+    end
+
+    -- Remove highlight after duration
+    vim.defer_fn(function()
+        vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
+    end, duration or 150)
+end
+
 return M
