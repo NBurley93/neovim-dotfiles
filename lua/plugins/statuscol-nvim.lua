@@ -24,6 +24,8 @@ return {
                             maxwidth = 1,
                             colwidth = 1,
                             wrap = true,
+                            auto = "┃",
+                            fillchar = "┃",
                         },
                     },
                 },

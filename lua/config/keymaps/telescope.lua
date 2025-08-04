@@ -13,9 +13,6 @@ local function map_builtins()
     -- Files
     vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
 
-    -- Jumplist
-    vim.keymap.set("n", "<leader>jj", builtin.jumplist, { desc = "View jumplist" })
-
     -- View keymaps
     vim.keymap.set("n", "<leader>km", builtin.keymaps, { desc = "View keymaps" })
 
