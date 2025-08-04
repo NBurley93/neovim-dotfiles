@@ -1,3 +1,5 @@
+local icons = require('common.icons')
+
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -14,10 +16,13 @@ return {
 					layout_strategy = "horizontal",
 					sorting_strategy = "ascending",
 					winblend = 0,
-					prompt_prefix = "   ",
+					prompt_prefix = " ".. icons.ui.Telescope .. " ",
 					selection_caret = "  ",
 					results_title = "",
-					dynamic_preview_title = true,
+					dynamic_preview_title = false,
+                    border = true,
+                    -- Solid border
+                    borderchars = { "" },
 				},
 				extensions = {
 					aerial = {

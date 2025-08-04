@@ -9,7 +9,7 @@ return {
                     package_pending = "󱑤",
                     package_uninstalled = "",
                 },
-                border = "rounded",
+                border = "solid",
             },
         },
         build = ":MasonUpdate",

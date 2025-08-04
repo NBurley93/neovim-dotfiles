@@ -53,6 +53,21 @@ local function AutoformatFTCommands()
     })
 end
 
+local function FtSpecificKeybinds()
+    local grp = augroup("ftspecific_keybinds", { clear = true })
+
+    autocmd({ "FileType" }, {
+        pattern = { "c", "cpp" },
+        group = grp,
+        desc = "Ouroboros keybinds for CPP",
+        callback = function()
+            vim.keymap.set("n", "<C-e>", function()
+                vim.cmd.Ouroboros()
+            end, { desc = "Toggle Ouroboros" })
+        end,
+    })
+end
+
 return {
     config = function()
         -- Highlight on yank
@@ -64,6 +79,7 @@ return {
             end,
         })
 
+        FtSpecificKeybinds()
         CopilotAutocommands()
         AutofixFiletypeCommands()
         AutoformatFTCommands()

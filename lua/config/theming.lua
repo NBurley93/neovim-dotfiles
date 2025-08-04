@@ -75,8 +75,12 @@ end
 function M.config()
     M.setup_commands()
     M.apply_theme("catppuccin", {
-        variant = "macchiato",
-        transparent = true,
+        flavour = "macchiato",
+        transparent_background = true,
+        float = {
+            transparent = true,
+            solid = true,
+        },
     })
 end
 

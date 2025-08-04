@@ -19,15 +19,21 @@ local function map_builtins()
             require("common.functions").nvim_notify_info("Not a git repository, defaulting to find_files instead!")
             builtin.find_files()
         end
-    end, { desc = "Search git files"})
+    end, { desc = "Search git files" })
 
     -- Files
     vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
 
+    -- Jumplist
+    vim.keymap.set("n", "<leader>jj", builtin.jumplist, { desc = "View jumplist" })
+
+    -- View keymaps
+    vim.keymap.set("n", "<leader>km", builtin.keymaps, { desc = "View keymaps" })
+
     -- Search nvim config
     vim.keymap.set("n", "cf", function()
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
-    end, { desc = "Neovim Config find files"})
+    end, { desc = "Neovim Config find files" })
 
     -- Search for a string in files
     vim.keymap.set("n", "<leader>ss", builtin.live_grep, { desc = "String search" })
@@ -48,7 +54,7 @@ local function map_builtins()
     -- Currently open buffers
     vim.keymap.set("n", "<leader><leader>", function()
         builtin.buffers(themes.get_dropdown({ previewer = false }), { sort_lastused = true })
-    end, { desc = "Search Buffers"})
+    end, { desc = "Search Buffers" })
 end
 
 local function map_extensions()

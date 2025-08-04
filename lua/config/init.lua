@@ -4,7 +4,7 @@ local lzy_module = {
 	config = function()
 		require("lazy").setup("plugins", {
 			ui = {
-				border = "rounded",
+				border = "solid",
 			},
 		})
 	end,
