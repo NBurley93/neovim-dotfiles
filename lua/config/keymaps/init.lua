@@ -29,7 +29,7 @@ local function base_mappings()
     vim.keymap.set("n", "<Esc>", vim.cmd.nohlsearch, { desc = "Clear search highlight" })
 
     -- Ergonomic underscore
-    vim.keymap.set("i", "<S-Space>", "_", { desc = "Underscore", noremap = true, })
+    -- vim.keymap.set("i", "<S-Space>", "_", { desc = "Underscore", noremap = true, })
 
     -- Window navigation
     vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to left window" })
