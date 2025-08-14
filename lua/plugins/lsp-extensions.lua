@@ -16,6 +16,20 @@ return {
         ft = { "nvimconf", },
     },
     {
+        "DNLHC/glance.nvim",
+        cmd = "Glance",
+        opts = {
+            preview_win_opts = {
+                cursorline = true,
+                number = true,
+                wrap = true,
+            },
+            border = {
+                enable = true,
+            },
+        },
+    },
+    {
         "neovim/nvim-lspconfig",
         event = { "BufReadPost", "BufNewFile" },
         dependencies = {
