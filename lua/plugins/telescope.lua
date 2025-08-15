@@ -38,8 +38,10 @@ return {
 			})
 			ts.load_extension("ui-select")
 			ts.load_extension("undo")
+            ts.load_extension("git_branch")
 		end,
 	},
 	{ "nvim-telescope/telescope-ui-select.nvim" },
 	{ "debugloop/telescope-undo.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+    { "mrloop/telescope-git-branch.nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 }

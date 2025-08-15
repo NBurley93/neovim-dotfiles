@@ -51,6 +51,12 @@ local function copilot_keymaps()
     end, { desc = "Prepare a Copilot prompt" })
 end
 
+local function rip_sub_keymaps()
+    vim.keymap.set({"n", "x"}, "<leader>fs", function()
+        require("rip-substitute").sub()
+    end, { desc = " rip substitute"})
+end
+
 return {
     config = function()
         -- Shortcut to exit insert mode
@@ -61,5 +67,6 @@ return {
         oil_keymaps()
         harpoon_keymaps()
         copilot_keymaps()
+        rip_sub_keymaps()
     end,
 }

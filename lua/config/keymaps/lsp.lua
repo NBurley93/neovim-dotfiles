@@ -11,7 +11,7 @@ function M.config(client, bufnr)
     lsp_map("gm", function() vim.cmd("Glance implementations") end, bufnr, "View implementations")
 
     lsp_map("K", function()
-        vim.lsp.buf.hover()
+        require("pretty_hover").hover()
     end, bufnr, "Hover LSP Docs")
 
     lsp_map("<leader>rn", vim.lsp.buf.rename, bufnr, "Rename symbol")

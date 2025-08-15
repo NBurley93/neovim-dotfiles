@@ -50,6 +50,11 @@ local function map_extensions()
     search_map("u", function()
         extensions.undo.undo()
     end, "Search undo history")
+
+    -- Git branch
+    vim.keymap.set({"n", "v"}, "<leader>gb", function()
+        require("git_branch").files()
+    end, { desc = "Search for files with diffs in current branch compared to default"})
 end
 
 function M.config()
