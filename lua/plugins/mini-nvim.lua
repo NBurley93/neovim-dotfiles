@@ -1,21 +1,21 @@
 return {
     {
-        "echasnovski/mini.ai",
+        "nvim-mini/mini.ai",
         opts = true,
         version = false,
     },
     {
-        "echasnovski/mini.surround",
+        "nvim-mini/mini.surround",
         opts = true,
         version = false,
     },
     {
-        "echasnovski/mini.operators",
+        "nvim-mini/mini.operators",
         opts = true,
         version = false,
     },
     {
-        "echasnovski/mini.pairs",
+        "nvim-mini/mini.pairs",
         opts = true,
         version = false,
     },
