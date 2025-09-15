@@ -2,6 +2,22 @@ return {
 	{ "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
 	{ "tpope/vim-fugitive" },
 	{ "tpope/vim-rhubarb" },
+    {
+        "pwntester/octo.nvim",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim",
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            require("octo").setup({
+                default_remote = { "upstream", "origin" }, -- order to try remotes
+                default_merge_method = "commit",
+                default_delete_branch = true,
+                picker = "telescope",
+            })
+        end,
+    },
 	{
 		"lewis6991/gitsigns.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
