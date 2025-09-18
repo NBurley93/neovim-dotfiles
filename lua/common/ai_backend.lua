@@ -20,6 +20,16 @@ M.baseline_config = {
 }
 
 
+function M.override_github_provider_url()
+    -- Returns the default github provider, but changes the url to api.business.githubcopilot.com
+    local providers = require('CopilotChat.config.providers')
+    local provider = providers.copilot
+    provider.get_url = function()
+        return 'https://api.business.githubcopilot.com/v1/chat/completions'
+    end
+end
+
+
 function M.provision_config()
     local chutes_provider = require('common.ai_backends.chutes')
     local cfg = M.baseline_config
@@ -30,6 +40,11 @@ function M.provision_config()
     else
         vim.notify("Using default provider for Copilot Chat.",
             vim.log.levels.INFO)
+        if vim.env.NEOVIM_COPILOT_USE_BUSINESS_ENDPOINT == '1' then
+            M.override_github_provider_url()
+            vim.notify("Using GitHub Copilot Business endpoint for Copilot Chat.",
+                vim.log.levels.INFO)
+        end
     end
     return cfg
 end
