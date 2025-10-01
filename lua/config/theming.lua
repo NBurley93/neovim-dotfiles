@@ -73,17 +73,19 @@ function M.setup_commands()
 end
 
 function M.config()
-    vim.api.nvim_set_hl(0, "BufferFlash", { bg = "#FFD700" })
+    -- vim.api.nvim_set_hl(0, "BufferFlash", { bg = "#FFD700" })
 
-    M.setup_commands()
-    M.apply_theme("catppuccin", {
-        flavour = "macchiato",
-        transparent_background = true,
-        float = {
-            transparent = true,
-            solid = true,
-        },
-    })
+    require('custom_themes.mallgoth').colorscheme()
+
+    -- M.setup_commands()
+    -- M.apply_theme("catppuccin", {
+    --     flavour = "macchiato",
+    --     transparent_background = true,
+    --     float = {
+    --         transparent = true,
+    --         solid = true,
+    --     },
+    -- })
 end
 
 return M

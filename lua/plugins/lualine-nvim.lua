@@ -1,3 +1,5 @@
+local P = require("custom_themes.mallgoth.palette")
+
 local function setup_line_segments()
     return {
         lualine_a = {
@@ -38,26 +40,42 @@ local function setup_line_segments()
                     modified = " ",
                     removed = " ",
                 },
+                diff_color = {
+                    added = { fg = P.neon_green },
+                    modified = { fg = P.sickly_yellow },
+                    removed = { fg = P.rose_red },
+                },
             },
             {
                 "filename",
                 file_status = true,
+                newfile_status = true,
                 path = 1,
                 symbols = {
-                    modified = "󱇧",
-                    readonly = "󰈡 ",
-                    unnamed = "[Unnamed]",
+                    modified = "●",
+                    readonly = "",
+                    unnamed = "[No Name]",
                     newfile = "[New]",
                 },
             },
             {
                 "diagnostics",
+                sources = { "nvim_diagnostic" },
+                sections = { "error", "warn", "info", "hint" },
+                diagnostics_color = {
+                    error = { fg = P.harsh_magenta },
+                    warn  = { fg = P.sickly_yellow },
+                    info  = { fg = P.acid_teal },
+                    hint  = { fg = P.sickly_yellow },
+                },
                 symbols = {
                     error = " ",
                     warn = " ",
                     info = " ",
-                    hint = " ",
+                    hint = " ",
                 },
+                colored = true,
+                update_in_insert = false,
             },
         },
         lualine_c = {
@@ -74,9 +92,28 @@ local function setup_line_segments()
                 },
                 -- List of LSP names to ignore (e.g., `null-ls`):
                 ignore_lsp = {},
-            }
+            },
         },
         lualine_x = {
+            {
+                "copilot",
+                symbols = {
+                    status = {
+                        hl = {
+                            enabled = { fg = P.acid_teal },
+                            sleep = { fg = P.fg },
+                            disabled = { fg = P.muted },
+                            warning = { fg = P.sickly_yellow },
+                            unknown = { fg = P.harsh_magenta },
+                        },
+                    },
+                    spinners = "dots",
+                    spinner_color = P.biohazard_lime,
+                },
+                show_colors = false,
+                show_loading = true
+            },
+            "encoding",
             {
                 "fileformat",
                 symbols = {
@@ -85,34 +122,79 @@ local function setup_line_segments()
                     mac = "",
                 }
             },
-            "encoding",
             { "filetype", colored = true },
         },
-        lualine_y = { "progress",
-            {
-                "searchcount",
-                maxcount = 999,
-                timeout = 500,
-            },
-        },
+        lualine_y = { "progress",},
         lualine_z = { "location" },
     }
 end
 
-local function setup_options()
+local function setup_inactive_segments()
     return {
-
-        icons_enabled = true,
-        component_separators = "│",
-        globalstatus = true,
-        disabled_filetypes = { "lazy", "noice" },
-        refresh = {
-            statusline = 1000,
-            tabline = 1000,
-            winbar = 1000,
-        },
+        lualine_a = { "filename" },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = { "location" },
+        lualine_y = {},
+        lualine_z = {},
     }
 end
+
+local function setup_winbar_segments()
+    return {
+        lualine_a = {
+            {
+                "filetype",
+                colored = false,
+                icon_only = true,
+                icon = { align = "right" },
+            },
+        },
+        lualine_b = {
+        },
+        lualine_c = {
+            {
+                "filename",
+                file_status = true,
+                newfile_status = true,
+                path = 0,
+                symbols = {
+                    modified = "●",
+                    readonly = "",
+                    unnamed = "[No Name]",
+                    newfile = "[New]",
+                },
+            },
+        },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+    }
+end
+
+local function get_theme()
+    return require('custom_themes.mallgoth.plugins.lualine')
+end
+
+local function setup_options()
+    return {
+        icons_enabled        = true,
+        -- component_separators = { left = "│", right = "│" },
+        component_separators = "",
+        section_separators   = { left = "", right = "" },
+        globalstatus         = true,
+        disabled_filetypes   = {
+            statusline = {
+                "lazy", "noice", "dashboard",
+            },
+            winbar = {
+                "lazy", "noice", "oil",
+            }
+        },
+        theme = get_theme(),
+    }
+end
+
 
 return {
     {
@@ -124,11 +206,15 @@ return {
         opts = {
             options = setup_options(),
             sections = setup_line_segments(),
+            inactive_sections = setup_inactive_segments(),
             tabline = {},
-            winbar = {},
-            inactive_winbar = {},
+            winbar = setup_winbar_segments(),
+            inactive_winbar = setup_winbar_segments(),
             extensions = { "fugitive", "trouble", "lazy", "mason", "oil" },
-            theme = 'lflops',
+            -- theme = 'lflops',
         },
     },
+    {
+        'AndreM222/copilot-lualine',
+    }
 }

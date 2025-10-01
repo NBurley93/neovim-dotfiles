@@ -12,18 +12,28 @@ return {
 					require("telescope.themes").get_dropdown({}),
 				},
 				defaults = {
-					layout_config = { prompt_position = "top" },
-					layout_strategy = "horizontal",
+					layout_config = { prompt_position = "top", height = 0.92, width = 0.92 },
+					layout_strategy = "flex",
 					sorting_strategy = "ascending",
 					winblend = 0,
-					prompt_prefix = " ".. icons.ui.Telescope .. " ",
-					selection_caret = "  ",
+					-- prompt_prefix = " ".. icons.ui.Telescope .. " ",
+					-- selection_caret = "  ",
 					results_title = "",
-					dynamic_preview_title = false,
+					dynamic_preview_title = true,
                     border = true,
+                    color_devicons = true,
                     -- Solid border
-                    borderchars = { "" },
+                    -- borderchars = { "" },
+                    prompt_prefix = "  ",     -- looks nice in neon; change if your font sulks
+                    selection_caret = " ",
+                    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 				},
+                pickers = {
+                    find_files = { hidden = true },
+                    buffers = { sort_lastused = true, ignore_current_buffer = true },
+                    live_grep = { only_sort_text = true },
+                    diagnostics = { theme = "dropdown" },
+                },
 				extensions = {
 					aerial = {
 						show_nesting = {

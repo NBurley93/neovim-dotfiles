@@ -50,7 +50,6 @@ function M.provision_provider_config()
     }
 
     local nconfig = vim.tbl_deep_extend("force", baseline_mod.provider_baseline_config, config)
-    print(vim.inspect(nconfig))
     return nconfig
 end
 
