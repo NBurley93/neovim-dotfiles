@@ -18,7 +18,7 @@ function M.colorscheme()
 
             -- Syntax groups
             Keyword = { fg = P.neon_green, bold = true },
-            String = { fg = P.electric_violet },
+            String = { fg = P.cursor_glow },
             Function = { fg = P.acid_teal, bold = true },
             Identifier = { fg = P.pale_lilac },
             Constant = { fg = P.rose_red },

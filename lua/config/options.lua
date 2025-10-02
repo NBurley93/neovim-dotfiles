@@ -18,7 +18,7 @@ return {
 			smartindent = true,
 			number = true,
             showmode = false,
-			cmdheight = 2,
+			cmdheight = 0,
 			breakindent = true,
 			mouse = "a",
 			relativenumber = true,
