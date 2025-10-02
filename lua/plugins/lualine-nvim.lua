@@ -161,7 +161,7 @@ local function setup_options()
                 "lazy", "noice", "oil", "DiffviewFiles",
             }
         },
-        theme = 'mallgoth',
+        theme = 'girlfailure',
     }
 end
 

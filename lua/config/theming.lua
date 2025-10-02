@@ -76,7 +76,8 @@ function M.config()
     -- vim.api.nvim_set_hl(0, "BufferFlash", { bg = "#FFD700" })
 
     -- require('custom_themes.mallgoth').colorscheme()
-    vim.cmd.colorscheme("mallgoth")
+    -- vim.cmd.colorscheme("mallgoth")
+    vim.cmd.colorscheme("girlfailure")
 
     -- M.setup_commands()
     -- M.apply_theme("catppuccin", {

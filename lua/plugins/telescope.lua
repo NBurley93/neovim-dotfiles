@@ -24,7 +24,7 @@ return {
                     color_devicons = true,
                     -- Solid border
                     -- borderchars = { "" },
-                    prompt_prefix = "  ",     -- looks nice in neon; change if your font sulks
+                    prompt_prefix = "  ",     -- looks nice in neon; change if your font sulks
                     selection_caret = " ",
                     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 				},
