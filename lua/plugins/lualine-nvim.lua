@@ -1,5 +1,3 @@
-local P = require("custom_themes.mallgoth.palette")
-
 local function setup_line_segments()
     return {
         lualine_a = {
@@ -40,11 +38,6 @@ local function setup_line_segments()
                     modified = " ",
                     removed = " ",
                 },
-                diff_color = {
-                    added = { fg = P.neon_green },
-                    modified = { fg = P.sickly_yellow },
-                    removed = { fg = P.rose_red },
-                },
             },
             {
                 "filename",
@@ -62,12 +55,6 @@ local function setup_line_segments()
                 "diagnostics",
                 sources = { "nvim_diagnostic" },
                 sections = { "error", "warn", "info", "hint" },
-                diagnostics_color = {
-                    error = { fg = P.harsh_magenta },
-                    warn  = { fg = P.sickly_yellow },
-                    info  = { fg = P.acid_teal },
-                    hint  = { fg = P.sickly_yellow },
-                },
                 symbols = {
                     error = " ",
                     warn = " ",
@@ -97,19 +84,6 @@ local function setup_line_segments()
         lualine_x = {
             {
                 "copilot",
-                symbols = {
-                    status = {
-                        hl = {
-                            enabled = { fg = P.acid_teal },
-                            sleep = { fg = P.fg },
-                            disabled = { fg = P.muted },
-                            warning = { fg = P.sickly_yellow },
-                            unknown = { fg = P.harsh_magenta },
-                        },
-                    },
-                    spinners = "dots",
-                    spinner_color = P.biohazard_lime,
-                },
                 show_colors = false,
                 show_loading = true
             },
@@ -172,10 +146,6 @@ local function setup_winbar_segments()
     }
 end
 
-local function get_theme()
-    return require('custom_themes.mallgoth.plugins.lualine')
-end
-
 local function setup_options()
     return {
         icons_enabled        = true,
@@ -191,7 +161,7 @@ local function setup_options()
                 "lazy", "noice", "oil", "DiffviewFiles",
             }
         },
-        theme = get_theme(),
+        theme = 'mallgoth',
     }
 end
 
