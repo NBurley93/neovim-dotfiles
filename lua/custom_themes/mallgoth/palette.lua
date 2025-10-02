@@ -63,6 +63,15 @@ local P = {
     diff_add            = "#556B2F",
     diff_remove         = "#4B0082",
     diff_change         = "#800020",
+
+    -- Diffview
+    diff_add_soft = "#0F2316",
+    diff_change_soft = "#1A1318",
+    diff_remove_soft = "#170F23",
+
+    diff_add_text = "#133322",
+    diff_change_text = "#332218",
+    diff_remove_text = "#241433"
 }
 
 return P

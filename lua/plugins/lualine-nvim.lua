@@ -48,8 +48,8 @@ local function setup_line_segments()
             },
             {
                 "filename",
-                file_status = true,
-                newfile_status = true,
+                file_status = false,
+                newfile_status = false,
                 path = 1,
                 symbols = {
                     modified = "●",
@@ -188,7 +188,7 @@ local function setup_options()
                 "lazy", "noice", "dashboard",
             },
             winbar = {
-                "lazy", "noice", "oil",
+                "lazy", "noice", "oil", "DiffviewFiles",
             }
         },
         theme = get_theme(),
