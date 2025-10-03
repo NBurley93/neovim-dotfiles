@@ -35,7 +35,7 @@ local lzy_module = {
             dev = {
                 path = "~/neovim-projects",
                 patterns = {},
-                fallback = false,
+                fallback = true,
             },
         })
     end,
