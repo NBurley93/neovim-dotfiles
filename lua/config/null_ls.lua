@@ -34,7 +34,6 @@ return {
                 },
                 go = {
                     diagnostics.golangci_lint,
-                    formatting.gofmt,
                 },
                 yaml = {
                     formatting.yamlfmt,

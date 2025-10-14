@@ -67,6 +67,7 @@ return {
                 filetypes = { "yaml.github", "yaml" },
             }),
             make_lsp_config("bashls"),
+            make_lsp_config("gopls"),
             make_lsp_config("powershell_es"),
             make_lsp_config("taplo"),
             make_lsp_config("texlab", {
