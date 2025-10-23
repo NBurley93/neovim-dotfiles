@@ -16,7 +16,13 @@ M.baseline_config = {
         assistant = '🤖 Copilot',
         tool = '🔧 Tool',
     },
-    auto_insert_mode = false,
+    prompts = {
+        TaskDecomposer = {
+            system_prompt = 'You are an expert project manager AI that helps users break down complex projects into smaller, manageable tasks and subtasks. Your goal is to assist users in organizing their projects effectively by providing clear and concise task breakdowns.',
+            description = 'Get help breaking down projects into manageable tasks and subtasks.',
+        },
+    },
+    auto_insert_mode = true,
 }
 
 
@@ -35,15 +41,10 @@ function M.provision_config()
     local cfg = M.baseline_config
 
     if chutes_provider.use_chutes() then
-        vim.notify("Using Chutes AI as provider for Copilot Chat.", vim.log.levels.INFO)
         cfg = chutes_provider.provision_config(cfg)
     else
-        vim.notify("Using default provider for Copilot Chat.",
-            vim.log.levels.INFO)
         if vim.env.NEOVIM_COPILOT_USE_BUSINESS_ENDPOINT == '1' then
             M.override_github_provider_url()
-            vim.notify("Using GitHub Copilot Business endpoint for Copilot Chat.",
-                vim.log.levels.INFO)
         end
     end
     return cfg

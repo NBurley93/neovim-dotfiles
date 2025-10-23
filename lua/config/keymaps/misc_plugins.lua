@@ -42,10 +42,6 @@ local function copilot_keymaps()
         vim.cmd.CopilotChatModels()
     end, { desc = "Show Copilot Models" })
 
-    vim.keymap.set("n", "<leader>cpa", function()
-        vim.cmd.CopilotChatAgents()
-    end, { desc = "Show Copilot Agents" })
-
     vim.keymap.set("n", "<leader>cpp", function()
         vim.cmd.CopilotChatPrompts()
     end, { desc = "Prepare a Copilot prompt" })
