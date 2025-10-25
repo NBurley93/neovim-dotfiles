@@ -32,9 +32,7 @@ function M.setup(server_list, log_level)
                 return true
             end
         end
-        if not config.capabilities then
-            config.capabilities = vim.lsp.protocol.make_client_capabilities()
-        end
+        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
 
         vim.lsp.config(server_name, config)
         vim.lsp.enable(server_name)

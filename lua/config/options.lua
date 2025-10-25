@@ -103,13 +103,24 @@ return {
 			end
 		end
 
-		-- Configure python runtime for windowps
-		if isWindows then
-			vim.g.python3_host_prog = "python.exe"
-			vim.g.sqlite_clib_path = vim.fn.stdpath("data") .. "/sqlite3.dll"
-		else
-			vim.g.python3_host_prog = "~/.nvimenv/.venv/bin/python3"
-		end
+        local get_python_host = function()
+            if isWindows then
+                return "python.exe"
+            else
+                return "python3"
+            end
+        end
+
+        local get_sqlite_path = function()
+            if isWindows then
+                return vim.fn.stdpath("data") .. "/sqlite3.dll"
+            else
+                return ""
+            end
+        end
+
+        vim.g.python3_host_prog = get_python_host()
+        vim.g.sqlite_clib_path = get_sqlite_path()
 
 		-- Misc provider vars
 		vim.g.loaded_perl_provider = 0

@@ -41,6 +41,15 @@ local function base_mappings()
     vim.keymap.set("v", "K", ":m '>-2<CR>gv=gv", { desc = "Move current line up" })
     vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move current line down" })
 
+    -- Formatting
+    vim.keymap.set({ "n", "v" }, "<leader>fb", function()
+        require('conform').format({
+            lsp_fallback = true,
+            async = false,
+            timeout_ms = 500,
+        })
+    end, { desc = "Format current buffer or visual range" })
+
     -- The BEST remap ever!!!
     vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Put without replacing paste buffer" })
 end

@@ -15,10 +15,6 @@ function M.config(client, bufnr)
     end, bufnr, "Hover LSP Docs")
 
     lsp_map("<leader>rn", vim.lsp.buf.rename, bufnr, "Rename symbol")
-
-    lsp_map("<leader>fb", function()
-        vim.lsp.buf.format({ async = true })
-    end, bufnr, "Format current buffer")
 end
 
 return M

@@ -9,41 +9,42 @@ return {
             pcall(require("nvim-treesitter.install").update({ with_sync = true }))
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
-                    "c",
-                    "cpp",
-                    "c_sharp",
-                    "cmake",
-                    "diff",
-                    "dot",
-                    "git_config",
-                    "git_rebase",
-                    "gitattributes",
-                    "gitcommit",
+                    -- C/C++ tools
+                    "c","cpp","cmake",
+
+                    -- Python
+                    "python",
+
+                    -- Misc for gamedev/hobby
                     "glsl",
-                    "html",
-                    "http",
                     "ini",
+                    "lua",
+
+                    -- Data description formats
                     "json",
-                    "javascript",
-                    "make",
-                    "regex",
-                    "sql",
-                    "ssh_config",
-                    "latex",
                     "xml",
                     "yaml",
-                    "lua",
-                    "vim",
-                    "vimdoc",
-                    "regex",
-                    "bash",
-                    "markdown",
-                    "markdown_inline",
-                    "python",
+
+                    -- Languages for web/devops
                     "terraform",
+                    "dockerfile",
+
+                    -- Misc languages
+                    "c_sharp",
                     "go",
                     "rust",
-                    "dockerfile",
+
+                    -- Document formats
+                    "markdown",
+                    "markdown_inline",
+
+                    -- Misc tools
+                    "regex",
+                    "diff",
+
+                    -- Git tooling
+                    "git_config", "git_rebase",
+                    "gitattributes", "gitcommit",
                 },
                 auto_install = false,
                 ignore_install = {},

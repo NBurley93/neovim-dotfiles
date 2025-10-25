@@ -1,13 +1,5 @@
 return {
     {
-        "nvimtools/none-ls.nvim",
-        event = { "BufReadPost", "BufNewFile" },
-        dependencies = {
-            "williamboman/mason.nvim",
-            { "jay-babu/mason-null-ls.nvim", lazy = true },
-        },
-    },
-    {
         "folke/lazydev.nvim",
         event = {
             "BufReadPost *.lua",

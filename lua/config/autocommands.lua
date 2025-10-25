@@ -1,10 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-local function realpath(path)
-    return vim.loop.fs_realpath(path) or path
-end
-
 local function CopilotAutocommands()
     local copilot_blink_group = augroup("copilot_blink_group", { clear = true })
 
@@ -48,7 +44,12 @@ local function AutoformatFTCommands()
         desc = "Automatically format LaTex files on save using tex-fmt",
         callback = function()
             local fname = vim.api.nvim_buf_get_name(0)
-            vim.cmd(":silent !tex-fmt " .. fname)
+            local ok, err = pcall(function()
+                vim.cmd(":silent !tex-fmt " .. vim.fn.shellescape(fname))
+            end)
+            if not ok then
+                vim.notify("tex-fmt failed: " .. err, vim.log.levels.ERROR)
+            end
         end,
     })
 end

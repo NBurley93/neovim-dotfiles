@@ -1,7 +1,8 @@
 return {
     {
         "Saghen/blink.cmp",
-        lazy = false,
+        lazy = true,
+        event = 'InsertEnter',
         version = "v0.13.*",
         build = 'cargo build --release',
         dependencies = {
@@ -76,7 +77,18 @@ return {
                 -- },
             },
             sources = {
-                default = { "lsp", "path", "buffer", "lazydev", "git", "copilot" },
+                default = function(ctx)
+                    local success, node = pcall(vim.treesitter.get_node)
+                    if success and node and vim.tbl_contains( { 'comment', 'line_comment', 'block_comment' }, node:type()) then
+                        return { 'buffer', 'copilot', }
+                    elseif vim.bo.filetype == 'lua' then
+                        return { 'lsp', 'path', 'lazydev', 'copilot', }
+                    elseif vim.bo.filetype == 'gitcommit' then
+                        return { 'git', 'buffer', 'copilot', }
+                    else
+                        return { 'lsp', 'path', 'snippets', 'buffer', 'copilot', }
+                    end
+                end,
                 providers = {
                     lazydev = {
                         name = "LazyDev",

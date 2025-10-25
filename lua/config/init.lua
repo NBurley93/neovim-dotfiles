@@ -55,7 +55,6 @@ local config_entries = {
     config_module('completion', require('config.completion')),
     config_module('lsp', require('config.lsp')),
     config_module('autocmd', require('config.autocommands')),
-    config_module('null-ls', require('config.null_ls')),
     config_module('keymaps', require('config.keymaps')),
     config_module('theming', require('config.theming')),
 }

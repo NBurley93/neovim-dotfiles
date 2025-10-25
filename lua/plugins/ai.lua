@@ -18,6 +18,7 @@ return {
     },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
+        event = "InsertEnter",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "zbirenbaum/copilot.lua",
