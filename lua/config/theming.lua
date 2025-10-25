@@ -2,7 +2,7 @@ local M = {}
 
 M.current_theme = nil
 
-M.themes_path = vim.fn.stdpath 'config' .. '/lua/config/themes'
+M.themes_path = vim.fn.stdpath('config') .. '/lua/config/themes'
 M.themes_source = 'config.themes.'
 
 function M.get_available_themes()
@@ -16,7 +16,7 @@ function M.get_available_themes()
         break
       end
 
-      if type == 'file' and name:match '%.lua$' then
+      if type == 'file' and name:match('%.lua$') then
         local theme_name = name:gsub('%.lua$', '')
         table.insert(themes, theme_name)
       end
@@ -31,7 +31,7 @@ function M.apply_theme(theme_name, opts)
   opts = opts or {}
 
   if not theme_name then
-    print 'No theme specified'
+    print('No theme specified')
     return false
   end
 
@@ -56,7 +56,7 @@ end
 function M.setup_commands()
   vim.api.nvim_create_user_command('ThemeList', function()
     local themes = M.get_available_themes()
-    print 'Available Themes:'
+    print('Available Themes:')
     for _, theme in ipairs(themes) do
       local prefix = theme == M.current_theme and '* ' or ' '
       print(prefix .. theme)
@@ -79,9 +79,9 @@ function M.config()
 
   -- require('custom_themes.mallgoth').colorscheme()
   -- vim.cmd.colorscheme("mallgoth")
-  vim.cmd.colorscheme 'girlfailure'
 
-  -- M.setup_commands()
+  M.setup_commands()
+  M.apply_theme('girlfailure')
   -- M.apply_theme("catppuccin", {
   --     flavour = "macchiato",
   --     transparent_background = true,

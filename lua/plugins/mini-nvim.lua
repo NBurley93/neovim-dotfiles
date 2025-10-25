@@ -19,4 +19,9 @@ return {
     opts = true,
     version = false,
   },
+  {
+    'nvim-mini/mini.jump',
+    opts = true,
+    version = false,
+  },
 }

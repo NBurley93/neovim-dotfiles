@@ -7,16 +7,20 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         yaml = { 'yamlfmt' },
-        dockerfile = { 'hadolint' },
-        gitcommit = { 'commitlint' },
         terraform = { 'terraform_fmt' },
         cmake = { 'cmake_format' },
       },
+      default_format_ops = {
+        lsp_format = 'fallback',
+      },
       format_on_save = {
-        lsp_fallback = true,
-        async = false,
+        lsp_format = 'fallback',
         timeout_ms = 500,
       },
+      format_after_save = {
+        lsp_fallback = 'fallback',
+      },
+      notify_no_formatters = false,
     },
   },
 }
