@@ -1,5 +1,5 @@
 return {
-    {
-        "sqwishy/vim-sqf-syntax"
-    },
+  {
+    'sqwishy/vim-sqf-syntax',
+  },
 }

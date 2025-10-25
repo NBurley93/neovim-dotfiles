@@ -1,8 +1,7 @@
 local M = {}
 
 M.provider_baseline_config = {
-    providers = {
-    },
+  providers = {},
 }
 
 return M

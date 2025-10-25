@@ -1,5 +1,5 @@
 return {
-	config = function()
-		require("lspkind").init()
-	end,
+  config = function()
+    require('lspkind').init()
+  end,
 }

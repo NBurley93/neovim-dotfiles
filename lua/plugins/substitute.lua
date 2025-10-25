@@ -1,7 +1,7 @@
 return {
-    {
-        "chrisgrieser/nvim-rip-substitute",
-        cmd = "RipSubstitute",
-        opts = {},
-    }
+  {
+    'chrisgrieser/nvim-rip-substitute',
+    cmd = 'RipSubstitute',
+    opts = {},
+  },
 }

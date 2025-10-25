@@ -1,6 +1,6 @@
 # Neovim Configuration Modernization Plan
 
-**Date:** October 25, 2025  
+**Date:** October 25, 2025
 **Configuration:** NBurley93/neovim-dotfiles
 
 ---
@@ -37,7 +37,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Consolidate on_attach logic** - Move all keybindings and on_attach logic to a single location for better maintainability
 - [ ] **Use vim.lsp.config defaults** - Leverage the new default configuration system instead of manually setting common options
 
-**Priority:** High  
+**Priority:** High
 **Estimated Effort:** 2-3 hours
 
 ---
@@ -72,7 +72,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Create a keymap reference document** - Generate a markdown file listing all keybindings
 - [ ] **Consolidate similar mappings** - Group related functionality (e.g., all git operations under `<leader>g`)
 
-**Priority:** Medium  
+**Priority:** Medium
 **Estimated Effort:** 2-4 hours
 
 ---
@@ -103,7 +103,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Profile startup time** - Use `:Lazy profile` to identify slow plugins
 - [ ] **Document loading strategies** - Add comments explaining why each plugin loads when it does
 
-**Priority:** Medium  
+**Priority:** Medium
 **Estimated Effort:** 3-4 hours
 
 ---
@@ -141,7 +141,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
   ```
 - [ ] **Add completion transformers** - Use blink.cmp transformers for better filtering
 
-**Priority:** Low-Medium  
+**Priority:** Low-Medium
 **Estimated Effort:** 2 hours
 
 ---
@@ -181,7 +181,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
   - More flexible configuration
   - Active development
 
-**Priority:** Medium-High  
+**Priority:** Medium-High
 **Estimated Effort:** 3-4 hours
 
 ---
@@ -219,7 +219,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Remove unused code** - Delete the `realpath()` function
 - [ ] **Use FileType events** - Replace BufReadPost/BufNewFile with FileType where appropriate
 
-**Priority:** Low-Medium  
+**Priority:** Low-Medium
 **Estimated Effort:** 1-2 hours
 
 ---
@@ -252,7 +252,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Validate plugin availability** - Check if plugins exist before configuring them
 - [ ] **Create fallback configurations** - Provide minimal functionality if plugins fail to load
 
-**Priority:** Medium  
+**Priority:** Medium
 **Estimated Effort:** 2-3 hours
 
 ---
@@ -291,7 +291,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Configure test output** - Better integration with diagnostics
 - [ ] **Add debug testing** - Integrate with DAP for debugging tests
 
-**Priority:** Low  
+**Priority:** Low
 **Estimated Effort:** 2-3 hours
 
 ---
@@ -330,7 +330,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Add inline comments** - Explain non-obvious configuration choices
 - [ ] **Document external dependencies** - List all tools needed (ripgrep, fd, etc.)
 
-**Priority:** Medium  
+**Priority:** Medium
 **Estimated Effort:** 3-4 hours
 
 ---
@@ -361,7 +361,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Use Neovim's profiling** - Leverage `:profile` command instead of custom solution
 - [ ] **Add load failure recovery** - Continue loading other modules if one fails
 
-**Priority:** Low  
+**Priority:** Low
 **Estimated Effort:** 1-2 hours
 
 ---
@@ -396,7 +396,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Fix octo.nvim config** - Update `requires` to `dependencies`
 - [ ] **Consolidate git keybindings** - Ensure all git commands use consistent leader group
 
-**Priority:** Low-Medium  
+**Priority:** Low-Medium
 **Estimated Effort:** 2-3 hours
 
 ---
@@ -439,7 +439,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Either use or remove theme system** - Uncomment and use the dynamic theme system, or remove it
 - [ ] **Consistent highlight groups** - Ensure plugins use same highlight groups for similar elements
 
-**Priority:** Low  
+**Priority:** Low
 **Estimated Effort:** 2 hours
 
 ---
@@ -483,7 +483,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
   ```
 - [ ] **Use platform-aware paths** - Apply throughout configuration
 
-**Priority:** High (if using WSL)  
+**Priority:** High (if using WSL)
 **Estimated Effort:** 2 hours
 
 ---
@@ -522,7 +522,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Configure preview settings** - Limit preview size for large files
 - [ ] **Add more extensions** - Consider: aerial (symbol search), project (project management)
 
-**Priority:** Medium  
+**Priority:** Medium
 **Estimated Effort:** 1-2 hours
 
 ---
@@ -567,7 +567,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Add incremental selection** - Enable smart selection expansion
 - [ ] **Document language choices** - Explain which parsers are installed and why
 
-**Priority:** Low-Medium  
+**Priority:** Low-Medium
 **Estimated Effort:** 1-2 hours
 
 ---
@@ -600,7 +600,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Update dependencies syntax** - Change `requires` to `dependencies`
 - [ ] **Document or remove** - Either use it properly or remove the plugin
 
-**Priority:** Low  
+**Priority:** Low
 **Estimated Effort:** 1 hour
 
 ---
@@ -641,7 +641,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Configure float appearance** - Match UI theme
 - [ ] **Set update timing** - Control when diagnostics update
 
-**Priority:** Low  
+**Priority:** Low
 **Estimated Effort:** 1 hour
 
 ---
@@ -679,7 +679,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
   ```
 - [ ] **Add provider validation** - Check if selected provider is available
 
-**Priority:** Low  
+**Priority:** Low
 **Estimated Effort:** 1-2 hours
 
 ---
@@ -722,7 +722,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
   ```
 - [ ] **Document performance targets** - Set and maintain startup time goals
 
-**Priority:** Medium  
+**Priority:** Medium
 **Estimated Effort:** 2-3 hours
 
 ---
@@ -757,7 +757,7 @@ Your Neovim configuration is well-structured and modern in many aspects, utilizi
 - [ ] **Add better terminal** - `akinsho/toggleterm.nvim` or similar
 - [ ] **Add snippet management** - Better snippet workflow with LuaSnip
 
-**Priority:** Low (Quality of life)  
+**Priority:** Low (Quality of life)
 **Estimated Effort:** Varies (1-4 hours per feature)
 
 ---

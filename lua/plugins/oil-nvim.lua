@@ -1,13 +1,13 @@
 return {
-	{
-		"stevearc/oil.nvim",
-		config = function()
-			require("oil").setup({
-				view_options = {
-					show_hidden = true,
-				},
-			})
-		end,
-		dependencies = { require("common.defines").WEB_DEVICONS_PROVIDER },
-	},
+  {
+    'stevearc/oil.nvim',
+    config = function()
+      require('oil').setup {
+        view_options = {
+          show_hidden = true,
+        },
+      }
+    end,
+    dependencies = { require('common.defines').WEB_DEVICONS_PROVIDER },
+  },
 }
