@@ -1,7 +1,13 @@
 return {
   { 'petertriho/cmp-git', dependencies = 'nvim-lua/plenary.nvim' },
-  { 'tpope/vim-fugitive' },
-  { 'tpope/vim-rhubarb' },
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+  },
   {
     'pwntester/octo.nvim',
     requires = {
@@ -10,19 +16,19 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require('octo').setup {
+      require('octo').setup({
         default_remote = { 'upstream', 'origin' }, -- order to try remotes
         default_merge_method = 'commit',
         default_delete_branch = true,
         picker = 'telescope',
-      }
+      })
     end,
   },
   {
     'lewis6991/gitsigns.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-      require('gitsigns').setup {
+      require('gitsigns').setup({
         signs = {
           add = { text = '┃' },
           change = { text = '┃' },
@@ -38,14 +44,14 @@ return {
           virt_text = true,
           virt_text_pos = 'eol',
         },
-      }
+      })
     end,
   },
   {
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
     config = function()
-      require('diffview').setup {
+      require('diffview').setup({
         use_icons = true,
         default_args = {
           DiffviewOpen = { '--imply-local' },
@@ -80,7 +86,7 @@ return {
             },
           },
         },
-      }
+      })
     end,
   },
   { 'akinsho/git-conflict.nvim' },

@@ -4,13 +4,13 @@ return {
     cmd = 'Copilot',
     event = 'InsertEnter',
     config = function()
-      require('copilot').setup {
+      require('copilot').setup({
         suggestion = { enabled = false },
         panel = { enabled = false },
         filetypes = {
           gitcommit = true,
         },
-      }
+      })
     end,
   },
   {
@@ -18,7 +18,7 @@ return {
   },
   {
     'CopilotC-Nvim/CopilotChat.nvim',
-    event = 'InsertEnter',
+    event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'zbirenbaum/copilot.lua',
@@ -31,7 +31,7 @@ return {
       return nil
     end)(),
     config = function()
-      local ai_backend = require 'common.ai_backend'
+      local ai_backend = require('common.ai_backend')
       require('CopilotChat').setup(ai_backend.provision_config())
     end,
   },

@@ -2,7 +2,7 @@ local function trouble_keymaps()
   -- Trouble
   vim.keymap.set('n', '<leader>t', function()
     vim.cmd.Trouble('diagnostics', 'toggle')
-  end, { desc = 'Show Trouble menu' })
+  end, { desc = 'Show [T]rouble menu' })
 end
 
 local function ufo_keymaps()
@@ -19,13 +19,13 @@ local function oil_keymaps()
   -- Oil
   vim.keymap.set('n', '<leader>pv', function()
     vim.cmd.Oil()
-  end, { desc = 'Open Oil to cwd' })
+  end, { desc = '[V]iew cwd with Oil' })
 end
 
 local function harpoon_keymaps()
   -- Harpoon
-  local harpoon = require 'harpoon'
-  local commonfuncs = require 'common.functions'
+  local harpoon = require('harpoon')
+  local commonfuncs = require('common.functions')
   vim.keymap.set('n', '<leader>m', function()
     harpoon:list():add()
     commonfuncs.flashBuffer(vim.api.nvim_get_current_buf(), 150)
@@ -40,23 +40,8 @@ local function harpoon_keymaps()
   end, { desc = 'Goto next Harpoon buffer' })
 end
 
-local function copilot_keymaps()
-  -- Copilot
-  vim.keymap.set('n', '<leader>cpc', function()
-    vim.cmd.CopilotChatToggle()
-  end, { desc = 'Open Copilot chat' })
-
-  vim.keymap.set('n', '<leader>cpm', function()
-    vim.cmd.CopilotChatModels()
-  end, { desc = 'Show Copilot Models' })
-
-  vim.keymap.set('n', '<leader>cpp', function()
-    vim.cmd.CopilotChatPrompts()
-  end, { desc = 'Prepare a Copilot prompt' })
-end
-
 local function rip_sub_keymaps()
-  vim.keymap.set({ 'n', 'x' }, '<leader>fs', function()
+  vim.keymap.set({ 'n', 'x' }, '<leader>r', function()
     require('rip-substitute').sub()
   end, { desc = ' rip substitute' })
 end
@@ -70,7 +55,6 @@ return {
     ufo_keymaps()
     oil_keymaps()
     harpoon_keymaps()
-    copilot_keymaps()
     rip_sub_keymaps()
   end,
 }
