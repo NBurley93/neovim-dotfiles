@@ -1,4 +1,18 @@
 return {
+  -- Comment.nvim: allows easy commenting of code
+  {
+    'numToStr/Comment.nvim',
+    opts = {},
+  },
+
+  -- nvim-rip-substitute: A plugin for performing search and replace operations using ripgrep
+  {
+    'chrisgrieser/nvim-rip-substitute',
+    cmd = 'RipSubstitute',
+    opts = {},
+  },
+
+  -- Conform.nvim: an opinionated code formatter
   {
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },

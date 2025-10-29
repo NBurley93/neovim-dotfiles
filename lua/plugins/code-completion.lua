@@ -1,4 +1,5 @@
 return {
+  -- blink.cmp - Modern, Fast and Extensible Completion Engine for Neovim
   {
     'Saghen/blink.cmp',
     lazy = true,

@@ -1,4 +1,5 @@
 return {
+  -- Copilot suckless
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
@@ -13,9 +14,13 @@ return {
       })
     end,
   },
+
+  -- Blink.cmp Copilot source
   {
     'giuxtaposition/blink-cmp-copilot',
   },
+
+  -- Copilot Chat AI chat interface
   {
     'CopilotC-Nvim/CopilotChat.nvim',
     event = 'VimEnter',

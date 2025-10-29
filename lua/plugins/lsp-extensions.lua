@@ -5,7 +5,7 @@ return {
       'BufReadPost *.lua',
       'BufNewFile *.lua',
     },
-    ft = { 'nvimconf' },
+    ft = { 'lua' },
   },
   {
     'DNLHC/glance.nvim',
@@ -33,7 +33,7 @@ return {
       'mason-org/mason-lspconfig.nvim',
     },
     config = function()
-      require('mason-lspconfig').setup {
+      require('mason-lspconfig').setup({
         ensure_installed = {
           'clangd',
           'lua_ls',
@@ -54,31 +54,8 @@ return {
           'docker_compose_language_service',
           'texlab',
         },
-      }
+      })
     end,
-  },
-  {
-    'j-hui/fidget.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
-    opts = {
-      progress = {
-        display = {
-          done_icon = '✅',
-          progress_icon = {
-            pattern = 'circle_quarters',
-            period = 1,
-          },
-        },
-      },
-      notification = {
-        window = {
-          winblend = 0,
-          relative = 'editor',
-          x_padding = 2,
-          y_padding = 1,
-        },
-      },
-    },
   },
   { 'p00f/clangd_extensions.nvim', ft = { 'c', 'cpp', 'rust' }, event = { 'BufReadPost', 'BufNewFile' } },
 }

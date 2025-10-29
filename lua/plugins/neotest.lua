@@ -1,4 +1,4 @@
-local commonicons = require 'common.icons'
+local commonicons = require('common.icons')
 local map = function(keys, action, desc)
   vim.keymap.set('n', keys, action, { desc = desc })
 end
@@ -7,7 +7,7 @@ return {
   {
     'nvim-neotest/neotest',
     config = function()
-      require('neotest').setup {
+      require('neotest').setup({
         icons = {
           failed = commonicons.testing.Fail,
           passed = commonicons.testing.Pass,
@@ -23,12 +23,12 @@ return {
           virtual_text = true,
         },
         adapters = {
-          require 'neotest-python' {
+          require('neotest-python')({
             runner = 'pytest',
             pytest_discover_instances = true,
             python = '.venv/bin/python',
             args = { 'tests', '-vv', '--no-cov' },
-          },
+          }),
         },
         output_panel = {
           enabled = true,
@@ -37,7 +37,7 @@ return {
         summary = {
           animated = false,
         },
-      }
+      })
     end,
     dependencies = {
       'nvim-neotest/nvim-nio',
@@ -56,8 +56,8 @@ return {
       end, 'Run the nearest unit-test'),
 
       map('<leader>uT', function()
-        require('neotest').run.run(vim.fn.expand '%')
-      end, "Run all unit-tests in the active buffer's file"),
+        require('neotest').run.run(vim.fn.expand('%'))
+      end, 'Run all unit-tests in the active buffer\'s file'),
     },
   },
 }
