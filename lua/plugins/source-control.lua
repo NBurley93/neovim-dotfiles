@@ -18,7 +18,7 @@ return {
     config = function()
       require('octo').setup({
         default_remote = { 'upstream', 'origin' }, -- order to try remotes
-        default_merge_method = 'commit',
+        default_merge_method = 'squash',
         default_delete_branch = true,
         picker = 'telescope',
       })
