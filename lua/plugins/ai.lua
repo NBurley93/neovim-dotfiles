@@ -15,6 +15,24 @@ return {
     end,
   },
 
+  -- Miki
+  {
+    'NBurley93/miki-assistant.nvim',
+    dev = true,
+    dependencies = {
+      'CopilotC-Nvim/CopilotChat.nvim',
+    },
+    opts = {
+      model = 'claude-sonnet-4.5',
+      personality = {
+        sass_level = 7, -- 1-10, how snarky
+        profanity_level = 6, -- 1-10, how much profanity
+        innuendo_frequency = 6, -- 1-10, how suggestive
+        emoji_frequency = 'moderate', -- none, low, moderate, high
+      },
+    },
+  },
+
   -- Blink.cmp Copilot source
   {
     'giuxtaposition/blink-cmp-copilot',

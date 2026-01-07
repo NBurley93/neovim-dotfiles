@@ -1,5 +1,5 @@
 -- LSP config
-local lsp_config_backend = require 'common.lsp_backend'
+local lsp_config_backend = require('common.lsp_backend')
 
 return {
   config = function()
@@ -47,6 +47,7 @@ return {
       { name = 'jsonls' },
       { name = 'dockerls' },
       { name = 'terraformls' },
+      { name = 'cssls' },
       {
         name = 'yamlls',
         config = {

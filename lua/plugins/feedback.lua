@@ -98,7 +98,8 @@ return {
         markdown = { 'vale' },
         latex = { 'vale' },
         yaml = { 'yamllint' },
-        python = { 'ruff' },
+        python = { 'flake8' },
+        css = { 'stylelint' },
       }
 
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })

@@ -27,6 +27,7 @@ return {
         markdown = { 'prettier' },
         css = { 'prettier' },
         html = { 'prettier' },
+        python = { 'autopep8' },
       },
       default_format_ops = {
         lsp_format = 'fallback',
