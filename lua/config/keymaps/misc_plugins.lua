@@ -41,9 +41,9 @@ local function harpoon_keymaps()
 end
 
 local function rip_sub_keymaps()
-  vim.keymap.set({ 'n', 'x' }, '<leader>r', function()
+  vim.keymap.set({ 'n', 'x' }, '<leader>sr', function()
     require('rip-substitute').sub()
-  end, { desc = ' rip substitute' })
+  end, { desc = ' rip [R]eplace' })
 end
 
 local function flash_keymaps()
