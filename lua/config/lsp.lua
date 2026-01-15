@@ -8,11 +8,22 @@ return {
       {
         name = 'clangd',
         config = {
+          keys = {
+            { '<leader>ch', '<cmd>Lsp_clangd_switch_source_header<cr>', desc = 'Switch between source/header (C/C++)' },
+          },
           cmd = {
             'clangd',
+            '--background-index',
             '--clang-tidy',
-            '--completion-style=bundled',
-            '--fallback-style=file',
+            '--header-insertion=never',
+            '--completion-style=detailed',
+            '--function-arg-placeholders',
+            '--fallback-style=google',
+          },
+          init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
           },
         },
       },
