@@ -3,6 +3,7 @@ return {
   {
     'numToStr/Comment.nvim',
     opts = {},
+    version = 'v0.8.0',
   },
 
   -- nvim-rip-substitute: A plugin for performing search and replace operations using ripgrep
