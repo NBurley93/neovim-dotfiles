@@ -42,4 +42,9 @@ return {
     opts = true,
     version = false,
   },
+  {
+    'nvim-mini/mini.icons',
+    opts = true,
+    version = false,
+  },
 }
