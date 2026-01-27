@@ -75,7 +75,6 @@ return {
     require('config.keymaps.telescope').config()
     require('config.keymaps.git').config()
     require('config.keymaps.misc_plugins').config()
-    require('config.keymaps.copilot').config()
     setup_groups()
   end,
 }

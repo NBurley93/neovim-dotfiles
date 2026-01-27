@@ -73,7 +73,7 @@ return {
     trouble_keymaps()
     ufo_keymaps()
     oil_keymaps()
-    harpoon_keymaps()
+    -- harpoon_keymaps()
     rip_sub_keymaps()
     flash_keymaps()
   end,
