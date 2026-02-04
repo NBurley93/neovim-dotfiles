@@ -11,6 +11,9 @@ return {
       },
       quickfile = { enabled = true },
       win = { enabled = true },
+      input = {},
+      picker = {},
+      terminal = {},
     },
   },
 

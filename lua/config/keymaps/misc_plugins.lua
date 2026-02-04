@@ -40,6 +40,37 @@ local function harpoon_keymaps()
   end, { desc = 'Goto next Harpoon buffer' })
 end
 
+local function opencode_keymaps()
+  local oc = require('opencode')
+
+  vim.keymap.set({ 'n', 'x' }, '<C-a>', function()
+    oc.ask('@this: ', { submit = true })
+  end, { desc = 'Ask opencode...' })
+  vim.keymap.set({ 'n', 'x' }, '<C-x>', function()
+    oc.select()
+  end, { desc = 'Execute opencode action...' })
+  vim.keymap.set({ 'n', 'x' }, '<C-.>', function()
+    oc.toggle()
+  end, { desc = 'Toggle opencode' })
+
+  vim.keymap.set({ 'n', 'x' }, 'go', function()
+    return oc.operator('@this ')
+  end, { desc = 'Add range to opencode', expr = true })
+  vim.keymap.set('n', 'goo', function()
+    return oc.operator('@this ') .. '_'
+  end, { desc = 'Add line to opencode', expr = true })
+
+  vim.keymap.set('n', '<S-C-u>', function()
+    require('opencode').command('session.half.page.up')
+  end, { desc = 'Scroll opencode up' })
+  vim.keymap.set('n', '<S-C-d>', function()
+    require('opencode').command('session.half.page.down')
+  end, { desc = 'Scroll opencode down' })
+
+  vim.keymap.set('n', '+', '<C-a>', { desc = 'Increment under cursor', noremap = true })
+  vim.keymap.set('n', '-', '<C-x>', { desc = 'Decrement under cursor', noremap = true })
+end
+
 local function rip_sub_keymaps()
   vim.keymap.set({ 'n', 'x' }, '<leader>sr', function()
     require('rip-substitute').sub()
@@ -74,6 +105,7 @@ return {
     ufo_keymaps()
     oil_keymaps()
     -- harpoon_keymaps()
+    opencode_keymaps()
     rip_sub_keymaps()
     flash_keymaps()
   end,
