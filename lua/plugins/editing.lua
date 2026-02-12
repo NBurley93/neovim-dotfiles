@@ -24,10 +24,11 @@ return {
         yaml = { 'yamlfmt' },
         terraform = { 'terraform_fmt' },
         cmake = { 'cmake_format' },
-        json = { 'jq' },
+        json = { 'jq', 'prettier' },
         markdown = { 'prettier' },
         css = { 'prettier' },
         html = { 'prettier' },
+        javascript = { 'prettier' },
         python = { 'autopep8' },
       },
       default_format_ops = {

@@ -100,6 +100,7 @@ return {
         yaml = { 'yamllint' },
         python = { 'flake8' },
         css = { 'stylelint' },
+        javascript = { 'eslint' },
       }
 
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })

@@ -83,6 +83,8 @@ return {
       { name = 'gopls' },
       { name = 'powershell_es' },
       { name = 'taplo' },
+      { name = 'eslint' },
+      { name = 'typescript-language-server' },
       {
         name = 'texlab',
         config = {
