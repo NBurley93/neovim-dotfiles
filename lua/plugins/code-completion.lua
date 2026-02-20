@@ -15,6 +15,7 @@ return {
       'saghen/blink.compat',
       'onsails/lspkind.nvim',
       'Kaiser-Yang/blink-cmp-git',
+      'bydlw98/blink-cmp-env',
       'giuxtaposition/blink-cmp-copilot',
     },
     opts = {
@@ -152,7 +153,7 @@ return {
         },
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 250,
+          auto_show_delay_ms = 150,
           treesitter_highlighting = true,
           window = { border = nil },
         },
@@ -166,13 +167,13 @@ return {
       sources = {
         default = function(ctx)
           local success, node = pcall(vim.treesitter.get_node)
-          local base_sources = { 'lsp', 'lazydev', 'git', 'path', 'buffer', 'snippets', 'copilot' }
+          local base_sources = { 'lsp', 'lazydev', 'git', 'path', 'buffer', 'snippets', 'omni', 'env', 'copilot' }
           return base_sources
         end,
         providers = {
           lsp = {
             name = 'LSP',
-            min_keyword_length = 2,
+            min_keyword_length = 0,
             score_offset = 0,
           },
           path = {
@@ -211,6 +212,10 @@ return {
             module = 'blink-cmp-copilot',
             score_offset = 100, -- Always prefer Copilot suggestions
             async = true,
+          },
+          env = {
+            name = 'Env',
+            module = 'blink-cmp-env',
           },
         },
       },
