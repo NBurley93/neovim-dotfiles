@@ -85,6 +85,21 @@ return {
       { name = 'taplo' },
       { name = 'eslint' },
       { name = 'typescript-language-server' },
+      { name = 'vue_ls' },
+      {
+        name = 'html',
+        config = {
+          capabilities = {
+            textDocument = {
+              completion = {
+                completionItem = {
+                  snippetSupport = true,
+                },
+              },
+            },
+          },
+        },
+      },
       {
         name = 'texlab',
         config = {

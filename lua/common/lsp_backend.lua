@@ -50,9 +50,9 @@ function M.setup(server_list, log_level)
     border = 'single',
   })
 
-  vim.diagnostic.config {
+  vim.diagnostic.config({
     signs = require('common.defines').DIAGNOSTIC_SIGNS,
-  }
+  })
 
   M.set_logging_level(log_level or 'warn')
 end

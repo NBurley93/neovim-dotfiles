@@ -1,13 +1,12 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    event = 'BufRead',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     config = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
-      require('nvim-treesitter.configs').setup {
+      pcall(require('nvim-treesitter.install').update({ with_sync = true }))
+      require('nvim-treesitter.configs').setup({
         ensure_installed = {
           -- C/C++ tools
           'c',
@@ -67,13 +66,12 @@ return {
           enable = true,
           enable_autocmd = false,
         },
-      }
+      })
     end,
     build = ':TSUpdate',
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
-    event = 'BufRead',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },

@@ -59,8 +59,7 @@ return {
   {
     'folke/trouble.nvim',
     event = {
-      'BufReadPost',
-      'BufNewFile',
+      'LspAttach',
     },
     dependencies = { require('common.defines').WEB_DEVICONS_PROVIDER },
     opts = {
@@ -86,6 +85,20 @@ return {
     event = { 'BufWritePre' },
     config = function()
       local lint = require('lint')
+
+      -- lint.linters.bacon = {
+      --   cmd = 'bacon',
+      --   stdin = true,
+      --   append_fname = true,
+      --   args = {},
+      --   stream = nil,
+      --   ignore_exitcode = false,
+      --   env = nil,
+      --   parser = lint.parser.from_pattern('', {}, {
+      --     error = vim.diagnostic.severity.ERROR,
+      --     warning = vim.diagnostic.severity.WARN,
+      --   }),
+      -- }
 
       lint.linters_by_ft = {
         cmake = { 'cmakelint' },
