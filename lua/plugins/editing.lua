@@ -30,13 +30,14 @@ return {
         html = { 'prettier' },
         javascript = { 'prettier' },
         python = { 'autopep8' },
+        gdscript = { 'gdformat' },
       },
       default_format_ops = {
         lsp_format = 'fallback',
       },
       format_on_save = {
         lsp_format = 'fallback',
-        timeout_ms = 500,
+        timeout_ms = 3000,
       },
       format_after_save = {
         lsp_fallback = 'fallback',

@@ -114,6 +114,7 @@ return {
         python = { 'flake8' },
         css = { 'stylelint' },
         javascript = { 'eslint' },
+        gdscript = { 'gdlint' },
       }
 
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })

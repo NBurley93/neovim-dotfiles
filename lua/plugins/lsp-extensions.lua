@@ -58,4 +58,17 @@ return {
     end,
   },
   { 'p00f/clangd_extensions.nvim', ft = { 'c', 'cpp', 'rust' }, event = { 'BufReadPost', 'BufNewFile' } },
+  {
+    'dpowling/godot-lsp.nvim',
+    ft = 'gdscript',
+    config = function()
+      require('godot-lsp').setup({
+        port = 6005,
+        fallback_port = 6006,
+        auto_start = true,
+        debug = false,
+        silent = true,
+      })
+    end,
+  },
 }

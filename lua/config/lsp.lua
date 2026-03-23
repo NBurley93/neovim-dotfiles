@@ -134,6 +134,9 @@ return {
           filetypes = { 'yaml.docker-compose' },
         },
       },
+      {
+        name = 'gdscript',
+      },
     }, 'warn')
   end,
 }
