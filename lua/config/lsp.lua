@@ -7,6 +7,7 @@ return {
     lsp_config_backend.setup({
       {
         name = 'clangd',
+        ---@type vim.lsp.Config
         config = {
           keys = {
             { '<leader>ch', '<cmd>Lsp_clangd_switch_source_header<cr>', desc = 'Switch between source/header (C/C++)' },
@@ -20,6 +21,7 @@ return {
             '--function-arg-placeholders',
             '--fallback-style=google',
           },
+          ---@type clangd_extensions.Config
           init_options = {
             usePlaceholders = true,
             completeUnimported = true,
@@ -27,26 +29,25 @@ return {
           },
         },
       },
-
       {
         name = 'lua_ls',
         config = {
           on_init = function(client)
             local path = client.workspace_folders[1].name
             if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
-              client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
+              ---@type lspconfig.settings.lua_ls
+              local lua_conf = {
                 Lua = {
                   runtime = {
                     version = 'LuaJIT',
                   },
                   workspace = {
                     checkThirdParty = false,
-                    library = {
-                      vim.env.VIMRUNTIME,
-                    },
+                    library = vim.api.nvim_get_runtime_file('', true),
                   },
                 },
-              })
+              }
+              client.config.settings = vim.tbl_deep_extend('force', client.config.settings, lua_conf)
               client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
             end
             return true

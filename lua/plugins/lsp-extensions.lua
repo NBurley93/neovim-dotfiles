@@ -1,11 +1,20 @@
 return {
   {
     'folke/lazydev.nvim',
-    event = {
-      'BufReadPost *.lua',
-      'BufNewFile *.lua',
+    dependencies = {
+      'DrKJeff16/wezterm-types',
     },
     ft = { 'lua' },
+    opts = {
+      library = {
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        'LazyVim',
+        {
+          path = 'wezterm-types',
+          mods = { 'wezterm' },
+        },
+      },
+    },
   },
   {
     'DNLHC/glance.nvim',
