@@ -7,7 +7,7 @@ return {
   -- blink.cmp - Modern, Fast and Extensible Completion Engine for Neovim
   {
     'Saghen/blink.cmp',
-    version = 'v1.1.*',
+    version = 'v1.10.*',
     build = 'cargo build --release',
     dependencies = {
       { 'folke/lazydev.nvim', ft = 'lua' },

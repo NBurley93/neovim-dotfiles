@@ -9,6 +9,7 @@ return {
         name = 'clangd',
         ---@type vim.lsp.Config
         config = {
+          filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
           keys = {
             { '<leader>ch', '<cmd>Lsp_clangd_switch_source_header<cr>', desc = 'Switch between source/header (C/C++)' },
           },
@@ -21,7 +22,6 @@ return {
             '--function-arg-placeholders',
             '--fallback-style=google',
           },
-          ---@type clangd_extensions.Config
           init_options = {
             usePlaceholders = true,
             completeUnimported = true,
@@ -31,7 +31,9 @@ return {
       },
       {
         name = 'lua_ls',
+        ---@type vim.lsp.Config
         config = {
+          filetypes = { 'lua' },
           on_init = function(client)
             local path = client.workspace_folders[1].name
             if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
@@ -54,12 +56,12 @@ return {
           end,
         },
       },
-      { name = 'ruff' },
-      { name = 'cmake' },
-      { name = 'jsonls' },
-      { name = 'dockerls' },
-      { name = 'terraformls' },
-      { name = 'cssls' },
+      { name = 'ruff', config = { filetypes = { 'python' } } },
+      { name = 'cmake', config = { filetypes = { 'cmake' } } },
+      { name = 'jsonls', config = { filetypes = { 'json', 'jsonc' } } },
+      { name = 'dockerls', config = { filetypes = { 'dockerfile' } } },
+      { name = 'terraformls', config = { filetypes = { 'terraform' } } },
+      { name = 'cssls', config = { filetypes = { 'css', 'scss', 'less' } } },
       {
         name = 'yamlls',
         config = {
@@ -71,7 +73,7 @@ return {
         },
       },
       { name = 'lemminx' },
-      { name = 'rust_analyzer' },
+      { name = 'rust_analyzer', config = { filetypes = { 'rust' } } },
       { name = 'glsl_analyzer' },
       { name = 'sqlls' },
       {
@@ -90,6 +92,7 @@ return {
       {
         name = 'html',
         config = {
+          filetypes = { 'html' },
           capabilities = {
             textDocument = {
               completion = {
