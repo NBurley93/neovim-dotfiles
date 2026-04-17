@@ -1,11 +1,4 @@
 return {
-  -- harpoon: quick file navigation
-  {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
-    requires = { { 'nvim-lua/plenary.nvim' }, { 'telescope/telescope.nvim' } },
-  },
-
   -- nvim-ufo: code folding
   {
     'kevinhwang91/nvim-ufo',

@@ -13,7 +13,7 @@ end
 
 -- Sets the logging level for the LSP client.
 function M.set_logging_level(log_level)
-  vim.lsp.set_log_level(log_level) -- options: "trace", "debug", "info", "warn", "error"
+  vim.lsp.log.set_level(log_level) -- options: "trace", "debug", "info", "warn", "error"
 end
 
 function M.setup(server_list, log_level)
@@ -45,10 +45,6 @@ function M.setup(server_list, log_level)
       configure_lsp_server(server.name)
     end
   end
-
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = 'single',
-  })
 
   vim.diagnostic.config({
     signs = require('common.defines').DIAGNOSTIC_SIGNS,

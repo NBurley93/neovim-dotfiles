@@ -31,19 +31,19 @@ function M.apply_theme(theme_name, opts)
   opts = opts or {}
 
   if not theme_name then
-    print('No theme specified')
+    vim.notify('No theme specified', vim.log.levels.WARN)
     return false
   end
 
   local ok, theme = pcall(require, M.themes_source .. theme_name)
   if not ok then
-    print('Theme "' .. theme_name .. '" not found')
-    print('Error: ' .. tostring(theme))
+    vim.notify('Theme "' .. theme_name .. '" not found', vim.log.levels.WARN)
+    vim.notify('Error: ' .. tostring(theme), vim.log.levels.WARN)
     return false
   end
 
   if type(theme.setup) ~= 'function' then
-    print('Theme "' .. theme_name .. '" does not have a setup function')
+    vim.notify('Theme "' .. theme_name .. '" does not have a setup function', vim.log.levels.WARN)
     return false
   end
 
@@ -56,10 +56,10 @@ end
 function M.setup_commands()
   vim.api.nvim_create_user_command('ThemeList', function()
     local themes = M.get_available_themes()
-    print('Available Themes:')
+    vim.notify('Available Themes:', vim.log.levels.INFO)
     for _, theme in ipairs(themes) do
       local prefix = theme == M.current_theme and '* ' or ' '
-      print(prefix .. theme)
+      vim.notify(prefix .. theme, vim.log.levels.INFO)
     end
   end, {})
 

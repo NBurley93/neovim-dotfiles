@@ -18,7 +18,7 @@ return {
       smartindent = true,
       number = true,
       showmode = false,
-      cmdheight = 0,
+      cmdheight = 2,
       breakindent = true,
       mouse = 'a',
       relativenumber = true,
@@ -55,12 +55,12 @@ return {
     for k, v in pairs(options) do
       vim.opt[k] = v
     end
-    vim.opt.isfname:append '@-@'
+    vim.opt.isfname:append('@-@')
 
-    vim.lsp.set_log_level 'off'
+    vim.lsp.log.set_level('off')
 
-    local isWindows = vim.fn.has 'win32' == 1
-    local isWSL = vim.fn.has 'wsl' == 1
+    local isWindows = vim.fn.has('win32') == 1
+    local isWSL = vim.fn.has('wsl') == 1
     local isWSLWindows = (isWindows and isWSL)
     local isWindowsNative = (isWindows and isWSL == false)
 
@@ -82,10 +82,10 @@ return {
 
     if isWindowsNative then
       local powershell_options = {
-        shell = vim.fn.executable 'pwsh' == 1 and 'pwsh' or 'powershell',
+        shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell',
         shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;',
-        shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait',
-        shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode',
+        shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode',
+        shellpipe = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode',
         shellquote = '',
         shellxquote = '',
       }
@@ -95,7 +95,7 @@ return {
       end
     else
       local shell_options = {
-        shell = vim.fn.executable 'zsh' == 1 and 'zsh',
+        shell = vim.fn.executable('zsh') == 1 and 'zsh',
       }
 
       for option, value in pairs(shell_options) do
@@ -113,7 +113,7 @@ return {
 
     local get_sqlite_path = function()
       if isWindows then
-        return vim.fn.stdpath 'data' .. '/sqlite3.dll'
+        return vim.fn.stdpath('data') .. '/sqlite3.dll'
       else
         return ''
       end

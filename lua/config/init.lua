@@ -49,14 +49,13 @@ local config_module = function(key, module)
 end
 
 local config_entries = {
-  config_module('options', require 'config.options'),
+  config_module('options', require('config.options')),
   config_module('plugins', lzy_module),
-  config_module('postplugins', require 'config.postplugins'),
-  config_module('completion', require 'config.completion'),
-  config_module('lsp', require 'config.lsp'),
-  config_module('autocmd', require 'config.autocommands'),
-  config_module('keymaps', require 'config.keymaps'),
-  config_module('theming', require 'config.theming'),
+  config_module('completion', require('config.completion')),
+  config_module('lsp', require('config.lsp')),
+  config_module('autocmd', require('config.autocommands')),
+  config_module('keymaps', require('config.keymaps')),
+  config_module('theming', require('config.theming')),
 }
 
 return {
@@ -74,7 +73,10 @@ return {
           print(string.format('Module %s took %.4f seconds to configure', entry.key, config_elapsed_time))
         end
       else
-        print('Skipping config module: ', entry.key, ' - config function missing or invalid')
+        vim.notify(
+          'Skipping config module: ' .. entry.key .. ' - config function missing or invalid',
+          vim.log.levels.WARN
+        )
       end
     end
   end,
