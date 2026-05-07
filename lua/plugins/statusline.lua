@@ -23,8 +23,12 @@ local function setup_line_segments()
     },
     lualine_b = {
       {
-        require('noice').api.statusline.mode.get,
-        cond = require('noice').api.statusline.mode.has,
+        function()
+          return require('noice').api.statusline.mode.get()
+        end,
+        cond = function()
+          return require('noice').api.statusline.mode.has()
+        end,
       },
       {
         'b:gitsigns_head',

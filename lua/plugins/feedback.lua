@@ -113,7 +113,6 @@ return {
         yaml = { 'yamllint' },
         python = { 'flake8' },
         css = { 'stylelint' },
-        javascript = { 'eslint' },
         gdscript = { 'gdlint' },
       }
 

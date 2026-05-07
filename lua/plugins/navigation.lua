@@ -19,6 +19,7 @@ return {
   -- oil.nvim: a file explorer
   {
     'stevearc/oil.nvim',
+    cmd = 'Oil',
     config = function()
       require('oil').setup({
         view_options = {

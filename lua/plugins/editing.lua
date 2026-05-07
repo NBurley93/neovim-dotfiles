@@ -2,6 +2,7 @@ return {
   -- Comment.nvim: allows easy commenting of code
   {
     'numToStr/Comment.nvim',
+    keys = { 'gc', 'gb', 'gcc' },
     opts = {},
     version = 'v0.8.0',
   },

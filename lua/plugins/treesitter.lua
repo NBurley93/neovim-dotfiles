@@ -4,52 +4,10 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
+    event = 'BufReadPre',
     config = function()
       require('nvim-treesitter.configs').setup({
-        ensure_installed = {
-          -- C/C++ tools
-          'c',
-          'cpp',
-          'cmake',
-
-          -- Python
-          'python',
-
-          -- Misc for gamedev/hobby
-          'glsl',
-          'ini',
-          'lua',
-
-          -- Data description formats
-          'json',
-          'xml',
-          'yaml',
-
-          -- Languages for web/devops
-          'terraform',
-          'dockerfile',
-
-          -- Misc languages
-          'c_sharp',
-          'go',
-          'rust',
-
-          -- Document formats
-          'markdown',
-          'markdown_inline',
-
-          -- Misc tools
-          'regex',
-          'diff',
-
-          -- Git tooling
-          'git_config',
-          'git_rebase',
-          'gitattributes',
-          'gitcommit',
-        },
         auto_install = false,
-        ignore_install = {},
         highlight = {
           enable = true,
           disable = function(lang, buf)
@@ -67,10 +25,10 @@ return {
         },
       })
     end,
-    build = ':TSUpdate',
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
+    event = 'BufReadPre',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },

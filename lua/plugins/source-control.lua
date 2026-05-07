@@ -1,7 +1,7 @@
 return {
-  { 'petertriho/cmp-git', dependencies = 'nvim-lua/plenary.nvim' },
   {
     'NeogitOrg/neogit',
+    cmd = 'Neogit',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'sindrets/diffview.nvim',
@@ -9,24 +9,9 @@ return {
     },
   },
   {
-    'pwntester/octo.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-      'nvim-tree/nvim-web-devicons',
-    },
-    config = function()
-      require('octo').setup({
-        default_remote = { 'upstream', 'origin' }, -- order to try remotes
-        default_merge_method = 'squash',
-        default_delete_branch = true,
-        picker = 'telescope',
-      })
-    end,
-  },
-  {
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
+    cmd = { 'DiffviewOpen', 'DiffviewFileHistory', 'DiffviewClose' },
     config = function()
       require('diffview').setup({
         use_icons = true,
@@ -66,5 +51,5 @@ return {
       })
     end,
   },
-  { 'akinsho/git-conflict.nvim' },
+  { 'akinsho/git-conflict.nvim', event = 'BufReadPost' },
 }

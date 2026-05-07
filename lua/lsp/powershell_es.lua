@@ -1,0 +1,32 @@
+---@type vim.lsp.Config
+local bundle_path = vim.fn.stdpath('data') .. '/mason/packages/powershell-editor-services'
+return {
+  cmd = {
+    'pwsh',
+    '-NoLogo',
+    '-NoProfile',
+    '-Command',
+    bundle_path .. '/PowerShellEditorServices/Start-EditorServices.ps1',
+    '-BundledModulesPath',
+    bundle_path,
+    '-LogPath',
+    vim.fn.stdpath('log') .. '/powershell_es.log',
+    '-SessionDetailsPath',
+    vim.fn.stdpath('data') .. '/powershell_es.session.json',
+    '-FeatureFlags',
+    '@()',
+    '-AdditionalModules',
+    '@()',
+    '-HostName',
+    'nvim',
+    '-HostProfileId',
+    '0',
+    '-HostVersion',
+    '1.0.0',
+    '-Stdio',
+    '-LogLevel',
+    'Warning',
+  },
+  root_markers = { 'PSScriptAnalyzerSettings.psd1', '.git' },
+  filetypes = { 'ps1' },
+}

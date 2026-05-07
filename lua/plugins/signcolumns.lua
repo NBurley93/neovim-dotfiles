@@ -2,6 +2,7 @@ return {
   -- statuscol.nvim: Enhanced status column for Neovim
   {
     'luukvbaal/statuscol.nvim',
+    event = 'BufReadPost',
     config = function()
       local builtin = require('statuscol.builtin')
       require('statuscol').setup({
@@ -37,6 +38,7 @@ return {
   -- gitsigns.nvim: Git integration for sign columns
   {
     'lewis6991/gitsigns.nvim',
+    event = 'BufReadPost',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('gitsigns').setup({

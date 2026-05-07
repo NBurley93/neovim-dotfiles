@@ -12,13 +12,21 @@ function M.config(client, bufnr)
     vim.cmd('Glance references')
   end, bufnr, 'View references')
 
-  lsp_map('<leader>ds', require('telescope.builtin').lsp_document_symbols, bufnr, 'View [D]ocument [S]ymbols')
+  lsp_map('<leader>ds', function()
+    require('telescope.builtin').lsp_document_symbols()
+  end, bufnr, 'View [D]ocument [S]ymbols')
 
   lsp_map('K', function()
     require('pretty_hover').hover()
   end, bufnr, 'Hover LSP Docs')
 
   lsp_map('<leader>rn', vim.lsp.buf.rename, bufnr, 'Rename symbol')
+
+  if client.name == 'clangd' then
+    lsp_map('<leader>ch', function()
+      vim.cmd('LspClangdSwitchSourceHeader')
+    end, bufnr, 'Switch between source/header (C/C++)')
+  end
 end
 
 return M

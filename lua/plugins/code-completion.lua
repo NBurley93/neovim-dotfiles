@@ -3,16 +3,17 @@ local copilot_highlight_color = '#ffa600'
 return {
   {
     'rafamadriz/friendly-snippets',
+    lazy = true,
   },
   -- blink.cmp - Modern, Fast and Extensible Completion Engine for Neovim
   {
     'Saghen/blink.cmp',
     version = 'v1.10.*',
     build = 'cargo build --release',
+    event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = {
       { 'folke/lazydev.nvim', ft = 'lua' },
       'rafamadriz/friendly-snippets',
-      'saghen/blink.compat',
       'onsails/lspkind.nvim',
       'Kaiser-Yang/blink-cmp-git',
       'bydlw98/blink-cmp-env',

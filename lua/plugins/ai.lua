@@ -17,20 +17,6 @@ return {
   -- Blink.cmp Copilot source
   {
     'giuxtaposition/blink-cmp-copilot',
-  },
-
-  -- Opencode
-  {
-    'NickvanDyke/opencode.nvim',
-    dependencies = {
-      ---@module 'snacks'
-      { 'folke/snacks.nvim' },
-    },
-
-    config = function()
-      vim.g.opencode_opts = {}
-
-      vim.o.autoread = true
-    end,
+    lazy = true,
   },
 }

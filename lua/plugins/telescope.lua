@@ -1,9 +1,13 @@
-local icons = require('common.icons')
-
 return {
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-lua/popup.nvim' },
+    cmd = 'Telescope',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-lua/popup.nvim',
+      'nvim-telescope/telescope-ui-select.nvim',
+      'mrloop/telescope-git-branch.nvim',
+    },
     config = function()
       local ts = require('telescope')
 
@@ -66,5 +70,5 @@ return {
     end,
   },
   { 'nvim-telescope/telescope-ui-select.nvim' },
-  { 'mrloop/telescope-git-branch.nvim', dependencies = { 'nvim-telescope/telescope.nvim' } },
+  { 'mrloop/telescope-git-branch.nvim' },
 }

@@ -22,55 +22,6 @@ local function oil_keymaps()
   end, { desc = '[V]iew cwd with Oil' })
 end
 
-local function harpoon_keymaps()
-  -- Harpoon
-  local harpoon = require('harpoon')
-  local commonfuncs = require('common.functions')
-  vim.keymap.set('n', '<leader>m', function()
-    harpoon:list():add()
-    commonfuncs.flashBuffer(vim.api.nvim_get_current_buf(), 150)
-    commonfuncs.nvim_notify_info('Added ' .. vim.fs.basename(vim.api.nvim_buf_get_name(0)) .. ' to Harpoon list')
-  end, { desc = 'Mark current buffer for Harpoon' })
-
-  vim.keymap.set('n', '<C-S-P>', function()
-    harpoon:list():prev()
-  end, { desc = 'Goto previous Harpoon buffer' })
-  vim.keymap.set('n', '<C-S-N>', function()
-    harpoon:list():next()
-  end, { desc = 'Goto next Harpoon buffer' })
-end
-
-local function opencode_keymaps()
-  local oc = require('opencode')
-
-  vim.keymap.set({ 'n', 'x' }, '<C-a>', function()
-    oc.ask('@this: ', { submit = true })
-  end, { desc = 'Ask opencode...' })
-  vim.keymap.set({ 'n', 'x' }, '<C-x>', function()
-    oc.select()
-  end, { desc = 'Execute opencode action...' })
-  vim.keymap.set({ 'n', 'x' }, '<C-.>', function()
-    oc.toggle()
-  end, { desc = 'Toggle opencode' })
-
-  vim.keymap.set({ 'n', 'x' }, 'go', function()
-    return oc.operator('@this ')
-  end, { desc = 'Add range to opencode', expr = true })
-  vim.keymap.set('n', 'goo', function()
-    return oc.operator('@this ') .. '_'
-  end, { desc = 'Add line to opencode', expr = true })
-
-  vim.keymap.set('n', '<S-C-u>', function()
-    require('opencode').command('session.half.page.up')
-  end, { desc = 'Scroll opencode up' })
-  vim.keymap.set('n', '<S-C-d>', function()
-    require('opencode').command('session.half.page.down')
-  end, { desc = 'Scroll opencode down' })
-
-  vim.keymap.set('n', '+', '<C-a>', { desc = 'Increment under cursor', noremap = true })
-  vim.keymap.set('n', '-', '<C-x>', { desc = 'Decrement under cursor', noremap = true })
-end
-
 local function rip_sub_keymaps()
   vim.keymap.set({ 'n', 'x' }, '<leader>sr', function()
     require('rip-substitute').sub()
@@ -78,21 +29,20 @@ local function rip_sub_keymaps()
 end
 
 local function flash_keymaps()
-  local flash = require('flash')
   vim.keymap.set({ 'n', 'x', 'o' }, 's', function()
-    flash.jump()
+    require('flash').jump()
   end, { desc = 'Flash' })
   vim.keymap.set({ 'n', 'x', 'o' }, 'S', function()
-    flash.treesitter()
+    require('flash').treesitter()
   end, { desc = 'Flash Treesitter' })
   vim.keymap.set({ 'o' }, 'r', function()
-    flash.remote()
+    require('flash').remote()
   end, { desc = 'Remote Flash' })
   vim.keymap.set({ 'o' }, 'r', function()
-    flash.treesitter_search()
+    require('flash').treesitter_search()
   end, { desc = 'Treesitter Search' })
   vim.keymap.set({ 'c' }, '<c-s>', function()
-    flash.toggle()
+    require('flash').toggle()
   end, { desc = 'Toggle Flash Search' })
 end
 
@@ -104,8 +54,6 @@ return {
     trouble_keymaps()
     ufo_keymaps()
     oil_keymaps()
-    -- harpoon_keymaps()
-    opencode_keymaps()
     rip_sub_keymaps()
     flash_keymaps()
   end,

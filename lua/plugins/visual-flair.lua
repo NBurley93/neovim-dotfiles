@@ -2,7 +2,7 @@ return {
   -- nvim-colorizer: Display color codes with their actual color
   {
     'catgoose/nvim-colorizer.lua',
-    event = 'BufReadPre',
+    event = 'BufReadPost',
     opts = {
       user_default_options = {
         names = false,
@@ -17,6 +17,7 @@ return {
   -- indent-blankline: Display indentation levels with vertical lines
   {
     'lukas-reineke/indent-blankline.nvim',
+    event = 'BufReadPost',
     main = 'ibl',
     config = function()
       require('ibl').setup({
@@ -50,5 +51,5 @@ return {
   },
 
   -- rainbow-csv: Highlight CSV and TSV files with rainbow colors
-  { 'mechatroner/rainbow_csv' },
+  { 'mechatroner/rainbow_csv', ft = { 'csv', 'tsv' } },
 }

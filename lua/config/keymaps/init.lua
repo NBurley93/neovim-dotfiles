@@ -26,6 +26,8 @@ local function base_mappings()
     end)
   end, { desc = 'Write buffer without running autocmds (raw)' })
 
+  vim.keymap.set('n', '<leader>ll', vim.cmd.Lazy, { desc = 'Open Lazy' })
+
   vim.keymap.set('n', '<Esc>', vim.cmd.nohlsearch, { desc = 'Clear search highlight' })
 
   -- Ergonomic underscore
@@ -54,27 +56,11 @@ local function base_mappings()
   vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Put without replacing paste buffer' })
 end
 
-local function setup_groups()
-  -- Sets up which-key groups
-  local wk = require('which-key')
-  wk.add({
-    { '<leader>z', group = 'Copilot' },
-    { '<leader>d', group = '[D]iffview' },
-    { '<leader>g', group = '[G]it' },
-    { '<leader>s', group = '[S]earch' },
-    { '<leader>sg', group = '[G]it' },
-    { '<leader>u', group = '[U]nit testing' },
-    { '<leader>w', group = '[W]ord' },
-    { '<leader>p', group = '[P]roject' },
-  })
-end
-
 return {
   config = function()
     base_mappings()
     require('config.keymaps.telescope').config()
     require('config.keymaps.git').config()
     require('config.keymaps.misc_plugins').config()
-    setup_groups()
   end,
 }
