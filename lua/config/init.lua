@@ -64,13 +64,13 @@ return {
       local module = entry.module
       if module and type(module.config) == 'function' then
         if PROFILE_CONFIG_MODULES == true then
-          local config_start_time = os.clock()
+          local _profile_config_start_time = os.clock()
         end
         module.config()
         if PROFILE_CONFIG_MODULES == true then
-          local config_end_time = os.clock()
-          local config_elapsed_time = config_end_time - config_start_time
-          print(string.format('Module %s took %.4f seconds to configure', entry.key, config_elapsed_time))
+          local _profile_config_end_time = os.clock()
+          local _profile_config_elapsed_time = _profile_config_end_time - _profile_config_start_time
+          print(string.format('Module %s took %.4f seconds to configure', entry.key, _profile_config_elapsed_time))
         end
       else
         vim.notify(

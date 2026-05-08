@@ -1,12 +1,4 @@
 return {
-  -- Comment.nvim: allows easy commenting of code
-  {
-    'numToStr/Comment.nvim',
-    keys = { 'gc', 'gb', 'gcc' },
-    opts = {},
-    version = 'v0.8.0',
-  },
-
   -- nvim-rip-substitute: A plugin for performing search and replace operations using ripgrep
   {
     'chrisgrieser/nvim-rip-substitute',

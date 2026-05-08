@@ -15,33 +15,33 @@ return {
   },
 
   -- indent-blankline: Display indentation levels with vertical lines
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    event = 'BufReadPost',
-    main = 'ibl',
-    config = function()
-      require('ibl').setup({
-        indent = {
-          char = '│',
-          tab_char = '│',
-          --highlight = { "Define" },
-        },
-        scope = {
-          char = '│',
-        },
-        exclude = {
-          buftypes = {
-            'nvimtree',
-          },
-          filetypes = {
-            'dashboard',
-            'mason',
-            'toggleterm',
-          },
-        },
-      })
-    end,
-  },
+  -- {
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   event = 'BufReadPost',
+  --   main = 'ibl',
+  --   config = function()
+  --     require('ibl').setup({
+  --       indent = {
+  --         char = '│',
+  --         tab_char = '│',
+  --         --highlight = { "Define" },
+  --       },
+  --       scope = {
+  --         char = '│',
+  --       },
+  --       exclude = {
+  --         buftypes = {
+  --           'nvimtree',
+  --         },
+  --         filetypes = {
+  --           'dashboard',
+  --           'mason',
+  --           'toggleterm',
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- },
 
   -- pretty_hover: A plugin to enhance LSP hover with a prettier UI
   {
