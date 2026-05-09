@@ -33,7 +33,6 @@ return {
         'yaml-language-server',
         'lemminx',
         'rust-analyzer',
-        'glsl-analyzer',
         'sql-language-server',
         'gh-actions-language-server',
         'bash-language-server',

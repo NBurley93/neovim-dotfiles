@@ -48,8 +48,6 @@ return {
         fps = 60,
         timeout = 3000,
         top_down = false,
-        -- background_colour = require('mallgoth.palette').bg0,
-        -- background_colour = "#000000",
       })
       vim.notify = require('notify')
     end,
@@ -85,20 +83,6 @@ return {
     event = { 'BufWritePre' },
     config = function()
       local lint = require('lint')
-
-      -- lint.linters.bacon = {
-      --   cmd = 'bacon',
-      --   stdin = true,
-      --   append_fname = true,
-      --   args = {},
-      --   stream = nil,
-      --   ignore_exitcode = false,
-      --   env = nil,
-      --   parser = lint.parser.from_pattern('', {}, {
-      --     error = vim.diagnostic.severity.ERROR,
-      --     warning = vim.diagnostic.severity.WARN,
-      --   }),
-      -- }
 
       lint.linters_by_ft = {
         cmake = { 'cmakelint' },
