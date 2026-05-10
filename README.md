@@ -1,5 +1,9 @@
 # Cabal's Neovim Dotfiles
 
+![GitHub Created At](https://img.shields.io/github/created-at/NBurley93/neovim-dotfiles)
+![GitHub last commit](https://img.shields.io/github/last-commit/NBurley93/neovim-dotfiles)
+![Static Badge](https://img.shields.io/badge/Plugin_Count-65-brightgreen?logo=lazyvim)
+
 ## Setup
 
 Ensure you are connected to the internet,
