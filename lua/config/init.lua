@@ -4,7 +4,7 @@ local lzy_module = {
   config = function()
     require('lazy').setup('plugins', {
       ui = {
-        border = 'solid',
+        border = 'rounded',
         icons = {
           cmd = ' ',
           config = '',
@@ -32,10 +32,34 @@ local lzy_module = {
           },
         },
       },
+      checker = { enabled = false },
+      change_detection = { notify = false },
       dev = {
         path = '~/neovim-projects',
         patterns = {},
         fallback = true,
+      },
+      performance = {
+        cache = { enabled = true },
+        rtp = {
+          disabled_plugins = {
+            'netrwPlugin',
+            'tarPlugin',
+            'tohtml',
+            'tutor',
+            'gzip',
+            'zipPlugin',
+            'matchit',
+            'matchparen',
+            'osc52',
+            'shada',
+            'man',
+            'spec',
+            'net',
+            'spellfile',
+            'rplugin',
+          },
+        },
       },
     })
   end,
