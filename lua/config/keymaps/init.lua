@@ -52,6 +52,9 @@ local function base_mappings()
     })
   end, { desc = '[F]ormat current buffer or visual range' })
 
+  -- Shortcut to exit insert mode
+  vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Exit insert mode' })
+
   -- The BEST remap ever!!!
   vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Put without replacing paste buffer' })
 end
@@ -61,6 +64,5 @@ return {
     base_mappings()
     require('config.keymaps.telescope').config()
     require('config.keymaps.git').config()
-    require('config.keymaps.misc_plugins').config()
   end,
 }

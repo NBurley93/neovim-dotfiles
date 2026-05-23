@@ -70,6 +70,16 @@ return {
         information = icons.diagnostics.Information,
         other = icons.diagnostics.Information,
       },
+      keys = {
+        {
+          '<leader>t',
+          function()
+            vim.cmd.Trouble('diagnostics', 'toggle')
+          end,
+          mode = 'n',
+          desc = 'Show [T]rouble menu',
+        },
+      },
     },
   },
 

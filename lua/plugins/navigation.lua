@@ -14,6 +14,24 @@ return {
     dependencies = {
       'kevinhwang91/promise-async',
     },
+    keys = {
+      {
+        'zR',
+        function()
+          require('ufo').openAllFolds()
+        end,
+        mode = 'n',
+        desc = 'Open all folds',
+      },
+      {
+        'zM',
+        function()
+          require('ufo').closeAllFolds()
+        end,
+        mode = 'n',
+        desc = 'Close all folds',
+      },
+    },
   },
 
   -- oil.nvim: a file explorer
@@ -26,12 +44,38 @@ return {
         },
       })
     end,
+    keys = {
+      {
+        '<leader>pv',
+        '<cmd>Oil<cr>',
+        mode = 'n',
+        desc = '[V]iew cwd with Oil',
+      },
+    },
     dependencies = { require('common.defines').WEB_DEVICONS_PROVIDER },
   },
 
   {
     'folke/flash.nvim',
     event = 'VeryLazy',
+    keys = {
+      {
+        's',
+        function()
+          require('flash').jump()
+        end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Flash',
+      },
+      {
+        'S',
+        function()
+          require('flash').treesitter()
+        end,
+        mode = { 'n', 'x', 'o' },
+        desc = 'Flash Treesitter',
+      },
+    },
     opts = {
       modes = {
         char = {
