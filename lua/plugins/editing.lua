@@ -21,6 +21,20 @@ return {
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
+    keys = {
+      {
+        '<leader>f',
+        function()
+          require('conform').format({
+            lsp_fallback = true,
+            async = false,
+            timeout_ms = 500,
+          })
+        end,
+        mode = { 'n', 'v' },
+        desc = '[F]ormat current buffer or visual range',
+      },
+    },
     opts = {
       formatters = {
         odinfmt = {

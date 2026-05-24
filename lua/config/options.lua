@@ -50,6 +50,16 @@ return {
       splitright = true,
       splitbelow = true,
       fillchars = { eob = ' ', foldopen = '', foldsep = ' ', foldclose = '' },
+      diffopt = {
+        'internal',
+        'filler',
+        'closeoff',
+        'context:12',
+        'algorithm:histogram',
+        'linematch:200',
+        'indent-heuristic',
+        'iwhite',
+      },
     }
 
     for k, v in pairs(options) do

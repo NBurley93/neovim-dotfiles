@@ -6,7 +6,40 @@ return {
       'nvim-lua/plenary.nvim',
       'nvim-lua/popup.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
-      'mrloop/telescope-git-branch.nvim',
+    },
+    keys = {
+      {
+        '<leader>sf',
+        function()
+          require('telescope.builtin').find_files()
+        end,
+        mode = 'n',
+        desc = 'Search [F]iles',
+      },
+      {
+        '<leader>ss',
+        function()
+          require('telescope.builtin').live_grep()
+        end,
+        mode = 'n',
+        desc = 'Grep Search [S]tring',
+      },
+      {
+        '<leader><leader>',
+        function()
+          require('telescope.builtin').find_files()
+        end,
+        mode = 'n',
+        desc = 'Search [F]iles',
+      },
+      {
+        '<leader>sh',
+        function()
+          require('telescope.builtin').help_tags()
+        end,
+        mode = 'n',
+        desc = 'Search [H]elp Tags',
+      },
     },
     config = function()
       local ts = require('telescope')
@@ -29,23 +62,13 @@ return {
           dynamic_preview_title = false,
           border = true,
           color_devicons = true,
-          -- Solid border
-          -- borderchars = { "" },
           prompt_prefix = '  ', -- looks nice in neon; change if your font sulks
           selection_caret = ' ',
-          -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-          -- borderchars = { '═', '║', '═', '║', '╔', '╗', '╝', '╚' },
           borderchars = {
             prompt = { '━', '┃', '━', '┃', '┏', '┓', '┛', '┗' },
             results = { '━', '┃', '━', '┃', '┏', '┓', '┛', '┗' },
             preview = { '━', '┃', '━', '┃', '┏', '┓', '┛', '┗' },
           },
-          -- borderchars = { '━', '┃', '━', '┃', '┏', '┓', '┛', '┗' },
-          -- borderchars = {
-          --   prompt = { '▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' },
-          --   results = { ' ', '▐', '▄', '▌', '▛', '▜', '▟', '▙' },
-          --   preview = { '▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' },
-          -- },
         },
         pickers = {
           find_files = { hidden = true },
@@ -66,9 +89,6 @@ return {
         },
       })
       ts.load_extension('ui-select')
-      ts.load_extension('git_branch')
     end,
   },
-  { 'nvim-telescope/telescope-ui-select.nvim' },
-  { 'mrloop/telescope-git-branch.nvim' },
 }
