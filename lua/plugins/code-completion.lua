@@ -95,7 +95,9 @@ return {
                     return '' .. ctx.icon_gap
                   end
 
-                  return ctx.kind_icon .. ctx.icon_gap
+                  return require('lspkind').symbol_map[ctx.kind] or '' .. ctx.icon_gap
+
+                  -- return ctx.kind_icon .. ctx.icon_gap
                 end,
 
                 -- Optionally, use the highlight groups from mini.icons

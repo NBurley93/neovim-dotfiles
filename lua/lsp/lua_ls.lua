@@ -20,7 +20,7 @@ return {
         },
       },
     })
-    client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+    client:notify('workspace/didChangeConfiguration', { settings = client.config.settings })
     return true
   end,
 }

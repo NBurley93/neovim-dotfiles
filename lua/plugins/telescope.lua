@@ -27,10 +27,13 @@ return {
       {
         '<leader><leader>',
         function()
-          require('telescope.builtin').find_files()
+          require('telescope.builtin').buffers(
+            require('telescope.themes').get_dropdown({ previewer = false }),
+            { sort_lastused = true, ignore_current_buffer = true }
+          )
         end,
         mode = 'n',
-        desc = 'Search [F]iles',
+        desc = 'Search open buffers',
       },
       {
         '<leader>sh',

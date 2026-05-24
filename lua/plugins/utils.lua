@@ -26,14 +26,10 @@ return {
       local wk = require('which-key')
       wk.setup(opts)
       wk.add({
-        { '<leader>z', group = 'Copilot' },
-        { '<leader>d', group = '[D]iffview' },
-        { '<leader>g', group = '[G]it' },
-        { '<leader>s', group = '[S]earch' },
-        { '<leader>sg', group = '[G]it' },
-        { '<leader>u', group = '[U]nit testing' },
-        { '<leader>w', group = '[W]ord' },
-        { '<leader>p', group = '[P]roject' },
+        { '<leader>g', group = 'Git' },
+        { '<leader>s', group = 'Search (Telescope)' },
+        { '<leader>u', group = 'Unit Testing (Neotest)' },
+        { '<leader>x', group = 'Diagnostics (Trouble)' },
       })
     end,
   },
