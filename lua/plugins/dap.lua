@@ -6,6 +6,7 @@ return {
     event = 'VeryLazy',
     dependencies = {
       'leoluz/nvim-dap-go',
+      'mfussenegger/nvim-dap-python',
     },
     keys = {
       {
@@ -97,50 +98,7 @@ return {
         { text = ' ', texthl = 'DiagnosticSignHint', linehl = '', numhl = '' }
       )
 
-      -- Python: debugpy-adapter.exe on Windows defaults to socket mode, not stdio.
-      -- Use server type so nvim-dap connects via socket to match.
-      local is_win = vim.fn.has('win32') == 1
-      local mason_pkg = vim.fn.stdpath('data') .. '/mason/packages/debugpy/venv/Scripts/'
-      dap.adapters.python = {
-        type = 'executable',
-        command = mason_pkg .. (is_win and 'debugpy-adapter.exe' or 'debugpy-adapter'),
-      }
-
-      -- Resolve the project python for launch configs (pipenv → venv → system)
-      local python_bin = is_win and '/Scripts/python.exe' or '/bin/python'
-      local function resolve_project_python()
-        local pipenv = vim.fn.trim(vim.fn.system('pipenv --venv'))
-        if vim.v.shell_error == 0 and pipenv ~= '' then
-          return pipenv .. python_bin
-        end
-        if vim.env.VIRTUAL_ENV and vim.env.VIRTUAL_ENV ~= '' then
-          return vim.env.VIRTUAL_ENV .. python_bin
-        end
-        return vim.fn.exepath('python3') ~= '' and vim.fn.exepath('python3') or 'python'
-      end
-
-      dap.configurations.python = {
-        {
-          type = 'python',
-          request = 'launch',
-          name = 'Launch file',
-          program = '${file}',
-          pythonPath = resolve_project_python,
-          console = 'internalConsole',
-        },
-        {
-          type = 'python',
-          request = 'launch',
-          name = 'Launch file (with arguments)',
-          program = '${file}',
-          args = function()
-            local args = vim.fn.input('Arguments: ')
-            return vim.split(args, ' ', { trimempty = true })
-          end,
-          pythonPath = resolve_project_python,
-          console = 'internalConsole',
-        },
-      }
+      require('dap-python').setup(vim.g.python_host_prog)
 
       -- Go: uses delve, installed via mason-nvim-dap
       require('dap-go').setup()
