@@ -12,5 +12,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Load configurations
-require('config').config_all()
+local C = require('init')
+
+C.configure_neovim_options()
+C.configure_lazy()
+C.configure_lsps('warn')
+C.configure_autocmds()
+C.configure_keymaps()
+
+vim.cmd.colorscheme('girlfailure')

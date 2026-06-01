@@ -8,6 +8,9 @@ return {
     opts = {
       library = {
         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        'lazy.nvim',
+        'dap.nvim',
+        'nvim-dap-ui',
         'LazyVim',
         {
           path = 'wezterm-types',

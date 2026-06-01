@@ -95,7 +95,7 @@ return {
                     return '' .. ctx.icon_gap
                   end
 
-                  return require('lspkind').symbol_map[ctx.kind] or '' .. ctx.icon_gap
+                  return (require('lspkind').symbol_map[ctx.kind] or '') .. ctx.icon_gap
 
                   -- return ctx.kind_icon .. ctx.icon_gap
                 end,
@@ -168,8 +168,7 @@ return {
         },
       },
       sources = {
-        default = function(ctx)
-          local success, node = pcall(vim.treesitter.get_node)
+        default = function(_)
           local base_sources = { 'lsp', 'lazydev', 'git', 'path', 'buffer', 'snippets', 'omni', 'env', 'copilot' }
           return base_sources
         end,

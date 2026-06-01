@@ -18,6 +18,8 @@ return {
         },
         status = {
           virtual_text = true,
+          enabled = true,
+          signs = true,
         },
         adapters = {
           require('neotest-python')({
@@ -33,6 +35,19 @@ return {
         },
         summary = {
           animated = false,
+          enabled = true,
+          follow = true,
+          expand_errors = true,
+          mappings = {
+            expand = { '<CR>', '<2-LeftMouse>' },
+            expand_focused = { '<CR>', '<2-LeftMouse>' },
+            open = 'o',
+            run = 'r',
+            short = 'O',
+            stop = 's',
+          },
+          open = 'botright vsplit | vertical resize 50',
+          count = true,
         },
       })
     end,

@@ -59,6 +59,11 @@ return {
         'flake8',
         'stylelint',
         'gdtoolkit',
+
+        -- DAP adapters
+        'debugpy',
+        'delve',
+        'codelldb',
       },
     },
   },

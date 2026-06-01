@@ -76,7 +76,7 @@ return {
       desc = 'Highlight when yanking text',
       group = augroup('highlight-yank', { clear = true }),
       callback = function()
-        vim.highlight.on_yank { higroup = 'DiffviewStatusCopied', timeout = 250 }
+        vim.highlight.on_yank({ higroup = 'DiffviewStatusCopied', timeout = 250 })
       end,
     })
 

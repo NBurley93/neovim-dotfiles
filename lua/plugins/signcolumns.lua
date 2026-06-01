@@ -3,6 +3,7 @@ return {
   {
     'luukvbaal/statuscol.nvim',
     event = 'BufReadPost',
+    dependencies = { 'mfussenegger/nvim-dap', 'lewis6991/gitsigns.nvim' },
     config = function()
       local builtin = require('statuscol.builtin')
       require('statuscol').setup({
@@ -11,6 +12,14 @@ return {
           -- Diagnostics
           {
             sign = { namespace = { 'diagnostic' } },
+          },
+          -- DAP: legacy signs placed via vim.fn.sign_place, use 'name' not 'namespace'
+          {
+            sign = {
+              name = { 'DapBreakpoint', 'DapBreakpointCondition', 'DapBreakpointRejected', 'DapStopped' },
+              maxwidth = 1,
+              auto = false,
+            },
           },
           -- Folds
           { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },

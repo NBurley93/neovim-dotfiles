@@ -1,5 +1,3 @@
-local icons = require('common.icons')
-
 return {
   -- Noice.nvim: Enhanced UI for Neovim's command line and messages
   {
@@ -48,112 +46,16 @@ return {
         fps = 60,
         timeout = 3000,
         top_down = false,
+        merge_duplicates = true,
       })
       vim.notify = require('notify')
     end,
-  },
-
-  -- trouble.nvim: A pretty list for showing diagnostics, references, etc.
-  {
-    'folke/trouble.nvim',
-    event = {
-      'LspAttach',
-    },
-    dependencies = { require('common.defines').WEB_DEVICONS_PROVIDER },
-    keys = {
-      {
-        '<leader>xx',
-        function()
-          vim.cmd.Trouble('diagnostics', 'toggle')
-        end,
-        desc = 'Diagnostics (Trouble)',
-      },
-      {
-        '<leader>xb',
-        function()
-          vim.cmd.Trouble('diagnostics', 'toggle', 'filter.buf=0')
-        end,
-        desc = 'Buffer Diagnostics (Trouble)',
-      },
-      {
-        '<leader>xs',
-        function()
-          vim.cmd.Trouble('symbols', 'toggle', 'focus=false')
-        end,
-        desc = 'Symbols (Trouble)',
-      },
-      {
-        '<leader>xd',
-        function()
-          vim.cmd.Trouble('lsp', 'toggle', 'focus=false', 'win.position=right')
-        end,
-        desc = 'LSP Symbols (Trouble)',
-      },
-      {
-        '<leader>xL',
-        function()
-          vim.cmd.Trouble('loclist', 'toggle')
-        end,
-        desc = 'Location List (Trouble)',
-      },
-      {
-        '<leader>xQ',
-        function()
-          vim.cmd.Trouble('qflist', 'toggle')
-        end,
-        desc = 'Quickfix List (Trouble)',
-      },
-    },
-    opts = {
-      fold_open = '', -- icon used for open folds
-      fold_closed = '', -- icon used for closed folds
-      signs = {
-        error = icons.diagnostics.Error,
-        warning = icons.diagnostics.Warning,
-        hint = icons.diagnostics.Hint,
-        information = icons.diagnostics.Information,
-        other = icons.diagnostics.Information,
-      },
-    },
   },
 
   -- lsp-colors.nvim: Automatically create missing LSP diagnostics highlight groups
   -- for color schemes that don't support them
   { 'folke/lsp-colors.nvim' },
 
-  -- nvim-lint: A linting plugin for Neovim
-  {
-    'mfussenegger/nvim-lint',
-    event = { 'BufWritePre' },
-    config = function()
-      local lint = require('lint')
-
-      lint.linters_by_ft = {
-        cmake = { 'cmakelint' },
-        gitcommit = { 'commitlint' },
-        c = { 'cpplint' },
-        cpp = { 'cpplint' },
-        go = { 'golangcilint' },
-        dockerfile = { 'hadolint' },
-        terraform = { 'tflint' },
-        markdown = { 'vale' },
-        latex = { 'vale' },
-        yaml = { 'yamllint' },
-        python = { 'flake8' },
-        css = { 'stylelint' },
-        gdscript = { 'gdlint' },
-      }
-
-      local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
-
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
-        group = lint_augroup,
-        callback = function()
-          lint.try_lint()
-        end,
-      })
-    end,
-  },
   -- fidget.nvim: A status indicator for LSP progress
   {
     'j-hui/fidget.nvim',

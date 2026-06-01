@@ -7,6 +7,7 @@ local function toggle_diffview(cmd)
 end
 
 return {
+  -- Neogit: A Magit-inspired Git interface for Neovim
   {
     'NeogitOrg/neogit',
     cmd = 'Neogit',
@@ -26,6 +27,8 @@ return {
       },
     },
   },
+
+  -- Diffview.nvim: A Git diff viewer and history browser
   {
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
