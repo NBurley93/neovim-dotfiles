@@ -1,28 +1,27 @@
+local DISABLE_HIGHLIGHT_THRESHOLD = 30000
+
 return {
   {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main',
+  },
+  {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
-    event = 'BufReadPre',
-    cmd = 'TSUpdate',
+    build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter.configs').setup({
+      require('nvim-treesitter').setup({
         auto_install = false,
+        sync_install = false,
         highlight = {
           enable = true,
           disable = function(lang, buf)
-            local max_filesize = 100 * 1024 -- 100kb
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-              return true
-            end
+            return vim.api.nvim_buf_line_count(bufnr or 0) > DISABLE_HIGHLIGHT_THRESHOLD
           end,
           additional_vim_regex_highlighting = false,
-        },
-        context_commentstring = {
-          enable = true,
-          enable_autocmd = false,
         },
       })
     end,

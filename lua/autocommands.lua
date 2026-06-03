@@ -22,6 +22,22 @@ local function CopilotAutocommands()
   })
 end
 
+local function TerminalAutocommands()
+  local term_group = augroup('custom-terminal-open', { clear = true })
+
+  autocmd('TermOpen', {
+    pattern = '*',
+    group = term_group,
+    desc = 'Set terminal buffer options',
+    callback = function()
+      vim.opt_local.number = false
+      vim.opt_local.relativenumber = false
+      vim.opt_local.signcolumn = 'no'
+      vim.opt_local.cursorline = false
+    end,
+  })
+end
+
 local function AutofixFiletypeCommands()
   local ft_lsp_group = augroup('ft_lsp_group', { clear = true })
 
@@ -54,21 +70,6 @@ local function AutoformatFTCommands()
   })
 end
 
-local function FtSpecificKeybinds()
-  local grp = augroup('ftspecific_keybinds', { clear = true })
-
-  autocmd({ 'FileType' }, {
-    pattern = { 'c', 'cpp' },
-    group = grp,
-    desc = 'Ouroboros keybinds for CPP',
-    callback = function()
-      vim.keymap.set('n', '<C-e>', function()
-        vim.cmd.Ouroboros()
-      end, { desc = 'Toggle Ouroboros' })
-    end,
-  })
-end
-
 return {
   config = function()
     -- Highlight on yank
@@ -80,9 +81,9 @@ return {
       end,
     })
 
-    FtSpecificKeybinds()
     CopilotAutocommands()
     AutofixFiletypeCommands()
     AutoformatFTCommands()
+    TerminalAutocommands()
   end,
 }

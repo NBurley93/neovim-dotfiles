@@ -1,34 +1,48 @@
 local M = {}
 
-function M.lsp_onattach_baseline(client, bufnr)
-  local lsp_map = function(keys, func, bufnr, desc)
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
-  end
+-- Helper function to set LSP-related keymaps with a consistent description prefix.
+---@param keys string The key sequence to map (e.g., 'gd' for "go
+---@param func function The function to execute when the keys are pressed
+---@param bufnr number The buffer number to set the keymap for
+---@param desc string A description of the keymap action, which will be prefixed with "LSP: " for clarity in which-key and other keymap displays.
+function M.lsp_map(keys, func, bufnr, desc)
+  vim.keymap.set('n', keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
+end
 
-  lsp_map('gd', function()
+-- Baseline on_attach function to set up common LSP keymaps and features for all servers.
+-- Servers can extend this baseline with their own on_attach logic using lsp_extend_baseline_onattach.
+---@param client vim.lsp.Client
+---@param bufnr number
+function M.lsp_onattach_baseline(client, bufnr)
+  M.lsp_map('gd', function()
     vim.cmd('Glance definitions')
   end, bufnr, 'View definitions')
-  lsp_map('gr', function()
+  M.lsp_map('gr', function()
     vim.cmd('Glance references')
   end, bufnr, 'View references')
 
-  lsp_map('<leader>ds', function()
+  M.lsp_map('<leader>ds', function()
     require('telescope.builtin').lsp_document_symbols()
   end, bufnr, 'View [D]ocument [S]ymbols')
 
-  lsp_map('K', function()
-    require('pretty_hover').hover()
-  end, bufnr, 'Hover LSP Docs')
+  if client.server_capabilities.hoverProvider then
+    M.lsp_map('K', function()
+      require('pretty_hover').hover()
+    end, bufnr, 'Hover LSP Docs')
+  end
 
-  lsp_map('<leader>rn', vim.lsp.buf.rename, bufnr, 'Rename symbol')
+  if client.server_capabilities.codeActionProvider then
+    M.lsp_map('<leader>ca', vim.lsp.buf.code_action, bufnr, 'Code actions')
+  end
 
-  if client.name == 'clangd' then
-    lsp_map('<leader>ch', function()
-      vim.cmd('LspClangdSwitchSourceHeader')
-    end, bufnr, 'Switch between source/header (C/C++)')
+  if client.server_capabilities.renameProvider then
+    M.lsp_map('<leader>rn', vim.lsp.buf.rename, bufnr, 'Rename symbol')
   end
 end
 
+-- A helper to extend the baseline on_attach with additional server-specific logic, so that all servers get the baseline keymaps and features,
+-- but can also add their own custom on_attach logic without needing to repeat the baseline setup.
+---@param func fun(client: vim.lsp.Client, bufnr: number)
 function M.lsp_extend_baseline_onattach(func)
   return function(client, bufnr)
     M.lsp_onattach_baseline(client, bufnr)
@@ -37,10 +51,13 @@ function M.lsp_extend_baseline_onattach(func)
 end
 
 -- Sets the logging level for the LSP client.
+---@param log_level string The desired log level (e.g., "trace", "debug", "info", "warn", "error")
 function M.set_logging_level(log_level)
   vim.lsp.log.set_level(log_level) -- options: "trace", "debug", "info", "warn", "error"
 end
 
+-- Sets up LSP servers by auto-discovering configuration files in lua/lsp/*.lua and applying a baseline on_attach.
+---@param log_level string The desired log level for LSP logging (e.g., "trace", "debug", "info", "warn", "error")
 function M.setup(log_level)
   -- Auto-discover all server config files under lua/lsp/*.lua
   local lsp_dir = vim.fn.stdpath('config') .. '/lua/lsp'
@@ -67,7 +84,6 @@ function M.setup(log_level)
       if user_on_init then
         return user_on_init(client, ...)
       end
-      return true
     end
 
     -- On Windows, Mason exposes binaries as .cmd shims which Neovim's

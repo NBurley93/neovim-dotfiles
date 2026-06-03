@@ -120,6 +120,23 @@ M.configure_keymaps = function()
 
   -- The BEST remap ever!!!
   vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Put without replacing paste buffer' })
+
+  -- Terminal splits
+  -- Horizontal split
+  vim.keymap.set('n', '<leader>ts', function()
+    vim.cmd.new()
+    vim.cmd.term()
+    vim.cmd.wincmd('J')
+    vim.api.nvim_win_set_height(0, math.floor(vim.o.lines * 0.4))
+  end, { desc = 'Open terminal in horizontal split' })
+
+  -- Vertical split
+  vim.keymap.set('n', '<leader>tv', function()
+    vim.cmd.vnew()
+    vim.cmd.term()
+    vim.cmd.wincmd('L')
+    vim.api.nvim_win_set_width(0, math.floor(vim.o.columns * 0.4))
+  end, { desc = 'Open terminal in vertical split' })
 end
 
 return M

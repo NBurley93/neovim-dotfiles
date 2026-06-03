@@ -9,20 +9,26 @@ return {
   {
     'Saghen/blink.cmp',
     version = 'v1.10.*',
-    build = 'cargo build --release',
+    build = function()
+      require('blink.cmp').build():pwait()
+    end,
     event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = {
       { 'folke/lazydev.nvim', ft = 'lua' },
       'rafamadriz/friendly-snippets',
       'onsails/lspkind.nvim',
       'Kaiser-Yang/blink-cmp-git',
+      'mayromr/blink-cmp-dap',
       'bydlw98/blink-cmp-env',
       'giuxtaposition/blink-cmp-copilot',
+      'Fildo7525/pretty_hover',
     },
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
     opts = {
       keymap = {
         preset = 'default',
-        ['<C-space>'] = {},
+        ['<C-y>'] = { 'select_and_accept', 'fallback' },
       },
       fuzzy = { implementation = 'prefer_rust_with_warning' },
       appearance = {
@@ -36,7 +42,7 @@ return {
           },
         },
         menu = {
-          border = nil,
+          border = 'rounded',
           cmdline_position = function()
             if vim.g.ui_cmdline_pos ~= nil then
               local pos = vim.g.ui_cmdline_pos -- (1, 0)-indexed
@@ -156,9 +162,17 @@ return {
         },
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 150,
+          auto_show_delay_ms = 250,
           treesitter_highlighting = true,
           window = { border = nil },
+          draw = function(opts)
+            if opts.item and opts.item.documentation and opts.item.documentation.value then
+              local out = require('pretty_hover.parser').parse(opts.item.documentation.value)
+              opts.item.documentation.value = out:string()
+            end
+
+            opts.default_implementation(opts)
+          end,
         },
         list = {
           selection = {
@@ -168,8 +182,8 @@ return {
         },
       },
       sources = {
-        default = function(_)
-          local base_sources = { 'lsp', 'lazydev', 'git', 'path', 'buffer', 'snippets', 'omni', 'env', 'copilot' }
+        default = function()
+          local base_sources = { 'lsp', 'lazydev', 'git', 'path', 'buffer', 'snippets', 'dap', 'env', 'copilot' }
           return base_sources
         end,
         providers = {
@@ -198,6 +212,10 @@ return {
               return vim.bo.filetype == 'lua'
             end,
             score_offset = 90,
+          },
+          dap = {
+            name = 'DAP',
+            module = 'blink-cmp-dap',
           },
           git = {
             name = 'Git',
