@@ -1,6 +1,25 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
+local function CustomTSParsers()
+  local ts_parser_group = augroup('custom_ts_parsers', { clear = true })
+
+  autocmd('User', {
+    pattern = 'TSUpdate',
+    group = ts_parser_group,
+    callback = function()
+      require('nvim-treesitter.parsers').sqf = {
+        install_info = {
+          url = 'https://github.com/NBurley93/tree-sitter-sqf',
+          branch = 'master',
+          generate = true,
+          generate_from_json = false,
+        },
+      }
+    end,
+  })
+end
+
 local function CopilotAutocommands()
   local copilot_blink_group = augroup('copilot_blink_group', { clear = true })
 
@@ -85,5 +104,6 @@ return {
     AutofixFiletypeCommands()
     AutoformatFTCommands()
     TerminalAutocommands()
+    CustomTSParsers()
   end,
 }

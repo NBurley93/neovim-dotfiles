@@ -34,7 +34,7 @@ M.configure_lazy = function()
     checker = { enabled = false },
     change_detection = { notify = false },
     dev = {
-      path = '~/neovim-projects',
+      path = '~/Development',
       patterns = {},
       fallback = true,
     },
