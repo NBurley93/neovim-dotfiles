@@ -65,6 +65,6 @@
   "telescope.nvim": { "branch": "master", "commit": "7d324792b7943e4aa16ad007212e6acc6f9fe335" },
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
   "vim-sqf-syntax": { "branch": "master", "commit": "35433894fbc75c62b135e99bff2fbc269d46e136" },
-  "wezterm-types": { "branch": "main", "commit": "13ab56e813cb5af9a36ae6b4c987ba2558cb3fcb" },
+  "wezterm-types": { "branch": "main", "commit": "58c95e0d78e24b236b2eecaa2c29ae973478f79b" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
 }
