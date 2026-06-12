@@ -28,6 +28,42 @@ return {
     },
   },
 
+  -- Octo.nvim: Github tools right in Neovim
+  {
+    'pwntester/octo.nvim',
+    cmd = 'Octo',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    opts = {
+      picker = 'telescope',
+      enable_builtin = true,
+    },
+    keys = {
+      {
+        '<leader>goi',
+        '<CMD>Octo issue list<CR>',
+        mode = 'n',
+        desc = 'List Github issues',
+      },
+      {
+        '<leader>gop',
+        '<CMD>Octo pr list<CR>',
+        mode = 'n',
+        desc = 'List Github Pullrequests',
+      },
+      {
+        '<leader>gos',
+        function()
+          require('octo.utils').create_base_search_command({ include_current_repo = true })
+        end,
+        desc = 'Search Github',
+      },
+    },
+  },
+
   -- Diffview.nvim: A Git diff viewer and history browser
   {
     'sindrets/diffview.nvim',
