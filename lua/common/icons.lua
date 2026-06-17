@@ -115,9 +115,9 @@ return {
   },
   diagnostics = {
     Ok = ' ',
-    Error = ' ',
-    Warning = ' ',
-    Information = ' ',
+    Error = '■',
+    Warning = '△',
+    Information = '○',
     Question = ' ',
     Hint = ' ',
   },

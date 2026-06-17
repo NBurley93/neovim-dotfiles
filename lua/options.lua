@@ -4,13 +4,19 @@ vim.g.maplocalleader = ' '
 
 return {
   config = function()
+    --- vim.opt
     local options = {
       autoindent = true,
       updatetime = 50,
+
       timeout = true,
       timeoutlen = 1000,
       expandtab = true,
+
+      -- Title
       title = true,
+      titlestring = '%F - Nvim',
+
       shiftwidth = 4,
       tabstop = 4,
       history = 10000,
@@ -22,7 +28,7 @@ return {
       breakindent = true,
       mouse = 'a',
       relativenumber = true,
-      signcolumn = 'yes:2',
+      signcolumn = 'auto:2',
       clipboard = 'unnamedplus',
       termguicolors = true,
       cursorline = true,
@@ -33,10 +39,14 @@ return {
       backup = false,
       hlsearch = true,
       incsearch = true,
-      foldcolumn = '1',
+
+      -- Folds
       foldenable = true,
       foldlevel = 99,
       foldlevelstart = -1,
+
+      -- Misc
+      fileformats = { 'unix', 'dos' },
       inccommand = 'split',
       scrolloff = 8,
       list = true,
@@ -49,7 +59,12 @@ return {
       pumblend = 15,
       splitright = true,
       splitbelow = true,
-      fillchars = { eob = ' ', foldopen = '', foldsep = ' ', foldclose = '' },
+      fillchars = {
+        eob = ' ',
+        foldopen = ' ',
+        foldsep = ' ',
+        foldclose = ' ',
+      },
       diffopt = {
         'internal',
         'filler',
