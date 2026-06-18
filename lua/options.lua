@@ -51,7 +51,9 @@ return {
       scrolloff = 8,
       list = true,
       listchars = {
-        tab = '» ',
+        tab = '▏ ',
+        leadmultispace = '▏ ',
+        multispace = '▏ ',
         trail = '·',
         nbsp = '␣',
       },
