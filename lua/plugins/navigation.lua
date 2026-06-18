@@ -34,6 +34,11 @@ return {
     },
   },
 
+  -- smart-splits.nvim - Seemless mux integration
+  {
+    'mrjones2014/smart-splits.nvim',
+  },
+
   -- oil.nvim: a file explorer
   {
     'stevearc/oil.nvim',

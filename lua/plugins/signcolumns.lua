@@ -65,7 +65,7 @@ return {
           untracked = { text = '┇' },
         },
         signcolumn = true,
-        current_line_blame = true,
+        current_line_blame = false,
         current_line_blame_opts = {
           delay = 1000,
           virt_text = true,
@@ -73,5 +73,21 @@ return {
         },
       })
     end,
+    keys = {
+      {
+        '<leader>gb',
+        function()
+          require('gitsigns').blame_line()
+        end,
+        desc = 'Git Blame Line',
+      },
+      {
+        '<leader>gB',
+        function()
+          require('gitsigns').blame()
+        end,
+        desc = 'Show Git Blame',
+      },
+    },
   },
 }
