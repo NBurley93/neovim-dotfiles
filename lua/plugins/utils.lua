@@ -25,12 +25,6 @@ return {
     config = function(_, opts)
       local wk = require('which-key')
       wk.setup(opts)
-      wk.add({
-        { '<leader>g', group = 'Git' },
-        { '<leader>s', group = 'Search (Telescope)' },
-        { '<leader>u', group = 'Unit Testing (Neotest)' },
-        { '<leader>x', group = 'Diagnostics (Trouble)' },
-      })
     end,
   },
 }
