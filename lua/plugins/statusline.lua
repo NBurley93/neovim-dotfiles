@@ -175,7 +175,8 @@ local function setup_options()
         'dap-repl',
       },
     },
-    theme = 'girlfailure',
+    -- theme = 'girlfailure',
+    theme = 'auto',
   }
 end
 
