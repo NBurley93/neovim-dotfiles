@@ -61,8 +61,8 @@ return {
               kind_icon = {
                 text = function(ctx)
                   if vim.tbl_contains({ 'Path' }, ctx.source_name) then
-                    local mini_icon, _ = require('mini.icons').get(ctx.item.data.type, ctx.label)
-                    if mini_icon then
+                    local ok, mini_icon, _ = pcall(require('mini.icons').get, ctx.item.data.type, ctx.label)
+                    if ok and mini_icon then
                       return mini_icon .. ctx.icon_gap
                     end
                   end
@@ -111,8 +111,8 @@ return {
                 -- keep the highlight groups in sync with the icons.
                 highlight = function(ctx)
                   if vim.tbl_contains({ 'Path' }, ctx.source_name) then
-                    local mini_icon, mini_hl = require('mini.icons').get(ctx.item.data.type, ctx.label)
-                    if mini_icon then
+                    local ok, mini_icon, mini_hl = pcall(require('mini.icons').get, ctx.item.data.type, ctx.label)
+                    if ok and mini_icon then
                       return mini_hl
                     end
                   end
