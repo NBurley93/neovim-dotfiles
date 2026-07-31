@@ -61,7 +61,7 @@
   "pretty_hover": { "branch": "master", "commit": "934df974ef6158b100fe910e8556e6c4a66614c2" },
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "rainbow_csv": { "branch": "master", "commit": "3dbbfd7d17536aebfb80f571255548495574c32b" },
-  "smart-splits.nvim": { "branch": "master", "commit": "32f67888ac71942442fdab3819864a10449dfc41" },
+  "smart-splits.nvim": { "branch": "master", "commit": "89ab35b282783efc1c49deadd72c22afd5eac356" },
   "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },
   "statuscol.nvim": { "branch": "main", "commit": "887b8a03ea3804628505c9002fd07bd06a3db2e0" },
   "telescope-ui-select.nvim": { "branch": "master", "commit": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2" },
