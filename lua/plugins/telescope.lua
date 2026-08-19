@@ -10,19 +10,15 @@ return {
     keys = {
       {
         '<leader>sf',
-        function()
-          require('telescope.builtin').find_files()
-        end,
+        require('telescope.builtin').find_files,
         mode = 'n',
-        desc = 'Search [F]iles',
+        desc = '[S]earch [F]iles',
       },
       {
-        '<leader>ss',
-        function()
-          require('telescope.builtin').live_grep()
-        end,
+        '<leader>sg',
+        require('telescope.builtin').live_grep,
         mode = 'n',
-        desc = 'Grep Search [S]tring',
+        desc = '[S]earch [G]rep',
       },
       {
         '<leader><leader>',
@@ -33,15 +29,67 @@ return {
           )
         end,
         mode = 'n',
-        desc = 'Search open buffers',
+        desc = '[ ] Find buffers',
       },
       {
         '<leader>sh',
+        require('telescope.builtin').help_tags,
+        mode = 'n',
+        desc = '[S]earch [H]elp',
+      },
+      {
+        '<leader>/',
         function()
-          require('telescope.builtin').help_tags()
+          require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
+            winblend = 10,
+            previewer = false,
+          }))
         end,
         mode = 'n',
-        desc = 'Search [H]elp Tags',
+        desc = '[/] Fuzzy search in current buffer',
+      },
+      {
+        '<leader>s/',
+        function()
+          require('telescope.builtin').live_grep({
+            grep_open_files = true,
+            prompt_title = 'Live Grep in Open Files',
+          })
+        end,
+        mode = 'n',
+        desc = '[S]earch [/] in Open Files',
+      },
+      {
+        '<leader>sn',
+        function()
+          require('telescope.builtin').find_files({ cwd = vim.fn.stdpath('config') })
+        end,
+        mode = 'n',
+        desc = '[S]earch [N]eovim files',
+      },
+      {
+        '<leader>sk',
+        require('telescope.builtin').keymaps,
+        mode = 'n',
+        desc = '[S]earch [K]eymaps',
+      },
+      {
+        '<leader>ss',
+        require('telescope.builtin').builtin,
+        mode = 'n',
+        desc = '[S]earch [S]elect Telescope',
+      },
+      {
+        '<leader>sw',
+        require('telescope.builtin').grep_string,
+        mode = 'n',
+        desc = '[S]earch current [W]ord',
+      },
+      {
+        '<leader>sd',
+        require('telescope.builtin').diagnostics,
+        mode = 'n',
+        desc = '[S]earch [D]iagnostics',
       },
     },
     config = function()

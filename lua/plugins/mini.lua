@@ -1,14 +1,26 @@
 return {
   -- Mini.nvim: A collection of minimal and fast Neovim plugins
+
+  -- Better Around/Inside textobjects
+  --
+  -- Examples:
+  -- - va) - [V]isually select [A]round [)]parens
+  -- - yinq - [Y]ank [I]nside [N]ext [']quote
+  -- - ci' - [C]hange [I]nside [']quote
   {
     'nvim-mini/mini.ai',
-    event = 'VeryLazy',
-    opts = true,
+    opts = {
+      n_lines = 500,
+    },
     version = false,
   },
+  -- Add/delete/replace surroundings
+  --
+  --  - saiw) - [S]urround [A]dd [I]nner [W]ord [)]paren
+  --  - sd' - [S]urround [D]elete [']quotes
+  --  - sr)' - [S]urround [R]eplace [)] [']
   {
     'nvim-mini/mini.surround',
-    event = 'VeryLazy',
     opts = true,
     version = false,
   },
