@@ -16,6 +16,7 @@ return {
     dependencies = {
       { 'folke/lazydev.nvim', ft = 'lua' },
       'rafamadriz/friendly-snippets',
+      { 'L3MON4D3/LuaSnip', version = 'v2.*' },
       'onsails/lspkind.nvim',
       'Kaiser-Yang/blink-cmp-git',
       'mayromr/blink-cmp-dap',
@@ -34,6 +35,12 @@ return {
       appearance = {
         use_nvim_cmp_as_default = false,
         nerd_font_variant = 'mono',
+      },
+      signature = {
+        enabled = true,
+      },
+      snippets = {
+        preset = 'luasnip',
       },
       completion = {
         accept = {
@@ -243,6 +250,13 @@ return {
     config = function(_, opts)
       require('blink.cmp').setup(opts)
       vim.api.nvim_set_hl(0, 'BlinkCmpKindCopilot', { fg = copilot_highlight_color })
+
+      local ls = require('luasnip')
+      ls.setup({ enable_autosnippets = true })
+      require('luasnip.loaders.from_vscode').lazy_load()
+      require('luasnip.loaders.from_lua').load({
+        paths = { './lua/snippets' },
+      })
     end,
   },
 }

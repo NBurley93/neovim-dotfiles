@@ -79,4 +79,8 @@ M.configure_keymaps = function()
   require('mappings').config()
 end
 
+M.configure_usercmds = function()
+  require('user_commands').config()
+end
+
 return M

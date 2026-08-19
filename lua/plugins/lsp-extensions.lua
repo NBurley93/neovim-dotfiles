@@ -12,6 +12,7 @@ return {
         'dap.nvim',
         'nvim-dap-ui',
         'LazyVim',
+        'overseer',
         {
           path = 'wezterm-types',
           mods = { 'wezterm' },

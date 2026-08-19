@@ -19,6 +19,7 @@ C.configure_lazy()
 C.configure_lsps('warn')
 C.configure_autocmds()
 C.configure_keymaps()
+C.configure_usercmds()
 
 -- vim.cmd.colorscheme('girlfailure')
 vim.cmd.colorscheme('kanagawa')
