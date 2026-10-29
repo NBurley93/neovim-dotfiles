@@ -2,6 +2,14 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
+    -- Telescope is lazy-loaded, so stand in for vim.ui.select until it loads; loading it
+    -- registers the ui-select extension, which replaces this stub with the dropdown
+    init = function()
+      vim.ui.select = function(...)
+        require('lazy').load({ plugins = { 'telescope.nvim' } })
+        return vim.ui.select(...)
+      end
+    end,
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-ui-select.nvim',

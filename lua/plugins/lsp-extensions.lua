@@ -19,7 +19,7 @@ return {
       },
     },
   },
-  { 'p00f/clangd_extensions.nvim', ft = { 'c', 'cpp', 'rust' }, event = { 'BufReadPost', 'BufNewFile' } },
+  { 'p00f/clangd_extensions.nvim', ft = { 'c', 'cpp' } },
   {
     'dpowling/godot-lsp.nvim',
     ft = 'gdscript',

@@ -35,7 +35,7 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope.nvim',
-      'nvim-tree/nvim-web-devicons',
+      require('common.defines').WEB_DEVICONS_PROVIDER,
     },
     opts = {
       picker = 'telescope',
@@ -127,5 +127,4 @@ return {
       })
     end,
   },
-  { 'akinsho/git-conflict.nvim', event = 'BufReadPost' },
 }

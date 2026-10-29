@@ -1,7 +1,8 @@
 local icons = require('common.icons')
 
 return {
-  WEB_DEVICONS_PROVIDER = 'nvim-tree/nvim-web-devicons',
+  -- mini.icons stands in for nvim-web-devicons (see lua/plugins/mini.lua)
+  WEB_DEVICONS_PROVIDER = 'nvim-mini/mini.icons',
   DIAGNOSTIC_SIGNS = {
     text = {
       [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
