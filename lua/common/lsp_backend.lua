@@ -36,9 +36,7 @@ function M.lsp_onattach_baseline(client, bufnr)
     end, bufnr, 'Hover LSP Docs')
   end
 
-  if client.server_capabilities.codeActionProvider then
-    M.lsp_map('<leader>ca', vim.lsp.buf.code_action, bufnr, 'Code actions')
-  end
+  -- Code actions use Neovim's built-in 'gra' (normal and visual mode), leaving <leader>ca to diffview
 
   if client.server_capabilities.renameProvider then
     M.lsp_map('<leader>rn', vim.lsp.buf.rename, bufnr, 'Rename symbol')
@@ -123,6 +121,11 @@ function M.setup(log_level)
 
   vim.diagnostic.config({
     signs = require('common.defines').DIAGNOSTIC_SIGNS,
+    -- When a line has several diagnostics, the most severe one gets the sign
+    severity_sort = true,
+    -- Full diagnostic messages under the cursor line only
+    virtual_lines = { current_line = true },
+    float = { border = 'rounded' },
   })
 
   M.set_logging_level(log_level or 'warn')

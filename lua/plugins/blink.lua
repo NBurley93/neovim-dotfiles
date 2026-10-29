@@ -1,3 +1,32 @@
+-- Icons for kinds mini.icons doesn't cover (Git, Buffer) or that we prefer our own glyph for
+local custom_kind_icons = {
+  Snippet = '\u{f0c4}',
+  Text = '\u{eb69}',
+  Buffer = '\u{f15b}',
+  Git = '\u{e702}',
+}
+
+-- Returns the icon and highlight group for a completion item
+local function kind_icon(ctx)
+  if ctx.source_name == 'Path' then
+    local ok, icon, hl = pcall(require('mini.icons').get, ctx.item.data.type, ctx.label)
+    if ok and icon then
+      return icon, hl
+    end
+  end
+
+  if custom_kind_icons[ctx.kind] then
+    return custom_kind_icons[ctx.kind], ctx.kind_hl
+  end
+
+  return require('mini.icons').get('lsp', ctx.kind)
+end
+
+local function kind_icon_hl(ctx)
+  local _, hl = kind_icon(ctx)
+  return hl
+end
+
 return {
   {
     'rafamadriz/friendly-snippets',
@@ -15,7 +44,6 @@ return {
       { 'folke/lazydev.nvim', ft = 'lua' },
       'rafamadriz/friendly-snippets',
       { 'L3MON4D3/LuaSnip', version = 'v2.*' },
-      'onsails/lspkind.nvim',
       'Kaiser-Yang/blink-cmp-git',
       'mayromr/blink-cmp-dap',
       'bydlw98/blink-cmp-env',
@@ -28,13 +56,31 @@ return {
         preset = 'default',
         ['<C-y>'] = { 'select_and_accept', 'fallback' },
       },
-      fuzzy = { implementation = 'prefer_rust_with_warning' },
+      fuzzy = {
+        implementation = 'prefer_rust_with_warning',
+        sorts = {
+          -- Exactly typed labels win, so a snippet's full trigger still reaches it
+          'exact',
+          -- Snippets after everything else, from any source (friendly-snippets and clangd's own),
+          -- so they can't outrank constructors and members on score or frecency
+          function(a, b)
+            local snippet = require('blink.cmp.types').CompletionItemKind.Snippet
+            local a_is_snippet, b_is_snippet = a.kind == snippet, b.kind == snippet
+            if a_is_snippet ~= b_is_snippet then
+              return b_is_snippet
+            end
+          end,
+          'score',
+          'sort_text',
+        },
+      },
       appearance = {
         use_nvim_cmp_as_default = false,
         nerd_font_variant = 'mono',
       },
       signature = {
         enabled = true,
+        window = { border = 'rounded' },
       },
       snippets = {
         preset = 'luasnip',
@@ -44,6 +90,9 @@ return {
           auto_brackets = {
             enabled = true,
           },
+        },
+        ghost_text = {
+          enabled = true,
         },
         menu = {
           border = 'rounded',
@@ -57,104 +106,24 @@ return {
           end,
           draw = {
             padding = { 1, 1 },
+            -- Highlight LSP labels with treesitter, like the code they complete
+            treesitter = { 'lsp' },
             columns = {
-              { 'label', gap = 1 },
+              { 'label', 'label_description', gap = 1 },
               { 'kind_icon', 'kind', gap = 1 },
             },
             components = {
               kind_icon = {
                 text = function(ctx)
-                  if vim.tbl_contains({ 'Path' }, ctx.source_name) then
-                    local ok, mini_icon, _ = pcall(require('mini.icons').get, ctx.item.data.type, ctx.label)
-                    if ok and mini_icon then
-                      return mini_icon .. ctx.icon_gap
-                    end
-                  end
-
-                  if vim.tbl_contains({ 'LSP' }, ctx.source_name) then
-                    -- snippet is a type that can be defined in the LSP source, but mini.icons doesn't have that icon under the lsp category
-                    if ctx.kind:lower() == 'snippet' then
-                      return '' .. ctx.icon_gap
-                    end
-
-                    local mini_icon, _ = require('mini.icons').get('lsp', ctx.kind)
-                    if mini_icon then
-                      return mini_icon .. ctx.icon_gap
-                    end
-                  end
-
-                  -- Handle icons for kinds not covered by mini.icons
-                  if ctx.kind == 'Snippet' then
-                    return '' .. ctx.icon_gap
-                  end
-
-                  if ctx.kind == 'Text' then
-                    return '' .. ctx.icon_gap
-                  end
-
-                  if ctx.kind == 'Buffer' then
-                    return '' .. ctx.icon_gap
-                  end
-
-                  if ctx.kind == 'Git' then
-                    return '' .. ctx.icon_gap
-                  end
-
-                  return (require('lspkind').symbol_map[ctx.kind] or '') .. ctx.icon_gap
-
-                  -- return ctx.kind_icon .. ctx.icon_gap
+                  return kind_icon(ctx) .. ctx.icon_gap
                 end,
-
-                -- Optionally, use the highlight groups from mini.icons
-                -- You can also add the same function for `kind.highlight` if you want to
-                -- keep the highlight groups in sync with the icons.
-                highlight = function(ctx)
-                  if vim.tbl_contains({ 'Path' }, ctx.source_name) then
-                    local ok, mini_icon, mini_hl = pcall(require('mini.icons').get, ctx.item.data.type, ctx.label)
-                    if ok and mini_icon then
-                      return mini_hl
-                    end
-                  end
-
-                  if vim.tbl_contains({ 'LSP' }, ctx.source_name) then
-                    local mini_icon, mini_hl, _ = require('mini.icons').get('lsp', ctx.kind)
-                    if mini_icon then
-                      return mini_hl
-                    end
-                  end
-
-                  if ctx.source_name == 'Copilot' then
-                    return 'BlinkCmpKindCopilot'
-                  end
-
-                  return ctx.kind_hl
-                end,
-              },
-              label = {
-                text = function(item)
-                  return item.label
-                end,
-                highlight = 'BlinkMenuItemLabel',
+                highlight = kind_icon_hl,
               },
               kind = {
-                -- Optional, use highlights from mini.icons
-                highlight = function(ctx)
-                  if vim.tbl_contains({ 'LSP' }, ctx.source_name) then
-                    local mini_icon, mini_hl, _ = require('mini.icons').get('lsp', ctx.kind)
-                    if mini_icon then
-                      return mini_hl
-                    end
-                  end
-
-                  if ctx.source_name == 'Copilot' then
-                    return 'BlinkCmpKindCopilot'
-                  end
-
-                  return ctx.kind_hl
-                end,
                 text = function(ctx)
                   return '<' .. ctx.kind:lower() .. '>'
                 end,
+                highlight = kind_icon_hl,
               },
             },
           },
@@ -163,7 +132,7 @@ return {
           auto_show = true,
           auto_show_delay_ms = 250,
           treesitter_highlighting = true,
-          window = { border = nil },
+          window = { border = 'rounded' },
           draw = function(opts)
             if opts.item and opts.item.documentation and opts.item.documentation.value then
               local out = require('pretty_hover.parser').parse(opts.item.documentation.value)
@@ -181,10 +150,13 @@ return {
         },
       },
       sources = {
-        default = function()
-          local base_sources = { 'lsp', 'lazydev', 'git', 'path', 'buffer', 'snippets', 'dap', 'env' }
-          return base_sources
-        end,
+        default = { 'lsp', 'path', 'buffer', 'snippets', 'dap', 'env' },
+        per_filetype = {
+          lua = { inherit_defaults = true, 'lazydev' },
+          gitcommit = { inherit_defaults = true, 'git' },
+          markdown = { inherit_defaults = true, 'git' },
+          octo = { inherit_defaults = true, 'git' },
+        },
         providers = {
           lsp = {
             name = 'LSP',
@@ -207,9 +179,6 @@ return {
           lazydev = {
             name = 'LazyDev',
             module = 'lazydev.integrations.blink',
-            enabled = function()
-              return vim.bo.filetype == 'lua'
-            end,
             score_offset = 90,
           },
           dap = {
@@ -219,11 +188,6 @@ return {
           git = {
             name = 'Git',
             module = 'blink-cmp-git',
-
-            enabled = function()
-              return vim.tbl_contains({ 'octo', 'gitcommit', 'markdown' }, vim.bo.filetype)
-            end,
-
             opts = {},
           },
           env = {

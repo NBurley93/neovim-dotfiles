@@ -23,6 +23,17 @@ return {
       vim.cmd('LspClangdSwitchSourceHeader')
     end, bufnr, 'Switch between source/header (C/C++)')
 
+    -- Applies clangd's "Create function body out-of-line" (on a declaration) or
+    -- "Move function body to out-of-line" (on an inline body) without the code action menu
+    lspbackend.lsp_map('<leader>ci', function()
+      vim.lsp.buf.code_action({
+        filter = function(action)
+          return action.title:find('out%-of%-line') ~= nil
+        end,
+        apply = true,
+      })
+    end, bufnr, 'Create/move [I]mplementation to source file (C/C++)')
+
     local lspkeyfuncs = require('common.lsp_keybind_funcs')
 
     -- Ctrl+Shift+B to spawn split terminal and generate + build debug

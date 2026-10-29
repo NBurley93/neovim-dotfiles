@@ -42,6 +42,7 @@ return {
 
       -- Folds
       foldenable = true,
+      foldcolumn = '1',
       foldlevel = 99,
       foldlevelstart = -1,
 
@@ -63,9 +64,9 @@ return {
       splitbelow = true,
       fillchars = {
         eob = ' ',
-        foldopen = ' ',
+        foldopen = '\u{f078}', -- nf-fa-chevron_down
         foldsep = ' ',
-        foldclose = ' ',
+        foldclose = '\u{f054}', -- nf-fa-chevron_right
       },
       diffopt = {
         'internal',
