@@ -25,8 +25,13 @@ return {
           require('neotest-python')({
             runner = 'pytest',
             pytest_discover_instances = true,
-            python = '.venv/bin/python',
-            args = { 'tests', '-vv', '--no-cov' },
+            python = function()
+              if vim.fn.has('win32') == 1 then
+                return '.venv/Scripts/python.exe'
+              end
+              return '.venv/bin/python'
+            end,
+            args = { '-vv' },
           }),
         },
         output_panel = {
@@ -56,7 +61,6 @@ return {
       'nvim-neotest/nvim-nio',
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
-      'antoinemadec/FixCursorHold.nvim',
       'nvim-neotest/neotest-python',
     },
     keys = {

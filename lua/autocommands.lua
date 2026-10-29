@@ -20,27 +20,6 @@ local function CustomTSParsers()
   })
 end
 
-local function CopilotAutocommands()
-  local copilot_blink_group = augroup('copilot_blink_group', { clear = true })
-
-  -- Copilot blink.cmp completions
-  autocmd('User', {
-    pattern = 'BlinkCmpMenuOpen',
-    group = copilot_blink_group,
-    callback = function()
-      vim.b.copilot_suggestion_hidden = true
-    end,
-  })
-
-  autocmd('User', {
-    pattern = 'BlinkCmpMenuClose',
-    group = copilot_blink_group,
-    callback = function()
-      vim.b.copilot_suggestion_hidden = false
-    end,
-  })
-end
-
 local function TerminalAutocommands()
   local term_group = augroup('custom-terminal-open', { clear = true })
 
@@ -96,11 +75,10 @@ return {
       desc = 'Highlight when yanking text',
       group = augroup('highlight-yank', { clear = true }),
       callback = function()
-        vim.highlight.on_yank({ higroup = 'DiffviewStatusCopied', timeout = 250 })
+        vim.hl.on_yank({ higroup = 'IncSearch', timeout = 250 })
       end,
     })
 
-    CopilotAutocommands()
     AutofixFiletypeCommands()
     AutoformatFTCommands()
     TerminalAutocommands()

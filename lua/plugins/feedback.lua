@@ -26,7 +26,6 @@ return {
         override = {
           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
           ['vim.lsp.util.stylize_markdown'] = true,
-          ['cmp.entry.get_documentation'] = true,
         },
       },
     },
@@ -51,10 +50,6 @@ return {
       vim.notify = require('notify')
     end,
   },
-
-  -- lsp-colors.nvim: Automatically create missing LSP diagnostics highlight groups
-  -- for color schemes that don't support them
-  { 'folke/lsp-colors.nvim' },
 
   -- fidget.nvim: A status indicator for LSP progress
   {

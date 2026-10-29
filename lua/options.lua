@@ -84,14 +84,12 @@ return {
     end
     vim.opt.isfname:append('@-@')
 
-    vim.lsp.log.set_level('off')
-
     local isWindows = vim.fn.has('win32') == 1
     local isWSL = vim.fn.has('wsl') == 1
-    local isWSLWindows = (isWindows and isWSL)
-    local isWindowsNative = (isWindows and isWSL == false)
+    -- has('win32') is 0 inside WSL, so the two are mutually exclusive
+    local isWindowsNative = isWindows
 
-    if isWSLWindows then
+    if isWSL then
       -- MUCH better clipboard
       vim.g.clipboard = {
         name = 'xclip-wsl',
@@ -120,14 +118,8 @@ return {
       for option, value in pairs(powershell_options) do
         vim.opt[option] = value
       end
-    else
-      local shell_options = {
-        shell = vim.fn.executable('zsh') == 1 and 'zsh',
-      }
-
-      for option, value in pairs(shell_options) do
-        vim.opt[option] = value
-      end
+    elseif vim.fn.executable('zsh') == 1 then
+      vim.opt.shell = 'zsh'
     end
 
     local get_python_host = function()
@@ -152,7 +144,5 @@ return {
     -- Misc provider vars
     vim.g.loaded_perl_provider = 0
     vim.g.loaded_ruby_provider = 0
-
-    vim.g.copilot_proxy_strict_ssl = false
   end,
 }

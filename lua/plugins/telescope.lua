@@ -4,36 +4,42 @@ return {
     cmd = 'Telescope',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-lua/popup.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
     },
     keys = {
       {
         '<leader>sf',
-        require('telescope.builtin').find_files,
+        function()
+          require('telescope.builtin').find_files()
+        end,
         mode = 'n',
         desc = '[S]earch [F]iles',
       },
       {
         '<leader>sg',
-        require('telescope.builtin').live_grep,
+        function()
+          require('telescope.builtin').live_grep()
+        end,
         mode = 'n',
         desc = '[S]earch [G]rep',
       },
       {
         '<leader><leader>',
         function()
-          require('telescope.builtin').buffers(
-            require('telescope.themes').get_dropdown({ previewer = false }),
-            { sort_lastused = true, ignore_current_buffer = true }
-          )
+          require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({
+            previewer = false,
+            sort_lastused = true,
+            ignore_current_buffer = true,
+          }))
         end,
         mode = 'n',
         desc = '[ ] Find buffers',
       },
       {
         '<leader>sh',
-        require('telescope.builtin').help_tags,
+        function()
+          require('telescope.builtin').help_tags()
+        end,
         mode = 'n',
         desc = '[S]earch [H]elp',
       },
@@ -69,25 +75,33 @@ return {
       },
       {
         '<leader>sk',
-        require('telescope.builtin').keymaps,
+        function()
+          require('telescope.builtin').keymaps()
+        end,
         mode = 'n',
         desc = '[S]earch [K]eymaps',
       },
       {
         '<leader>ss',
-        require('telescope.builtin').builtin,
+        function()
+          require('telescope.builtin').builtin()
+        end,
         mode = 'n',
         desc = '[S]earch [S]elect Telescope',
       },
       {
         '<leader>sw',
-        require('telescope.builtin').grep_string,
+        function()
+          require('telescope.builtin').grep_string()
+        end,
         mode = 'n',
         desc = '[S]earch current [W]ord',
       },
       {
         '<leader>sd',
-        require('telescope.builtin').diagnostics,
+        function()
+          require('telescope.builtin').diagnostics()
+        end,
         mode = 'n',
         desc = '[S]earch [D]iagnostics',
       },
@@ -96,9 +110,6 @@ return {
       local ts = require('telescope')
 
       ts.setup({
-        ['ui-select'] = {
-          require('telescope.themes').get_dropdown({}),
-        },
         defaults = {
           layout_config = { prompt_position = 'top', height = 0.92, width = 0.92 },
           layout_strategy = 'flex',
@@ -128,6 +139,9 @@ return {
           diagnostics = { theme = 'dropdown' },
         },
         extensions = {
+          ['ui-select'] = {
+            require('telescope.themes').get_dropdown({}),
+          },
           aerial = {
             show_nesting = {
               ['_'] = false,

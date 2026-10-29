@@ -98,7 +98,13 @@ return {
         { text = ' ', texthl = 'DiagnosticSignHint', linehl = '', numhl = '' }
       )
 
-      require('dap-python').setup(vim.g.python_host_prog)
+      -- Python: debugpy, installed via mason-tool-installer into its own venv
+      local debugpy_venv = vim.fn.stdpath('data') .. '/mason/packages/debugpy/venv'
+      if vim.fn.has('win32') == 1 then
+        require('dap-python').setup(debugpy_venv .. '/Scripts/python.exe')
+      else
+        require('dap-python').setup(debugpy_venv .. '/bin/python')
+      end
 
       -- Go: uses delve, installed via mason-nvim-dap
       require('dap-go').setup()

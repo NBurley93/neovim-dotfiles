@@ -10,11 +10,11 @@ return {
     },
     keys = {
       {
-        '<leader>a',
+        '<leader>cn',
         function()
           require('neogen').generate()
         end,
-        desc = 'Annotate class/file/function with neogen',
+        desc = 'Annotate class/file/function with [N]eogen',
       },
     },
   },

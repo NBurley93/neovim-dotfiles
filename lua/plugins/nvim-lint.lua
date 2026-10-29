@@ -2,7 +2,7 @@ return {
   -- nvim-lint: A linting plugin for Neovim
   {
     'mfussenegger/nvim-lint',
-    event = { 'BufWritePre' },
+    event = { 'BufReadPost', 'BufNewFile' },
     config = function()
       local lint = require('lint')
 
@@ -17,7 +17,6 @@ return {
         markdown = { 'vale' },
         latex = { 'vale' },
         yaml = { 'yamllint' },
-        python = { 'flake8' },
         css = { 'stylelint' },
         gdscript = { 'gdlint' },
       }

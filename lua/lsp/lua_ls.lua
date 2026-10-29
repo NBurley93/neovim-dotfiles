@@ -7,16 +7,16 @@ return {
     -- Only apply settings if no .luarc.json exists in the workspace
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
-      if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+      if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
         return true
       end
     end
     client.config.settings = vim.tbl_deep_extend('force', client.config.settings or {}, {
       Lua = {
         runtime = { version = 'LuaJIT' },
+        -- Runtime and plugin libraries are provided by lazydev.nvim
         workspace = {
           checkThirdParty = false,
-          library = vim.api.nvim_get_runtime_file('', true),
         },
       },
     })

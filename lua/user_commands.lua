@@ -1,7 +1,6 @@
-local overseer = require('overseer')
-
 local function makefile_cmd()
   vim.api.nvim_create_user_command('Make', function(params)
+    local overseer = require('overseer')
     local cmd, num_subs = vim.o.makeprg:gsub('%$%*', params.args)
     if num_subs == 0 then
       cmd = cmd .. ' ' .. params.args
@@ -23,12 +22,11 @@ local function makefile_cmd()
 end
 
 local function cmake_cmds()
-  vim.api.nvim_create_user_command('CMakeGen', function()
+  vim.api.nvim_create_user_command('CMakeGen', function(params)
+    local overseer = require('overseer')
     local task = overseer.new_task({
       cmd = 'cmake',
-      args = {
-        'build',
-      },
+      args = vim.list_extend({ '-S', '.', '-B', 'build' }, params.fargs),
       components = {
         'default',
       },

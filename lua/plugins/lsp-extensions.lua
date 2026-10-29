@@ -9,35 +9,15 @@ return {
       library = {
         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
         'lazy.nvim',
-        'dap.nvim',
+        'nvim-dap',
         'nvim-dap-ui',
-        'LazyVim',
-        'overseer',
+        'overseer.nvim',
         {
           path = 'wezterm-types',
           mods = { 'wezterm' },
         },
       },
     },
-  },
-  {
-    'DNLHC/glance.nvim',
-    cmd = 'Glance',
-    opts = {
-      preview_win_opts = {
-        cursorline = true,
-        number = true,
-        wrap = true,
-      },
-      border = {
-        enable = true,
-      },
-    },
-  },
-  {
-    'Fildo7525/pretty_hover',
-    event = 'LspAttach',
-    opts = {},
   },
   { 'p00f/clangd_extensions.nvim', ft = { 'c', 'cpp', 'rust' }, event = { 'BufReadPost', 'BufNewFile' } },
   {

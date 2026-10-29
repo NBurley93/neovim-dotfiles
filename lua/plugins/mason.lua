@@ -1,7 +1,9 @@
 return {
   {
     'williamboman/mason.nvim',
-    cmd = 'Mason',
+    -- Not lazy: setup() puts mason/bin on PATH, which LSPs, formatters and linters
+    -- need before the first buffer's FileType fires
+    lazy = false,
     opts = {
       ui = {
         icons = {
@@ -25,6 +27,7 @@ return {
         'clangd',
         'lua-language-server',
         'ruff',
+        'basedpyright',
         'cmake-language-server',
         'json-lsp',
         'dockerfile-language-server',
@@ -56,7 +59,6 @@ return {
         'tflint',
         'vale',
         'yamllint',
-        'flake8',
         'stylelint',
         'gdtoolkit',
 

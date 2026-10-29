@@ -40,20 +40,20 @@ end
 local function navigation_and_editing()
   -- Window navigation
   vim.keymap.set('n', '<A-h>', function()
-    vim.cmd.wincmd('H')
-  end, { desc = 'Move focus to left window' })
+    vim.cmd.wincmd('h')
+  end, { desc = 'Focus window left' })
 
   vim.keymap.set('n', '<A-j>', function()
-    vim.cmd.wincmd('J')
-  end, { desc = 'Move focus to below window' })
+    vim.cmd.wincmd('j')
+  end, { desc = 'Focus window bottom' })
 
   vim.keymap.set('n', '<A-k>', function()
-    vim.cmd.wincmd('K')
-  end, { desc = 'Move focus to above window' })
+    vim.cmd.wincmd('k')
+  end, { desc = 'Focus window top' })
 
   vim.keymap.set('n', '<A-l>', function()
-    vim.cmd.wincmd('L')
-  end, { desc = 'Move focus to right window' })
+    vim.cmd.wincmd('l')
+  end, { desc = 'Focus window right' })
 
   -- Window pane splits
   vim.keymap.set('n', '<A-->', function()
@@ -96,7 +96,7 @@ local function split_term(horizontal_or_vertical)
       vim.cmd.vnew()
       vim.cmd.term()
       vim.cmd.wincmd('L')
-      vim.api.nvim_win_set_height(0, pane_section(horizontal_or_vertical, 0.4))
+      vim.api.nvim_win_set_width(0, pane_section(horizontal_or_vertical, 0.4))
     end
   end
 end

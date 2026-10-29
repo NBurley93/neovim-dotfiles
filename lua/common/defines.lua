@@ -1,7 +1,7 @@
-local icons = require 'common.icons'
+local icons = require('common.icons')
 
 return {
-  WEB_DEVICONS_PROVIDER = 'kyazdani42/nvim-web-devicons',
+  WEB_DEVICONS_PROVIDER = 'nvim-tree/nvim-web-devicons',
   DIAGNOSTIC_SIGNS = {
     text = {
       [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,

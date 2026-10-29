@@ -16,7 +16,7 @@ local function setup_line_segments()
           elseif str == 'VISUAL' then
             return 'VIS'
           else
-            return str:sub(1, 3).upper()
+            return str:sub(1, 3):upper()
           end
         end,
       },
@@ -86,11 +86,6 @@ local function setup_line_segments()
       },
     },
     lualine_x = {
-      {
-        'copilot',
-        show_colors = false,
-        show_loading = true,
-      },
       'encoding',
       {
         'fileformat',
@@ -194,11 +189,8 @@ return {
       tabline = {},
       winbar = setup_winbar_segments(),
       inactive_winbar = setup_winbar_segments(),
-      extensions = { 'fugitive', 'trouble', 'lazy', 'mason', 'oil' },
+      extensions = { 'trouble', 'lazy', 'mason', 'oil' },
       -- theme = 'lflops',
     },
-  },
-  {
-    'AndreM222/copilot-lualine',
   },
 }

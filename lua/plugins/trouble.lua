@@ -1,5 +1,3 @@
-local icons = require('common.icons')
-
 return {
   -- trouble.nvim: A pretty list for showing diagnostics, references, etc.
   {
@@ -52,16 +50,6 @@ return {
         desc = 'Quickfix List (Trouble)',
       },
     },
-    opts = {
-      fold_open = '', -- icon used for open folds
-      fold_closed = '', -- icon used for closed folds
-      signs = {
-        error = icons.diagnostics.Error,
-        warning = icons.diagnostics.Warning,
-        hint = icons.diagnostics.Hint,
-        information = icons.diagnostics.Information,
-        other = icons.diagnostics.Information,
-      },
-    },
+    opts = {},
   },
 }

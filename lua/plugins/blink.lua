@@ -1,5 +1,3 @@
-local copilot_highlight_color = '#ffa600'
-
 return {
   {
     'rafamadriz/friendly-snippets',
@@ -21,7 +19,6 @@ return {
       'Kaiser-Yang/blink-cmp-git',
       'mayromr/blink-cmp-dap',
       'bydlw98/blink-cmp-env',
-      'giuxtaposition/blink-cmp-copilot',
       'Fildo7525/pretty_hover',
     },
     ---@module 'blink.cmp'
@@ -84,11 +81,6 @@ return {
                     if mini_icon then
                       return mini_icon .. ctx.icon_gap
                     end
-                  end
-
-                  -- Handle copilot icon separately to avoid misalignment
-                  if ctx.kind == 'Copilot' then
-                    return '' .. ctx.icon_gap
                   end
 
                   -- Handle icons for kinds not covered by mini.icons
@@ -190,7 +182,7 @@ return {
       },
       sources = {
         default = function()
-          local base_sources = { 'lsp', 'lazydev', 'git', 'path', 'buffer', 'snippets', 'dap', 'env', 'copilot' }
+          local base_sources = { 'lsp', 'lazydev', 'git', 'path', 'buffer', 'snippets', 'dap', 'env' }
           return base_sources
         end,
         providers = {
@@ -234,12 +226,6 @@ return {
 
             opts = {},
           },
-          copilot = {
-            name = 'Copilot',
-            module = 'blink-cmp-copilot',
-            score_offset = 100, -- Always prefer Copilot suggestions
-            async = true,
-          },
           env = {
             name = 'Env',
             module = 'blink-cmp-env',
@@ -249,7 +235,6 @@ return {
     },
     config = function(_, opts)
       require('blink.cmp').setup(opts)
-      vim.api.nvim_set_hl(0, 'BlinkCmpKindCopilot', { fg = copilot_highlight_color })
 
       local ls = require('luasnip')
       ls.setup({ enable_autosnippets = true })

@@ -17,7 +17,8 @@ function M.lsp_onattach_baseline(client, bufnr)
   M.lsp_map('gd', function()
     vim.cmd('Glance definitions')
   end, bufnr, 'View definitions')
-  M.lsp_map('gr', function()
+  -- 'grr' rather than 'gr': Neovim's built-in gr* maps would otherwise make 'gr' wait for timeoutlen
+  M.lsp_map('grr', function()
     vim.cmd('Glance references')
   end, bufnr, 'View references')
 
@@ -25,12 +26,9 @@ function M.lsp_onattach_baseline(client, bufnr)
     require('telescope.builtin').lsp_document_symbols()
   end, bufnr, 'View [D]ocument [S]ymbols')
 
-  M.lsp_map(
-    '<leader>ws',
-    require('telescope.builtin').lsp_dynamic_workspace_symbols,
-    bufnr,
-    'View [W]orkspace [S]ymbols'
-  )
+  M.lsp_map('<leader>ws', function()
+    require('telescope.builtin').lsp_dynamic_workspace_symbols()
+  end, bufnr, 'View [W]orkspace [S]ymbols')
 
   if client.server_capabilities.hoverProvider then
     M.lsp_map('K', function()
@@ -81,15 +79,17 @@ function M.setup(log_level)
       config.on_attach = M.lsp_onattach_baseline
     end
 
-    -- Wrap on_init to defer blink.cmp capability resolution until the server
-    -- starts, so blink does not need to load at startup
-    local user_on_init = config.on_init
+    -- Wrap before_init to defer blink.cmp capability resolution until the server
+    -- starts, so blink does not need to load at startup. This must be before_init:
+    -- by on_init the initialize request (and its capabilities) has already been sent.
+    local user_before_init = config.before_init
     local base_caps = config.capabilities
     config.capabilities = nil
-    config.on_init = function(client, ...)
-      client.config.capabilities = require('blink.cmp').get_lsp_capabilities(base_caps)
-      if user_on_init then
-        return user_on_init(client, ...)
+    config.before_init = function(params, client_config)
+      params.capabilities =
+        vim.tbl_deep_extend('force', params.capabilities, require('blink.cmp').get_lsp_capabilities(base_caps))
+      if user_before_init then
+        user_before_init(params, client_config)
       end
     end
 

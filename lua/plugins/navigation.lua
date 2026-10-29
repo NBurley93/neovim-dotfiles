@@ -67,6 +67,11 @@ return {
       {
         '<CR>',
         function()
+          -- Keep <CR>'s built-in behaviour in the quickfix list and the cmdline window
+          if vim.bo.buftype == 'quickfix' or vim.fn.getcmdwintype() ~= '' then
+            vim.api.nvim_feedkeys(vim.keycode('<CR>'), 'n', false)
+            return
+          end
           require('flash').jump()
         end,
         mode = { 'n', 'x', 'o' },
