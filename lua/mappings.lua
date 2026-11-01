@@ -39,19 +39,20 @@ end
 
 local function navigation_and_editing()
   -- Window navigation
-  vim.keymap.set('n', '<A-h>', function()
+  -- Also mapped in terminal mode so terminal apps that capture input (e.g. Claude Code) can be left without <C-\><C-n>
+  vim.keymap.set({ 'n', 't' }, '<A-h>', function()
     vim.cmd.wincmd('h')
   end, { desc = 'Focus window left' })
 
-  vim.keymap.set('n', '<A-j>', function()
+  vim.keymap.set({ 'n', 't' }, '<A-j>', function()
     vim.cmd.wincmd('j')
   end, { desc = 'Focus window bottom' })
 
-  vim.keymap.set('n', '<A-k>', function()
+  vim.keymap.set({ 'n', 't' }, '<A-k>', function()
     vim.cmd.wincmd('k')
   end, { desc = 'Focus window top' })
 
-  vim.keymap.set('n', '<A-l>', function()
+  vim.keymap.set({ 'n', 't' }, '<A-l>', function()
     vim.cmd.wincmd('l')
   end, { desc = 'Focus window right' })
 
