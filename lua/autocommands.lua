@@ -194,21 +194,6 @@ end
 local function CommandNudges()
   local nudge_group = augroup('command_nudges', { clear = true })
 
-  -- Mappings whose rhs is a Lua callback can't be discovered from the keymap table, so list them here
-  local manual = {
-    ['Lazy'] = '<leader>ll',
-    ['noh'] = '<Esc>',
-    ['nohlsearch'] = '<Esc>',
-    ['noa w'] = '<leader>wr',
-    ['new'] = '<A-->',
-    ['vnew'] = '<A-\\>',
-    ['Trouble diagnostics toggle'] = '<leader>xx',
-    ['Trouble diagnostics toggle filter.buf=0'] = '<leader>xb',
-    ['Trouble symbols toggle focus=false'] = '<leader>xs',
-    ['Trouble loclist toggle'] = '<leader>xL',
-    ['Trouble qflist toggle'] = '<leader>xQ',
-  }
-
   local function normalize(cmd)
     return (vim.trim(cmd):gsub('%s+', ' '))
   end
@@ -234,15 +219,28 @@ local function CommandNudges()
     end
   end
 
+  -- Mappings whose rhs is a Lua callback have no rhs to inspect, so they declare the command(s) they
+  -- replace in their desc with one or more `[:X]` tags, e.g. desc = 'Open Lazy [:Lazy]'
+  local function desc_has_command(desc, cmd)
+    if not desc then
+      return false
+    end
+    for tagged in desc:gmatch('%[:(.-)%]') do
+      if normalize(tagged) == cmd then
+        return true
+      end
+    end
+    return false
+  end
+
   local function find_mapping(cmd)
     -- Buffer-local mappings first so they win over globals
     local maps = vim.list_extend(vim.api.nvim_buf_get_keymap(0, 'n'), vim.api.nvim_get_keymap('n'))
     for _, map in ipairs(maps) do
-      if rhs_command(map.rhs) == cmd then
+      if rhs_command(map.rhs) == cmd or desc_has_command(map.desc, cmd) then
         return display_lhs(map)
       end
     end
-    return manual[cmd]
   end
 
   autocmd('CmdlineLeave', {

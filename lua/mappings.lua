@@ -15,7 +15,7 @@ local function helpers()
   vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Exit insert mode' })
 
   -- Allow clearing of highlights from search with Esc
-  vim.keymap.set('n', '<Esc>', vim.cmd.nohlsearch, { desc = 'Clear search highlight' })
+  vim.keymap.set('n', '<Esc>', vim.cmd.nohlsearch, { desc = 'Clear search highlight [:nohlsearch] [:noh]' })
 end
 
 local function misc_binds()
@@ -27,7 +27,7 @@ local function misc_binds()
     commonfuncs.attempt_write(function()
       vim.cmd('noa w')
     end)
-  end, { desc = 'Write buffer without running autocmds (raw)' })
+  end, { desc = 'Write buffer without running autocmds (raw) [:noa w]' })
 end
 
 -- Keymaps meant to help select portions of text
@@ -59,11 +59,11 @@ local function navigation_and_editing()
   -- Window pane splits
   vim.keymap.set('n', '<A-->', function()
     vim.cmd.new()
-  end, { desc = 'Create horizontal split' })
+  end, { desc = 'Create horizontal split [:new]' })
 
   vim.keymap.set('n', '<A-\\>', function()
     vim.cmd.vnew()
-  end, { desc = 'Create vertical split' })
+  end, { desc = 'Create vertical split [:vnew]' })
 
   -- Quickly navigate to start of line
   vim.keymap.set('n', '<BS>', '^', { desc = 'Quickly move the cursor to the start of the line' })
@@ -77,7 +77,7 @@ local function navigation_and_editing()
 end
 
 local function plugin_ext()
-  vim.keymap.set('n', '<leader>ll', vim.cmd.Lazy, { desc = 'Open Lazy' })
+  vim.keymap.set('n', '<leader>ll', vim.cmd.Lazy, { desc = 'Open Lazy [:Lazy]' })
 end
 
 local function pane_section(horizontal_or_vertical, split_portion)
