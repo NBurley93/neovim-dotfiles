@@ -190,6 +190,84 @@ local function CMakeAutoConfigure()
   })
 end
 
+-- Nudges toward keybinds: when a `:` command is typed that a normal-mode mapping already runs, say so
+local function CommandNudges()
+  local nudge_group = augroup('command_nudges', { clear = true })
+
+  -- Mappings whose rhs is a Lua callback can't be discovered from the keymap table, so list them here
+  local manual = {
+    ['Lazy'] = '<leader>ll',
+    ['noh'] = '<Esc>',
+    ['nohlsearch'] = '<Esc>',
+    ['noa w'] = '<leader>wr',
+    ['new'] = '<A-->',
+    ['vnew'] = '<A-\\>',
+    ['Trouble diagnostics toggle'] = '<leader>xx',
+    ['Trouble diagnostics toggle filter.buf=0'] = '<leader>xb',
+    ['Trouble symbols toggle focus=false'] = '<leader>xs',
+    ['Trouble loclist toggle'] = '<leader>xL',
+    ['Trouble qflist toggle'] = '<leader>xQ',
+  }
+
+  local function normalize(cmd)
+    return (vim.trim(cmd):gsub('%s+', ' '))
+  end
+
+  local function display_lhs(map)
+    local lhs = vim.fn.keytrans(map.lhsraw or map.lhs)
+    local leader = vim.fn.keytrans(vim.g.mapleader or '\\')
+    if lhs:sub(1, #leader) == leader then
+      return '<leader>' .. lhs:sub(#leader + 1)
+    end
+    return lhs
+  end
+
+  -- Command a mapping's rhs runs, if it is a plain `<Cmd>X<CR>` or `:X<CR>`
+  local function rhs_command(rhs)
+    if not rhs then
+      return nil
+    end
+    local cmd = rhs:match('^<[Cc][Mm][Dd]>(.-)<[Cc][Rr]>$') or rhs:match('^:(.-)<[Cc][Rr]>$')
+    if cmd then
+      cmd = cmd:gsub('^<[Cc]%-[Uu]>', '')
+      return normalize(cmd)
+    end
+  end
+
+  local function find_mapping(cmd)
+    -- Buffer-local mappings first so they win over globals
+    local maps = vim.list_extend(vim.api.nvim_buf_get_keymap(0, 'n'), vim.api.nvim_get_keymap('n'))
+    for _, map in ipairs(maps) do
+      if rhs_command(map.rhs) == cmd then
+        return display_lhs(map)
+      end
+    end
+    return manual[cmd]
+  end
+
+  autocmd('CmdlineLeave', {
+    pattern = ':',
+    group = nudge_group,
+    desc = 'Suggest the keybind for a command that has one',
+    callback = function()
+      if vim.v.event.abort then
+        return
+      end
+      local cmd = normalize(vim.fn.getcmdline())
+      if cmd == '' then
+        return
+      end
+      -- Look up after the command runs, so lazy-loaded plugins have swapped their stub mappings for real ones
+      vim.schedule(function()
+        local lhs = find_mapping(cmd)
+        if lhs then
+          vim.notify(('Use %s instead of :%s'):format(lhs, cmd), vim.log.levels.WARN, { title = 'Command nudge' })
+        end
+      end)
+    end,
+  })
+end
+
 return {
   config = function()
     -- Highlight on yank
@@ -207,5 +285,6 @@ return {
     CustomTSParsers()
     CMakeAutoConfigure()
     PipfileUpdate()
+    CommandNudges()
   end,
 }
