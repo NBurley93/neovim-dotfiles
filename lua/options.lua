@@ -37,6 +37,7 @@ return {
       wrap = false,
       swapfile = false,
       backup = false,
+      undofile = true,
       hlsearch = true,
       incsearch = true,
 

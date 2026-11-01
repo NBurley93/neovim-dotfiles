@@ -27,11 +27,182 @@ local function TerminalAutocommands()
     pattern = '*',
     group = term_group,
     desc = 'Set terminal buffer options',
-    callback = function()
+    callback = function(args)
       vim.opt_local.number = false
       vim.opt_local.relativenumber = false
       vim.opt_local.signcolumn = 'no'
       vim.opt_local.cursorline = false
+      -- Only when the terminal is in the current window: background terminals (overseer, neotest)
+      -- would otherwise drop whatever window you're in into insert mode
+      if args.buf == vim.api.nvim_get_current_buf() then
+        vim.cmd.startinsert()
+      end
+    end,
+  })
+end
+
+-- General editing quality-of-life
+local function EditorQoL()
+  autocmd({ 'FocusGained', 'BufEnter', 'TermClose', 'TermLeave' }, {
+    group = augroup('checktime', { clear = true }),
+    desc = 'Reload buffers changed outside of Neovim',
+    callback = function()
+      -- checktime errors inside the command-line window (E11)
+      if vim.o.buftype ~= 'nofile' and vim.fn.getcmdwintype() == '' then
+        vim.cmd('checktime')
+      end
+    end,
+  })
+
+  autocmd('BufReadPost', {
+    group = augroup('restore-cursor', { clear = true }),
+    desc = 'Restore last cursor position',
+    callback = function(args)
+      if vim.tbl_contains({ 'gitcommit', 'gitrebase' }, vim.bo[args.buf].filetype) then
+        return
+      end
+      local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+      if mark[1] > 0 and mark[1] <= vim.api.nvim_buf_line_count(args.buf) then
+        pcall(vim.api.nvim_win_set_cursor, 0, mark)
+      end
+    end,
+  })
+
+  autocmd('BufWritePre', {
+    group = augroup('auto-mkdir', { clear = true }),
+    desc = 'Create missing parent directories on save',
+    callback = function(args)
+      -- Skip URL-style buffers (oil://, fugitive://); needs 2+ chars so Windows drives (C:\) still match
+      if args.match:match('^%w%w+:[\\/][\\/]') then
+        return
+      end
+      local path = vim.uv.fs_realpath(args.match) or args.match
+      vim.fn.mkdir(vim.fn.fnamemodify(path, ':p:h'), 'p')
+    end,
+  })
+
+  autocmd('FileType', {
+    group = augroup('close-with-q', { clear = true }),
+    pattern = { 'help', 'qf', 'man', 'checkhealth', 'lspinfo', 'notify', 'startuptime' },
+    desc = 'Close helper windows with q',
+    callback = function(args)
+      vim.bo[args.buf].buflisted = false
+      vim.keymap.set('n', 'q', '<Cmd>close<CR>', { buffer = args.buf, silent = true, desc = 'Close window' })
+    end,
+  })
+
+  autocmd('VimResized', {
+    group = augroup('resize-splits', { clear = true }),
+    desc = 'Equalize splits when the terminal is resized',
+    callback = function()
+      local tab = vim.fn.tabpagenr()
+      vim.cmd('tabdo wincmd =')
+      vim.cmd('tabnext ' .. tab)
+    end,
+  })
+
+  -- Remember which windows had cursorline, so windows that turn it off (terminals, plugin UIs) stay off
+  local cursorline_group = augroup('focused-cursorline', { clear = true })
+  autocmd('WinLeave', {
+    group = cursorline_group,
+    desc = 'Hide cursorline in unfocused windows',
+    callback = function()
+      if vim.wo.cursorline then
+        vim.w.auto_cursorline = true
+        vim.wo.cursorline = false
+      end
+    end,
+  })
+  autocmd('WinEnter', {
+    group = cursorline_group,
+    desc = 'Restore cursorline in the focused window',
+    callback = function()
+      if vim.w.auto_cursorline then
+        vim.w.auto_cursorline = nil
+        vim.wo.cursorline = true
+      end
+    end,
+  })
+
+  autocmd('FileType', {
+    group = augroup('prose', { clear = true }),
+    pattern = { 'markdown', 'gitcommit', 'tex', 'plaintex', 'text' },
+    desc = 'Wrap and spellcheck prose',
+    callback = function()
+      vim.opt_local.wrap = true
+      vim.opt_local.linebreak = true
+      vim.opt_local.spell = true
+    end,
+  })
+
+  autocmd('CursorMoved', {
+    group = augroup('auto-nohlsearch', { clear = true }),
+    desc = 'Clear search highlight once the cursor leaves a match',
+    callback = function()
+      if vim.v.hlsearch == 0 then
+        return
+      end
+      local ok, count = pcall(vim.fn.searchcount, { timeout = 50 })
+      if ok and count.exact_match == 0 then
+        -- :nohlsearch has no effect when run directly inside an autocommand
+        vim.schedule(vim.cmd.nohlsearch)
+      end
+    end,
+  })
+end
+
+-- Turns off expensive features for large files so they open without freezing
+local function BigFileGuard()
+  local bigfile_group = augroup('bigfile', { clear = true })
+  local max_size = 1.5 * 1024 * 1024 -- bytes
+
+  autocmd('BufReadPre', {
+    group = bigfile_group,
+    desc = 'Flag large files',
+    callback = function(args)
+      local stat = vim.uv.fs_stat(args.match)
+      if stat and stat.size > max_size then
+        vim.b[args.buf].bigfile = true
+        vim.b[args.buf].miniindentscope_disable = true
+      end
+    end,
+  })
+
+  -- Treesitter is started from ftplugins on FileType, so stop it after they've run
+  autocmd('FileType', {
+    group = bigfile_group,
+    desc = 'Disable treesitter, syntax and folds for large files',
+    callback = function(args)
+      if not vim.b[args.buf].bigfile then
+        return
+      end
+      vim.schedule(function()
+        if not vim.api.nvim_buf_is_valid(args.buf) then
+          return
+        end
+        pcall(vim.treesitter.stop, args.buf)
+        pcall(function()
+          require('ufo').detach(args.buf)
+        end)
+        vim.bo[args.buf].syntax = 'off'
+        for _, win in ipairs(vim.fn.win_findbuf(args.buf)) do
+          vim.wo[win].foldmethod = 'manual'
+          vim.wo[win].foldenable = false
+        end
+        vim.notify('Large file: treesitter, syntax, folds and LSP disabled', vim.log.levels.INFO, { title = 'Big file' })
+      end)
+    end,
+  })
+
+  autocmd('LspAttach', {
+    group = bigfile_group,
+    desc = 'Detach LSP clients from large files',
+    callback = function(args)
+      if vim.b[args.buf].bigfile then
+        vim.schedule(function()
+          vim.lsp.buf_detach_client(args.buf, args.data.client_id)
+        end)
+      end
     end,
   })
 end
@@ -284,5 +455,7 @@ return {
     CMakeAutoConfigure()
     PipfileUpdate()
     CommandNudges()
+    EditorQoL()
+    BigFileGuard()
   end,
 }
