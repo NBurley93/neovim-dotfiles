@@ -1,56 +1,63 @@
--- Set <leader> to <Space>
+-- Navigation (searches are case-sensitive):
+--   /SECTION:   jump between the blocks of this file
+--   /OPT:       jump between the option groups
+
+-- SECTION: Leader keys
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+local INDENT_SIZE = 2
+
 return {
   config = function()
-    --- vim.opt
+    -- SECTION: Options
     local options = {
-      autoindent = true,
+      -- OPT: Timing
       updatetime = 50,
-
       timeout = true,
       timeoutlen = 1000,
-      expandtab = true,
 
-      -- Title
+      -- OPT: Window title
       title = true,
       titlestring = '%F - Nvim',
 
-      shiftwidth = 4,
-      tabstop = 4,
-      history = 10000,
-      backspace = 'indent,eol,start',
+      -- OPT: Indentation
+      expandtab = true,
       smartindent = true,
-      number = true,
-      showmode = false,
-      cmdheight = 2,
-      breakindent = true,
+      shiftwidth = INDENT_SIZE,
+      tabstop = INDENT_SIZE,
+      softtabstop = INDENT_SIZE,
+
+      -- OPT: Input & clipboard
       mouse = 'a',
+      clipboard = 'unnamedplus',
+
+      -- OPT: Line numbers & sign column
+      number = true,
       relativenumber = true,
       signcolumn = 'auto:2',
-      clipboard = 'unnamedplus',
-      termguicolors = true,
+
+      -- OPT: Cursor & scrolling
       cursorline = true,
       guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20',
-      completeopt = 'menu,menuone,noselect',
-      wrap = false,
-      swapfile = false,
-      backup = false,
-      undofile = true,
-      hlsearch = true,
-      incsearch = true,
-
-      -- Folds
-      foldenable = true,
-      foldcolumn = '1',
-      foldlevel = 99,
-      foldlevelstart = -1,
-
-      -- Misc
-      fileformats = { 'unix', 'dos' },
-      inccommand = 'split',
       scrolloff = 8,
+
+      -- OPT: Display
+      termguicolors = true,
+      showmode = false,
+      cmdheight = 0,
+      fillchars = {
+        eob = ' ',
+        foldopen = '\u{f078}', -- nf-fa-chevron_down
+        foldsep = ' ',
+        foldclose = '\u{f054}', -- nf-fa-chevron_right
+      },
+
+      -- OPT: Line wrapping
+      wrap = false,
+      breakindent = true,
+
+      -- OPT: Whitespace characters
       list = true,
       listchars = {
         tab = '▏ ',
@@ -59,16 +66,32 @@ return {
         trail = '·',
         nbsp = '␣',
       },
+
+      -- OPT: Search & substitute
+      inccommand = 'split',
       gdefault = true,
+
+      -- OPT: Completion & popup menu
+      completeopt = 'menu,menuone,noselect',
       pumblend = 15,
+
+      -- OPT: Splits
       splitright = true,
       splitbelow = true,
-      fillchars = {
-        eob = ' ',
-        foldopen = '\u{f078}', -- nf-fa-chevron_down
-        foldsep = ' ',
-        foldclose = '\u{f054}', -- nf-fa-chevron_right
-      },
+
+      -- OPT: Folds
+      foldcolumn = '1',
+      foldlevel = 99,
+      foldlevelstart = -1,
+
+      -- OPT: Files, undo & history
+      swapfile = false,
+      backup = false,
+      undofile = true,
+      history = 10000,
+      fileformats = { 'unix', 'dos' },
+
+      -- OPT: Diff
       diffopt = {
         'internal',
         'filler',
@@ -84,13 +107,15 @@ return {
     for k, v in pairs(options) do
       vim.opt[k] = v
     end
+
+    -- OPT: Filename characters (appends to the default, so it can't live in the table)
     vim.opt.isfname:append('@-@')
 
+    -- SECTION: Platform detection
     local isWindows = vim.fn.has('win32') == 1
     local isWSL = vim.fn.has('wsl') == 1
-    -- has('win32') is 0 inside WSL, so the two are mutually exclusive
-    local isWindowsNative = isWindows
 
+    -- SECTION: WSL clipboard
     if isWSL then
       -- MUCH better clipboard
       vim.g.clipboard = {
@@ -107,7 +132,8 @@ return {
       }
     end
 
-    if isWindowsNative then
+    -- SECTION: Shell
+    if isWindows then
       local powershell_options = {
         shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell',
         shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;',
@@ -124,6 +150,7 @@ return {
       vim.opt.shell = 'zsh'
     end
 
+    -- SECTION: Providers & native libraries
     local get_python_host = function()
       if isWindows then
         return 'python.exe'
@@ -143,7 +170,6 @@ return {
     vim.g.python3_host_prog = get_python_host()
     vim.g.sqlite_clib_path = get_sqlite_path()
 
-    -- Misc provider vars
     vim.g.loaded_perl_provider = 0
     vim.g.loaded_ruby_provider = 0
   end,
