@@ -12,6 +12,12 @@ return {
       restriction_mode = 'block',
       max_count = 3,
       disable_mouse = false,
+      -- Merged with hardtime's defaults, which don't cover Snacks.picker
+      disabled_filetypes = {
+        snacks_picker_input = true,
+        snacks_picker_list = true,
+        snacks_picker_preview = true,
+      },
     },
   },
 

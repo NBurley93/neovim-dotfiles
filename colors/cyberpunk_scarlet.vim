@@ -83,4 +83,3 @@ highlight! link TSTagDelimiter Type
 highlight! link CursorLineNr Identifier
 highlight! link TSParameter Constant
 highlight! link TSFuncMacro Macro
-highlight! link TelescopeNormal Normal

@@ -23,11 +23,11 @@ function M.lsp_onattach_baseline(client, bufnr)
   end, bufnr, 'View references')
 
   M.lsp_map('<leader>ds', function()
-    require('telescope.builtin').lsp_document_symbols()
+    Snacks.picker.lsp_symbols()
   end, bufnr, 'View [D]ocument [S]ymbols')
 
   M.lsp_map('<leader>ws', function()
-    require('telescope.builtin').lsp_dynamic_workspace_symbols()
+    Snacks.picker.lsp_workspace_symbols()
   end, bufnr, 'View [W]orkspace [S]ymbols')
 
   if client.server_capabilities.hoverProvider then

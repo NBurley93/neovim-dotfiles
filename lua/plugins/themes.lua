@@ -19,13 +19,13 @@ return {
             FloatBorder = { bg = 'none' },
             FloatTitle = { bg = 'none' },
 
-            TelescopeTitle = { fg = theme.ui.special, bold = true },
-            TelescopePromptNormal = { bg = theme.ui.bg_p1 },
-            TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
-            TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
-            TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
-            TelescopePreviewNormal = { bg = theme.ui.bg_dim },
-            TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+            SnacksPickerTitle = { fg = theme.ui.special, bold = true },
+            SnacksPickerInput = { bg = theme.ui.bg_p1 },
+            SnacksPickerInputBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+            SnacksPickerList = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+            SnacksPickerListBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+            SnacksPickerPreview = { bg = theme.ui.bg_dim },
+            SnacksPickerPreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
 
             NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
 

@@ -14,7 +14,7 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'sindrets/diffview.nvim',
-      'nvim-telescope/telescope.nvim',
+      'folke/snacks.nvim',
     },
     keys = {
       {
@@ -34,11 +34,11 @@ return {
     cmd = 'Octo',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
+      'folke/snacks.nvim',
       require('common.defines').WEB_DEVICONS_PROVIDER,
     },
     opts = {
-      picker = 'telescope',
+      picker = 'snacks',
       enable_builtin = true,
     },
     keys = {
