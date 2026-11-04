@@ -21,4 +21,4 @@ C.configure_autocmds()
 C.configure_keymaps()
 C.configure_usercmds()
 
-vim.cmd.colorscheme('kanagawa')
+vim.cmd.colorscheme('duskhaven')
