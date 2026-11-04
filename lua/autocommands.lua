@@ -437,6 +437,46 @@ local function CommandNudges()
   })
 end
 
+-- Let the terminal background show through floating windows, whichever colorscheme is active.
+-- PmenuSel and PmenuThumb keep their backgrounds so the selection and scrollbar stay visible,
+-- and NotifyBackground keeps its own because nvim-notify needs a color to fade from.
+local TRANSPARENT_GROUPS = {
+  'NormalFloat',
+  'FloatBorder',
+  'FloatTitle',
+  'FloatFooter',
+  'Pmenu',
+  'PmenuSbar',
+  'PmenuKind',
+  'PmenuExtra',
+  'PmenuMatch',
+  'BlinkCmpMenu',
+  'BlinkCmpMenuBorder',
+  'BlinkCmpDoc',
+  'BlinkCmpDocBorder',
+  'BlinkCmpSignatureHelp',
+  'BlinkCmpSignatureHelpBorder',
+  'LazyNormal',
+  'MasonNormal',
+}
+
+local function TransparentFloats()
+  autocmd('ColorScheme', {
+    group = augroup('transparent-floats', { clear = true }),
+    desc = 'Clear floating window backgrounds',
+    callback = function()
+      for _, group in ipairs(TRANSPARENT_GROUPS) do
+        local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+        if next(hl) ~= nil then
+          hl.bg = nil
+          hl.ctermbg = nil
+          vim.api.nvim_set_hl(0, group, hl)
+        end
+      end
+    end,
+  })
+end
+
 return {
   config = function()
     -- Highlight on yank
@@ -457,5 +497,6 @@ return {
     CommandNudges()
     EditorQoL()
     BigFileGuard()
+    TransparentFloats()
   end,
 }

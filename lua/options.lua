@@ -46,6 +46,7 @@ return {
       termguicolors = true,
       showmode = false,
       cmdheight = 0,
+      winborder = 'rounded',
       fillchars = {
         eob = ' ',
         foldopen = '\u{f078}', -- nf-fa-chevron_down
@@ -73,7 +74,6 @@ return {
 
       -- OPT: Completion & popup menu
       completeopt = 'menu,menuone,noselect',
-      pumblend = 15,
 
       -- OPT: Splits
       splitright = true,

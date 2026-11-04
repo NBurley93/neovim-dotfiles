@@ -80,7 +80,6 @@ return {
       },
       signature = {
         enabled = true,
-        window = { border = 'rounded' },
       },
       snippets = {
         preset = 'luasnip',
@@ -95,7 +94,6 @@ return {
           enabled = true,
         },
         menu = {
-          border = 'rounded',
           cmdline_position = function()
             if vim.g.ui_cmdline_pos ~= nil then
               local pos = vim.g.ui_cmdline_pos -- (1, 0)-indexed
@@ -132,7 +130,6 @@ return {
           auto_show = true,
           auto_show_delay_ms = 250,
           treesitter_highlighting = true,
-          window = { border = 'rounded' },
           draw = function(opts)
             if opts.item and opts.item.documentation and opts.item.documentation.value then
               local out = require('pretty_hover.parser').parse(opts.item.documentation.value)

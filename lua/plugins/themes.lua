@@ -15,22 +15,11 @@ return {
         overrides = function(colors)
           local theme = colors.theme
           return {
-            NormalFloat = { bg = 'none' },
-            FloatBorder = { bg = 'none' },
-            FloatTitle = { bg = 'none' },
-
-            SnacksPickerTitle = { fg = theme.ui.special, bold = true },
-            SnacksPickerInput = { bg = theme.ui.bg_p1 },
-            SnacksPickerInputBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
-            SnacksPickerList = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
-            SnacksPickerListBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
-            SnacksPickerPreview = { bg = theme.ui.bg_dim },
-            SnacksPickerPreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
-
             NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
 
-            LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-            MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+            -- Backgrounds are cleared by the transparent-floats autocommand
+            LazyNormal = { fg = theme.ui.fg_dim },
+            MasonNormal = { fg = theme.ui.fg_dim },
           }
         end,
         colors = {

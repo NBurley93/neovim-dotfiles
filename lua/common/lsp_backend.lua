@@ -125,7 +125,6 @@ function M.setup(log_level)
     severity_sort = true,
     -- Full diagnostic messages under the cursor line only
     virtual_lines = { current_line = true },
-    float = { border = 'rounded' },
   })
 
   M.set_logging_level(log_level or 'warn')

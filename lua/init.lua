@@ -3,7 +3,7 @@ local M = {}
 M.configure_lazy = function()
   require('lazy').setup('plugins', {
     ui = {
-      border = 'none',
+      border = 'rounded',
       icons = {
         cmd = ' ',
         config = '',
